@@ -18,6 +18,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<eapli.framework.core.version>25.0.0-RELEASE</eapli.framework.core.version>
+		<eapli.framework.authz.version>25.0.0-RELEASE</eapli.framework.authz.version>
+		<eapli.framework.pubsub.version>25.0.0-RELEASE</eapli.framework.pubsub.version>
 	</properties>
 
 	<dependencies>
@@ -56,6 +59,24 @@
 			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+			<artifactId>eapli.framework.core</artifactId>
+			<version>${eapli.framework.core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+			<artifactId>eapli.framework.infrastructure.authz</artifactId>
+			<version>${eapli.framework.authz.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+			<artifactId>eapli.framework.infrastructure.pubsub</artifactId>
+			<version>${eapli.framework.pubsub.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -63,7 +84,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.5.0</version>
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
@@ -194,5 +215,12 @@
 		</plugins>
 	</build>
 
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 </project>
