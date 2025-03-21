@@ -1,0 +1,115 @@
+@startuml
+' Diagrama de Domínio (DDD) - Com IDs explícitos como Value Objects
+
+' ========== ENTITIES & AGGREGATES ==========
+class User <<Entity>> {
+    - id: UserId
+    - username: Username
+    - password: Password
+}
+
+class Client <<Entity>> {
+    - clientId: ClientId
+}
+
+class Drone <<AggregateRoot>> {
+    - id: DroneId
+    - model: String
+    - state: DroneState
+    - lang: String
+    - maintenance_history: List<Maintenance>
+}
+
+class Show <<AggregateRoot>> {
+    - id: ShowId
+    - date: DateValue
+    - figures: List<Figure>
+    - drones: List<Drone>
+}
+
+class Figure <<Entity>> {
+    - id: FigureId
+    - description: Description
+}
+
+class ShowProposal <<Entity>> {
+    - show: Show
+}
+
+' ========== VALUE OBJECTS ==========
+class UserId <<ValueObject>> {
+    - value: String
+}
+
+class ClientId <<ValueObject>> {
+    - value: String
+}
+
+class DroneId <<ValueObject>> {
+    - value: String
+}
+
+class ShowId <<ValueObject>> {
+    - value: String
+}
+
+class FigureId <<ValueObject>> {
+    - value: String
+}
+
+class Username <<ValueObject>> {
+    - value: String
+}
+
+class Password <<ValueObject>> {
+    - value: String
+}
+
+class DroneState <<ValueObject>> {
+    - value: String
+}
+
+class Maintenance <<ValueObject>> {
+    - maintenance_start_date: DateValue
+    - maintenance_final_date: DateValue
+}
+
+class DateValue <<ValueObject>> {
+    - value: String
+}
+
+class Description <<ValueObject>> {
+    - value: String
+}
+
+' ========== DOMAIN SERVICE ==========
+class Inventory <<DomainService>> {
+    + getAvailableDrones(): List<Drone>
+}
+
+' ========== RELAÇÕES ==========
+User --> UserId
+User --> Username
+User --> Password
+
+Client --> ClientId
+
+Drone --> DroneId
+Drone --> DroneState
+Drone --> Maintenance
+
+Show --> ShowId
+Show --> DateValue
+Show --> Drone
+Show --> Figure
+
+Figure --> FigureId
+Figure --> Description
+
+ShowProposal --> Show
+
+Maintenance --> DateValue
+
+Inventory --> Drone : manages
+
+@enduml
