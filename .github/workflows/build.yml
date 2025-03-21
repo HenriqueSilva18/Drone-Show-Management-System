@@ -10,10 +10,10 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
-      - name: Configurar JDK 21.0.6 da Oracle
+      - name: Configurar JDK 17.0.12 da Oracle
         uses: actions/setup-java@v4
         with:
-          java-version: '21.0.6'
+          java-version: '17.0.12'
           distribution: 'oracle'
 
       - name: Compilar código
