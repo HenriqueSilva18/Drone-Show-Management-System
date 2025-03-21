@@ -1,0 +1,57 @@
+
+@startuml
+
+class User {
+    - username: String
+    - password: String
+}
+
+class Client {
+    - clientId: String
+}
+
+class Drone {
+    - model: String
+    - state: String
+    - lang: String
+    - maintenance_history: List<Maintenance>
+}
+
+class Inventory {
+    - stock: List<Drone>
+}
+
+class Show {
+    - date: String
+    - figures: List<Figure>
+    - drones: List<Drone>
+}
+
+class Figure {
+    - description: String
+}
+
+class ShowProposal {
+    - show: Show
+}
+
+class Maintenance {
+    - maintenance_start_date: String
+    - maintenance_final_date: String
+}
+
+Inventory "1" -- "*" Drone : contains
+Drone "1" -- "*" Maintenance : includes
+Show "1" -- "*" Figure : contains
+Show "1" -- "*" Drone : uses
+ShowProposal "1" -- "1" Show : proposes
+
+Admin --> User : manages
+"CRM Manager" --> Client : manages
+"CRM Collaborator" --> Show : manages
+"CRM Collaborator" --> ShowProposal : generates
+"Show Designer" --> Figure : creates
+"Drone Tech" --> Drone : manages
+"Drone Tech" --> Maintenance : manages
+
+@enduml
