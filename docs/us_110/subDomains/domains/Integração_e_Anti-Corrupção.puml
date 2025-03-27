@@ -1,0 +1,8 @@
+@startuml
+package "Integration and Anti-Corruption" {
+    ' Adaptador para integração com sistemas externos de monitoramento/control de drones
+    class ExternalDroneSystemAdapter <<AntiCorruptionLayer>> {
+       + fetchDroneStatus(droneId: String): String
+    }
+}
+@enduml

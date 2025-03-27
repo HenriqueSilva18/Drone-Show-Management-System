@@ -1,0 +1,38 @@
+@startuml
+package "Simulation and Safety" {
+    ' Serviço de simulação responsável por validar figuras e shows
+    class SimulationService <<DomainService>> {
+       + simulateFigure(figure: Figure): String
+    }
+
+    ' Evento de domínio para detecção de colisões durante a simulação
+    class CollisionDetectedEvent <<DomainEvent>> {
+       - droneId: DroneId
+       - position: Position
+       - timestamp: DateValue
+    }
+
+    ' Value Object para posição 3D, utilizado na simulação
+    class Position <<ValueObject>> {
+       - x: Integer
+       - y: Integer
+       - z: Integer
+    }
+
+    class DroneId <<ValueObject>> {
+       - value: String
+    }
+    class DateValue <<ValueObject>> {
+       - value: String
+    }
+
+    ' Figura que será simulada (relação com o subdomínio de Shows e Figuras)
+    class Figure <<Entity>> {
+       - id: FigureId
+       - description: Description
+       - dslCode: String
+       - version: String
+       - exclusive: Boolean
+    }
+}
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+package "Drone Inventory and Models" {
+    ' Modelo de drone com atributos específicos
+    class DroneModel <<Entity>> {
+       - id: DroneModelId
+       - name: String
+       - language: String
+    }
+    class DroneModelId <<ValueObject>> {
+       - value: String
+    }
+
+    ' Agregado Drone que representa um drone específico
+    class Drone <<AggregateRoot>> {
+       - id: DroneId
+       - serialNumber: String
+       - state: DroneState
+       - maintenance_history: List<Maintenance>
+       - droneModel: DroneModel
+    }
+    class DroneId <<ValueObject>> {
+       - value: String
+    }
+    class DroneState <<ValueObject>> {
+       - value: String
+    }
+    class Maintenance <<ValueObject>> {
+       - maintenance_start_date: DateValue
+       - maintenance_final_date: DateValue
+    }
+    class DateValue <<ValueObject>> {
+       - value: String
+    }
+
+    ' Repositório para acesso aos drones
+    interface DroneRepository <<Repository>> {
+       + save(drone: Drone): void
+       + findById(id: DroneId): Drone
+       + findAvailableDrones(): List<Drone>
+    }
+
+    Drone --> DroneId
+    Drone --> DroneState
+    Drone --> Maintenance
+    Drone --> DroneModel
+    DroneModel --> DroneModelId
+}
+@enduml

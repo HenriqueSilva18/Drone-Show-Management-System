@@ -1,0 +1,43 @@
+@startuml
+package "Client Management" {
+    ' Entidade Client com informações relevantes
+    class Client <<Entity>> {
+       - clientId: ClientId
+       - vat: String
+       - address: String
+       - status: ClientStatus
+       - representatives: List<Representative>
+    }
+
+    ' Value Objects para Client
+    class ClientId <<ValueObject>> {
+       - value: String
+    }
+    class ClientStatus <<ValueObject>> {
+       - value: String
+    }
+
+    ' Representante do cliente
+    class Representative <<Entity>> {
+       - id: RepresentativeId
+       - email: String
+       - name: String
+       - position: String
+       - active: Boolean
+    }
+    class RepresentativeId <<ValueObject>> {
+       - value: String
+    }
+
+    ' Repositório para persistência dos clientes
+    interface ClientRepository <<Repository>> {
+       + save(client: Client): void
+       + findById(id: ClientId): Client
+    }
+
+    Client --> ClientId
+    Client --> ClientStatus
+    Client "1" -- "*" Representative : has
+    Representative --> RepresentativeId
+}
+@enduml

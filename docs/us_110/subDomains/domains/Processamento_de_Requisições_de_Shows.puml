@@ -1,0 +1,49 @@
+@startuml
+package "Show Request Processing" {
+    ' Entidade ShowRequest que capta a solicitação de um show
+    class ShowRequest <<Entity>> {
+       - id: ShowRequestId
+       - place: String
+       - time: DateValue
+       - numberOfDrones: Integer
+       - description: Description
+       - status: RequestStatus
+       - client: Client
+    }
+    class ShowRequestId <<ValueObject>> {
+       - value: String
+    }
+    class DateValue <<ValueObject>> {
+       - value: String
+    }
+    class Description <<ValueObject>> {
+       - value: String
+    }
+    class RequestStatus <<ValueObject>> {
+       - value: String
+    }
+
+    ' Cliente que fez a requisição – pode ser compartilhado com o subdomínio de Clientes
+    class Client <<Entity>> {
+       - clientId: ClientId
+       - vat: String
+       - address: String
+    }
+    class ClientId <<ValueObject>> {
+       - value: String
+    }
+
+    ' Repositório para as requisições de show
+    interface ShowRequestRepository <<Repository>> {
+       + save(request: ShowRequest): void
+       + findById(id: ShowRequestId): ShowRequest
+    }
+
+    ShowRequest --> ShowRequestId
+    ShowRequest --> DateValue
+    ShowRequest --> Description
+    ShowRequest --> RequestStatus
+    ShowRequest --> Client
+    Client --> ClientId
+}
+@enduml
