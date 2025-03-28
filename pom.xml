@@ -67,7 +67,11 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>eapli-framework-repo</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 </project>
-
-
-
