@@ -1,93 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>lapr4</groupId>
-        <artifactId>shodrone</artifactId>
-        <version>0.1.0</version>
-    </parent>
-
-    <groupId>lapr4.shodrone</groupId>
-    <artifactId>shodrone.util.ci</artifactId>
+    <groupId>lapr4</groupId>
+    <artifactId>shodrone</artifactId>
     <packaging>pom</packaging>
+    <version>0.1.0</version>
 
-    <name>shodrone.util.ci</name>
+    <modules>
+        <module>shodrone.app1</module>
+        <module>shodrone.app2</module>
+        <module>shodrone.util.ci</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <code.coverage.project.folder>${basedir}/../</code.coverage.project.folder>
-        <code.coverage.overall.data.folder>${basedir}/target/</code.coverage.overall.data.folder>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <eapli.framework.core.version>25.0.0-RELEASE</eapli.framework.core.version>
+        <eapli.framework.authz.version>25.0.0-RELEASE</eapli.framework.authz.version>
+        <eapli.framework.pubsub.version>25.0.0-RELEASE</eapli.framework.pubsub.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <version>0.1.0</version>
-            <groupId>lapr4</groupId>
-            <artifactId>shodrone.app1</artifactId>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.10.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 Database (exclusivamente para testes) -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>2.2.224</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- EAPLI Framework dependencies -->
+        <dependency>
+            <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+            <artifactId>eapli.framework.core</artifactId>
+            <version>${eapli.framework.core.version}</version>
         </dependency>
         <dependency>
-            <version>0.1.0</version>
-            <groupId>lapr4</groupId>
-            <artifactId>shodrone.app2</artifactId>
+            <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+            <artifactId>eapli.framework.infrastructure.authz</artifactId>
+            <version>${eapli.framework.authz.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
+            <artifactId>eapli.framework.infrastructure.pubsub</artifactId>
+            <version>${eapli.framework.pubsub.version}</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>3.5.0</version>
                 <configuration>
-                    <argLine>-Xms256m -Xmx2048m</argLine>
-                    <forkCount>1</forkCount>
-                    <runOrder>random</runOrder>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
 
             <plugin>
-
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
                 <executions>
                     <execution>
-                        <id>report-aggregate</id>
-                        <phase>verify</phase>
+                        <id>prepare-agent</id>
                         <goals>
-                            <goal>report-aggregate</goal>
+                            <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-
-                    <execution>
-                        <id>merge-results</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>merge</goal>
-                        </goals>
-                        <configuration>
-                            <fileSets>
-                                <fileSet>
-                                    <directory>${code.coverage.project.folder}</directory>
-                                    <includes>
-                                        <include>**/target/jacoco.exec</include>
-                                    </includes>
-                                </fileSet>
-                            </fileSets>
-                            <destFile>${code.coverage.overall.data.folder}/aggregate.exec</destFile>
-                        </configuration>
-                    </execution>
-
                 </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>
