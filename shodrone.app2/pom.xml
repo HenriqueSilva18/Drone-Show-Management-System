@@ -9,11 +9,10 @@
         <version>0.1.0</version>
     </parent>
 
-    <groupId>lapr4</groupId>
     <artifactId>shodrone.app2</artifactId>
     <packaging>jar</packaging>
 
-    <name>jobs4u.app2</name>
+    <name>shodrone.app2</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,7 +23,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
