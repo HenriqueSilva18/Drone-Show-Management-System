@@ -23,12 +23,7 @@ package "Show Request Processing" {
        - value: String
     }
 
-    ' Cliente que fez a requisição – pode ser compartilhado com o subdomínio de Clientes
-    class Client <<Entity>> {
-       - clientId: ClientId
-       - vat: String
-       - address: String
-    }
+
     class ClientId <<ValueObject>> {
        - value: String
     }
@@ -43,7 +38,6 @@ package "Show Request Processing" {
     ShowRequest --> DateValue
     ShowRequest --> Description
     ShowRequest --> RequestStatus
-    ShowRequest --> Client
-    Client --> ClientId
+    ShowRequest --> ClientId
 }
 @enduml

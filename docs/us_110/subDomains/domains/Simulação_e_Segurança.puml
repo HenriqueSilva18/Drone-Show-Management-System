@@ -5,13 +5,6 @@ package "Simulation and Safety" {
        + simulateFigure(figure: Figure): String
     }
 
-    ' Evento de domínio para detecção de colisões durante a simulação
-    class CollisionDetectedEvent <<DomainEvent>> {
-       - droneId: DroneId
-       - position: Position
-       - timestamp: DateValue
-    }
-
     ' Value Object para posição 3D, utilizado na simulação
     class Position <<ValueObject>> {
        - x: Integer
