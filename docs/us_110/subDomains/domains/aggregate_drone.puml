@@ -1,48 +1,50 @@
 @startuml
-package "Drone Inventory and Models" {
-    ' Modelo de drone com atributos específicos
-    class DroneModel <<Entity>> {
-       - id: DroneModelId
-       - name: String
-       - language: String
-    }
-    class DroneModelId <<ValueObject>> {
-       - value: String
-    }
+package "Aggregate Drone" {
 
-    ' Agregado Drone que representa um drone específico
+    ' Agregado Drone (Aggregate Root)
     class Drone <<AggregateRoot>> {
-       - id: DroneId
-       - serialNumber: String
-       - state: DroneState
-       - maintenance_history: List<Maintenance>
-       - droneModel: DroneModel
+        - id: DroneId
+        - serialNumber: String
+        - state: DroneState
+        - maintenanceHistory: List<Maintenance>
+        - droneModelId: DroneModelId
     }
+
+    ' Entidade Maintenance associada ao drone
+    class Maintenance <<Entity>> {
+        - id: MaintenanceId
+        - maintenanceStartDate: DateValue
+        - maintenanceEndDate: DateValue
+        - description: String
+    }
+
+    class MaintenanceId <<ValueObject>> {
+        - value: String
+    }
+
+    ' Value Objects
     class DroneId <<ValueObject>> {
-       - value: String
+        - value: String
     }
+
     class DroneState <<ValueObject>> {
-       - value: String
+        - value: String
     }
-    class Maintenance <<ValueObject>> {
-       - maintenance_start_date: DateValue
-       - maintenance_final_date: DateValue
+
+    class DroneModelId <<ValueObject>> {
+        - value: String
     }
+
     class DateValue <<ValueObject>> {
-       - value: String
+        - value: String
     }
 
-    ' Repositório para acesso aos drones
-    interface DroneRepository <<Repository>> {
-       + save(drone: Drone): void
-       + findById(id: DroneId): Drone
-       + findAvailableDrones(): List<Drone>
-    }
-
+    ' Ligações
     Drone --> DroneId
     Drone --> DroneState
-    Drone --> Maintenance
-    Drone --> DroneModel
-    DroneModel --> DroneModelId
+    Drone --> DroneModelId
+    Drone "1" -- "*" Maintenance : has
+    Maintenance --> MaintenanceId
+    Maintenance --> DateValue
 }
 @enduml

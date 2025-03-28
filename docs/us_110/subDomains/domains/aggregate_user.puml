@@ -1,7 +1,8 @@
 @startuml
-package "User Management and Authentication" {
-    ' Entidade de usuário com dados de autenticação
-    class User <<Entity>> {
+package "Aggregate User" {
+
+    ' Agregado User (Aggregate Root)
+    class User <<AggregateRoot>> {
         - id: UserId
         - username: Username
         - password: Password
@@ -9,29 +10,20 @@ package "User Management and Authentication" {
         - phone: String
     }
 
-    ' Value Objects para identificação e credenciais
+    ' Value Objects associados
     class UserId <<ValueObject>> {
         - value: String
     }
+
     class Username <<ValueObject>> {
         - value: String
     }
+
     class Password <<ValueObject>> {
         - value: String
     }
 
-    ' Repositório para persistência dos usuários
-    interface UserRepository <<Repository>> {
-        + save(user: User): void
-        + findById(id: UserId): User
-    }
-
-    ' Serviço de autenticação, responsável pelo login/logout
-    class AuthService <<ApplicationService>> {
-        + login(username: Username, password: Password): User
-        + logout(user: User): void
-    }
-
+    ' Ligações
     User --> UserId
     User --> Username
     User --> Password

@@ -1,50 +1,35 @@
 @startuml
-package "Show and Figures Management" {
-    ' Agregado Show que representa um show com drones
+package "Aggregate Show " {
+
+    ' Agregado Show (Aggregate Root)
     class Show <<AggregateRoot>> {
-       - id: ShowId
-       - date: DateValue
-       - figures: List<Figure>
-       - drones: List<Drone>
+        - id: ShowId
+        - date: DateValue
+        - figureIds: List<FigureId>
+        - droneIds: List<DroneId>
     }
+
+    ' Value Objects relacionados
     class ShowId <<ValueObject>> {
-       - value: String
+        - value: String
     }
 
-    ' Figura, parte constitutiva do show
-    class Figure <<Entity>> {
-       - id: FigureId
-       - description: Description
-       - dslCode: String
-       - version: String
-       - exclusive: Boolean
+    class DateValue <<ValueObject>> {
+        - value: String
     }
+
     class FigureId <<ValueObject>> {
-       - value: String
-    }
-    class Description <<ValueObject>> {
-       - value: String
+        - value: String
     }
 
-    ' Proposta de show enviada ao cliente
-    class ShowProposal <<Entity>> {
-       - id: ProposalId
-       - show: Show
-    }
-    class ProposalId <<ValueObject>> {
-       - value: String
+    class DroneId <<ValueObject>> {
+        - value: String
     }
 
-    ' Repositório para acesso aos shows
-    interface ShowRepository <<Repository>> {
-       + save(show: Show): void
-       + findById(id: ShowId): Show
-    }
-
+    ' Ligações
     Show --> ShowId
     Show --> DateValue
-    Show --> Figure
-    ShowProposal --> ProposalId
-    ShowProposal --> Show
+    Show --> FigureId
+    Show --> DroneId
 }
 @enduml

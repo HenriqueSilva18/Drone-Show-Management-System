@@ -1,0 +1,26 @@
+@startuml
+package "Aggregate Figure " {
+
+    ' Agregado Figure (Aggregate Root)
+    class Figure <<AggregateRoot>> {
+        - id: FigureId
+        - description: Description
+        - dslCode: String
+        - version: String
+        - exclusive: Boolean
+    }
+
+    ' Value Objects relacionados
+    class FigureId <<ValueObject>> {
+        - value: String
+    }
+
+    class Description <<ValueObject>> {
+        - value: String
+    }
+
+    ' Ligações
+    Figure --> FigureId
+    Figure --> Description
+}
+@enduml

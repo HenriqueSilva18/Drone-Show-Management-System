@@ -1,0 +1,41 @@
+@startuml
+package "Aggregate Show Proposal" {
+
+    ' Agregado ShowProposal (Aggregate Root)
+    class ShowProposal <<AggregateRoot>> {
+        - id: ProposalId
+        - showId: ShowId
+        - clientId: ClientId
+        - proposalDate: DateValue
+        - status: ProposalStatus
+    }
+
+    ' Value Objects associados
+    class ProposalId <<ValueObject>> {
+        - value: String
+    }
+
+    class ShowId <<ValueObject>> {
+        - value: String
+    }
+
+    class ClientId <<ValueObject>> {
+        - value: String
+    }
+
+    class DateValue <<ValueObject>> {
+        - value: String
+    }
+
+    class ProposalStatus <<ValueObject>> {
+        - value: String
+    }
+
+    ' Ligações
+    ShowProposal --> ProposalId
+    ShowProposal --> ShowId
+    ShowProposal --> ClientId
+    ShowProposal --> DateValue
+    ShowProposal --> ProposalStatus
+}
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+package " Aggregate Drone Model " {
+
+    ' Agregado DroneModel (Aggregate Root)
+    class DroneModel <<AggregateRoot>> {
+        - id: DroneModelId
+        - name: String
+        - language: String
+        - manufacturer: String
+        - specifications: ModelSpecifications
+    }
+
+    ' Value Objects associados
+    class DroneModelId <<ValueObject>> {
+        - value: String
+    }
+
+    class ModelSpecifications <<ValueObject>> {
+        - dimensions: String
+        - weight: String
+        - maxSpeed: String
+        - flightTime: String
+    }
+
+    ' Ligações
+    DroneModel --> DroneModelId
+    DroneModel --> ModelSpecifications
+}
+@enduml
