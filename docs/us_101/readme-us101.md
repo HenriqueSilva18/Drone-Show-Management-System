@@ -1,10 +1,8 @@
-# US 105
-
-*This is an example template*
+# US101 - Technical constraints
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+This task is addressed in Sprint 1 as we begin the project. The goal is to ensure the team follows the technical constraints defined in the project document.
 
 ### 1.1 List of issues
 
@@ -23,13 +21,13 @@ Test:
 
 *Example*
 
-**US G105** As {Ator} I Want...
+**US G101** As {Ator} I Want...
 
 **Acceptance Criteria:**
 
-- US105.1 The system should...Blá Blá Blá ...
+- US101.1 The system should...Blá Blá Blá ...
 
-- US105.2. Blá Blá Blá ...
+- US101.2. Blá Blá Blá ...
 
 **Dependencies/References:**
 
@@ -45,7 +43,7 @@ Test:
 
 ### 4.1. Realization
 
-![a class diagram](class-diagram-us105.svg "A Class Diagram")
+![a class diagram](class-diagram-us101.svg "A Class Diagram")
 
 ### 4.3. Applied Patterns
 
@@ -55,7 +53,7 @@ Include here the main tests used to validate the functionality. Focus on how the
 
 **Test 1:** *Verifies that it is not possible to ...*
 
-**Refers to Acceptance Criteria:** US105.1
+**Refers to Acceptance Criteria:** US101.1
 
 
 ```
