@@ -7,20 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Delete build.yml #5">
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_drone_model.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_figure.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_show_proposal.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Gestão_de_Clientes.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_client.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Gestão_de_Shows_e_Figuras.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_show.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Gestão_de_Usuários_e_Autenticação.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_user.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Integração_e_Anti-Corrupção.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Inventário_de_Drones_e_Modelos.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_drone.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Processamento_de_Requisições_de_Shows.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/aggregate_show_request.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Simulação_e_Segurança.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/us_110/subDomains/domains/Simulação_e_Segurança.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.util.ci/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.util.ci/pom.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Fix dependecies #5">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2025_16_23__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_21_03_2025_16_23__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,8 +95,7 @@
       <updated>1742917879950</updated>
       <workItem from="1742917885298" duration="13000" />
       <workItem from="1743090671800" duration="2296000" />
-      <workItem from="1743165366498" duration="2858000" />
-      <workItem from="1743172776486" duration="3002000" />
+      <workItem from="1743165366498" duration="1731000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -125,15 +113,7 @@
       <option name="project" value="LOCAL" />
       <updated>1743165669170</updated>
     </task>
-    <task id="LOCAL-00004" summary="Delete build.yml #5">
-      <option name="closed" value="true" />
-      <created>1743171316321</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1743171316321</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,7 +145,6 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add base files for user stories documentation #1 #2 #3 #4 #5" />
     <MESSAGE value="Fix dependecies #5" />
-    <MESSAGE value="Delete build.yml #5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete build.yml #5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix dependecies #5" />
   </component>
 </project>
