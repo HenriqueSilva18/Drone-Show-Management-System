@@ -2,16 +2,18 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for shodrone" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar" />
-        </processorPath>
         <module name="shodrone.app2" />
         <module name="shodrone.app1" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="shodrone.app1 (1)" target="17" />
+      <module name="shodrone.app2 (1)" target="17" />
+      <module name="shodrone.util.ci (1)" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
