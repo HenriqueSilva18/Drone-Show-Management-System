@@ -9,12 +9,6 @@
     <packaging>pom</packaging>
     <version>0.1.0</version>
 
-    <modules>
-        <module>shodrone.app1</module>
-        <module>shodrone.app2</module>
-        <module>shodrone.util.ci</module>
-    </modules>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
