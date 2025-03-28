@@ -7,22 +7,88 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="#6">
-      <change afterPath="$PROJECT_DIR$/docs/us_110/Domain_Model/domain.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/Domain_Model/domain.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/Domain_Model/ful_model_explanation.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/Gestão_de_Clientes.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/Gestão_de_Shows_e_Figuras.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/Gestão_de_Usuários_e_Autenticação.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/Inventário_de_Drones_e_Modelos.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/Processamento_de_Requisições_de_Shows.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/us_110/subDomains/subDomains_explanation.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/us_101/01.requirements-engineering/US-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/01.requirements-engineering/US006-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/01.requirements-engineering/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/01.requirements-engineering/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/02.analysis/US-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/02.analysis/US006-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/02.analysis/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/02.analysis/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/03.design/US-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/03.design/US006-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/03.design/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/03.design/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/04.tests-and-implementation/US-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/04.tests-and-implementation/US006-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/US006-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_101/USXXX-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/01.requirements-engineering/US-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/01.requirements-engineering/US006-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/01.requirements-engineering/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/01.requirements-engineering/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/02.analysis/US-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/02.analysis/US006-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/02.analysis/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/02.analysis/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/03.design/US-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/03.design/US006-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/03.design/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/03.design/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/04.tests-and-implementation/US-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/04.tests-and-implementation/US006-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/US006-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_102/USXXX-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/01.requirements-engineering/US-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/01.requirements-engineering/US006-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/01.requirements-engineering/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/01.requirements-engineering/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/02.analysis/US-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/02.analysis/US006-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/02.analysis/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/02.analysis/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/03.design/US-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/03.design/US006-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/03.design/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/03.design/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/04.tests-and-implementation/US-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/04.tests-and-implementation/US006-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/US006-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_103/USXXX-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/01.requirements-engineering/US-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/01.requirements-engineering/US006-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/01.requirements-engineering/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/01.requirements-engineering/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/02.analysis/US-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/02.analysis/US006-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/02.analysis/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/02.analysis/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/03.design/US-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/03.design/US006-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/03.design/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/03.design/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/04.tests-and-implementation/US-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/04.tests-and-implementation/US006-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/US006-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_104/USXXX-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/01.requirements-engineering/US-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/01.requirements-engineering/US006-requirements.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/01.requirements-engineering/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/01.requirements-engineering/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/02.analysis/US-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/02.analysis/US006-analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/02.analysis/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/02.analysis/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/03.design/US-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/03.design/US006-design.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/03.design/puml/base.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/03.design/svg/base.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/04.tests-and-implementation/US-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/04.tests-and-implementation/US006-tests-and-implementation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/US006-README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/us_105/USXXX-README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/class-diagram-01.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/class-diagram-01.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/domain.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_110/domain_model.puml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +98,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;HenriqueSilva18&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
+    &quot;accountId&quot;: &quot;f1894e0c-9084-4dcf-940f-43995e03d9c5&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -46,24 +124,25 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/senke/OneDrive/Ambiente de Trabalho",
+    "last_opened_file_path": "C:/Users/josem/IdeaProjects/sem4pi-2024-2025-sem4pi_2024_2025_g39/docs/us_101",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "Errors",
-    "vue.rearranger.settings.migration": "true"
+    "settings.editor.selected.configurable": "Errors"
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\senke\IdeaProjects\sem4pi_2024_2025_g39\docs\us_110\Domain_Model" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_101" />
+      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_102" />
+      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_103" />
+      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_104" />
+      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_105" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -99,8 +178,27 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="#6" />
-    <option name="LAST_COMMIT_MESSAGE" value="#6" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
