@@ -12,7 +12,6 @@ Implement: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Inf
 
 Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/104)
 
-
 ## 2. Requirements
 
 **US101** - As Project Manager, I want the team to follow the technical constraints and concerns of the project.
