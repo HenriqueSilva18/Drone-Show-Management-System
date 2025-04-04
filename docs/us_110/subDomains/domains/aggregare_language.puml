@@ -1,0 +1,16 @@
+@startuml
+hide methods
+
+package "Aggregate Language " {
+
+    class Language <<AggregateRoot>> {
+        LanguageName: Name
+    }
+
+    class Name <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    Language --> Name
+}
+@enduml

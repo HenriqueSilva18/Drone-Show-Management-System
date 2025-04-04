@@ -6,18 +6,16 @@ package " Aggregate Drone Model " {
     ' Agregado DroneModel (Aggregate Root)
     class DroneModel <<AggregateRoot>> {
         DroneModelId: Id
-        Name: String
-        language: String
-        manufacturer: String
-        specifications: ModelSpecifications
+        Language: Language
+        ModelSpecifications: Specifications
     }
 
     ' Value Objects associados
-    class DroneModelId <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
-    class ModelSpecifications <<(V, #007fff) ValueObject>> {
+    class Specifications <<Entity>> {
         dimensions: String
         weight: String
         maxSpeed: String
@@ -25,7 +23,7 @@ package " Aggregate Drone Model " {
     }
 
     ' Ligações
-    DroneModel --> DroneModelId
-    DroneModel --> ModelSpecifications
+    DroneModel --> Id
+    DroneModel --> Specifications
 }
 @enduml

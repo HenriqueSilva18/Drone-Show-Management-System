@@ -20,31 +20,4 @@ package "Aggregate Figure " {
     Figure --> Id
 }
 
-package " Aggregate Drone Model " {
-
-    ' Agregado DroneModel (Aggregate Root)
-    class DroneModel <<AggregateRoot>> {
-        DroneModelId: Id
-        Name: String
-        language: String
-        manufacturer: String
-        specifications: ModelSpecifications
-    }
-
-    ' Value Objects associados
-    class DroneModelId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class ModelSpecifications <<(V, #007fff) ValueObject>> {
-        dimensions: String
-        weight: String
-        maxSpeed: String
-        flightTime: String
-    }
-
-    ' Ligações
-    DroneModel --> DroneModelId
-    DroneModel --> ModelSpecifications
-}
 @enduml

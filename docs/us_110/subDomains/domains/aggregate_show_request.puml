@@ -6,7 +6,7 @@ package "Aggregate Show Request " {
     ' Agregado ShowRequest (Aggregate Root)
     class ShowRequest <<AggregateRoot>> {
         ShowRequestId: Id
-        ClientId: Id
+        Client: Client
         Description: String
     }
 

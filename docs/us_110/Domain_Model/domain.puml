@@ -1,12 +1,8 @@
 @startuml
-skinparam monochrome true
-skinparam shadowing false
-skinparam classAttributeIconSize 0
-hide circle
+
 hide methods
 
-' Layout optimization
-left to right direction
+
 
 package "Aggregate Client " {
 
@@ -17,15 +13,6 @@ package "Aggregate Client " {
         ClientVAT: VAT
         ClientAddress: Address
         Representatives: List<Representative>
-    }
-
-    ' Value Objects do Client
-    class Id <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class Name <<(V, #007fff) ValueObject>> {
-        value: String
     }
 
     class VAT <<(V, #007fff) ValueObject>> {
@@ -42,14 +29,14 @@ package "Aggregate Client " {
         RepresentativeName: Name
     }
 
-    Client --> Id
-    Client --> Name
     Client --> VAT
     Client --> Representative
-    Representative --> Id
-    Representative --> Name
     Client --> Address
 }
+    Client --> Id
+    Representative --> Id
+        Representative --> Name
+    Client --> Name
 
 package "Aggregate Drone" {
 
@@ -69,48 +56,33 @@ package "Aggregate Drone" {
         Description: String
     }
 
-    ' Value Objects
-    class Id <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
     class SerialNumber <<(V, #007fff) ValueObject>> {
         value: String
     }
 
-    class DateValue <<(V, #007fff) ValueObject>> {
-        value: String
-    }
 
-    ' Ligações
-    Drone --> Id
     Drone --> SerialNumber
     Drone --> Maintenance
-    Maintenance --> Id
-    Maintenance --> DateValue
 
 }
+
+    Drone --> Id
+    Maintenance --> Id
+        Maintenance --> DateValue
 
 package "Aggregate Show Proposal" {
 
     ' Agregado ShowProposal (Aggregate Root)
     class ShowProposal <<AggregateRoot>> {
         ProposalId: Id
-        ClientId: Id
+        Client: Client
         ProposalDate: DateValue
         ProposalStatus: Status
         Figures: List<FigureId>
         SimulationResult: Report
     }
 
-    ' Value Objects associados
-    class Id <<(V, #007fff) ValueObject>> {
-        value: String
-    }
 
-    class DateValue <<(V, #007fff) ValueObject>> {
-        value: String
-    }
 
     class Status <<(V, #007fff) ValueObject>> {
         value: String
@@ -120,30 +92,24 @@ package "Aggregate Show Proposal" {
         value: String
     }
 
-    ' Ligações
-    ShowProposal --> Id
-    ShowProposal --> DateValue
     ShowProposal --> Status
     ShowProposal --> Report
 }
+    ShowProposal --> Id
+        ShowProposal --> DateValue
 
 package "Aggregate Show Request " {
 
     ' Agregado ShowRequest (Aggregate Root)
     class ShowRequest <<AggregateRoot>> {
         ShowRequestId: Id
-        ClientId: Id
+        Client: Client
         Description: String
     }
 
-    ' Value Objects associados
-    class Id <<(V, #007fff) ValueObject>> {
-        value: String
-    }
 
-    ' Ligações
-    ShowRequest --> Id
 }
+    ShowRequest --> Id
 
 package "Aggregate User" {
 
@@ -156,11 +122,6 @@ package "Aggregate User" {
         Phone: String
     }
 
-    ' Value Objects associados
-    class Id <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
     class Username <<(V, #007fff) ValueObject>> {
         value: String
     }
@@ -170,24 +131,75 @@ package "Aggregate User" {
     }
 
     ' Ligações
-    User --> Id
     User --> Username
     User --> Password
 }
+    User --> Id
+
+package "Aggregate Language " {
+
+    class Language <<AggregateRoot>> {
+        LanguageName: Name
+    }
+
+}
+    Language --> Name
+
+package "Aggregate Figure " {
+
+    ' Agregado Figure (Aggregate Root)
+    class Figure <<AggregateRoot>> {
+        FigureId: Id
+        ClientId: Id
+        Description: String
+        Exclusive: Boolean
+    }
+
+
+}
+    Figure --> Id
+
+package " Aggregate Drone Model " {
+
+    ' Agregado DroneModel (Aggregate Root)
+    class DroneModel <<AggregateRoot>> {
+        DroneModelId: Id
+        Language: Language
+        ModelSpecifications: Specifications
+    }
+
+    class Specifications <<Entity>> {
+        dimensions: String
+        weight: String
+        maxSpeed: String
+        flightTime: String
+    }
+
+    ' Ligações
+    DroneModel --> Specifications
+}
+    DroneModel --> Id
+
+
+DroneModel --> Language
+Client <-- ShowRequest
 
 
 
+class Id <<(V, #007fff) ValueObject>> {
+    value: String
+}
 
+    class Name <<(V, #007fff) ValueObject>> {
+        value: String
+    }
 
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
+    }
 
+ShowProposal --> Client
 
-
-
-
-
-
-
-
-
+Figure <-- ShowProposal
 
 @enduml
