@@ -1,29 +1,31 @@
 @startuml
+hide methods
+
 package "Aggregate Show " {
 
     ' Agregado Show (Aggregate Root)
     class Show <<AggregateRoot>> {
-        - id: ShowId
-        - date: DateValue
-        - figureIds: List<FigureId>
-        - droneIds: List<DroneId>
+        id: ShowId
+        date: DateValue
+        figureIds: List<FigureId>
+        droneIds: List<DroneId>
     }
 
     ' Value Objects relacionados
-    class ShowId <<ValueObject>> {
-        - value: String
+    class ShowId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DateValue <<ValueObject>> {
-        - value: String
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class FigureId <<ValueObject>> {
-        - value: String
+    class FigureId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DroneId <<ValueObject>> {
-        - value: String
+    class DroneId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações

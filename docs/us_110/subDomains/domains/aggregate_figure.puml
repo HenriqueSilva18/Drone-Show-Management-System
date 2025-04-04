@@ -1,22 +1,24 @@
 @startuml
+hide methods
+
 package "Aggregate Figure " {
 
     ' Agregado Figure (Aggregate Root)
     class Figure <<AggregateRoot>> {
-        - id: FigureId
-        - description: Description
-        - dslCode: String
-        - version: String
-        - exclusive: Boolean
+        id: FigureId
+        description: Description
+        dslCode: String
+        version: String
+        exclusive: Boolean
     }
 
     ' Value Objects relacionados
-    class FigureId <<ValueObject>> {
-        - value: String
+    class FigureId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class Description <<ValueObject>> {
-        - value: String
+    class Description <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações

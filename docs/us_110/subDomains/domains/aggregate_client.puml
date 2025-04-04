@@ -1,43 +1,45 @@
 @startuml
+hide methods
+
 package "Aggregate Client " {
 
     ' Agregado Client (Aggregate Root)
     class Client <<AggregateRoot>> {
-        - id: ClientId
-        - name: ClientName
-        - vat: String
-        - address: String
-        - status: ClientStatus
-        - representatives: List<Representative>
+        id: ClientId
+        name: ClientName
+        vat: String
+        address: String
+        status: ClientStatus
+        representatives: List<Representative>
     }
 
     ' Value Objects do Client
-    class ClientId <<ValueObject>> {
-        - value: String
+    class ClientId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ClientName <<ValueObject>> {
-        - value: String
+    class ClientName <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ClientStatus <<ValueObject>> {
-        - value: String
+    class ClientStatus <<(V, #007fff)ValueObject>> {
+        value: String
     }
 
     ' Representante (Gestor do sistema é um tipo de User, aqui é o representante do cliente)
     class Representative <<Entity>> {
-        - id: RepresentativeId
-        - userId: UserId
-        - position: String
-        - active: Boolean
+        id: RepresentativeId
+        userId: UserId
+        position: String
+        active: Boolean
     }
 
-    class RepresentativeId <<ValueObject>> {
-        - value: String
+    class RepresentativeId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class UserId <<ValueObject>> {
-        - value: String
+    class UserId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     Client --> ClientId

@@ -1,42 +1,44 @@
 @startuml
+hide methods
+
 package "Aggregate Drone" {
 
     ' Agregado Drone (Aggregate Root)
     class Drone <<AggregateRoot>> {
-        - id: DroneId
-        - serialNumber: String
-        - state: DroneState
-        - maintenanceHistory: List<Maintenance>
-        - droneModelId: DroneModelId
+        id: DroneId
+        serialNumber: String
+        state: DroneState
+        maintenanceHistory: List<Maintenance>
+        droneModelId: DroneModelId
     }
 
     ' Entidade Maintenance associada ao drone
     class Maintenance <<Entity>> {
-        - id: MaintenanceId
-        - maintenanceStartDate: DateValue
-        - maintenanceEndDate: DateValue
-        - description: String
+        id: MaintenanceId
+        maintenanceStartDate: DateValue
+        maintenanceEndDate: DateValue
+        description: String
     }
 
-    class MaintenanceId <<ValueObject>> {
-        - value: String
+    class MaintenanceId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Value Objects
-    class DroneId <<ValueObject>> {
-        - value: String
+    class DroneId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DroneState <<ValueObject>> {
-        - value: String
+    class DroneState <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DroneModelId <<ValueObject>> {
-        - value: String
+    class DroneModelId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DateValue <<ValueObject>> {
-        - value: String
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações

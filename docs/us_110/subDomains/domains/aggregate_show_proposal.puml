@@ -1,34 +1,36 @@
 @startuml
+hide methods
+
 package "Aggregate Show Proposal" {
 
     ' Agregado ShowProposal (Aggregate Root)
     class ShowProposal <<AggregateRoot>> {
-        - id: ProposalId
-        - showId: ShowId
-        - clientId: ClientId
-        - proposalDate: DateValue
-        - status: ProposalStatus
+        id: ProposalId
+        showId: ShowId
+        clientId: ClientId
+        proposalDate: DateValue
+        status: ProposalStatus
     }
 
     ' Value Objects associados
-    class ProposalId <<ValueObject>> {
-        - value: String
+    class ProposalId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ShowId <<ValueObject>> {
-        - value: String
+    class ShowId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ClientId <<ValueObject>> {
-        - value: String
+    class ClientId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class DateValue <<ValueObject>> {
-        - value: String
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ProposalStatus <<ValueObject>> {
-        - value: String
+    class ProposalStatus <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações

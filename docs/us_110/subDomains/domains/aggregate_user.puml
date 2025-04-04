@@ -1,26 +1,28 @@
 @startuml
+hide methods
+
 package "Aggregate User" {
 
     ' Agregado User (Aggregate Root)
     class User <<AggregateRoot>> {
-        - id: UserId
-        - username: Username
-        - password: Password
-        - email: String
-        - phone: String
+        id: UserId
+        username: Username
+        password: Password
+        email: String
+        phone: String
     }
 
     ' Value Objects associados
-    class UserId <<ValueObject>> {
-        - value: String
+    class UserId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class Username <<ValueObject>> {
-        - value: String
+    class Username <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class Password <<ValueObject>> {
-        - value: String
+    class Password <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações

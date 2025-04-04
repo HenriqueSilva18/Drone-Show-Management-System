@@ -1,43 +1,25 @@
 @startuml
+hide methods
+
 package "Aggregate Show Request " {
 
     ' Agregado ShowRequest (Aggregate Root)
     class ShowRequest <<AggregateRoot>> {
-        - id: ShowRequestId
-        - clientId: ClientId
-        - place: String
-        - requestedDate: DateValue
-        - numberOfDrones: Integer
-        - description: Description
-        - status: RequestStatus
+        id: ShowRequestId
+        description: Description
     }
 
     ' Value Objects associados
-    class ShowRequestId <<ValueObject>> {
-        - value: String
+    class ShowRequestId <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    class ClientId <<ValueObject>> {
-        - value: String
-    }
-
-    class DateValue <<ValueObject>> {
-        - value: String
-    }
-
-    class Description <<ValueObject>> {
-        - value: String
-    }
-
-    class RequestStatus <<ValueObject>> {
-        - value: String
+    class Description <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
     ' Ligações
     ShowRequest --> ShowRequestId
-    ShowRequest --> ClientId
-    ShowRequest --> DateValue
     ShowRequest --> Description
-    ShowRequest --> RequestStatus
 }
 @enduml
