@@ -1,86 +1,118 @@
 # US 104
-
-*This is an example template*
-
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+This task is being developed in **Sprint 1** and aims to create the initial version of the domain model of the system. The domain model will guide the design of the system's business logic and will be used in future user stories that involve business rules, persistence, and integration between modules.
 
 ### 1.1 List of issues
 
-Analysis:
+**Analysis:**
+- Identify core entities, value objects and aggregates.
+- Understand how the drone shows work (requests, figures, proposals, execution).
 
-Design:
+**Design:**
+- Draw the initial class diagram.
+- Organize entities into aggregates.
+- Apply DDD principles.
 
-Implement:
+**Implement:**
+- Define Java classes/interfaces for aggregates and value objects.
+- Use annotations or documentation to clarify roles (Entity, AggregateRoot, ValueObject).
 
-Test:
+**Test:**
+- Validate model consistency (e.g., ID uniqueness, immutability of value objects).
+- Compile domain module.
 
+---
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies). You should also add acceptance criteria.*
+**US104** – *As Domain Expert, I want the system's domain model to reflect the core business rules and entities so that development can follow a consistent, realistic design.*
 
-*Example*
+### Acceptance Criteria:
 
-**US G104** As {Ator} I Want...
+- US104.1 The domain model must be implemented using DDD (aggregates, entities, value objects).
+- US104.2 Class diagrams and documentation must exist under `docs/`.
+- US104.3 Each aggregate must clearly identify its root.
+- US104.4 Relationships between aggregates must be defined via IDs (not direct object references).
 
-**Acceptance Criteria:**
+### Dependencies/References:
 
-- US104.1 The system should...Blá Blá Blá ...
+- Related to US103 (Project structure)
+- Enables US110 (Domain logic implementation)
+- Refers to domain documentation provided by the Product Owner
 
-- US104.2. Blá Blá Blá ...
-
-**Dependencies/References:**
-
-*Regarding this requirement we understand that it relates to...*
+---
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+The team analyzed the main business concepts: Client, Drone, DroneModel, Figure, Show, ShowProposal, ShowRequest, Maintenance, and User. Each of these was evaluated as a candidate for an aggregate.
+
+The model is heavily influenced by Domain-Driven Design (Evans) and follows DDD terminology:
+- Entities have identity and lifecycle.
+- Value Objects are immutable and compared by value.
+- Aggregates encapsulate consistency boundaries.
+
+---
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
+
+Main aggregates defined:
+- **Client** – root: `Client`, has: `ClientId`, `ClientStatus`, `Representative`.
+- **Drone** – root: `Drone`, has: `DroneId`, `DroneState`, `Maintenance`, related to `DroneModelId`.
+- **DroneModel** – root: `DroneModel`, has: `DroneModelId`, `ModelSpecifications`.
+- **Figure** – root: `Figure`, has: `FigureId`, `Description`, `dslCode`, etc.
+- **Show** – root: `Show`, has: `ShowId`, references `DroneId`, `FigureId`.
+- **ShowProposal** – root: `ShowProposal`, has: `ProposalId`, `ShowId`, `ClientId`.
+- **ShowRequest** – root: `ShowRequest`, has: `ShowRequestId`, `ClientId`, `Description`.
+
+Relationships use only IDs to ensure aggregate isolation and loose coupling.
 
 ![a class diagram](class-diagram-us104.svg "A Class Diagram")
 
 ### 4.3. Applied Patterns
 
+- **Domain-Driven Design (DDD)**: Entity, Aggregate, Value Object.
+- **Separation of Concerns**: only the domain logic is represented here.
+
 ### 4.4. Acceptance Tests
 
-Include here the main tests used to validate the functionality. Focus on how they relate to the acceptance criteria. May be automated or manual tests.
-
-**Test 1:** *Verifies that it is not possible to ...*
-
+**Test 1:** Domain module compiles successfully.  
 **Refers to Acceptance Criteria:** US104.1
 
+**Test 2:** All aggregates are implemented with a root and clear value objects.  
+**Refers to Acceptance Criteria:** US104.3
 
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureXxxxYyyy() {
-	...
-}
-````
+**Test 3:** Diagrams exist under `docs/` and represent the model faithfully.  
+**Refers to Acceptance Criteria:** US104.2
+
+---
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+All classes were placed in the `domain` module.
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+Classes created:
+- `Client`, `ClientId`, `ClientStatus`, `Representative`, etc.
+- `Drone`, `DroneId`, `DroneState`, `Maintenance`, etc.
+- `Show`, `ShowId`, `Figure`, `FigureId`, etc.
+
+Domain annotations or JavaDocs were used to mark roles (`@Entity`, `@AggregateRoot`, etc.).
+
+### Main commits:
+- `feat: initial domain model classes`
+- `docs: add class diagram of aggregates`
+- `chore: update domain module with full structure`
+
+---
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+Domain module is referenced by `simulation-core`, `plugins`, etc.  
+Other modules access aggregate roots via repositories or ID references.
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
-
-## 7. Observations
-
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+To test:
+```bash
+cd domain
+mvn clean compile

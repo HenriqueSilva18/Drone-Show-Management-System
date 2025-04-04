@@ -1,86 +1,119 @@
-# US 102
-
-*This is an example template*
+# US 102 – Project Repository
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+This is the first time this task is assigned and it must be completed in Sprint 1. The goal of US102 is to ensure the team is working in a structured and professional environment with proper version control and project organization from the beginning.
+
+The team must use the provided GitHub Classroom repository, organize it properly, and adopt a tool for project management (e.g., GitHub Projects).
 
 ### 1.1 List of issues
 
-Analysis:
+**Analysis:**
+- Understand GitHub Classroom setup
+- Investigate features of GitHub Projects or alternatives
 
-Design:
+**Design:**
+- Decide on initial folder structure
+- Choose labels and conventions for issues and branches
 
-Implement:
+**Implement:**
+- Initialize repository with README, docs folder, and base structure
+- Set up GitHub Project board (Kanban)
+- Define contribution rules (e.g., commit message style)
 
-Test:
+**Test:**
+- Validate correct repository access
+- Simulate workflow: assign issue, develop, commit, review, merge
 
+---
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies). You should also add acceptance criteria.*
+**US102** – *As Project Manager, I want the team to use the defined project repository in GitHub and setup a GitHub tool for project management.*
 
-*Example*
+### Acceptance Criteria:
 
-**US G102** As {Ator} I Want...
-
-**Acceptance Criteria:**
-
-- US102.1 The system should...Blá Blá Blá ...
-
-- US102.2. Blá Blá Blá ...
+- US102.1 Repository is initialized and accessible by all team members.
+- US102.2 The project has a documented structure (folders like `/docs`, `/src`, `/scripts`, etc.).
+- US102.3 A GitHub Project (Kanban) board is created and in use.
+- US102.4 The team uses Issues, Labels, Milestones, and Branches appropriately.
+- US102.5 The repository contains a `README.md` and relevant documentation.
 
 **Dependencies/References:**
 
-*Regarding this requirement we understand that it relates to...*
+- Relates to US103 (Project structure setup)
+- Relates to NFR04 (Source control)
+
+---
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+- The GitHub repository was provided via GitHub Classroom and follows standard naming.
+- GitHub Projects (Kanban-style) allows for clear task tracking.
+- Documentation folder (`/docs`) is needed for reporting.
+- Using issues and branches supports asynchronous and parallel development.
+
+---
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
 
-![a class diagram](class-diagram-us102.svg "A Class Diagram")
+- Project root includes:
+    - `README.md`
+    - `/src` – Source code
+    - `/docs` – Markdown documentation (e.g., US102.md)
+    - `/scripts` – Build and execution scripts
+
+- GitHub Project board configured with:
+    - Columns: Backlog, To Do, In Progress, Review, Done
+    - Issues linked to USs and assigned with priority labels
 
 ### 4.3. Applied Patterns
 
+- GitHub Flow (branch-based workflow)
+- Semantic Commit Messages (e.g., `feat:`, `fix:`)
+
 ### 4.4. Acceptance Tests
 
-Include here the main tests used to validate the functionality. Focus on how they relate to the acceptance criteria. May be automated or manual tests.
+**Test 1:** Verify all members can push to the repository.
+- **Refers to Acceptance Criteria:** US102.1
 
-**Test 1:** *Verifies that it is not possible to ...*
+**Test 2:** Validate the folder structure and presence of `/docs`, `/scripts`.
+- **Refers to Acceptance Criteria:** US102.2
 
-**Refers to Acceptance Criteria:** US102.1
+**Test 3:** Create and move a task through the GitHub Project board.
+- **Refers to Acceptance Criteria:** US102.3
 
-
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureXxxxYyyy() {
-	...
-}
-````
+---
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+- `README.md` created with basic info and contribution guidelines.
+- Repository contains base folders (`/docs`, `/src`, etc.)
+- GitHub Project board created.
+- Issues created for each Sprint 1 User Story.
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+### Major Commits:
+
+- `init: initial commit with base structure`
+- `docs: add US102 documentation`
+- `chore: configure GitHub Project board`
+
+---
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
+- GitHub Project board integrated with Issues and PRs.
+- Example issue assigned, worked on, PR created and merged.
+- Validated via team walkthrough.
 
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+---
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
+- The setup enables traceability, collaboration, and continuous progress tracking.
+- The board helps with sprint planning and tracking.
+- Future improvements include automation of some workflows using GitHub Actions.
 
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+---

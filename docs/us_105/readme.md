@@ -1,86 +1,98 @@
 # US 105
-
-*This is an example template*
+# US 105 – Automated Deployment
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+This task is being developed in **Sprint 1**. The goal is to provide simple and effective automation scripts to make project compilation, testing, and local execution easier for all team members. It ensures consistency across developer environments and simplifies usage for future users and evaluators.
 
 ### 1.1 List of issues
 
 Analysis:
+- Identify the most common commands needed: build, run, test.
+- Clarify scope: remote deployment is out of Sprint 1.
 
 Design:
+- Define scripts for Windows and Unix-like systems.
+- Decide naming conventions and folder organization (`scripts/`).
 
 Implement:
+- Create `.bat` and `.sh` scripts.
+- Cover build, test and execution (where applicable).
 
 Test:
-
+- Execute scripts on different OSes.
+- Validate that each script works independently.
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies). You should also add acceptance criteria.*
+US105 – As Project Manager, I want the team to add to the project the necessary scripts, so that build/executions/deployments can be executed effortlessly.
 
-*Example*
+Acceptance Criteria:
+- US105.1 Scripts exist for compiling the full project (`build.bat`, `quick-build.bat`)
+- US105.2 Scripts allow running tests with a single command.
+- US105.3 Scripts are cross-platform (`.bat` and `.sh`)
+- US105.4 Scripts are documented and included in the repository.
 
-**US G105** As {Ator} I Want...
-
-**Acceptance Criteria:**
-
-- US105.1 The system should...Blá Blá Blá ...
-
-- US105.2. Blá Blá Blá ...
-
-**Dependencies/References:**
-
-*Regarding this requirement we understand that it relates to...*
+Dependencies/References:
+- US102 (Project repo setup)
+- US103 (Project structure)
+- NFR04 (Automation and standardization)
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+The team clarified with the instructor that deployment to other machines is out of scope for Sprint 1. Focus is on local automation: build, test and execute.
+
+We identified three categories of scripts:
+- Build scripts
+- Test scripts
+- Execution scripts (only if there's an app to run)
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
-### 4.1. Realization
-
-![a class diagram](class-diagram-us105.svg "A Class Diagram")
-
-### 4.3. Applied Patterns
-
-### 4.4. Acceptance Tests
-
-Include here the main tests used to validate the functionality. Focus on how they relate to the acceptance criteria. May be automated or manual tests.
-
-**Test 1:** *Verifies that it is not possible to ...*
-
-**Refers to Acceptance Criteria:** US105.1
+Realization:
+- Folder: `scripts/`
+- Provided scripts:
+    - `build.bat`
+    - `quick-build.bat`
+    - `test-all.bat`
+    - `test-all.sh`
 
 
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureXxxxYyyy() {
-	...
-}
-````
+
+Acceptance Tests:
+- Test 1: Run build.bat and quick-build.bat successfully
+- Test 2: Run test-all.bat and test-all.sh
+- Test 3: Output messages are clear and useful
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
+Scripts created:
 
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+Windows:
+build.bat: |
+@echo off
+echo Make sure JAVA_HOME is set to JDK folder
+echo Make sure Maven is on the system PATH
+mvn %1 dependency:copy-dependencies package
+
+quick-build.bat: |
+mvn -B %1 dependency:copy-dependencies verify -D maven.javadoc.skip=true
+
+test-all.bat: |
+@echo off
+echo Running all tests...
+mvn clean test
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+Usage:
+- scripts/build.bat clean install
+- scripts/test-all.sh
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
+These scripts simplify onboarding and improve workflow consistency.
 
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+Future improvements:
+- GitHub Actions for CI
+- Remote deployment scripts using Docker or SSH
