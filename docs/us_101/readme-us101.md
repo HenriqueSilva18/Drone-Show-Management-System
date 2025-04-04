@@ -59,12 +59,7 @@ The implementation of US101 involves:
 
 ## 6. Integration/Demonstration
 
-The technical constraints will be demonstrated through:
-- The proper functioning of the GitHub repository
-- The execution of CI/CD pipelines
-- The ability to switch between in-memory and relational database configurations
-- The presence and quality of documentation
-- Authentication and authorization working as expected
+- n/a
 
 ## 7. Observations
 
