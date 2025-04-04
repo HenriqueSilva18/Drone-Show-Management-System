@@ -2,83 +2,70 @@
 
 ## 1. Context
 
-This task is addressed in Sprint 1 as we begin the project. The goal is to ensure the team follows the technical constraints defined in the project document.
-
 ### 1.1 List of issues
 
-Analysis:
+Analysis: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/81)
 
-Design:
+Design: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/82)
 
-Implement:
+Implement: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/83)
 
-Test:
+Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/104)
 
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies). You should also add acceptance criteria.*
-
-*Example*
-
-**US G101** As {Ator} I Want...
+**US101** - As Project Manager, I want the team to follow the technical constraints and concerns of the project.
 
 **Acceptance Criteria:**
 
-- US101.1 The system should...Blá Blá Blá ...
-
-- US101.2. Blá Blá Blá ...
+- n/a
 
 **Dependencies/References:**
 
-*Regarding this requirement we understand that it relates to...*
+- There is a dependency on Non-Functional Requirements (constraints and concerns in section 5).
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+### 3.1. Relevant Domain Model Excerpt
+
+- n/a
+
+### 3.2. Other Remarks
+- n/a
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
 
-![a class diagram](class-diagram-us101.svg "A Class Diagram")
+- n/a
 
 ### 4.3. Applied Patterns
 
+- n/a
+
 ### 4.4. Acceptance Tests
 
-Include here the main tests used to validate the functionality. Focus on how they relate to the acceptance criteria. May be automated or manual tests.
-
-**Test 1:** *Verifies that it is not possible to ...*
-
-**Refers to Acceptance Criteria:** US101.1
-
-
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureXxxxYyyy() {
-	...
-}
-````
+- n/a
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
-
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+The implementation of US101 involves:
+- Read section 5 of the project document to identify all technical restrictions and non-functional requirements.
+- Create a document that outlines the identified restrictions and rules.
+- Review each user story to ensure compliance with the technical restrictions.
+- Document technical decisions in the repository.
+- Schedule a meeting with the team to discuss and validate the understanding of these restrictions.
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+The technical constraints will be demonstrated through:
+- The proper functioning of the GitHub repository
+- The execution of CI/CD pipelines
+- The ability to switch between in-memory and relational database configurations
+- The presence and quality of documentation
+- Authentication and authorization working as expected
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+- n/a
