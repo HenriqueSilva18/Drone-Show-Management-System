@@ -13,7 +13,7 @@ public class GreeterTest {
 
 	@Test
 	public void greeterSaysHello() {
-		assertTrue(greeter.sayHello().contains("Hello"));
+		assertTrue(greeter.sayHello().contains("Hello2"));
 	}
 
 }
