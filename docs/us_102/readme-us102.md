@@ -10,20 +10,19 @@ The team must use the provided GitHub Classroom repository, organize it properly
 
 **Analysis:**
 - Understand GitHub Classroom setup
-- Investigate features of GitHub Projects or alternatives
+
 
 **Design:**
 - Decide on initial folder structure
-- Choose labels and conventions for issues and branches
+
 
 **Implement:**
 - Initialize repository with README, docs folder, and base structure
-- Set up GitHub Project board (Kanban)
-- Define contribution rules (e.g., commit message style)
+- Set up GitHub Project board
 
 **Test:**
 - Validate correct repository access
-- Simulate workflow: assign issue, develop, commit, review, merge
+-
 
 ---
 
@@ -32,12 +31,6 @@ The team must use the provided GitHub Classroom repository, organize it properly
 **US102** – *As Project Manager, I want the team to use the defined project repository in GitHub and setup a GitHub tool for project management.*
 
 ### Acceptance Criteria:
-
-- US102.1 Repository is initialized and accessible by all team members.
-- US102.2 The project has a documented structure (folders like `/docs`, `/src`, `/scripts`, etc.).
-- US102.3 A GitHub Project (Kanban) board is created and in use.
-- US102.4 The team uses Issues, Labels, Milestones, and Branches appropriately.
-- US102.5 The repository contains a `README.md` and relevant documentation.
 
 **Dependencies/References:**
 
@@ -76,16 +69,6 @@ The team must use the provided GitHub Classroom repository, organize it properly
 
 ### 4.4. Acceptance Tests
 
-**Test 1:** Verify all members can push to the repository.
-- **Refers to Acceptance Criteria:** US102.1
-
-**Test 2:** Validate the folder structure and presence of `/docs`, `/scripts`.
-- **Refers to Acceptance Criteria:** US102.2
-
-**Test 3:** Create and move a task through the GitHub Project board.
-- **Refers to Acceptance Criteria:** US102.3
-
----
 
 ## 5. Implementation
 
@@ -98,7 +81,6 @@ The team must use the provided GitHub Classroom repository, organize it properly
 
 - `init: initial commit with base structure`
 - `docs: add US102 documentation`
-- `chore: configure GitHub Project board`
 
 ---
 
