@@ -5,8 +5,8 @@ package " Aggregate Drone Model " {
 
     ' Agregado DroneModel (Aggregate Root)
     class DroneModel <<AggregateRoot>> {
-        id: DroneModelId
-        name: String
+        DroneModelId: Id
+        Name: String
         language: String
         manufacturer: String
         specifications: ModelSpecifications

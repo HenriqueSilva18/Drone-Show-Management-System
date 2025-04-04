@@ -1,135 +1,193 @@
 @startuml
-package "General Domain Model" {
+skinparam monochrome true
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+hide circle
+hide methods
 
-    ' Client Aggregate
-    package "Client Aggregate" {
-        class Client <<AggregateRoot>> {}
-        class ClientId <<ValueObject>> {}
-        class ClientName <<ValueObject>> {}
-        class ClientStatus <<ValueObject>> {}
-        class Representative <<Entity>> {}
-        class RepresentativeId <<ValueObject>> {}
-        class UserId <<ValueObject>> {}
+' Layout optimization
+left to right direction
 
-        Client --> ClientId
-        Client --> ClientName
-        Client --> ClientStatus
-        Client "1" -- "*" Representative : has
-        Representative --> RepresentativeId
-        Representative --> UserId
+package "Aggregate Client " {
+
+    ' Agregado Client (Aggregate Root)
+    class Client <<AggregateRoot>> {
+        ClientID: Id
+        ClientName: Name
+        ClientVAT: VAT
+        ClientAddress: Address
+        Representatives: List<Representative>
     }
 
-    ' Drone Inventory Aggregate
-    package "Drone Inventory Aggregate" {
-        class Drone <<AggregateRoot>> {}
-        class DroneId <<ValueObject>> {}
-        class DroneState <<ValueObject>> {}
-        class DroneModelId <<ValueObject>> {}
-        class Maintenance <<Entity>> {}
-        class MaintenanceId <<ValueObject>> {}
-        class DateValue <<ValueObject>> {}
-
-        Drone --> DroneId
-        Drone --> DroneState
-        Drone --> DroneModelId
-        Drone "1" -- "*" Maintenance : has
-        Maintenance --> MaintenanceId
-        Maintenance --> DateValue
+    ' Value Objects do Client
+    class Id <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    ' Drone Model Aggregate
-    package "Drone Model Aggregate" {
-        class DroneModel <<AggregateRoot>> {}
-        class DroneModelId <<ValueObject>> {}
-        class ModelSpecifications <<ValueObject>> {}
-
-        DroneModel --> DroneModelId
-        DroneModel --> ModelSpecifications
+    class Name <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    ' Figure Aggregate
-    package "Figure Aggregate" {
-        class Figure <<AggregateRoot>> {}
-        class FigureId <<ValueObject>> {}
-        class Description <<ValueObject>> {}
-
-        Figure --> FigureId
-        Figure --> Description
+    class VAT <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    ' Show Aggregate
-    package "Show Aggregate" {
-        class Show <<AggregateRoot>> {}
-        class ShowId <<ValueObject>> {}
-        class DateValue <<ValueObject>> {}
-        class FigureId <<ValueObject>> {}
-        class DroneId <<ValueObject>> {}
-
-        Show --> ShowId
-        Show --> DateValue
-        Show --> FigureId
-        Show --> DroneId
+    class Address <<(V, #007fff) ValueObject>> {
+        value: String
     }
 
-    ' Show Proposal Aggregate
-    package "Show Proposal Aggregate" {
-        class ShowProposal <<AggregateRoot>> {}
-        class ProposalId <<ValueObject>> {}
-        class ShowId <<ValueObject>> {}
-        class ClientId <<ValueObject>> {}
-        class DateValue <<ValueObject>> {}
-        class ProposalStatus <<ValueObject>> {}
-
-        ShowProposal --> ProposalId
-        ShowProposal --> ShowId
-        ShowProposal --> ClientId
-        ShowProposal --> DateValue
-        ShowProposal --> ProposalStatus
+    ' Representante (Gestor do sistema é um tipo de User, aqui é o representante do cliente)
+    class Representative <<Entity>> {
+        RepresentativeId: Id
+        RepresentativeName: Name
     }
 
-    ' Show Request Aggregate
-    package "Show Request Aggregate" {
-        class ShowRequest <<AggregateRoot>> {}
-        class ShowRequestId <<ValueObject>> {}
-        class ClientId <<ValueObject>> {}
-        class DateValue <<ValueObject>> {}
-        class Description <<ValueObject>> {}
-        class RequestStatus <<ValueObject>> {}
-
-        ShowRequest --> ShowRequestId
-        ShowRequest --> ClientId
-        ShowRequest --> DateValue
-        ShowRequest --> Description
-        ShowRequest --> RequestStatus
-    }
-
-    ' User Aggregate
-    package "User Aggregate" {
-        class User <<AggregateRoot>> {}
-        class UserId <<ValueObject>> {}
-        class Username <<ValueObject>> {}
-        class Password <<ValueObject>> {}
-
-        User --> UserId
-        User --> Username
-        User --> Password
-    }
-
-    ' Domain Services
-    class SimulationService <<DomainService>> {}
-
-    ' Relações entre agregados
-    Client "1" <-- "*" ShowRequest : requestedBy
-    Client "1" <-- "*" ShowProposal : proposedTo
-
-    DroneModel "1" <-- "*" Drone : isModelOf
-
-    Drone "*" <-- "*" Show : usedIn
-
-    Figure "*" <-- "*" Show : composedBy
-
-    Show "1" <-- "*" ShowProposal : proposedShow
-
-    SimulationService --> Figure : simulates
+    Client --> Id
+    Client --> Name
+    Client --> VAT
+    Client --> Representative
+    Representative --> Id
+    Representative --> Name
+    Client --> Address
 }
+
+package "Aggregate Drone" {
+
+    ' Agregado Drone (Aggregate Root)
+    class Drone <<AggregateRoot>> {
+        DroneId: Id
+        DroneSerialNumber: SerialNumber
+        MaintenanceHistory: List<Maintenance>
+        DroneModelId: Id
+    }
+
+    ' Entidade Maintenance associada ao drone
+    class Maintenance <<Entity>> {
+        MaintenanceId: Id
+        MaintenanceStartDate: DateValue
+        MaintenanceEndDate: DateValue
+        Description: String
+    }
+
+    ' Value Objects
+    class Id <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class SerialNumber <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    ' Ligações
+    Drone --> Id
+    Drone --> SerialNumber
+    Drone --> Maintenance
+    Maintenance --> Id
+    Maintenance --> DateValue
+
+}
+
+package "Aggregate Show Proposal" {
+
+    ' Agregado ShowProposal (Aggregate Root)
+    class ShowProposal <<AggregateRoot>> {
+        ProposalId: Id
+        ClientId: Id
+        ProposalDate: DateValue
+        ProposalStatus: Status
+        Figures: List<FigureId>
+        SimulationResult: Report
+    }
+
+    ' Value Objects associados
+    class Id <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class DateValue <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Status <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Report <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    ' Ligações
+    ShowProposal --> Id
+    ShowProposal --> DateValue
+    ShowProposal --> Status
+    ShowProposal --> Report
+}
+
+package "Aggregate Show Request " {
+
+    ' Agregado ShowRequest (Aggregate Root)
+    class ShowRequest <<AggregateRoot>> {
+        ShowRequestId: Id
+        ClientId: Id
+        Description: String
+    }
+
+    ' Value Objects associados
+    class Id <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    ' Ligações
+    ShowRequest --> Id
+}
+
+package "Aggregate User" {
+
+    ' Agregado User (Aggregate Root)
+    class User <<AggregateRoot>> {
+        UserId: Id
+        Username: Username
+        Password: Password
+        Email: String
+        Phone: String
+    }
+
+    ' Value Objects associados
+    class Id <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Username <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Password <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    ' Ligações
+    User --> Id
+    User --> Username
+    User --> Password
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @enduml

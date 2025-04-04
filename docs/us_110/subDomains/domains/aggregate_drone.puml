@@ -5,35 +5,26 @@ package "Aggregate Drone" {
 
     ' Agregado Drone (Aggregate Root)
     class Drone <<AggregateRoot>> {
-        id: DroneId
-        serialNumber: String
-        state: DroneState
-        maintenanceHistory: List<Maintenance>
-        droneModelId: DroneModelId
+        DroneId: Id
+        DroneSerialNumber: SerialNumber
+        MaintenanceHistory: List<Maintenance>
+        DroneModelId: Id
     }
 
     ' Entidade Maintenance associada ao drone
     class Maintenance <<Entity>> {
-        id: MaintenanceId
-        maintenanceStartDate: DateValue
-        maintenanceEndDate: DateValue
-        description: String
-    }
-
-    class MaintenanceId <<(V, #007fff) ValueObject>> {
-        value: String
+        MaintenanceId: Id
+        MaintenanceStartDate: DateValue
+        MaintenanceEndDate: DateValue
+        Description: String
     }
 
     ' Value Objects
-    class DroneId <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
-    class DroneState <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class DroneModelId <<(V, #007fff) ValueObject>> {
+    class SerialNumber <<(V, #007fff) ValueObject>> {
         value: String
     }
 
@@ -42,11 +33,11 @@ package "Aggregate Drone" {
     }
 
     ' Ligações
-    Drone --> DroneId
-    Drone --> DroneState
-    Drone --> DroneModelId
-    Drone "1" -- "*" Maintenance : has
-    Maintenance --> MaintenanceId
+    Drone --> Id
+    Drone --> SerialNumber
+    Drone --> Maintenance
+    Maintenance --> Id
     Maintenance --> DateValue
+
 }
 @enduml

@@ -5,15 +5,15 @@ package "Aggregate User" {
 
     ' Agregado User (Aggregate Root)
     class User <<AggregateRoot>> {
-        id: UserId
-        username: Username
-        password: Password
-        email: String
-        phone: String
+        UserId: Id
+        Username: Username
+        Password: Password
+        Email: String
+        Phone: String
     }
 
     ' Value Objects associados
-    class UserId <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
@@ -26,7 +26,7 @@ package "Aggregate User" {
     }
 
     ' Ligações
-    User --> UserId
+    User --> Id
     User --> Username
     User --> Password
 }

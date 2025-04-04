@@ -5,10 +5,10 @@ package "Aggregate Show " {
 
     ' Agregado Show (Aggregate Root)
     class Show <<AggregateRoot>> {
-        id: ShowId
-        date: DateValue
-        figureIds: List<FigureId>
-        droneIds: List<DroneId>
+        ShowId: Id
+        Date: DateValue
+        Figures: List<FigureId>
+        Drones: List<DroneId>
     }
 
     ' Value Objects relacionados

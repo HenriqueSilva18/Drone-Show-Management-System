@@ -5,23 +5,16 @@ package "Aggregate Show Proposal" {
 
     ' Agregado ShowProposal (Aggregate Root)
     class ShowProposal <<AggregateRoot>> {
-        id: ProposalId
-        showId: ShowId
-        clientId: ClientId
-        proposalDate: DateValue
-        status: ProposalStatus
+        ProposalId: Id
+        ClientId: Id
+        ProposalDate: DateValue
+        ProposalStatus: Status
+        Figures: List<FigureId>
+        SimulationResult: Report
     }
 
     ' Value Objects associados
-    class ProposalId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class ShowId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class ClientId <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
@@ -29,15 +22,18 @@ package "Aggregate Show Proposal" {
         value: String
     }
 
-    class ProposalStatus <<(V, #007fff) ValueObject>> {
+    class Status <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Report <<(V, #007fff) ValueObject>> {
         value: String
     }
 
     ' Ligações
-    ShowProposal --> ProposalId
-    ShowProposal --> ShowId
-    ShowProposal --> ClientId
+    ShowProposal --> Id
     ShowProposal --> DateValue
-    ShowProposal --> ProposalStatus
+    ShowProposal --> Status
+    ShowProposal --> Report
 }
 @enduml

@@ -5,21 +5,17 @@ package "Aggregate Show Request " {
 
     ' Agregado ShowRequest (Aggregate Root)
     class ShowRequest <<AggregateRoot>> {
-        id: ShowRequestId
-        description: Description
+        ShowRequestId: Id
+        ClientId: Id
+        Description: String
     }
 
     ' Value Objects associados
-    class ShowRequestId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class Description <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
     ' Ligações
-    ShowRequest --> ShowRequestId
-    ShowRequest --> Description
+    ShowRequest --> Id
 }
 @enduml

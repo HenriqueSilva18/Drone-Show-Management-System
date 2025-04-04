@@ -5,48 +5,42 @@ package "Aggregate Client " {
 
     ' Agregado Client (Aggregate Root)
     class Client <<AggregateRoot>> {
-        id: ClientId
-        name: ClientName
-        vat: String
-        address: String
-        status: ClientStatus
-        representatives: List<Representative>
+        ClientID: Id
+        ClientName: Name
+        ClientVAT: VAT
+        ClientAddress: Address
+        Representatives: List<Representative>
     }
 
     ' Value Objects do Client
-    class ClientId <<(V, #007fff) ValueObject>> {
+    class Id <<(V, #007fff) ValueObject>> {
         value: String
     }
 
-    class ClientName <<(V, #007fff) ValueObject>> {
+    class Name <<(V, #007fff) ValueObject>> {
         value: String
     }
 
-    class ClientStatus <<(V, #007fff)ValueObject>> {
+    class VAT <<(V, #007fff) ValueObject>> {
+        value: String
+    }
+
+    class Address <<(V, #007fff) ValueObject>> {
         value: String
     }
 
     ' Representante (Gestor do sistema é um tipo de User, aqui é o representante do cliente)
     class Representative <<Entity>> {
-        id: RepresentativeId
-        userId: UserId
-        position: String
-        active: Boolean
+        RepresentativeId: Id
+        RepresentativeName: Name
     }
 
-    class RepresentativeId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    class UserId <<(V, #007fff) ValueObject>> {
-        value: String
-    }
-
-    Client --> ClientId
-    Client --> ClientName
-    Client --> ClientStatus
-    Client "1" -- "*" Representative : has
-    Representative --> RepresentativeId
-    Representative --> UserId
+    Client --> Id
+    Client --> Name
+    Client --> VAT
+    Client --> Representative
+    Representative --> Id
+    Representative --> Name
+    Client --> Address
 }
 @enduml
