@@ -2,6 +2,8 @@
 
 ## 1. Context
 
+This task is being done for the first time in Sprint 1. It focuses on identifying and documenting all technical constraints from the project requirements. The goal is to make sure the team follows these rules during development to keep the system consistent and reliable.
+
 ### 1.1 List of issues
 
 Analysis: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/81)
@@ -18,7 +20,7 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 **Acceptance Criteria:**
 
-- n/a
+- US101.1 - All rules defined in Section 5 of the requirements document must be identified and documented by the team.
 
 **Dependencies/References:**
 

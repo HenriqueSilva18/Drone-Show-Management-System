@@ -2,6 +2,8 @@
 
 ## 1. Context
 
+This is the first time this task is assigned and it must be completed in Sprint 1. The goal is to ensure the team is working in a structured and professional environment with proper version control and project organization from the beginning.
+
 ### 1.1 List of issues
 
 Analysis: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/85)
@@ -20,11 +22,12 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 **Acceptance Criteria:**
 
-- n/a
+- US102.1 - Each user story must have associated issues for analysis, design, implementation, and testing.
+- US102.2 - All commits must follow the agreed commit message guidelines.
 
 **Dependencies/References:**
 
-- There is a dependency on Non-Functional Requirements (constraints and concerns in section 5).
+- There is a dependency on US101 (non-functional requirements, constraints and concerns in section 5).
 
 ## 3. Analysis
 
