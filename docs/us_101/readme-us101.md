@@ -2,7 +2,7 @@
 
 ## 1. Context
 
-This task is being done for the first time in Sprint 1. It focuses on identifying and documenting all technical constraints from the project requirements. The goal is to make sure the team follows these rules during development to keep the system consistent and reliable.
+This task is being done for the first time in **Sprint 1**. It focuses on identifying and documenting all technical constraints from the project requirements. The goal is to make sure the team follows these rules during development to keep the system consistent and reliable.
 
 ### 1.1 List of issues
 

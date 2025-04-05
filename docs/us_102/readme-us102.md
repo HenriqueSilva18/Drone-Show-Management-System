@@ -1,8 +1,8 @@
-# US 102 – Project Repository
+# US102 – Project Repository
 
 ## 1. Context
 
-This is the first time this task is assigned and it must be completed in Sprint 1. The goal is to ensure the team is working in a structured and professional environment with proper version control and project organization from the beginning.
+This is the first time this task is assigned and it must be completed in **Sprint 1**. The goal is to ensure the team is working in a structured and professional environment with proper version control and project organization from the beginning.
 
 ### 1.1 List of issues
 

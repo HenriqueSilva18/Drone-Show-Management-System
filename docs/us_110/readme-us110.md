@@ -1,4 +1,4 @@
-# US 110
+# US110 - YYYYY
 
 *This is an example template*
 
@@ -23,7 +23,7 @@ Test:
 
 *Example*
 
-**US G110** As {Ator} I Want...
+**US110** As {Ator} I Want...
 
 **Acceptance Criteria:**
 

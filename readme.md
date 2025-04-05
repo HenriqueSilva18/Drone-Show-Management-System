@@ -2,7 +2,16 @@
 
 ## 1. Description of the Project
 
-*To Do*
+In the 2024-2025 academic year, the fourth semester of the Degree in
+Informatics Engineering (LEI) of the Instituto Superior de Engenharia do Porto
+(ISEP) adopts a ProjectBased Learning (PBL) learning process based on the development of a single project integrating all
+units of the semester: Applications Engineering (EAPLI), Laboratory and Project IV (LAPR4), Languages
+and Programming (LPROG), Computer Networks (RCOMP) and Computer Systems(SCOMP).
+
+The project, common to all course units, consists of developing the system
+to a company Shodrone that is dedicated to providing customized drone multimedia shows. It has a library
+of figures and sequences and allows clients to select sets of them for their personalized shows. It also
+allows clients to submit proposals for new figures to be used in their super exclusive shows.
 
 ## 2. Planning and Technical Documentation
 
@@ -10,11 +19,29 @@
 
 ## 3. How to Build
 
-*To Do*
+To build the project, execute the build script.
+
+### On Windows:
+
+
+    ./build-all.bat
+
+### On Linux/unix/macOS:
+
+    ./build-all.sh
 
 ## 4. How to Execute Tests
 
-*To Do*
+To run tests on the project, execute the test script.
+
+### On Windows:
+
+
+    ./test-all.bat
+
+### On Linux/unix/macOS:
+
+    ./test-all.sh
 
 ## 5. How to Run
 

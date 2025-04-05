@@ -1,4 +1,4 @@
-# US 103 – Project Structure Setup
+# US103 – Project Structure Setup
 
 ## 1. Context
 

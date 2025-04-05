@@ -2,6 +2,8 @@
 
 ## 1. Context
 
+This task is being done for the first time in **Sprint 1**. It focuses on setting up a Continuous Integration (CI) server to automatically build and test the project. The goal is to detect issues early, ensure code quality, and support a smooth development workflow.
+
 ### 1.1 List of issues
 
 Analysis: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/93)
@@ -12,18 +14,17 @@ Implement: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Inf
 
 Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/92)
 
-
 ## 2. Requirements
 
 **US104** - As Project Manager, I want the team to setup a continuous integration server.
 
 **Acceptance Criteria:**
 
-- GitHub Actions/Workflows should be used.
+- US104.1 - GitHub Actions/Workflows should be used.
 
 **Dependencies/References:**
 
-- There is a dependency on Non-Functional Requirements (constraints and concerns in section 5).
+- There is a dependency on US101 (non-functional requirements, constraints and concerns in section 5).
 
 ## 3. Analysis
 
@@ -46,7 +47,8 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 ### 4.4. Acceptance Tests
 
-- n/a
+To validate the functionality it was used:
+- A test commit that caused the acceptance test to fail, was successfully reverted.
 
 ## 5. Implementation
 
