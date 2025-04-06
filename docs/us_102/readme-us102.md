@@ -31,6 +31,14 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 ## 3. Analysis
 
+The team created the project repository based with the information that were given for this task.
+This ensures organized collaboration and version control from the beginning of the project.
+
+### 3.1. Relevant Domain Model Excerpt
+
+- n/a
+
+### 3.2. Other Remarks
 - n/a
 
 ## 4. Design

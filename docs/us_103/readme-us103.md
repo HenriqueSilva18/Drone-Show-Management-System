@@ -30,6 +30,13 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 ## 3. Analysis
 
+The team analyzed project needs to determine a suitable repository structure, naming conventions, and branching strategies. Also adding the dependacies needed.
+
+### 3.1. Relevant Domain Model Excerpt
+
+- n/a
+
+### 3.2. Other Remarks
 - n/a
 
 ## 4. Design

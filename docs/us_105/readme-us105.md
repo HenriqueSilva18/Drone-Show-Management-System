@@ -31,6 +31,8 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 ## 3. Analysis
 
+The team analyzed the necessary build, test, and deployment steps. The focus was on simplifying local setup and ensuring consistency across environments.
+
 ### 3.1. Relevant Domain Model Excerpt
 
 - n/a

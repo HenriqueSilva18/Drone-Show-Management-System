@@ -1,86 +1,74 @@
-# US110 - YYYYY
-
-*This is an example template*
+# US110 - Domain model
 
 ## 1. Context
 
-*Explain the context for this task. It is the first time the task is assigned to be developed or this tasks was incomplete in a previous sprint and is to be completed in this sprint? Are we fixing some bug?*
+This task is being developed in Sprint 1. The goal is to create a comprehensive Domain Model using Domain-Driven Design (DDD) principles. This model is intended to capture the major business entities, their relationships, and the overall structure of the system. It lays the foundation for consistent design decisions in later development phases.
 
 ### 1.1 List of issues
 
-Analysis:
+Analysis: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/71)
 
-Design:
+Design: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/72)
 
-Implement:
+Implement: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/74)
 
-Test:
-
+Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39/issues/70)
 
 ## 2. Requirements
 
-*In this section you should present the functionality that is being developed, how do you understand it, as well as possible correlations to other requirements (i.e., dependencies). You should also add acceptance criteria.*
-
-*Example*
-
-**US110** As {Ator} I Want...
+**US110** – As Project Manager, I want the team to elaborate a Domain Model using DDD.
 
 **Acceptance Criteria:**
 
-- US110.1 The system should...Blá Blá Blá ...
-
-- US110.2. Blá Blá Blá ...
+- US110.1 - The domain model must clearly represent all key business entities and their relationships.
+- US110.2 - The domain model diagram should be integrated into the project documentation repository and reviewed by the team for consistency.
 
 **Dependencies/References:**
 
-*Regarding this requirement we understand that it relates to...*
+- There is a dependency on US101 (non-functional requirements, constraints and concerns in section 5).
 
 ## 3. Analysis
 
-*In this section, the team should report the study/analysis/comparison that was done in order to take the best design decisions for the requirement. This section should also include supporting diagrams/artifacts (such as domain model; use case diagrams, etc.),*
+The team studied the requirements to identify the major entities, value objects, aggregates, and services within the system.
+
+### 3.1. Domain Model
+
+![Domain Model](domain-model.svg)
+
+### 3.2. Other Remarks
+
+- n/a
 
 ## 4. Design
 
-*In this sections, the team should present the solution design that was adopted to solve the requirement. This should include, at least, a diagram of the realization of the functionality (e.g., sequence diagram), a class diagram (presenting the classes that support the functionality), the identification and rational behind the applied design patterns and the specification of the main tests used to validade the functionality.*
-
 ### 4.1. Realization
 
-![a class diagram](class-diagram-01.svg "A Class Diagram")
+The Domain Model is realized through a class diagram that illustrates the key entities, their attributes, and relationships. The design ensures that business rules are encapsulated within the appropriate domain objects.
+This analysis defined clear boundaries and interactions between components.
 
 ### 4.3. Applied Patterns
 
+- **Entity and Value Object:** To distinguish between mutable entities and immutable value objects.
+- **Aggregates:** For grouping related entities and ensuring consistency boundaries.
+
 ### 4.4. Acceptance Tests
 
-Include here the main tests used to validate the functionality. Focus on how they relate to the acceptance criteria. May be automated or manual tests.
-
-**Test 1:** *Verifies that it is not possible to ...*
-
-**Refers to Acceptance Criteria:** US110.1
-
-
-```
-@Test(expected = IllegalArgumentException.class)
-public void ensureXxxxYyyy() {
-	...
-}
-````
+- n/a
 
 ## 5. Implementation
 
-*In this section the team should present, if necessary, some evidencies that the implementation is according to the design. It should also describe and explain other important artifacts necessary to fully understand the implementation like, for instance, configuration files.*
-
-*It is also a best practice to include a listing (with a brief summary) of the major commits regarding this requirement.*
+The implementation of US105 involves:
+- Identify the main domain concepts and entities.
+- Define relevant methods and behaviors for each class.
+- Create UML diagrams to illustrate the relationships between system entities.
+- Review and validate the domain model with the team.
+- Document the domain model and UML diagrams in the repository.
+- Update the documentation based on team feedback and project evolution.
 
 ## 6. Integration/Demonstration
 
-*In this section the team should describe the efforts realized in order to integrate this functionality with the other parts/components of the system*
-
-*It is also important to explain any scripts or instructions required to execute an demonstrate this functionality*
+- n/a
 
 ## 7. Observations
 
-*This section should be used to include any content that does not fit any of the previous sections.*
-
-*The team should present here, for instance, a critical prespective on the developed work including the analysis of alternative solutioons or related works*
-
-*The team should include in this section statements/references regarding third party works that were used in the development this work.*
+- n/a

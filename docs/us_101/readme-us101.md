@@ -28,6 +28,8 @@ Test: [GitHub issue link](https://github.com/Departamento-de-Engenharia-Informat
 
 ## 3. Analysis
 
+The team reviewed the project's constraints, identifying key non-functional requirements. These were documented to guide technical decisions throughout development.
+
 ### 3.1. Relevant Domain Model Excerpt
 
 - n/a
