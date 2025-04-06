@@ -1,0 +1,64 @@
+@startuml
+hide methods
+
+' Aggregates
+class Language
+class "Drone Model" as DroneModel
+class Client
+class "Show Request" as ShowRequest
+class "Show Proposal" as ShowProposal
+class Drone
+class User
+class Figure
+
+' Value Objects
+class Name
+class VAT
+class Address
+class Id
+class SerialNumber
+class DateValue
+class Status
+class Report
+class Username
+class Password
+class Email
+class Phone
+
+' Entities
+class Representative
+class Maintenance
+
+' Relações sem legendas
+Language --> Name
+DroneModel --> Language
+DroneModel --> Name
+Client --> Name
+Client --> VAT
+Client --> Address
+Client --> Representative
+Representative --> Name
+Representative --> Id
+ShowRequest --> Client
+ShowRequest --> Id
+ShowRequest --> Drone
+ShowRequest --> DateValue
+ShowRequest --> Figure
+Drone --> DroneModel
+Drone --> SerialNumber
+Drone --> Maintenance
+Drone --> Id
+Maintenance --> DateValue
+ShowProposal --> Drone
+ShowProposal --> DateValue
+ShowProposal --> Status
+ShowProposal --> Report
+ShowProposal --> Id
+User --> Username
+User --> Password
+User --> Email
+User --> Phone
+User --> Id
+Figure --> Id
+
+@enduml
