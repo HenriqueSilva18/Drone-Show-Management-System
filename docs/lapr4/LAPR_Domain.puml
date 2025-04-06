@@ -17,7 +17,7 @@ class VAT
 class Address
 class Id
 class SerialNumber
-class DateValue
+class Date
 class Status
 class Report
 class Username
@@ -29,36 +29,36 @@ class Phone
 class Representative
 class Maintenance
 
-' Relações sem legendas
-Language --> Name
-DroneModel --> Language
-DroneModel --> Name
-Client --> Name
-Client --> VAT
-Client --> Address
-Client --> Representative
-Representative --> Name
-Representative --> Id
-ShowRequest --> Client
-ShowRequest --> Id
-ShowRequest --> Drone
-ShowRequest --> DateValue
-ShowRequest --> Figure
-Drone --> DroneModel
-Drone --> SerialNumber
-Drone --> Maintenance
-Drone --> Id
-Maintenance --> DateValue
-ShowProposal --> Drone
-ShowProposal --> DateValue
-ShowProposal --> Status
-ShowProposal --> Report
-ShowProposal --> Id
-User --> Username
-User --> Password
-User --> Email
-User --> Phone
-User --> Id
-Figure --> Id
+' Relationships with names
+Language --> Name : has >
+DroneModel --> Language : has >
+DroneModel --> Name : has >
+Client --> Name : has >
+Client --> VAT : has >
+Client --> Address : has >
+Client --> Representative : has many >
+Representative --> Name : has >
+Representative --> Id : has >
+ShowRequest --> Client : requested by >
+ShowRequest --> Id : has >
+ShowRequest --> Drone : uses >
+ShowRequest --> Date : scheduled for >
+ShowRequest --> Figure : includes >
+Drone --> DroneModel : is of >
+Drone --> SerialNumber : identified by >
+Drone --> Maintenance : undergoes >
+Drone --> Id : has >
+Maintenance --> Date : performed on >
+ShowProposal --> Drone : uses >
+ShowProposal --> Date : scheduled for >
+ShowProposal --> Status : has >
+ShowProposal --> Report : includes >
+ShowProposal --> Id : has >
+User --> Username : identified by >
+User --> Password : authenticated with >
+User --> Email : contacted via >
+User --> Phone : contacted via >
+User --> Id : has >
+Figure --> Id : has >
 
 @enduml
