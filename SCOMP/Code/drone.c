@@ -1,5 +1,5 @@
 /* drone.c - Processo de simulação de um drone individual */
-
+#define _POSIX_C_SOURCE 200809L
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
