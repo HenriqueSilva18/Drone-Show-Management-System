@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="shodrone.app.customer.console" />
         <module name="shodrone.app.backoffice.console" />
         <module name="shodrone.core" />
         <module name="shodrone.infrastructure.application" />
@@ -18,6 +19,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="exemplo.app.customer.console" target="17" />
       <module name="shodrone.app1 (1)" target="17" />
       <module name="shodrone.app2 (1)" target="17" />
       <module name="shodrone.util.ci (1)" target="1.8" />

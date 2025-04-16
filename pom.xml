@@ -20,6 +20,7 @@
 		<module>shodrone.app.backoffice.console</module>
 		<module>shodrone.app.bootstrap</module>
 		<module>shodrone.app.common.console</module>
+		<module>shodrone.app.user.console</module>
 	</modules>
 
 	<properties>
