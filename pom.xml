@@ -7,12 +7,19 @@
 	<groupId>lapr4</groupId>
 	<artifactId>shodrone</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1.0</version>
+	<version>1.4.0-SNAPSHOT</version>
 
 	<modules>
 		<module>shodrone.app1</module>
 		<module>shodrone.app2</module>
 		<module>shodrone.util.ci</module>
+		<module>shodrone.bootstrappers</module>
+		<module>shodrone.core</module>
+		<module>shodrone.infrastructure.application</module>
+		<module>shodrone.persistence.impl</module>
+		<module>shodrone.app.backoffice.console</module>
+		<module>shodrone.app.bootstrap</module>
+		<module>shodrone.app.common.console</module>
 	</modules>
 
 	<properties>
@@ -22,6 +29,10 @@
 		<eapli.framework.core.version>25.0.0-RELEASE</eapli.framework.core.version>
 		<eapli.framework.authz.version>25.0.0-RELEASE</eapli.framework.authz.version>
 		<eapli.framework.pubsub.version>25.0.0-RELEASE</eapli.framework.pubsub.version>
+
+		<eapli.framework.core.version-snapshot>25.0.1</eapli.framework.core.version-snapshot>
+		<eapli.framework.authz.version-snapshot>22.0.0</eapli.framework.authz.version-snapshot>
+		<eapli.framework.pubsub.version-snapshot>22.1.0</eapli.framework.pubsub.version-snapshot>
 	</properties>
 
 	<dependencyManagement>

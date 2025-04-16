@@ -8,8 +8,115 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Global Domain Model">
-      <change afterPath="$PROJECT_DIR$/docs/lapr4/LAPR_Domain.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run-backoffice.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/Backoffice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/AddUserAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/AddUserUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/DeactivateUserAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/DeactivateUserUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/ListUsersAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/ListUsersUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/authz/SystemUserPrinter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/AcceptRefuseSignupRequestAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/AcceptRefuseSignupRequestUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/SignupRequestPrinter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/java/lapr4/app/bootstrap/Bootstrap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/BaseApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/ChangePasswordUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/LoginAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/LoginUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/LogoutAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/LogoutUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation/authz/MyUserMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/AbstractUserBootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/Bootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/MasterUsersBootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/TestDataConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/demo/BackofficeUsersBootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/demo/CustomerBootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/demo/DemoBootstrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/smoketests/DemoSmokeTester.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerEventfullImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerTxImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/ListExemploUtenteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/UtenteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/eventhandlers/AddCustomerOnSignupAcceptedController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/eventhandlers/NewUserRegisteredFromSignupWatchDog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/ApprovalStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/CustomerBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/MecanographicNumber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/SignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/SignupRequestBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/events/NewUserRegisteredFromSignupEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/domain/events/SignupAcceptedEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/repositories/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/repositories/SignupRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/mycustomer/application/MyCustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/mycustomer/application/SignupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/AddUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/DeactivateUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/ListUsersController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/eventhandlers/AddUserOnSignupAcceptedController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/eventhandlers/SignupAcceptedWatchDog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/ExemploPasswordPolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/ExemploRoles.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/UserBuilderHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/resources/exemplo-sample.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/customermanagement/domain/CustomerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/AppSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/infrastructure/authz/AuthenticationCredentialHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/infrastructure/authz/CredentialHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/resources/application.properties.sample" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemorySignupRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryUtenteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/BaseJpaRepositoryBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/ExemploJpaReportingRepositoryBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaClientUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaSignupRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/PersistenceSettings.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/shodrone-db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/shodrone-db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/test-classes/hello/GreeterTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/target/test-classes/hello/GreeterTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.util.ci/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.util.ci/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +149,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -55,20 +162,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Backoffice.executor": "Run",
     "Application.H2DatabaseManager.executor": "Run",
     "Application.HelloWorld.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/senke/OneDrive/Ambiente de Trabalho",
+    "last_opened_file_path": "C:/Users/Jose/IdeaProjects/sem4pi-2024-2025-sem4pi_2024_2025_g39/shodrone.app.common.console/src/main/java/lapr4/app/common/console/presentation",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -85,18 +194,24 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_101" />
-      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_102" />
-      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_103" />
-      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_104" />
-      <recent name="C:\Users\josem\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\us_105" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console\src\main\java\lapr4\app\common\console\presentation" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console\src\main\java\lapr4\app\common\console" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.bootstrap\src\main\resources" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.bootstrap" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\senke\IdeaProjects\sem4pi_2024_2025_g39\docs\us_110\Domain_Model" />
       <recent name="$PROJECT_DIR$/database" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lapr4.app.common.console" />
+      <recent name="lapr4.app.bootstrap" />
+      <recent name="lapr4.app.backoffice.console" />
+      <recent name="lapr4.utentemanagement.domain" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.H2DatabaseManager">
+  <component name="RunManager">
     <configuration name="H2DatabaseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hello.persistence.H2DatabaseManager" />
       <module name="shodrone.app1" />
@@ -133,8 +248,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -163,6 +278,7 @@
       <workItem from="1743426193978" duration="896000" />
       <workItem from="1743591618246" duration="4754000" />
       <workItem from="1743955886225" duration="397000" />
+      <workItem from="1744823557659" duration="8258000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />

@@ -6,7 +6,7 @@
     <parent>
         <groupId>lapr4</groupId>
         <artifactId>shodrone</artifactId>
-        <version>0.1.0</version>
+        <version>1.4.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>shodrone.app2</artifactId>
