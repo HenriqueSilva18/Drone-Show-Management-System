@@ -26,7 +26,7 @@ package lapr4.app.customer.console.presentation;
 import lapr4.app.common.console.presentation.authz.LoginUI;
 import lapr4.app.customer.console.presentation.myuser.SignupRequestAction;
 import lapr4.infrastructure.authz.AuthenticationCredentialHandler;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import eapli.framework.actions.ChainedAction;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.presentation.console.AbstractUI;
@@ -58,7 +58,7 @@ public class FrontMenu extends AbstractUI {
 	public boolean doShow() {
 		final var menu = new Menu();
 		menu.addItem(LOGIN_OPTION, "Login",
-				new ChainedAction(new LoginUI(new AuthenticationCredentialHandler(), ExemploRoles.UTENTE)::show, () -> {
+				new ChainedAction(new LoginUI(new AuthenticationCredentialHandler(), Roles.CUSTOMER)::show, () -> {
 					new MainMenu().mainLoop();
 					return true;
 				}));
@@ -72,6 +72,6 @@ public class FrontMenu extends AbstractUI {
 
 	@Override
 	public String headline() {
-		return "Exemplo";
+		return "Customer App";
 	}
 }

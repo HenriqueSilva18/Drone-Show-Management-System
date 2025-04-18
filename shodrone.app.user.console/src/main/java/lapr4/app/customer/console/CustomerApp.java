@@ -22,12 +22,12 @@ package lapr4.app.customer.console;
 
 import lapr4.app.customer.console.presentation.FrontMenu;
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploPasswordPolicy;
+import lapr4.usermanagement.domain.PasswordPolicy;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
 
 /**
- * Utente App.
+ * Customer App.
  */
 @SuppressWarnings("squid:S106")
 public final class CustomerApp {
@@ -41,10 +41,10 @@ public final class CustomerApp {
 	public static void main(final String[] args) {
 		System.out.println("=====================================");
 		System.out.println("Customer App");
-		System.out.println("(C) 2016 - 2024");
+		System.out.println("(C) 2016 - 2025");
 		System.out.println("=====================================");
 
-		AuthzRegistry.configure(PersistenceContext.repositories().users(), new ExemploPasswordPolicy(),
+		AuthzRegistry.configure(PersistenceContext.repositories().users(), new PasswordPolicy(),
 				new PlainTextEncoder());
 
 		new FrontMenu().show();

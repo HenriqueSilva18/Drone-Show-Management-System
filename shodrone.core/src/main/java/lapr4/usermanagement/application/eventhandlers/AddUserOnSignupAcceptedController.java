@@ -24,7 +24,7 @@
 package lapr4.usermanagement.application.eventhandlers;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
 import lapr4.customermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import lapr4.customermanagement.domain.events.SignupAcceptedEvent;
@@ -59,7 +59,7 @@ import eapli.framework.infrastructure.pubsub.impl.inprocess.service.InProcessPub
         final SystemUserBuilder userBuilder = UserBuilderHelper.builder();
         userBuilder.withUsername(theSignupRequest.username())
                 .withPassword(theSignupRequest.password()).withName(theSignupRequest.name())
-                .withEmail(theSignupRequest.email()).withRoles(ExemploRoles.UTENTE);
+                .withEmail(theSignupRequest.email()).withRoles(Roles.CUSTOMER);
         final SystemUser newUser = userRepository.save(userBuilder.build());
 
         // notify interested parties

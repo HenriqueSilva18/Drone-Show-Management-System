@@ -40,10 +40,10 @@ public class UserBuilderHelper {
     }
 
     public static SystemUserBuilder builder() {
-        return new SystemUserBuilder(new ExemploPasswordPolicy(), new PlainTextEncoder());
+        return new SystemUserBuilder(new PasswordPolicy(), new PlainTextEncoder());
     }
 
     public static SignupRequestBuilder signupBuilder() {
-        return new SignupRequestBuilder(new ExemploPasswordPolicy(), new PlainTextEncoder());
+        return new SignupRequestBuilder(new PasswordPolicy(), new PlainTextEncoder());
     }
 }

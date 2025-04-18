@@ -24,7 +24,7 @@
 package lapr4.customermanagement.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.customermanagement.domain.SignupRequest;
 import lapr4.customermanagement.domain.events.SignupAcceptedEvent;
 import lapr4.customermanagement.repositories.SignupRequestRepository;
@@ -61,8 +61,8 @@ public class AcceptRefuseSignupRequestControllerEventfullImpl
     @Override
     @SuppressWarnings("squid:S1226")
     public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
-        authorizationService.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER,
-                ExemploRoles.ADMIN);
+        authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER,
+                Roles.ADMIN);
 
         Preconditions.nonNull(theSignupRequest);
 
@@ -94,8 +94,8 @@ public class AcceptRefuseSignupRequestControllerEventfullImpl
     @Override
     @Transactional
     public SignupRequest refuseSignupRequest(final SignupRequest theSignupRequest) {
-        authorizationService.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER,
-                ExemploRoles.ADMIN);
+        authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER,
+                Roles.ADMIN);
 
         Preconditions.nonNull(theSignupRequest);
 

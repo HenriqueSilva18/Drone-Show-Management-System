@@ -21,7 +21,7 @@
 package lapr4.persistence.impl.inmemory;
 
 import lapr4.infrastructure.persistence.RepositoryFactory;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
 import lapr4.customermanagement.repositories.SignupRequestRepository;
 import lapr4.customermanagement.repositories.CustomerRepository;
@@ -41,7 +41,7 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 		// ensure we have at least a power user to be able to use the application
 		final var userBuilder = UserBuilderHelper.builder();
 		userBuilder.withUsername("poweruser").withPassword("Password1").withName("joe", "power")
-				.withEmail("joe@email.org").withRoles(ExemploRoles.POWER_USER);
+				.withEmail("joe@email.org").withRoles(Roles.POWER_USER);
 		final var newUser = userBuilder.build();
 		repo.save(newUser);
 		return repo;
@@ -53,14 +53,14 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	}
 
 	@Override
-	public CustomerRepository utentes(final TransactionalContext tx) {
+	public CustomerRepository customers(final TransactionalContext tx) {
 
-		return new InMemoryUtenteRepository();
+		return new InMemoryCustomerRepository();
 	}
 
 	@Override
-	public CustomerRepository utentes() {
-		return utentes(null);
+	public CustomerRepository customers() {
+		return customers(null);
 	}
 
 	@Override

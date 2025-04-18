@@ -23,7 +23,7 @@
  */
 package lapr4.customermanagement.domain;
 
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import eapli.framework.infrastructure.authz.domain.model.*;
 import org.testng.annotations.Test;
 
@@ -48,7 +48,7 @@ public class CustomerTest {
     }
 
     private SystemUser getNewDummyUser() {
-        return dummyUser("dummy", ExemploRoles.ADMIN);
+        return dummyUser("dummy", Roles.ADMIN);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CustomerTest {
     @Test
     public void ensureClientUserEqualsFailsForDifferenteMecanographicNumber() throws Exception {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.ADMIN);
+        roles.add(Roles.ADMIN);
 
         final Customer aClientUser = new CustomerBuilder().withMecanographicNumber(aMecanographicNumber)
                 .withSystemUser(getNewDummyUser()).build();
@@ -93,7 +93,7 @@ public class CustomerTest {
     @Test
     public void ensureClientUserEqualsFailsForDifferenteObjectTypes() throws Exception {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.ADMIN);
+        roles.add(Roles.ADMIN);
 
         final Customer aClientUser = new CustomerBuilder().withMecanographicNumber("DUMMY")
                 .withSystemUser(getNewDummyUser()).build();
@@ -117,7 +117,7 @@ public class CustomerTest {
     @Test
     public void ensureTwoClientUserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.ADMIN);
+        roles.add(Roles.ADMIN);
         final Customer aClientUser = new CustomerBuilder().withMecanographicNumber(aMecanographicNumber)
                 .withSystemUser(getNewDummyUser()).build();
 

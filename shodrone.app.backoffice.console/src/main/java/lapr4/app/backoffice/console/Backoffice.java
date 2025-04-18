@@ -29,7 +29,7 @@ import lapr4.app.common.console.presentation.authz.LoginUI;
 import lapr4.infrastructure.authz.AuthenticationCredentialHandler;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.application.eventhandlers.SignupAcceptedWatchDog;
-import lapr4.usermanagement.domain.ExemploPasswordPolicy;
+import lapr4.usermanagement.domain.PasswordPolicy;
 import lapr4.customermanagement.application.eventhandlers.NewUserRegisteredFromSignupWatchDog;
 import lapr4.customermanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import lapr4.customermanagement.domain.events.SignupAcceptedEvent;
@@ -55,7 +55,7 @@ public final class Backoffice extends BaseApp {
 	 */
 	public static void main(final String[] args) {
 
-		AuthzRegistry.configure(PersistenceContext.repositories().users(), new ExemploPasswordPolicy(),
+		AuthzRegistry.configure(PersistenceContext.repositories().users(), new PasswordPolicy(),
 				new PlainTextEncoder());
 
 		new Backoffice().run(args);

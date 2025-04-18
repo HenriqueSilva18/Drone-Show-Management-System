@@ -26,21 +26,21 @@ package lapr4.usermanagement.domain;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 
 /**
- * TODO you must adpat this enum to the roles that make sense for your
+ *
  * application.
  * 
  * @author Paulo Gandra Sousa
  *
  */
-public final class ExemploRoles {
+public final class Roles {
 	/**
 	 * poweruser
 	 */
 	public static final Role POWER_USER = Role.valueOf("POWER_USER");
 	/**
-	 * Utente
+	 * Customer
 	 */
-	public static final Role UTENTE = Role.valueOf("UTENTE");
+	public static final Role CUSTOMER = Role.valueOf("CUSTOMER");
 	/**
 	 * Administrator
 	 */
@@ -48,15 +48,15 @@ public final class ExemploRoles {
 	/**
 	 *
 	 */
-	public static final Role SAMPLE_1_MANAGER = Role.valueOf("SAMPLE_1_MANAGER");
+	public static final Role CRM_MANAGER = Role.valueOf("SAMPLE_1_MANAGER");
 	/**
 	 *
 	 */
-	public static final Role ANOTHER_EXAMPLE_MANAGER = Role.valueOf("ANOTHER_EXAMPLE_MANAGER");
+	public static final Role CRM_COLLABORATOR = Role.valueOf("ANOTHER_EXAMPLE_MANAGER");
 	/**
 	 *
 	 */
-	public static final Role OTHER_EXAMPLE = Role.valueOf("OTHER_EXAMPLE");
+	public static final Role CUSTOMER_REPRESENTATIVE = Role.valueOf("OTHER_EXAMPLE");
 
 	/**
 	 * get available role types for adding new users
@@ -64,10 +64,10 @@ public final class ExemploRoles {
 	 * @return
 	 */
 	public static Role[] nonUserValues() {
-		return new Role[] { ADMIN, SAMPLE_1_MANAGER, ANOTHER_EXAMPLE_MANAGER, OTHER_EXAMPLE };
+		return new Role[] { ADMIN, CRM_MANAGER, CRM_COLLABORATOR};
 	}
 
 	public boolean isCollaborator(final Role role) {
-		return role != UTENTE;
+		return role != CUSTOMER_REPRESENTATIVE;
 	}
 }

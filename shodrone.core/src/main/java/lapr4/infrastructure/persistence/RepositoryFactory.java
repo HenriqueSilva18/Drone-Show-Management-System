@@ -59,14 +59,14 @@ public interface RepositoryFactory {
      *            the transactional context to enroll
      * @return
      */
-    CustomerRepository utentes(TransactionalContext autoTx);
+    CustomerRepository customers(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
      *
      * @return
      */
-    CustomerRepository utentes();
+    CustomerRepository customers();
 
     /**
      *
