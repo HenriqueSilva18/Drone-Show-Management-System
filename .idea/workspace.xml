@@ -7,29 +7,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Added initial backoffice">
-      <change afterPath="$PROJECT_DIR$/run-backoffice.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-user.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run-user.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/CustomerApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/CustomerBaseUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/FrontMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/MainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/myuser/SignupRequestAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/myuser/SignupRequestUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/myuser/UserDataWidget.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/resources/logback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Added initial customer app">
+      <change afterPath="$PROJECT_DIR$/run-bootstrap.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run-bootstrap.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_example/class-diagram-usXXX.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/lapr4/us_example/class-diagram-usXXX.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_example/class-diagram-usXXX.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/lapr4/us_example/class-diagram-usXXX.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/us_example/readme-usXXX.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/lapr4/us_example/readme-usXXX.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/Backoffice.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/Backoffice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/java/lapr4/app/bootstrap/Bootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/java/lapr4/app/bootstrap/Bootstrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.bootstrap/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/CustomerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/CustomerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/CustomerBaseUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/CustomerBaseUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/FrontMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/java/lapr4/app/customer/console/presentation/FrontMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.user.console/src/main/resources/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.user.console/src/main/resources/logback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/Bootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/Bootstrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/MasterUsersBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/MasterUsersBootstrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/demo/BackofficeUsersBootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/demo/BackofficeUsersBootstrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerEventfullImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerEventfullImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerTxImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AcceptRefuseSignupRequestControllerTxImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/ListExemploUtenteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/ListCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/UtenteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/CustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/eventhandlers/AddCustomerOnSignupAcceptedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/eventhandlers/AddCustomerOnSignupAcceptedController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/mycustomer/application/MyCustomerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/mycustomer/application/MyCustomerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/AddUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/AddUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/DeactivateUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/DeactivateUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/ListUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/ListUsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/eventhandlers/AddUserOnSignupAcceptedController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/application/eventhandlers/AddUserOnSignupAcceptedController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/ExemploPasswordPolicy.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/PasswordPolicy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/ExemploRoles.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/Roles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/UserBuilderHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/usermanagement/domain/UserBuilderHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/customermanagement/domain/CustomerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/customermanagement/domain/CustomerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/AppSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/java/lapr4/AppSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/resources/application.properties.sample" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.infrastructure.application/src/main/resources/application.properties.sample" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryUtenteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryCustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/ExemploJpaReportingRepositoryBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaReportingRepositoryBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaSignupRequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaSignupRequestRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/PersistenceSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/PersistenceSettings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +104,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jose/IdeaProjects/sem4pi-2024-2025-sem4pi_2024_2025_g39",
+    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -196,7 +213,9 @@
       <workItem from="1743426193978" duration="896000" />
       <workItem from="1743591618246" duration="4754000" />
       <workItem from="1743955886225" duration="397000" />
-      <workItem from="1744823557659" duration="10321000" />
+      <workItem from="1744823557659" duration="24123000" />
+      <workItem from="1744894485014" duration="1545000" />
+      <workItem from="1744982623601" duration="4489000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -238,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744833278280</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added initial customer app">
+      <option name="closed" value="true" />
+      <created>1744836142962</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1744836142962</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +300,7 @@
     <MESSAGE value="Setup Database #4" />
     <MESSAGE value="Global Domain Model" />
     <MESSAGE value="Added initial backoffice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added initial backoffice" />
+    <MESSAGE value="Added initial customer app" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added initial customer app" />
   </component>
 </project>

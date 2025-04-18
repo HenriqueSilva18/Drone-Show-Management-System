@@ -18,39 +18,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package lapr4.persistence.impl.inmemory;
+package lapr4.persistence.impl.jpa;
 
-import lapr4.customermanagement.domain.MecanographicNumber;
-import lapr4.customermanagement.domain.Customer;
-import lapr4.customermanagement.repositories.CustomerRepository;
-import eapli.framework.infrastructure.authz.domain.model.Username;
-import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
-
-import java.util.Optional;
+import lapr4.Application;
+import eapli.framework.infrastructure.repositories.impl.jpa.JpaTransactionalContext;
 
 /**
+ * a base class for all reporting repositories to use the same persistence unit
  *
- * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
+ * @param <T>
+ * @param <K>
+ *
+ * @author Paulo Gandra de Sousa
  */
-public class InMemoryUtenteRepository extends InMemoryDomainRepository<Customer, MecanographicNumber>
-		implements CustomerRepository {
+/* package */ class JpaReportingRepositoryBase extends JpaTransactionalContext {
 
-	static {
-		InMemoryInitializer.init();
-	}
+    JpaReportingRepositoryBase() {
+        super(Application.settings().getPersistenceUnitName(),
+                Application.settings().getExtendedPersistenceProperties());
+    }
 
-	@Override
-	public Optional<Customer> findByUsername(final Username name) {
-		return matchOne(e -> e.user().username().equals(name));
-	}
-
-	@Override
-	public Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
-		return Optional.of(data().get(number));
-	}
-
-	@Override
-	public Iterable<Customer> findAllActive() {
-		return match(e -> e.user().isActive());
-	}
+    JpaReportingRepositoryBase(final String persistenceUnitName) {
+        super(persistenceUnitName, Application.settings().getExtendedPersistenceProperties());
+    }
 }

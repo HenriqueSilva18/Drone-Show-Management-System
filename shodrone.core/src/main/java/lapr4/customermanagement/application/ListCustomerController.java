@@ -24,7 +24,7 @@
 package lapr4.customermanagement.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -34,13 +34,13 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
  *
  * @author losa
  */
-public class ListExemploUtenteController {
+public class ListCustomerController {
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-    private final CustomerRepository repo = PersistenceContext.repositories().utentes();
+    private final CustomerRepository repo = PersistenceContext.repositories().customers();
 
-    public Iterable<Customer> activeExemploUtente() {
-        authz.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER, ExemploRoles.ADMIN);
+    public Iterable<Customer> activeCustomer() {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 
         return this.repo.findAllActive();
     }

@@ -99,6 +99,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<!-- Skip Javadoc generation -->
+					<skip>true</skip>
+					<!-- Disable strict doclint checks -->
+					<doclint>none</doclint>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>none</phase> <!-- Disable Javadoc JAR generation -->
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 

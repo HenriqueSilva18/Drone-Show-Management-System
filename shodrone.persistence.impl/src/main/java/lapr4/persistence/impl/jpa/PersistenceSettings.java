@@ -26,7 +26,7 @@ package lapr4.persistence.impl.jpa;
  */
 class PersistenceSettings {
 
-	public static final String PERSISTENCE_UNIT_NAME = "eapli.exemplo";
+	public static final String PERSISTENCE_UNIT_NAME = "lapr4";
 
 	private PersistenceSettings() {
 	}

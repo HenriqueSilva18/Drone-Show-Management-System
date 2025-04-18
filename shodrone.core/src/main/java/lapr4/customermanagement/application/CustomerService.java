@@ -24,7 +24,7 @@
 package lapr4.customermanagement.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.customermanagement.domain.MecanographicNumber;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.repositories.CustomerRepository;
@@ -37,18 +37,18 @@ import java.util.Optional;
 /**
  * @author mcn
  */
-public class UtenteService {
+public class CustomerService {
 
 	private final AuthorizationService authz = AuthzRegistry.authorizationService();
-	private final CustomerRepository repo = PersistenceContext.repositories().utentes();
+	private final CustomerRepository repo = PersistenceContext.repositories().customers();
 
-	public Optional<Customer> findExemploUtenteByMecNumber(final String mecNumber) {
-		authz.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER, ExemploRoles.ADMIN, ExemploRoles.OTHER_EXAMPLE);
+	public Optional<Customer> findCustomerByMecNumber(final String mecNumber) {
+		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CUSTOMER_REPRESENTATIVE);
 		return repo.ofIdentity(MecanographicNumber.valueOf(mecNumber));
 	}
 
-	public Optional<Customer> findExemploUtenteByUsername(final Username user) {
-		authz.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER, ExemploRoles.ADMIN);
+	public Optional<Customer> findCustomerByUsername(final Username user) {
+		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 		return repo.findByUsername(user);
 	}
 }

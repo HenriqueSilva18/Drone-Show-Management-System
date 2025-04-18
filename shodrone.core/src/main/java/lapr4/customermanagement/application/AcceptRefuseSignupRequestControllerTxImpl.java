@@ -24,7 +24,7 @@
 package lapr4.customermanagement.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.customermanagement.domain.SignupRequest;
 import lapr4.customermanagement.domain.CustomerBuilder;
 import lapr4.customermanagement.repositories.SignupRequestRepository;
@@ -61,7 +61,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl implements AcceptRefuseSi
 	private final UserManagementService userService = AuthzRegistry.userService();
 
 	private final TransactionalContext txCtx = PersistenceContext.repositories().newTransactionalContext();
-	private final CustomerRepository clientUserRepository = PersistenceContext.repositories().utentes(txCtx);
+	private final CustomerRepository clientUserRepository = PersistenceContext.repositories().customers(txCtx);
 	private final SignupRequestRepository signupRequestsRepository = PersistenceContext.repositories()
 			.signupRequests(txCtx);
 
@@ -74,7 +74,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl implements AcceptRefuseSi
 	 */
 	@Override
 	public SignupRequest acceptSignupRequest(SignupRequest theSignupRequest) {
-		authz.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER, ExemploRoles.ADMIN);
+		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 
 		if (theSignupRequest == null) {
 			throw new IllegalArgumentException();
@@ -109,7 +109,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl implements AcceptRefuseSi
 	//
 	private SystemUser createSystemUserForClientUser(final SignupRequest theSignupRequest) {
 		final Set<Role> roles = new HashSet<>();
-		roles.add(ExemploRoles.UTENTE);
+		roles.add(Roles.CUSTOMER);
 		return userService.registerUser(theSignupRequest.username(), theSignupRequest.password(),
 				theSignupRequest.name(), theSignupRequest.email(), roles);
 	}
@@ -123,7 +123,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl implements AcceptRefuseSi
 	 */
 	@Override
 	public SignupRequest refuseSignupRequest(SignupRequest theSignupRequest) {
-		authz.ensureAuthenticatedUserHasAnyOf(ExemploRoles.POWER_USER, ExemploRoles.ADMIN);
+		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 
 		if (theSignupRequest == null) {
 			throw new IllegalArgumentException();

@@ -23,8 +23,9 @@
  */
 package lapr4.infrastructure.bootstrapers;
 
+import lapr4.infrastructure.bootstrapers.demo.BackofficeUsersBootstrapper;
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
@@ -58,7 +59,7 @@ public class Bootstrapper implements Action {
 	@Override
 	public boolean execute() {
 		// declare bootstrap actions
-		final Action[] actions = { new MasterUsersBootstrapper(), };
+		final Action[] actions = { new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper()};
 
 		registerPowerUser();
 		authenticateForBootstrapping();
@@ -79,7 +80,7 @@ public class Bootstrapper implements Action {
 	private boolean registerPowerUser() {
 		final var userBuilder = UserBuilderHelper.builder();
 		userBuilder.withUsername(POWERUSER).withPassword(POWERUSER_PWD).withName("joe", "power")
-				.withEmail("joe@email.org").withRoles(ExemploRoles.POWER_USER);
+				.withEmail("joe@email.org").withRoles(Roles.POWER_USER);
 		final var newUser = userBuilder.build();
 
 		SystemUser poweruser;

@@ -23,7 +23,6 @@
  */
 package lapr4.usermanagement.domain;
 
-import eapli.framework.infrastructure.authz.domain.model.PasswordPolicy;
 import eapli.framework.strings.util.StringPredicates;
 
 /**
@@ -38,7 +37,7 @@ import eapli.framework.strings.util.StringPredicates;
  * @author Paulo Gandra de Sousa 24/05/2019
  *
  */
-public class ExemploPasswordPolicy implements PasswordPolicy {
+public class PasswordPolicy implements eapli.framework.infrastructure.authz.domain.model.PasswordPolicy {
 
 	/*
 	 * (non-Javadoc)

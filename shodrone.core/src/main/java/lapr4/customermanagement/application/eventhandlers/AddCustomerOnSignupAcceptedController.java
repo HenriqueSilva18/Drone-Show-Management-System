@@ -43,7 +43,7 @@ import java.util.Optional;
 
     private final UserRepository repo = PersistenceContext.repositories().users();
     private final CustomerRepository clientUserRepository = PersistenceContext
-            .repositories().utentes();
+            .repositories().customers();
 
     public Customer addExemploUtente(final NewUserRegisteredFromSignupEvent event) {
         final Optional<SystemUser> newUser = findUser(event);

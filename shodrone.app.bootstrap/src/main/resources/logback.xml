@@ -34,7 +34,7 @@
 	<logger name="eapli.framework" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	<logger name="eapli.exemplo" level="info" additivity="false">
+	<logger name="lapr4" level="info" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 

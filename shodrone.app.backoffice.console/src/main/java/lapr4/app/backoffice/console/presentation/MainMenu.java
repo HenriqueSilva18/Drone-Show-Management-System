@@ -29,7 +29,7 @@ import lapr4.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import lapr4.app.backoffice.console.presentation.authz.ListUsersAction;
 import lapr4.app.backoffice.console.presentation.customer.AcceptRefuseSignupRequestAction;
 import lapr4.app.common.console.presentation.authz.MyUserMenu;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -110,7 +110,7 @@ public class MainMenu extends AbstractUI {
 			mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
 		}
 
-		if (authz.isAuthenticatedUserAuthorizedTo(ExemploRoles.POWER_USER, ExemploRoles.ADMIN)) {
+		if (authz.isAuthenticatedUserAuthorizedTo(Roles.POWER_USER, Roles.ADMIN)) {
 			final var usersMenu = buildUsersMenu();
 			mainMenu.addSubMenu(USERS_OPTION, usersMenu);
 			final var settingsMenu = buildAdminSettingsMenu();

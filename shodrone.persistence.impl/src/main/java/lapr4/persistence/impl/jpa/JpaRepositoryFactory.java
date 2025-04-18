@@ -46,12 +46,12 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public JpaClientUserRepository utentes(final TransactionalContext autoTx) {
+    public JpaClientUserRepository customers(final TransactionalContext autoTx) {
         return new JpaClientUserRepository(autoTx);
     }
 
     @Override
-    public JpaClientUserRepository utentes() {
+    public JpaClientUserRepository customers() {
         return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
     }
 

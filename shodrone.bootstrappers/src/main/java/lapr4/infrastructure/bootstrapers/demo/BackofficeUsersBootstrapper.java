@@ -21,7 +21,7 @@
 package lapr4.infrastructure.bootstrapers.demo;
 
 import lapr4.infrastructure.bootstrapers.AbstractUserBootstrapper;
-import lapr4.usermanagement.domain.ExemploRoles;
+import lapr4.usermanagement.domain.Roles;
 import eapli.framework.actions.Action;
 import eapli.framework.infrastructure.authz.domain.model.Role;
 
@@ -38,32 +38,32 @@ public class BackofficeUsersBootstrapper extends AbstractUserBootstrapper implem
 
     @Override
     public boolean execute() {
-        registerOtherExample("cashier", PASSWORD1, "Johny", "Cash", "johny.doe@emai.l.com");
-        registerSample1Manager("kitchen", PASSWORD1, "Oven", "Stove", "Oven.and.stove@emai.l.com");
-        registerAnotherExampleManager("chef", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
+        registerCrmManager("manager1", PASSWORD1, "Johny", "Cash", "johny.doe@emai.l.com");
+        registerCrmCollaborator("collaborator1", PASSWORD1, "Oven", "Stove", "Oven.and.stove@emai.l.com");
+        registerCustomerRepresentative("representative1", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
         return true;
     }
 
-    private void registerOtherExample(final String username, final String password,
+    private void registerCrmManager(final String username, final String password,
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.OTHER_EXAMPLE);
+        roles.add(Roles.CRM_MANAGER);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }
 
-    private void registerSample1Manager(final String username, final String password,
+    private void registerCrmCollaborator(final String username, final String password,
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.SAMPLE_1_MANAGER);
+        roles.add(Roles.CRM_COLLABORATOR);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }
 
-    private void registerAnotherExampleManager(final String username, final String password,
+    private void registerCustomerRepresentative(final String username, final String password,
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
-        roles.add(ExemploRoles.ANOTHER_EXAMPLE_MANAGER);
+        roles.add(Roles.CUSTOMER_REPRESENTATIVE);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }
