@@ -1,4 +1,5 @@
-/* main.c - Simulador de movimento de drones */
+/* main.c - Simulador de movimento de drones com espaço 3D físico */
+#define _POSIX_C_SOURCE 200809L
 
 #include <errno.h>
 #include <fcntl.h>
@@ -13,19 +14,31 @@
 
 #define MAX_DRONES 10
 #define MAX_STEPS 20
+#define MAX_X 10
+#define MAX_Y 10
+#define MAX_Z 5
 
-
+typedef struct {
+	int x, y, z;
+	int drone_id;
+	int step;
+} Position;
 
 // US262 - Captura e armazenamento de posições no tempo
 Position positionMatrix[MAX_STEPS][MAX_DRONES];
+int space3D[MAX_X][MAX_Y][MAX_Z];
+
 int num_drones;
 int pipefds[MAX_DRONES][2];
 pid_t drone_pids[MAX_DRONES];
 int collision_count = 0;
 const int COLLISION_THRESHOLD = 3;
 
-void handle_drone_signal(int sig) {
-	// Pode ser usado no futuro
+void clear_space3D() {
+	for (int x = 0; x < MAX_X; x++)
+		for (int y = 0; y < MAX_Y; y++)
+			for (int z = 0; z < MAX_Z; z++)
+				space3D[x][y][z] = -1;
 }
 
 // US263 - Log de colisões
@@ -34,18 +47,13 @@ void log_collision(int step, int x, int y, int z) {
 	collision_count++;
 }
 
-// US263 - Deteção de colisões
-int check_collision(int step, Position new_pos) {
-	for (int i = 0; i < num_drones; i++) {
-		Position pos = positionMatrix[step][i];
-		if (pos.drone_id != -1 &&
-			 pos.x == new_pos.x &&
-			 pos.y == new_pos.y &&
-			 pos.z == new_pos.z) {
-			log_collision(step, new_pos.x, new_pos.y, new_pos.z);
-			return 1;
-		}
+// US263 - Deteção de colisões reais no espaço 3D
+int check_collision(Position pos) {
+	if (space3D[pos.x][pos.y][pos.z] != -1) {
+		log_collision(pos.step, pos.x, pos.y, pos.z);
+		return 1;
 	}
+	space3D[pos.x][pos.y][pos.z] = pos.drone_id;
 	return 0;
 }
 
@@ -60,7 +68,6 @@ void save_position(int step, Position pos) {
 }
 
 int main(int argc, char* argv[]) {
-	// US261 - Verificação de argumentos
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s <num_drones>\n", argv[0]);
 		exit(EXIT_FAILURE);
@@ -70,12 +77,14 @@ int main(int argc, char* argv[]) {
 	if (num_drones > MAX_DRONES)
 		num_drones = MAX_DRONES;
 
-	// US262 - Inicialização da matriz de posições
+	// Inicializar estruturas
 	for (int i = 0; i < MAX_STEPS; i++)
 		for (int j = 0; j < MAX_DRONES; j++)
 			positionMatrix[i][j].drone_id = -1;
 
-	// US261 - Criação de pipes e drones
+	clear_space3D();
+
+	// Criação de pipes e drones
 	for (int i = 0; i < num_drones; i++) {
 		if (pipe(pipefds[i]) == -1) {
 			perror("pipe");
@@ -102,28 +111,26 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	// US264 - Simulação por passos de tempo (timesteps)
+	// Simulação por passos de tempo (timesteps)
 	for (int step = 0; step < MAX_STEPS; step++) {
+		clear_space3D();
+
 		for (int i = 0; i < num_drones; i++) {
 			Position pos;
 			int bytes = read(pipefds[i][0], &pos, sizeof(Position));
 			if (bytes == sizeof(Position)) {
 				pos.step = step;
 
-				// US263 - Verifica colisão e envia sinal
-				if (check_collision(step, pos)) {
+				if (check_collision(pos)) {
 					kill(drone_pids[i], SIGUSR1);
 				}
 
-				// US262 - Guarda posição
 				save_position(step, pos);
 			}
 		}
 
-		// US264 - Avança para próximo timestep
 		sleep(1);
 
-		// US263 - Verifica número de colisões
 		if (collision_count >= COLLISION_THRESHOLD) {
 			printf("Too many collisions. Terminating simulation...\n");
 			for (int i = 0; i < num_drones; i++) {
@@ -133,14 +140,11 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	// US261 - Espera pelo fim dos drones
 	for (int i = 0; i < num_drones; i++) {
 		wait(NULL);
 	}
 
-	// US265 - Geração do relatório
 	generate_report("simulation_report.txt", positionMatrix, MAX_STEPS, num_drones, collision_count);
-
 	printf("Simulation ended. Total collisions: %d\n", collision_count);
 	return 0;
 }

@@ -1,0 +1,177 @@
+@startuml
+
+' ======== VALUE OBJECTS ========
+
+class Name {
+  +String value
+}
+
+class VAT {
+  +String value
+}
+
+class Address {
+  +String street
+  +String city
+  +String postalCode
+  +String country
+}
+
+class SerialNumber {
+  +String value
+}
+
+class DateValue {
+  +String value
+}
+
+class DronesNum {
+  +int value
+}
+
+class Duration {
+  +int value
+}
+
+class Id {
+  +int value
+}
+
+class Email {
+  +String value
+}
+
+class Password {
+  +String value
+}
+
+class Username {
+  +String value
+}
+
+class Phone {
+  +String value
+}
+
+class Status {
+  +String value
+}
+
+class Report {
+  +String content
+}
+
+class Type {
+  +String value
+}
+
+
+' ======== AGGREGATES & ENTITIES ========
+
+package "Aggregate Language" {
+  class Language
+}
+
+package "Aggregate Drone Model" {
+  class DroneModel {
+    +List<String> ModelSpecifications
+  }
+}
+
+package "Aggregate Client" {
+  class Client {
+    +List<Representative> representatives
+  }
+
+  class Representative {
+    +Name name
+    +VAT vat
+    +Address address
+  }
+}
+
+package "Aggregate Drone" {
+  class Drone {
+    +SerialNumber serialNumber
+    +List<Maintenance> maintenanceHistory
+  }
+
+  class Maintenance {
+    +String description
+    +DateValue startDate
+    +DateValue endDate
+  }
+}
+
+package "Aggregate Show Request" {
+  class ShowRequest {
+    +DronesNum numDrones
+    +Duration duration
+    +String showDescription
+    +Id showRequestId
+    +DateValue date
+  }
+}
+
+package "Aggregate Show Proposal" {
+  class ShowProposal {
+    +DronesNum proposalDronesNum
+    +Duration proposalDuration
+    +String proposalDescription
+    +Type type
+    +Report simulationResult
+  }
+}
+
+package "Aggregate Figure" {
+  class Figure {
+    +String description
+    +Boolean exclusive
+    +VAT clientVAT
+  }
+}
+
+package "Aggregate User" {
+  class User {
+    +Username username
+    +Password password
+    +Email email
+    +Phone phone
+  }
+}
+
+
+' ======== RELATIONSHIPS ========
+
+Client --> VAT : clientVAT (as ID)
+Client --> Address : clientAddress
+Client --> Name : clientName
+Representative --> Name : name
+Representative --> VAT : vat
+Representative --> Address : address
+
+DroneModel --> Language
+DroneModel --> Name
+
+Drone --> DroneModel
+Drone --> SerialNumber
+Drone --> Maintenance
+
+ShowRequest --> Client : customer
+ShowRequest --> VAT : clientVAT
+ShowRequest --> Id : showRequestId
+ShowRequest --> Drone : drone (via SerialNumber)
+ShowRequest --> Figure
+ShowRequest --> User
+
+ShowProposal --> ShowRequest : baseRequest
+ShowProposal --> Drone : dronesProposal
+ShowProposal --> Report : simulationResult
+ShowProposal --> Type : type
+ShowProposal --> Status : proposalStatus
+
+Figure --> VAT : clientVAT
+
+User --> Email : userID
+
+@enduml

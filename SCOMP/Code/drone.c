@@ -1,5 +1,6 @@
-/* drone.c - Processo de simulação de um drone individual */
+/* drone.c - Processo de simulação de um drone individual (versão com script) */
 #define _POSIX_C_SOURCE 200809L
+
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +17,7 @@ typedef struct {
 
 int drone_id;
 int stop = 0;
+FILE* script = NULL;
 
 // US263 - Handler para SIGUSR1 (colisão)
 void handle_collision(int sig) {
@@ -48,23 +50,27 @@ int main(int argc, char* argv[]) {
 	signal(SIGUSR1, handle_collision);
 	signal(SIGTERM, handle_terminate);
 
-	srand(getpid());
+	// Abrir o ficheiro de script para este drone
+	char filename[32];
+	sprintf(filename, "script%d.txt", drone_id);
+	script = fopen(filename, "r");
+	if (!script) {
+		perror("Failed to open script file");
+		exit(EXIT_FAILURE);
+	}
 
-	for (int step = 0; step < 20 && !stop; step++) {
-		Position pos;
-		pos.drone_id = drone_id;
-		pos.step = step;
+	Position pos;
+	pos.drone_id = drone_id;
+	int step = 0;
 
-		// US262 - Geração aleatória da posição
-		pos.x = rand() % 10;
-		pos.y = rand() % 10;
-		pos.z = rand() % 5;
-
-		// US262/264 - Envia posição para processo pai
+	// Ler posições do ficheiro e enviá-las por pipe
+	while (!stop && fscanf(script, "%d %d %d", &pos.x, &pos.y, &pos.z) == 3) {
+		pos.step = step++;
 		write(STDOUT_FILENO, &pos, sizeof(Position));
 		sleep(1);
 	}
 
+	fclose(script);
 	printf("[DRONE %d] Finished execution.\n", drone_id);
 	return 0;
 }
