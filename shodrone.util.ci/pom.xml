@@ -6,7 +6,8 @@
     <parent>
         <groupId>lapr4</groupId>
         <artifactId>shodrone</artifactId>
-        <version>0.1.0</version>
+        <relativePath>../</relativePath>
+        <version>1.4.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>shodrone.util.ci</artifactId>
@@ -18,12 +19,12 @@
         <dependency>
             <groupId>lapr4</groupId>
             <artifactId>shodrone.app1</artifactId>
-            <version>0.1.0</version>
+            <version>1.4.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>lapr4</groupId>
             <artifactId>shodrone.app2</artifactId>
-            <version>0.1.0</version>
+            <version>1.4.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

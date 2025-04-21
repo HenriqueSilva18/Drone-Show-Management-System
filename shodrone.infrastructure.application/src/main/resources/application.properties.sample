@@ -1,0 +1,16 @@
+#####################################################
+##
+## Base
+##
+#####################################################
+
+persistence.persistenceUnit=lapr4
+
+#persistence.repositoryFactory=lapr4.persistence.jpa.JpaRepositoryFactory
+persistence.repositoryFactory=lapr4.persistence.inmemory.InMemoryRepositoryFactory
+
+ui.menu.layout=horizontal
+
+HighCaloriesDishLimit=300
+
+UseEventfulControllers=true
