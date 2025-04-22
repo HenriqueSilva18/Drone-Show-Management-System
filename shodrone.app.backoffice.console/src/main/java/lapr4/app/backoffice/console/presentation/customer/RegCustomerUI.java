@@ -1,6 +1,5 @@
 package lapr4.app.backoffice.console.presentation.customer;
 
-
 import lapr4.customermanagement.application.RegCustomerController;
 import lapr4.customermanagement.domain.*;
 import eapli.framework.actions.menu.Menu;
@@ -13,7 +12,9 @@ import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -46,17 +47,40 @@ public class RegCustomerUI extends AbstractUI {
             return false;
         }
 
+        // Representative information - at least one is required
+        List<Representative> representatives = new ArrayList<>();
+        boolean addMore = true;
+
+        System.out.println("\nRepresentative Information (at least one required):");
+        while (addMore) {
+            addRepresentative(representatives);
+
+            if (!representatives.isEmpty()) {
+                String response = Console.readLine("\nAdd another representative? (Y/N)");
+                addMore = response.equalsIgnoreCase("Y");
+            }
+        }
+
+        if (representatives.isEmpty()) {
+            System.out.println("Error: At least one representative is required!");
+            return false;
+        }
+
         try {
-            // Using the controller to register the customer
-            this.theController.registerCustomer(
+            // Using the controller to register the customer with representatives
+            Customer customer = this.theController.registerCustomerWithMultipleRepresentatives(
                     vatNumber,
                     name,
                     new Address(street, city, postalCode, country),
                     email,
                     phone,
-                    customerType);
+                    customerType,
+                    representatives);
 
             System.out.println("\nCustomer registered successfully!");
+            System.out.println("Customer VAT: " + customer.identity().toString());
+            System.out.println("Number of Representatives: " + customer.representatives().size());
+
         } catch (final IntegrityViolationException | ConcurrencyException e) {
             System.out.println("Error: That VAT number is already registered.");
         } catch (IllegalArgumentException e) {
@@ -64,6 +88,22 @@ public class RegCustomerUI extends AbstractUI {
         }
 
         return false;
+    }
+
+    private void addRepresentative(List<Representative> representatives) {
+        System.out.println("\nRepresentative #" + (representatives.size() + 1));
+        final String repName = Console.readLine("Representative Name:");
+        final String repEmail = Console.readLine("Representative Email:");
+        final String repPosition = Console.readLine("Representative Position:");
+
+        try {
+            Representative rep = new Representative(repName, new Email(repEmail), repPosition);
+            representatives.add(rep);
+            System.out.println("Representative added successfully!");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error adding representative: " + e.getMessage());
+            System.out.println("Please try again.");
+        }
     }
 
     private CustomerType selectCustomerType() {

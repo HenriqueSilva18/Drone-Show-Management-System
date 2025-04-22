@@ -2,6 +2,9 @@ package lapr4.customermanagement.domain;
 
 import eapli.framework.domain.model.DomainFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerBuilder implements DomainFactory<Customer> {
 
     private VAT vat;
@@ -11,6 +14,7 @@ public class CustomerBuilder implements DomainFactory<Customer> {
     private Phone phone;
     private CustomerType customerType;
     private CustomerStatus customerStatus = CustomerStatus.CREATED;
+    private List<Representative> representatives = new ArrayList<>();
 
     public CustomerBuilder withVAT(final VAT vat) {
         this.vat = vat;
@@ -68,9 +72,24 @@ public class CustomerBuilder implements DomainFactory<Customer> {
         return this;
     }
 
+    public CustomerBuilder withRepresentative(final Representative representative) {
+        this.representatives.add(representative);
+        return this;
+    }
+
+    public CustomerBuilder withRepresentative(final String name, final String email, final String position) {
+        Representative representative = new Representative(name, new Email(email), position);
+        this.representatives.add(representative);
+        return this;
+    }
+
     @Override
     public Customer build() {
+        if (this.representatives.isEmpty()) {
+            throw new IllegalStateException("Customer must have at least one representative");
+        }
+
         return new Customer(this.vat, this.name, this.address,
-                this.email, this.phone, this.customerType, this.customerStatus);
+                this.email, this.phone, this.customerType, this.customerStatus, this.representatives);
     }
 }

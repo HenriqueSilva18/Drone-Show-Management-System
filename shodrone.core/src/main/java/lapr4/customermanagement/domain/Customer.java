@@ -4,6 +4,9 @@ import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name = "CUSTOMER")
@@ -34,12 +37,20 @@ public class Customer implements AggregateRoot<VAT> {
     @Enumerated(EnumType.STRING)
     public CustomerStatus customerStatus;
 
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Representative> representatives = new ArrayList<>();
+
     public Customer(final VAT vat, final String name, final Address address, final Email email,
-                    final Phone phone, final CustomerType customerType, final CustomerStatus customerStatus) {
+                    final Phone phone, final CustomerType customerType, final CustomerStatus customerStatus,
+                    final List<Representative> representatives) {
 
         if (vat == null || name == null || address == null || email == null ||
                 phone == null || customerType == null || customerStatus == null) {
             throw new IllegalArgumentException("All customer attributes must be provided");
+        }
+
+        if (representatives == null || representatives.isEmpty()) {
+            throw new IllegalArgumentException("Customer must have at least one representative");
         }
 
         this.vat = vat;
@@ -49,10 +60,28 @@ public class Customer implements AggregateRoot<VAT> {
         this.phone = phone;
         this.customerType = customerType;
         this.customerStatus = customerStatus;
+
+        // Associate each representative with this customer
+        for (Representative rep : representatives) {
+            addRepresentative(rep);
+        }
     }
 
     protected Customer() {
         // for ORM only
+    }
+
+    public void addRepresentative(Representative representative) {
+        if (representative == null) {
+            throw new IllegalArgumentException("Representative cannot be null");
+        }
+
+        representative.associateCustomer(this);
+        this.representatives.add(representative);
+    }
+
+    public List<Representative> representatives() {
+        return Collections.unmodifiableList(this.representatives);
     }
 
     @Override
