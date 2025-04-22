@@ -21,9 +21,9 @@
 package lapr4.persistence.impl.jpa;
 
 import lapr4.Application;
-import lapr4.customermanagement.domain.MecanographicNumber;
-import lapr4.customermanagement.domain.Customer;
-import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.utentemanagement.domain.MecanographicNumber;
+import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -38,7 +38,7 @@ import java.util.Optional;
  */
 class JpaClientUserRepository
         extends JpaAutoTxRepository<Customer, MecanographicNumber, MecanographicNumber>
-        implements CustomerRepository {
+        implements UtenteRepository {
 
     public JpaClientUserRepository(final TransactionalContext autoTx) {
         super(autoTx, "mecanographicNumber");

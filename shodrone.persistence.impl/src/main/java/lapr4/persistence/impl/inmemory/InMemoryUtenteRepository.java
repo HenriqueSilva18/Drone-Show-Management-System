@@ -18,30 +18,39 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package lapr4.usermanagement.application.eventhandlers;
+package lapr4.persistence.impl.inmemory;
 
-import lapr4.utentemanagement.domain.events.SignupAcceptedEvent;
-import eapli.framework.domain.events.DomainEvent;
-import eapli.framework.domain.repositories.IntegrityViolationException;
-import eapli.framework.infrastructure.pubsub.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lapr4.utentemanagement.domain.MecanographicNumber;
+import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.repositories.UtenteRepository;
+import eapli.framework.infrastructure.authz.domain.model.Username;
+import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
-public class SignupAcceptedWatchDog implements EventHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);
+import java.util.Optional;
 
-    @Override
-    public void onEvent(final DomainEvent domainevent) {
-        assert domainevent instanceof SignupAcceptedEvent;
+/**
+ *
+ * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
+ */
+public class InMemoryUtenteRepository extends InMemoryDomainRepository<Customer, MecanographicNumber>
+		implements UtenteRepository {
 
-        final SignupAcceptedEvent event = (SignupAcceptedEvent) domainevent;
+	static {
+		InMemoryInitializer.init();
+	}
 
-        final AddUserOnSignupAcceptedController controller = new AddUserOnSignupAcceptedController();
-        try {
-            controller.addUser(event);
-        } catch (final IntegrityViolationException e) {
-            // TODO provably should send some warning email...
-            LOGGER.error("Unable to register new user on signup event", e);
-        }
-    }
+	@Override
+	public Optional<Customer> findByUsername(final Username name) {
+		return matchOne(e -> e.user().username().equals(name));
+	}
+
+	@Override
+	public Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
+		return Optional.of(data().get(number));
+	}
+
+	@Override
+	public Iterable<Customer> findAllActive() {
+		return match(e -> e.user().isActive());
+	}
 }

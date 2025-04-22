@@ -21,29 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package lapr4.usermanagement.domain;
+package lapr4.utentemanagement.application;
 
-import lapr4.utentemanagement.domain.SignupRequestBuilder;
-import eapli.framework.infrastructure.authz.domain.model.PlainTextEncoder;
-import eapli.framework.infrastructure.authz.domain.model.SystemUserBuilder;
-import eapli.framework.util.Utility;
+import lapr4.infrastructure.persistence.PersistenceContext;
+import lapr4.usermanagement.domain.Roles;
+import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.repositories.UtenteRepository;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 /**
  *
- * @author Paulo Gandra de Sousa 27/05/2019
- *
+ * @author losa
  */
-@Utility
-public class UserBuilderHelper {
-    private UserBuilderHelper() {
-        // ensure utility
-    }
+public class ListCustomerController {
+    private final AuthorizationService authz = AuthzRegistry.authorizationService();
 
-    public static SystemUserBuilder builder() {
-        return new SystemUserBuilder(new PasswordPolicy(), new PlainTextEncoder());
-    }
+    private final UtenteRepository repo = PersistenceContext.repositories().utentes();
 
-    public static SignupRequestBuilder signupBuilder() {
-        return new SignupRequestBuilder(new PasswordPolicy(), new PlainTextEncoder());
+    public Iterable<Customer> activeCustomer() {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
+
+        return this.repo.findAllActive();
     }
 }

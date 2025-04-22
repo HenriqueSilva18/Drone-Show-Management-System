@@ -1,100 +1,85 @@
-/*
- * Copyright (c) 2013-2024 the original author or authors.
- *
- * MIT License
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package lapr4.customermanagement.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
-import eapli.framework.infrastructure.authz.domain.model.SystemUser;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 
-/**
- * A Client User. This class represents "utentes" (client users). It follows a
- * DDD approach where Utente is the root entity of the Utente Aggregate and all
- * of its properties are instances of value objects. A Utente references a
- * System User This approach may seem a little more complex than just having
- * String or native type attributes but provides for real semantic of the domain
- * and follows the Single Responsibility Pattern
- *
- * @author Jorge Santos ajs@isep.ipp.pt
- */
+
 @Entity
-public class Customer implements AggregateRoot<MecanographicNumber> {
+@Table(name = "CUSTOMER")
+public class Customer implements AggregateRoot<VAT> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Version
-	private Long version;
+    @Version
+    private Long version;
 
-	@EmbeddedId
-	private MecanographicNumber mecanographicNumber;
+    @EmbeddedId
+    private VAT vat;
 
-	/**
-	 * cascade = CascadeType.NONE as the systemUser is part of another aggregate
-	 */
-	@OneToOne()
-	private SystemUser systemUser;
+    private String name;
 
-	public Customer(final SystemUser user, final MecanographicNumber mecanographicNumber) {
-		if (mecanographicNumber == null || user == null) {
-			throw new IllegalArgumentException();
-		}
-		this.systemUser = user;
-		this.mecanographicNumber = mecanographicNumber;
-	}
+    @Embedded
+    private Address address;
 
-	protected Customer() {
-		// for ORM only
-	}
+    @Embedded
+    private Email email;
 
-	public SystemUser user() {
-		return this.systemUser;
-	}
+    @Embedded
+    private Phone phone;
 
-	@Override
-	public boolean equals(final Object o) {
-		return DomainEntities.areEqual(this, o);
-	}
+    @Enumerated(EnumType.STRING)
+    public CustomerType customerType;
 
-	@Override
-	public int hashCode() {
-		return DomainEntities.hashCode(this);
-	}
+    @Enumerated(EnumType.STRING)
+    public CustomerStatus customerStatus;
 
-	@Override
-	public boolean sameAs(final Object other) {
-		return DomainEntities.areEqual(this, other);
-	}
+    public Customer(final VAT vat, final String name, final Address address, final Email email,
+                    final Phone phone, final CustomerType customerType, final CustomerStatus customerStatus) {
 
-	public MecanographicNumber mecanographicNumber() {
-		return identity();
-	}
+        if (vat == null || name == null || address == null || email == null ||
+                phone == null || customerType == null || customerStatus == null) {
+            throw new IllegalArgumentException("All customer attributes must be provided");
+        }
 
-	@Override
-	public MecanographicNumber identity() {
-		return this.mecanographicNumber;
-	}
+        this.vat = vat;
+        this.name = name.trim();
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.customerType = customerType;
+        this.customerStatus = customerStatus;
+    }
+
+    protected Customer() {
+        // for ORM only
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        return DomainEntities.areEqual(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        return DomainEntities.hashCode(this);
+    }
+
+    @Override
+    public boolean sameAs(final Object other) {
+        return DomainEntities.areEqual(this, other);
+    }
+
+    @Override
+    public VAT identity() {
+        return this.vat;
+    }
+
+    public CustomerType customerType() {
+        return this.customerType;
+    }
+
+    public CustomerStatus customerStatus() {
+        return this.customerStatus;
+    }
 }

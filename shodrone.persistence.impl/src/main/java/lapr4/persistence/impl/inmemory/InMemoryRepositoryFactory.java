@@ -20,11 +20,12 @@
  */
 package lapr4.persistence.impl.inmemory;
 
+import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
-import lapr4.customermanagement.repositories.SignupRequestRepository;
-import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.utentemanagement.repositories.SignupRequestRepository;
+import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryUserRepository;
@@ -50,6 +51,17 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public UserRepository users() {
 		return users(null);
+	}
+
+	@Override
+	public UtenteRepository utentes(final TransactionalContext tx) {
+
+		return new InMemoryUtenteRepository();
+	}
+
+	@Override
+	public UtenteRepository utentes() {
+		return utentes(null);
 	}
 
 	@Override

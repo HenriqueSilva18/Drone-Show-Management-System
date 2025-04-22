@@ -1,56 +1,45 @@
-/*
- * Copyright (c) 2013-2024 the original author or authors.
- *
- * MIT License
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
- * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 package lapr4.persistence.impl.inmemory;
 
-import lapr4.customermanagement.domain.MecanographicNumber;
-import lapr4.customermanagement.domain.Customer;
+import lapr4.customermanagement.domain.*;
 import lapr4.customermanagement.repositories.CustomerRepository;
-import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-/**
- *
- * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
- */
-public class InMemoryCustomerRepository extends InMemoryDomainRepository<Customer, MecanographicNumber>
-		implements CustomerRepository {
+public class InMemoryCustomerRepository
+        extends InMemoryDomainRepository<Customer, VAT>
+        implements CustomerRepository {
 
-	static {
-		InMemoryInitializer.init();
-	}
+    static {
+        InMemoryInitializer.init();
+    }
 
-	@Override
-	public Optional<Customer> findByUsername(final Username name) {
-		return matchOne(e -> e.user().username().equals(name));
-	}
+    @Override
+    public Optional<Customer> findByVAT(VAT vat) {
+        return Optional.ofNullable(super.data().get(vat));
+    }
 
-	@Override
-	public Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
-		return Optional.of(data().get(number));
-	}
+    @Override
+    public Optional<Customer> findByVAT(String vatNumber) {
+        return StreamSupport.stream(super.findAll().spliterator(), false)
+                .filter(c -> c.identity().toString().equals(vatNumber))
+                .findFirst();
+    }
 
-	@Override
-	public Iterable<Customer> findAllActive() {
-		return match(e -> e.user().isActive());
-	}
+    @Override
+    public Iterable<Customer> findAllActive() {
+        return StreamSupport.stream(super.findAll().spliterator(), false)
+                .filter(c -> c.customerStatus() == CustomerStatus.CREATED) // Changed from ACTIVE to CREATED
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public Iterable<Customer> findByType(CustomerType type) {
+        return StreamSupport.stream(super.findAll().spliterator(), false)
+                .filter(c -> c.customerType() == type)
+                .collect(Collectors.toList());
+    }
 }

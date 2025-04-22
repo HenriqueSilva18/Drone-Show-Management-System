@@ -1,0 +1,28 @@
+package lapr4.app.backoffice.console.presentation.menu;
+
+import eapli.framework.actions.Actions;
+import eapli.framework.actions.menu.Menu;
+import lapr4.app.backoffice.console.presentation.MainMenu;
+import lapr4.app.backoffice.console.presentation.authz.AddUserUI;
+
+public class ManagerMenu extends MainMenu {
+    private static final String RETURN_LABEL = "Return ";
+
+    private static final int EXIT_OPTION = 0;
+
+    // MAIN MENU
+    private static final int OPTION = 2;
+
+    public static void buildManagerMenu(Menu mainMenu) {
+        final Menu mMenu = ManagerMenu.buildMMenu();
+        mainMenu.addSubMenu(OPTION, mMenu);
+    }
+
+    private static Menu buildMMenu() {
+        final var menu = new Menu("??? >");
+
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+}

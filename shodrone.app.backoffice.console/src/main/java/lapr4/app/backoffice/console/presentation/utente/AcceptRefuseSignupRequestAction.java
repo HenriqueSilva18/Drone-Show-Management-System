@@ -18,30 +18,17 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package lapr4.usermanagement.application.eventhandlers;
+package lapr4.app.backoffice.console.presentation.utente;
 
-import lapr4.utentemanagement.domain.events.SignupAcceptedEvent;
-import eapli.framework.domain.events.DomainEvent;
-import eapli.framework.domain.repositories.IntegrityViolationException;
-import eapli.framework.infrastructure.pubsub.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import eapli.framework.actions.Action;
 
-public class SignupAcceptedWatchDog implements EventHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);
+/**
+ * Created by AJS on 08/04/2016.
+ */
+public class AcceptRefuseSignupRequestAction implements Action {
 
     @Override
-    public void onEvent(final DomainEvent domainevent) {
-        assert domainevent instanceof SignupAcceptedEvent;
-
-        final SignupAcceptedEvent event = (SignupAcceptedEvent) domainevent;
-
-        final AddUserOnSignupAcceptedController controller = new AddUserOnSignupAcceptedController();
-        try {
-            controller.addUser(event);
-        } catch (final IntegrityViolationException e) {
-            // TODO provably should send some warning email...
-            LOGGER.error("Unable to register new user on signup event", e);
-        }
+    public boolean execute() {
+        return new AcceptRefuseSignupRequestUI().show();
     }
 }

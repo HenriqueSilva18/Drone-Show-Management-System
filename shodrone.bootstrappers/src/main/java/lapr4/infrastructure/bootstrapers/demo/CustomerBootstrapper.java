@@ -22,9 +22,9 @@ package lapr4.infrastructure.bootstrapers.demo;
 
 import lapr4.infrastructure.bootstrapers.TestDataConstants;
 import lapr4.mycustomer.application.SignupController;
-import lapr4.customermanagement.application.AcceptRefuseSignupFactory;
-import lapr4.customermanagement.application.AcceptRefuseSignupRequestController;
-import lapr4.customermanagement.domain.SignupRequest;
+import lapr4.utentemanagement.application.AcceptRefuseSignupFactory;
+import lapr4.utentemanagement.application.AcceptRefuseSignupRequestController;
+import lapr4.utentemanagement.domain.SignupRequest;
 import eapli.framework.actions.Action;
 import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;

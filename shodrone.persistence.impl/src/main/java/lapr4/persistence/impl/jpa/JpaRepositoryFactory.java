@@ -21,8 +21,9 @@
 package lapr4.persistence.impl.jpa;
 
 import lapr4.Application;
+import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
-import lapr4.customermanagement.repositories.SignupRequestRepository;
+import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.jpa.JpaAutoTxUserRepository;
@@ -46,13 +47,23 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     }
 
     @Override
-    public JpaClientUserRepository customers(final TransactionalContext autoTx) {
+    public JpaClientUserRepository utentes(final TransactionalContext autoTx) {
         return new JpaClientUserRepository(autoTx);
     }
 
     @Override
-    public JpaClientUserRepository customers() {
+    public JpaClientUserRepository utentes() {
         return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
+    }
+
+    @Override
+    public CustomerRepository customers(TransactionalContext autoTx) {
+        return new JpaCustomerRepository(autoTx);
+    }
+
+    @Override
+    public CustomerRepository customers() {
+        return new JpaCustomerRepository(Application.settings().getPersistenceUnitName());
     }
 
     @Override

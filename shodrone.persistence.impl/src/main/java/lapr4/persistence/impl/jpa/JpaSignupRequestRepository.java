@@ -21,8 +21,8 @@
 package lapr4.persistence.impl.jpa;
 
 import lapr4.Application;
-import lapr4.customermanagement.domain.SignupRequest;
-import lapr4.customermanagement.repositories.SignupRequestRepository;
+import lapr4.utentemanagement.domain.SignupRequest;
+import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;

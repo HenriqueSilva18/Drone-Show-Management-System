@@ -25,9 +25,9 @@ package lapr4.mycustomer.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.UserBuilderHelper;
-import lapr4.customermanagement.domain.SignupRequest;
-import lapr4.customermanagement.domain.SignupRequestBuilder;
-import lapr4.customermanagement.repositories.SignupRequestRepository;
+import lapr4.utentemanagement.domain.SignupRequest;
+import lapr4.utentemanagement.domain.SignupRequestBuilder;
+import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.time.util.CurrentTimeCalendars;
 

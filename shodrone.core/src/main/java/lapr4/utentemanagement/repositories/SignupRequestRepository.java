@@ -18,30 +18,17 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package lapr4.usermanagement.application.eventhandlers;
+package lapr4.utentemanagement.repositories;
 
-import lapr4.utentemanagement.domain.events.SignupAcceptedEvent;
-import eapli.framework.domain.events.DomainEvent;
-import eapli.framework.domain.repositories.IntegrityViolationException;
-import eapli.framework.infrastructure.pubsub.EventHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lapr4.utentemanagement.domain.SignupRequest;
+import eapli.framework.domain.repositories.DomainRepository;
+import eapli.framework.infrastructure.authz.domain.model.Username;
 
-public class SignupAcceptedWatchDog implements EventHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignupAcceptedWatchDog.class);
+/**
+ *
+ * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
+ */
+public interface SignupRequestRepository extends DomainRepository<Username, SignupRequest> {
 
-    @Override
-    public void onEvent(final DomainEvent domainevent) {
-        assert domainevent instanceof SignupAcceptedEvent;
-
-        final SignupAcceptedEvent event = (SignupAcceptedEvent) domainevent;
-
-        final AddUserOnSignupAcceptedController controller = new AddUserOnSignupAcceptedController();
-        try {
-            controller.addUser(event);
-        } catch (final IntegrityViolationException e) {
-            // TODO provably should send some warning email...
-            LOGGER.error("Unable to register new user on signup event", e);
-        }
-    }
+    Iterable<SignupRequest> pendingSignupRequests();
 }
