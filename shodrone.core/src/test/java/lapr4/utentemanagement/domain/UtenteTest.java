@@ -36,7 +36,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Nuno Bettencourt [NMB] on 03/04/16.
  */
-public class CustomerTest {
+public class UtenteTest {
 
     private final String aMecanographicNumber = "abc";
     private final String anotherMecanographicNumber = "xyz";
@@ -54,10 +54,10 @@ public class CustomerTest {
     @Test
     public void ensureCustomerEqualsPassesForTheSameMecanographicNumber() throws Exception {
 
-        final Customer aClientUser = new CustomerBuilder().withMecanographicNumber("DUMMY")
+        final Utente aClientUser = new UtenteBuilder().withMecanographicNumber("DUMMY")
                 .withSystemUser(getNewDummyUser()).build();
 
-        final Customer anotherClientUser = new CustomerBuilder().withMecanographicNumber("DUMMY")
+        final Utente anotherClientUser = new UtenteBuilder().withMecanographicNumber("DUMMY")
                 .withSystemUser(getNewDummyUser()).build();
 
         final boolean expected = aClientUser.equals(anotherClientUser);
@@ -70,10 +70,10 @@ public class CustomerTest {
         final Set<Role> roles = new HashSet<>();
         roles.add(Roles.ADMIN);
 
-        final Customer aClientUser = new CustomerBuilder().withMecanographicNumber(aMecanographicNumber)
+        final Utente aClientUser = new UtenteBuilder().withMecanographicNumber(aMecanographicNumber)
                 .withSystemUser(getNewDummyUser()).build();
 
-        final Customer anotherClientUser = new CustomerBuilder()
+        final Utente anotherClientUser = new UtenteBuilder()
                 .withMecanographicNumber(anotherMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
         final boolean expected = aClientUser.equals(anotherClientUser);
@@ -83,7 +83,7 @@ public class CustomerTest {
 
     @Test
     public void ensureClientUserEqualsAreTheSameForTheSameInstance() throws Exception {
-        final Customer aClientUser = new Customer();
+        final Utente aClientUser = new Utente();
 
         final boolean expected = aClientUser.equals(aClientUser);
 
@@ -95,7 +95,7 @@ public class CustomerTest {
         final Set<Role> roles = new HashSet<>();
         roles.add(Roles.ADMIN);
 
-        final Customer aClientUser = new CustomerBuilder().withMecanographicNumber("DUMMY")
+        final Utente aClientUser = new UtenteBuilder().withMecanographicNumber("DUMMY")
                 .withSystemUser(getNewDummyUser()).build();
 
         @SuppressWarnings("unlikely-arg-type")
@@ -106,7 +106,7 @@ public class CustomerTest {
 
     @Test
     public void ensureClientUserIsTheSameAsItsInstance() throws Exception {
-        final Customer aClientUser = new CustomerBuilder().withMecanographicNumber("DUMMY")
+        final Utente aClientUser = new UtenteBuilder().withMecanographicNumber("DUMMY")
                 .withSystemUser(getNewDummyUser()).build();
 
         final boolean expected = aClientUser.sameAs(aClientUser);
@@ -118,10 +118,10 @@ public class CustomerTest {
     public void ensureTwoClientUserWithDifferentMecanographicNumbersAreNotTheSame() throws Exception {
         final Set<Role> roles = new HashSet<>();
         roles.add(Roles.ADMIN);
-        final Customer aClientUser = new CustomerBuilder().withMecanographicNumber(aMecanographicNumber)
+        final Utente aClientUser = new UtenteBuilder().withMecanographicNumber(aMecanographicNumber)
                 .withSystemUser(getNewDummyUser()).build();
 
-        final Customer anotherClientUser = new CustomerBuilder()
+        final Utente anotherClientUser = new UtenteBuilder()
                 .withMecanographicNumber(anotherMecanographicNumber).withSystemUser(getNewDummyUser()).build();
 
         final boolean expected = aClientUser.sameAs(anotherClientUser);

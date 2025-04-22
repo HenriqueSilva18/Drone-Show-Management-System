@@ -42,7 +42,7 @@ import jakarta.persistence.Version;
  * @author Jorge Santos ajs@isep.ipp.pt
  */
 @Entity
-public class Customer implements AggregateRoot<MecanographicNumber> {
+public class Utente implements AggregateRoot<MecanographicNumber> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,7 +58,7 @@ public class Customer implements AggregateRoot<MecanographicNumber> {
 	@OneToOne()
 	private SystemUser systemUser;
 
-	public Customer(final SystemUser user, final MecanographicNumber mecanographicNumber) {
+	public Utente(final SystemUser user, final MecanographicNumber mecanographicNumber) {
 		if (mecanographicNumber == null || user == null) {
 			throw new IllegalArgumentException();
 		}
@@ -66,7 +66,7 @@ public class Customer implements AggregateRoot<MecanographicNumber> {
 		this.mecanographicNumber = mecanographicNumber;
 	}
 
-	protected Customer() {
+	protected Utente() {
 		// for ORM only
 	}
 

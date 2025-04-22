@@ -2,6 +2,7 @@ package lapr4.customermanagement.domain;
 
 import eapli.framework.domain.model.DomainEntity;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,17 +22,24 @@ public class Representative implements DomainEntity<Integer> {
 
     private String position;
 
+    /**
+     * cascade = CascadeType.NONE as the systemUser is part of another aggregate
+     */
+    @OneToOne()
+    private SystemUser systemUser;
+
     @ManyToOne
     @JoinColumn(name = "customer_vat")
     private Customer customer;
 
-    public Representative(final String name, final Email email, final String position) {
-        if (name == null || email == null || position == null) {
+    public Representative(final String name, final Email email, final String position, final SystemUser systemUser) {
+        if (name == null || email == null || position == null || systemUser == null) {
             throw new IllegalArgumentException("All representative attributes must be provided");
         }
         this.name = name.trim();
         this.email = email;
         this.position = position.trim();
+        this.systemUser = systemUser;
     }
 
     protected Representative() {
@@ -40,6 +48,10 @@ public class Representative implements DomainEntity<Integer> {
 
     public void associateCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public SystemUser user() {
+        return this.systemUser;
     }
 
     @Override
@@ -72,5 +84,9 @@ public class Representative implements DomainEntity<Integer> {
 
     public String position() {
         return this.position;
+    }
+
+    public Customer customer() {
+        return this.customer;
     }
 }

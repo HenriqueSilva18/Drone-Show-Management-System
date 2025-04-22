@@ -41,7 +41,7 @@ public final class CustomerApp {
 	public static void main(final String[] args) {
 		System.out.println("=====================================");
 		System.out.println("Customer App");
-		System.out.println("(C) 2016 - 2025");
+		System.out.println("(C) 2016 - 2024");
 		System.out.println("=====================================");
 
 		AuthzRegistry.configure(PersistenceContext.repositories().users(), new PasswordPolicy(),

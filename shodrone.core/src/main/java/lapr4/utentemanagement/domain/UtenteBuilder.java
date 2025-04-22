@@ -31,30 +31,30 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class CustomerBuilder implements DomainFactory<Customer> {
+public class UtenteBuilder implements DomainFactory<Utente> {
 
     private SystemUser systemUser;
     private MecanographicNumber mecanographicNumber;
 
-    public CustomerBuilder withSystemUser(final SystemUser systemUser) {
+    public UtenteBuilder withSystemUser(final SystemUser systemUser) {
         this.systemUser = systemUser;
         return this;
     }
 
-    public CustomerBuilder withMecanographicNumber(final MecanographicNumber mecanographicNumber) {
+    public UtenteBuilder withMecanographicNumber(final MecanographicNumber mecanographicNumber) {
         this.mecanographicNumber = mecanographicNumber;
         return this;
     }
 
-    public CustomerBuilder withMecanographicNumber(final String mecanographicNumber) {
+    public UtenteBuilder withMecanographicNumber(final String mecanographicNumber) {
         this.mecanographicNumber = new MecanographicNumber(mecanographicNumber);
         return this;
     }
 
     @Override
-    public Customer build() {
+    public Utente build() {
         // since the factory knows that all the parts are needed it could throw
         // an exception. however, we will leave that to the constructor
-        return new Customer(this.systemUser, this.mecanographicNumber);
+        return new Utente(this.systemUser, this.mecanographicNumber);
     }
 }

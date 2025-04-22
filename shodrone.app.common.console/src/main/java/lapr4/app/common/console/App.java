@@ -31,14 +31,14 @@ import org.apache.logging.log4j.Logger;
  * @author Paulo Gandra Sousa
  */
 @SuppressWarnings("squid:S106")
-public abstract class BaseApp {
+public abstract class App {
 
 	// we are assuming we will always use the in process event dispatcher. check the
 	// Spring version of the eCafeteria project for an alternative
 	final EventDispatcher dispatcher = InProcessPubSub.dispatcher();
 
 	protected static final String SEPARATOR_HR = "=====================================";
-	private static final Logger LOGGER = LogManager.getLogger(BaseApp.class);
+	private static final Logger LOGGER = LogManager.getLogger(App.class);
 
 	/**
 	 * @param args the command line arguments

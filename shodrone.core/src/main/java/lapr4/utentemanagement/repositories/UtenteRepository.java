@@ -21,7 +21,7 @@
 package lapr4.utentemanagement.repositories;
 
 import lapr4.utentemanagement.domain.MecanographicNumber;
-import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.domain.Utente;
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
@@ -32,7 +32,7 @@ import java.util.Optional;
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
 public interface UtenteRepository
-        extends DomainRepository<MecanographicNumber, Customer> {
+        extends DomainRepository<MecanographicNumber, Utente> {
 
     /**
      * returns the client user (utente) whose username is given
@@ -41,7 +41,7 @@ public interface UtenteRepository
      *            the username to search for
      * @return
      */
-    Optional<Customer> findByUsername(Username name);
+    Optional<Utente> findByUsername(Username name);
 
     /**
      * returns the client user (utente) with the given mecanographic number
@@ -49,9 +49,9 @@ public interface UtenteRepository
      * @param number
      * @return
      */
-    default Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
+    default Optional<Utente> findByMecanographicNumber(final MecanographicNumber number) {
         return ofIdentity(number);
     }
 
-    public Iterable<Customer> findAllActive();
+    public Iterable<Utente> findAllActive();
 }

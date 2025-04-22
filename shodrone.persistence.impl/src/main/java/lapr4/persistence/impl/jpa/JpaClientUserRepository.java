@@ -22,7 +22,7 @@ package lapr4.persistence.impl.jpa;
 
 import lapr4.Application;
 import lapr4.utentemanagement.domain.MecanographicNumber;
-import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.domain.Utente;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.model.Username;
@@ -37,7 +37,7 @@ import java.util.Optional;
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
 class JpaClientUserRepository
-        extends JpaAutoTxRepository<Customer, MecanographicNumber, MecanographicNumber>
+        extends JpaAutoTxRepository<Utente, MecanographicNumber, MecanographicNumber>
         implements UtenteRepository {
 
     public JpaClientUserRepository(final TransactionalContext autoTx) {
@@ -50,21 +50,21 @@ class JpaClientUserRepository
     }
 
     @Override
-    public Optional<Customer> findByUsername(final Username name) {
+    public Optional<Utente> findByUsername(final Username name) {
         final Map<String, Object> params = new HashMap<>();
         params.put("name", name);
         return matchOne("e.systemUser.username=:name", params);
     }
 
     @Override
-    public Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
+    public Optional<Utente> findByMecanographicNumber(final MecanographicNumber number) {
         final Map<String, Object> params = new HashMap<>();
         params.put("number", number);
         return matchOne("e.mecanographicNumber=:number", params);
     }
 
     @Override
-    public Iterable<Customer> findAllActive() {
+    public Iterable<Utente> findAllActive() {
         return match("e.systemUser.active = true");
     }
 }

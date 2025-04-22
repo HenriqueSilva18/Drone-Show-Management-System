@@ -1,6 +1,7 @@
 package lapr4.app.backoffice.console.presentation.customer;
 
 import lapr4.customermanagement.application.RegCustomerController;
+import lapr4.customermanagement.application.RegCustomerController.RepresentativeData;
 import lapr4.customermanagement.domain.*;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
@@ -48,20 +49,23 @@ public class RegCustomerUI extends AbstractUI {
         }
 
         // Representative information - at least one is required
-        List<Representative> representatives = new ArrayList<>();
+        List<RepresentativeData> representativesData = new ArrayList<>();
         boolean addMore = true;
 
         System.out.println("\nRepresentative Information (at least one required):");
         while (addMore) {
-            addRepresentative(representatives);
+            RepresentativeData repData = collectRepresentativeData();
 
-            if (!representatives.isEmpty()) {
+            if (repData != null) {
+                representativesData.add(repData);
+                System.out.println("Representative information collected successfully!");
+
                 String response = Console.readLine("\nAdd another representative? (Y/N)");
                 addMore = response.equalsIgnoreCase("Y");
             }
         }
 
-        if (representatives.isEmpty()) {
+        if (representativesData.isEmpty()) {
             System.out.println("Error: At least one representative is required!");
             return false;
         }
@@ -75,14 +79,14 @@ public class RegCustomerUI extends AbstractUI {
                     email,
                     phone,
                     customerType,
-                    representatives);
+                    representativesData);
 
             System.out.println("\nCustomer registered successfully!");
             System.out.println("Customer VAT: " + customer.identity().toString());
             System.out.println("Number of Representatives: " + customer.representatives().size());
 
         } catch (final IntegrityViolationException | ConcurrencyException e) {
-            System.out.println("Error: That VAT number is already registered.");
+            System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -90,19 +94,33 @@ public class RegCustomerUI extends AbstractUI {
         return false;
     }
 
-    private void addRepresentative(List<Representative> representatives) {
-        System.out.println("\nRepresentative #" + (representatives.size() + 1));
-        final String repName = Console.readLine("Representative Name:");
-        final String repEmail = Console.readLine("Representative Email:");
-        final String repPosition = Console.readLine("Representative Position:");
-
+    private RepresentativeData collectRepresentativeData() {
         try {
-            Representative rep = new Representative(repName, new Email(repEmail), repPosition);
-            representatives.add(rep);
-            System.out.println("Representative added successfully!");
+            System.out.println("\nRepresentative Information:");
+            final String name = Console.readLine("Representative Name:");
+            final String email = Console.readLine("Representative Email:");
+            final String position = Console.readLine("Representative Position:");
+
+            System.out.println("\nSystem User Information for Representative:");
+            final String username = Console.readLine("Username:");
+            final String password = Console.readLine("Password:");
+            final String firstName = Console.readLine("First Name:");
+            final String lastName = Console.readLine("Last Name:");
+
+            // Validate the inputs
+            if (name.isBlank() || email.isBlank() || position.isBlank() ||
+                    username.isBlank() || password.isBlank() || firstName.isBlank() || lastName.isBlank()) {
+                System.out.println("Error: All fields are required!");
+                return null;
+            }
+
+            // Return a data object with all the collected information
+            return new RepresentativeData(name, email, position, username, password, firstName, lastName);
+
         } catch (IllegalArgumentException e) {
             System.out.println("Error adding representative: " + e.getMessage());
             System.out.println("Please try again.");
+            return null;
         }
     }
 

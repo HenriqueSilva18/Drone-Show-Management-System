@@ -22,7 +22,7 @@ package lapr4.mycustomer.application;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
-import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.domain.Utente;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -40,15 +40,15 @@ public class MyCustomerService {
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     private final UtenteRepository repo = PersistenceContext.repositories().utentes();
 
-    public Customer me() {
+    public Utente me() {
         final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
         final SystemUser myUser = s.authenticatedUser();
         // TODO cache the client user object
-        final Optional<Customer> me = repo.findByUsername(myUser.identity());
+        final Optional<Utente> me = repo.findByUsername(myUser.identity());
         return me.orElseThrow(IllegalStateException::new);
     }
 
-    public Customer myUser() {
+    public Utente myUser() {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.CUSTOMER);
         final UserSession s = authz.session().orElseThrow(IllegalStateException::new);
         final SystemUser me = s.authenticatedUser();

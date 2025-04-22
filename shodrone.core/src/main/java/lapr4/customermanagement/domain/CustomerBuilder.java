@@ -77,12 +77,6 @@ public class CustomerBuilder implements DomainFactory<Customer> {
         return this;
     }
 
-    public CustomerBuilder withRepresentative(final String name, final String email, final String position) {
-        Representative representative = new Representative(name, new Email(email), position);
-        this.representatives.add(representative);
-        return this;
-    }
-
     @Override
     public Customer build() {
         if (this.representatives.isEmpty()) {

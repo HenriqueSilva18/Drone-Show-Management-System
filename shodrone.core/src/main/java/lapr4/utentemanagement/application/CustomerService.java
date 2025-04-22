@@ -26,7 +26,7 @@ package lapr4.utentemanagement.application;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.utentemanagement.domain.MecanographicNumber;
-import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.domain.Utente;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -42,12 +42,12 @@ public class CustomerService {
 	private final AuthorizationService authz = AuthzRegistry.authorizationService();
 	private final UtenteRepository repo = PersistenceContext.repositories().utentes();
 
-	public Optional<Customer> findCustomerByMecNumber(final String mecNumber) {
+	public Optional<Utente> findCustomerByMecNumber(final String mecNumber) {
 		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CUSTOMER_REPRESENTATIVE);
 		return repo.ofIdentity(MecanographicNumber.valueOf(mecNumber));
 	}
 
-	public Optional<Customer> findCustomerByUsername(final Username user) {
+	public Optional<Utente> findCustomerByUsername(final Username user) {
 		authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 		return repo.findByUsername(user);
 	}

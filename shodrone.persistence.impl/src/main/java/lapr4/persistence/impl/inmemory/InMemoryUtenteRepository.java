@@ -21,7 +21,7 @@
 package lapr4.persistence.impl.inmemory;
 
 import lapr4.utentemanagement.domain.MecanographicNumber;
-import lapr4.utentemanagement.domain.Customer;
+import lapr4.utentemanagement.domain.Utente;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -32,7 +32,7 @@ import java.util.Optional;
  *
  * @author Jorge Santos ajs@isep.ipp.pt 02/04/2016
  */
-public class InMemoryUtenteRepository extends InMemoryDomainRepository<Customer, MecanographicNumber>
+public class InMemoryUtenteRepository extends InMemoryDomainRepository<Utente, MecanographicNumber>
 		implements UtenteRepository {
 
 	static {
@@ -40,17 +40,17 @@ public class InMemoryUtenteRepository extends InMemoryDomainRepository<Customer,
 	}
 
 	@Override
-	public Optional<Customer> findByUsername(final Username name) {
+	public Optional<Utente> findByUsername(final Username name) {
 		return matchOne(e -> e.user().username().equals(name));
 	}
 
 	@Override
-	public Optional<Customer> findByMecanographicNumber(final MecanographicNumber number) {
+	public Optional<Utente> findByMecanographicNumber(final MecanographicNumber number) {
 		return Optional.of(data().get(number));
 	}
 
 	@Override
-	public Iterable<Customer> findAllActive() {
+	public Iterable<Utente> findAllActive() {
 		return match(e -> e.user().isActive());
 	}
 }

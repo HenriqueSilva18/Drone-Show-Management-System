@@ -48,15 +48,15 @@ public final class Roles {
 	/**
 	 *
 	 */
-	public static final Role CRM_MANAGER = Role.valueOf("SAMPLE_1_MANAGER");
+	public static final Role CRM_MANAGER = Role.valueOf("CRM_MANAGER");
 	/**
 	 *
 	 */
-	public static final Role CRM_COLLABORATOR = Role.valueOf("ANOTHER_EXAMPLE_MANAGER");
+	public static final Role CRM_COLLABORATOR = Role.valueOf("CRM_COLLABORATOR");
 	/**
 	 *
 	 */
-	public static final Role CUSTOMER_REPRESENTATIVE = Role.valueOf("OTHER_EXAMPLE");
+	public static final Role CUSTOMER_REPRESENTATIVE = Role.valueOf("CUSTOMER_REPRESENTATIVE");
 
 	/**
 	 * get available role types for adding new users

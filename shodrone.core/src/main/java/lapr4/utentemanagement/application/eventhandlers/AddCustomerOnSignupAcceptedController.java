@@ -24,8 +24,8 @@
 package lapr4.utentemanagement.application.eventhandlers;
 
 import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.utentemanagement.domain.Customer;
-import lapr4.utentemanagement.domain.CustomerBuilder;
+import lapr4.utentemanagement.domain.Utente;
+import lapr4.utentemanagement.domain.UtenteBuilder;
 import lapr4.utentemanagement.domain.events.NewUserRegisteredFromSignupEvent;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.functional.Functions;
@@ -45,11 +45,11 @@ import java.util.Optional;
     private final UtenteRepository clientUserRepository = PersistenceContext
             .repositories().utentes();
 
-    public Customer addExemploUtente(final NewUserRegisteredFromSignupEvent event) {
+    public Utente addExemploUtente(final NewUserRegisteredFromSignupEvent event) {
         final Optional<SystemUser> newUser = findUser(event);
 
         return newUser.map(u -> {
-            final CustomerBuilder clientUserBuilder = new CustomerBuilder();
+            final UtenteBuilder clientUserBuilder = new UtenteBuilder();
             clientUserBuilder.withMecanographicNumber(event.mecanographicNumber())
                     .withSystemUser(u);
             return clientUserRepository.save(clientUserBuilder.build());

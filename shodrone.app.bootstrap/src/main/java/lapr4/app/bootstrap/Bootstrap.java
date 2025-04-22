@@ -20,7 +20,7 @@
  */
 package lapr4.app.bootstrap;
 
-import lapr4.app.common.console.BaseApp;
+import lapr4.app.common.console.App;
 import lapr4.infrastructure.bootstrapers.Bootstrapper;
 import lapr4.infrastructure.bootstrapers.demo.DemoBootstrapper;
 import lapr4.infrastructure.persistence.PersistenceContext;
@@ -39,7 +39,7 @@ import eapli.framework.infrastructure.pubsub.EventDispatcher;
  * Bootstrapping data app
  */
 @SuppressWarnings("squid:S106")
-public final class Bootstrap extends BaseApp {
+public final class Bootstrap extends App {
 	/**
 	 * avoid instantiation of this class.
 	 */

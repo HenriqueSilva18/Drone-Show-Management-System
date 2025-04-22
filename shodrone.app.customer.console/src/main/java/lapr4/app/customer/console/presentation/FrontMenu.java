@@ -58,12 +58,11 @@ public class FrontMenu extends AbstractUI {
 	public boolean doShow() {
 		final var menu = new Menu();
 		menu.addItem(LOGIN_OPTION, "Login",
-				new ChainedAction(new LoginUI(new AuthenticationCredentialHandler(), Roles.CUSTOMER)::show, () -> {
+				new ChainedAction(new LoginUI(new AuthenticationCredentialHandler(), Roles.CUSTOMER_REPRESENTATIVE)::show, () -> {
 					new MainMenu().mainLoop();
 					return true;
 				}));
 		// TODO: instead of leaving the app, return to the main menu again
-		menu.addItem(SIGNUP_OPTION, "Sign up", new SignupRequestAction());
 		menu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
 		final MenuRenderer renderer = new VerticalMenuRenderer(menu, MenuItemRenderer.DEFAULT);

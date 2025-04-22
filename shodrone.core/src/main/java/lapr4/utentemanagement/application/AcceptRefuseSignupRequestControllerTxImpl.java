@@ -26,7 +26,7 @@ package lapr4.utentemanagement.application;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.utentemanagement.domain.SignupRequest;
-import lapr4.utentemanagement.domain.CustomerBuilder;
+import lapr4.utentemanagement.domain.UtenteBuilder;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.application.UseCaseController;
@@ -99,7 +99,7 @@ public class AcceptRefuseSignupRequestControllerTxImpl implements AcceptRefuseSi
 	}
 
 	private void createUtente(final SignupRequest theSignupRequest, final SystemUser newUser) {
-		final var builder = new CustomerBuilder();
+		final var builder = new UtenteBuilder();
 		builder.withMecanographicNumber(theSignupRequest.mecanographicNumber()).withSystemUser(newUser);
 		this.clientUserRepository.save(builder.build());
 	}

@@ -24,7 +24,7 @@
 package lapr4.app.backoffice.console;
 
 import lapr4.app.backoffice.console.presentation.MainMenu;
-import lapr4.app.common.console.BaseApp;
+import lapr4.app.common.console.App;
 import lapr4.app.common.console.presentation.authz.LoginUI;
 import lapr4.infrastructure.authz.AuthenticationCredentialHandler;
 import lapr4.infrastructure.persistence.PersistenceContext;
@@ -42,7 +42,7 @@ import eapli.framework.infrastructure.pubsub.EventDispatcher;
  * @author Paulo Gandra Sousa
  */
 @SuppressWarnings("squid:S106")
-public final class Backoffice extends BaseApp {
+public final class Backoffice extends App {
 
 	/**
 	 * avoid instantiation of this class.
