@@ -69,6 +69,8 @@ public class DeactivateUserUI extends AbstractUI {
                     LOGGER.error("Error performing the operation", ex);
                     System.out.println(
                             "Unfortunatelly there was an unexpected error in the application. Please try again and if the problem persists, contact your system admnistrator.");
+                } catch (IllegalStateException ex) {
+                    System.out.println(ex.getMessage());
                 }
             }
         }

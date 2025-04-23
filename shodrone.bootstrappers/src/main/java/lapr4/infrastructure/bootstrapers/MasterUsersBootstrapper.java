@@ -36,6 +36,8 @@ public class MasterUsersBootstrapper extends AbstractUserBootstrapper implements
     public boolean execute() {
         registerAdmin("admin", TestDataConstants.PASSWORD1, "Jane", "Doe Admin",
                 "jane.doe@email.local");
+        registerAdmin("admin2", TestDataConstants.PASSWORD1, "Pedro", "Sousa",
+                "pedro.sousa@email.local");
         return true;
     }
 

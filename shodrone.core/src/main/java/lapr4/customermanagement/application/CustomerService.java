@@ -1,5 +1,6 @@
 package lapr4.customermanagement.application;
 
+import jakarta.transaction.Transactional;
 import lapr4.customermanagement.domain.CustomerType;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
@@ -31,6 +32,7 @@ public class CustomerService {
         return repo.findAllActive();
     }
 
+    @Transactional
     public Customer registerCustomer(final Customer customer) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
         return repo.save(customer);

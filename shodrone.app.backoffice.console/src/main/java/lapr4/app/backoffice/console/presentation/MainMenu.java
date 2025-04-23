@@ -47,8 +47,6 @@ import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
 
 /**
- * TODO split this class in more specialized classes for each menu
- *
  * @author Paulo Gandra Sousa
  */
 public class MainMenu extends AbstractUI {
@@ -73,6 +71,11 @@ public class MainMenu extends AbstractUI {
 	 */
 	@Override
 	public boolean doShow() {
+		if (authz.isAuthenticatedUserAuthorizedTo(Roles.CUSTOMER, Roles.CUSTOMER_REPRESENTATIVE)) {
+			System.out.println("Access denied.");
+			return true;
+		}
+
 		final var menu = buildMainMenu();
 		final MenuRenderer renderer;
 		if (Application.settings().isMenuLayoutHorizontal()) {

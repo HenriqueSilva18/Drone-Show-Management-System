@@ -39,8 +39,9 @@ public class BackofficeUsersBootstrapper extends AbstractUserBootstrapper implem
     @Override
     public boolean execute() {
         registerCrmManager("manager1", PASSWORD1, "Johny", "Cash", "johny.doe@emai.l.com");
-        registerCrmCollaborator("collaborator1", PASSWORD1, "Oven", "Stove", "Oven.and.stove@emai.l.com");
-        registerCustomerRepresentative("representative1", PASSWORD1, "Master", "Chef", "master.chef@emai.l.com");
+        registerCrmManager("manager2", PASSWORD1, "Joao", "Silva", "joao.silva@emai.l.com");
+        registerCrmCollaborator("collab1", PASSWORD1, "Oven", "Stove", "Oven.and.stove@emai.l.com");
+        registerCrmCollaborator("collab2", PASSWORD1, "Rui", "Neves", "rui.neves@emai.l.com");
         return true;
     }
 
@@ -56,14 +57,6 @@ public class BackofficeUsersBootstrapper extends AbstractUserBootstrapper implem
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
         roles.add(Roles.CRM_COLLABORATOR);
-
-        registerUser(username, password, firstName, lastName, email, roles);
-    }
-
-    private void registerCustomerRepresentative(final String username, final String password,
-            final String firstName, final String lastName, final String email) {
-        final Set<Role> roles = new HashSet<>();
-        roles.add(Roles.CUSTOMER_REPRESENTATIVE);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }

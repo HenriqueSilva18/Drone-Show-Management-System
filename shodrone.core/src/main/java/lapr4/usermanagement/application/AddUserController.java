@@ -20,6 +20,7 @@
  */
 package lapr4.usermanagement.application;
 
+import jakarta.transaction.Transactional;
 import lapr4.usermanagement.domain.Roles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -51,6 +52,7 @@ public class AddUserController {
         return Roles.nonUserValues();
     }
 
+    @Transactional
     public SystemUser addUser(final String username, final String password, final String firstName,
             final String lastName,
             final String email, final Set<Role> roles, final Calendar createdOn) {

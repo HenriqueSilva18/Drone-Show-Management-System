@@ -23,6 +23,7 @@
  */
 package lapr4.usermanagement.application;
 
+import eapli.framework.infrastructure.authz.domain.model.Role;
 import lapr4.usermanagement.domain.Roles;
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
@@ -31,7 +32,7 @@ import eapli.framework.infrastructure.authz.application.UserManagementService;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 import eapli.framework.infrastructure.authz.domain.model.Username;
 
-import java.util.Optional;
+import java.util.*;
 
 /**
  *
@@ -47,6 +48,34 @@ public class ListUsersController{
         authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
 
         return userSvc.allUsers();
+    }
+
+    public Iterable<SystemUser> backofficeUsers() {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
+
+        Iterable<SystemUser> allUsers = userSvc.allUsers();
+
+        List<SystemUser> filteredUsers = new ArrayList<>();
+
+        Role[] targetRoles = {
+                Roles.POWER_USER,
+                Roles.ADMIN,
+                Roles.CRM_MANAGER,
+                Roles.CRM_COLLABORATOR
+        };
+
+        for (SystemUser user : allUsers) {
+            Collection<Role> userRoles = user.roleTypes();
+
+            for (Role role : targetRoles) {
+                if (userRoles.contains(role)) {
+                    filteredUsers.add(user);
+                    break;
+                }
+            }
+        }
+
+        return filteredUsers;
     }
 
     public Optional<SystemUser> find(final Username u) {

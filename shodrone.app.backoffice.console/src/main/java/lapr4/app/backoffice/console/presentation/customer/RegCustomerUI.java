@@ -18,9 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * UI for registering a new customer.
- */
 public class RegCustomerUI extends AbstractUI {
 
     private final RegCustomerController theController = new RegCustomerController();
@@ -29,26 +26,23 @@ public class RegCustomerUI extends AbstractUI {
     protected boolean doShow() {
         System.out.println("=== Customer Registration ===");
 
-        // Basic customer information
         final String vatNumber = Console.readLine("VAT Number:");
         final String name = Console.readLine("Company/Individual Name:");
         final String email = Console.readLine("Email:");
         final String phone = Console.readLine("Phone:");
 
-        // Address information
         System.out.println("\nAddress Information:");
         final String street = Console.readLine("Street:");
         final String city = Console.readLine("City:");
         final String postalCode = Console.readLine("Postal Code:");
         final String country = Console.readLine("Country:");
 
-        // Customer type selection
+        System.out.println("\nCustomer Type:");
         final CustomerType customerType = selectCustomerType();
         if (customerType == null) {
             return false;
         }
 
-        // Representative information - at least one is required
         List<RepresentativeData> representativesData = new ArrayList<>();
         boolean addMore = true;
 
@@ -71,7 +65,6 @@ public class RegCustomerUI extends AbstractUI {
         }
 
         try {
-            // Using the controller to register the customer with representatives
             Customer customer = this.theController.registerCustomerWithMultipleRepresentatives(
                     vatNumber,
                     name,
@@ -97,25 +90,23 @@ public class RegCustomerUI extends AbstractUI {
     private RepresentativeData collectRepresentativeData() {
         try {
             System.out.println("\nRepresentative Information:");
-            final String name = Console.readLine("Representative Name:");
+            final String firstName = Console.readLine("First Name:");
+            final String lastName = Console.readLine("Last Name:");
             final String email = Console.readLine("Representative Email:");
             final String position = Console.readLine("Representative Position:");
 
-            System.out.println("\nSystem User Information for Representative:");
+            System.out.println("\nSystem User Information:");
             final String username = Console.readLine("Username:");
             final String password = Console.readLine("Password:");
-            final String firstName = Console.readLine("First Name:");
-            final String lastName = Console.readLine("Last Name:");
 
-            // Validate the inputs
-            if (name.isBlank() || email.isBlank() || position.isBlank() ||
+
+            if (email.isBlank() || position.isBlank() ||
                     username.isBlank() || password.isBlank() || firstName.isBlank() || lastName.isBlank()) {
                 System.out.println("Error: All fields are required!");
                 return null;
             }
 
-            // Return a data object with all the collected information
-            return new RepresentativeData(name, email, position, username, password, firstName, lastName);
+            return new RepresentativeData(firstName, email, position, username, password, firstName, lastName);
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error adding representative: " + e.getMessage());
@@ -143,21 +134,14 @@ public class RegCustomerUI extends AbstractUI {
 
     private Menu buildCustomerTypeMenu(final Set<CustomerType> selectedTypes) {
         final Menu typeMenu = new Menu();
-        int counter = 0;
+        int counter = 1;
 
-        // Add default "no selection" option
-        typeMenu.addItem(MenuItem.of(counter++, "Cancel Selection", () -> {
-            selectedTypes.clear();
-            return true;  // Return true to exit menu
-        }));
-
-        // Add all available customer types
         for (final CustomerType type : theController.getCustomerTypes()) {
             typeMenu.addItem(MenuItem.of(counter++, type.toString(),
                     () -> {
                         selectedTypes.clear();
                         selectedTypes.add(type);
-                        return true;  // Return true to exit menu after selection
+                        return true;
                     }));
         }
         return typeMenu;

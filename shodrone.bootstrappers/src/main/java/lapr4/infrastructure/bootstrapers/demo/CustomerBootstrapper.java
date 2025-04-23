@@ -20,6 +20,10 @@
  */
 package lapr4.infrastructure.bootstrapers.demo;
 
+import lapr4.customermanagement.application.RegCustomerController;
+import lapr4.customermanagement.domain.Address;
+import lapr4.customermanagement.domain.Customer;
+import lapr4.customermanagement.domain.CustomerType;
 import lapr4.infrastructure.bootstrapers.TestDataConstants;
 import lapr4.mycustomer.application.SignupController;
 import lapr4.utentemanagement.application.AcceptRefuseSignupFactory;
@@ -31,6 +35,9 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Paulo Sousa
@@ -39,32 +46,47 @@ public class CustomerBootstrapper implements Action {
     private static final Logger LOGGER = LoggerFactory.getLogger(
             CustomerBootstrapper.class);
 
-    private final SignupController signupController = new SignupController();
-    private final AcceptRefuseSignupRequestController acceptController = AcceptRefuseSignupFactory
-            .build();
+    private final RegCustomerController customerController = new RegCustomerController();
 
     @Override
     public boolean execute() {
-        signupAndApprove(TestDataConstants.USER_TEST1, "Password1", "John", "Smith",
-                "john@smith.com", TestDataConstants.USER_TEST1);
-        signupAndApprove("isep959", "Password1", "Mary", "Smith", "mary@smith.com", "isep959");
+        registerCustomer(
+                "PT123456789", "Company One",
+                new Address("Rua 123", "Lisbon", "1000-100", "Portugal"),
+                "companyone@email.com", "255123456",
+                List.of(newRepresentative("John Smith", "john.rep@companyone.com", "Sales Manager", "johnrep", "Password1", "John", "Smith"))
+        );
+
+        registerCustomer(
+                "PT987654321", "Company Two",
+                new Address("Rua 321", "Porto", "4000-200", "Portugal"),
+                "companytwo@email.com", "251987654",
+                List.of(
+                        newRepresentative("Maria Silva", "maria.rep@companytwo.com", "CEO", "mariarep", "Password1", "Maria", "Silva"),
+                        newRepresentative("Carlos Santos", "carlos.rep@companytwo.com", "Sales Manager", "carlosrep", "Password1", "Carlos", "Santos")
+                )
+        );
+
         return true;
     }
 
-    private SignupRequest signupAndApprove(final String username, final String password,
-            final String firstName, final String lastName, final String email,
-            final String mecanographicNumber) {
-        SignupRequest request = null;
+    private void registerCustomer(String vat, String name, Address address, String email, String phone,
+                                  List<RegCustomerController.RepresentativeData> representatives) {
         try {
-            request = signupController.signup(username, password, firstName, lastName, email,
-                    mecanographicNumber);
-            acceptController.acceptSignupRequest(request);
+            CustomerType type = customerController.getCustomerTypes().iterator().next();
+            Customer customer = customerController.registerCustomerWithMultipleRepresentatives(
+                    vat, name, address, email, phone, type, representatives
+            );
+            LOGGER.info("Customer {} registered", customer.identity());
         } catch (final ConcurrencyException | IntegrityViolationException e) {
-            // ignoring exception. assuming it is just a primary key violation
-            // due to the tentative of inserting a duplicated user
-            LOGGER.warn("Assuming {} already exists (activate trace log for details)", username);
-            LOGGER.trace("Assuming existing record", e);
+            LOGGER.warn("Error creating customer {}", name, e);
         }
-        return request;
+    }
+
+    private RegCustomerController.RepresentativeData newRepresentative(
+            String fullName, String email, String role, String username, String password, String firstName, String lastName) {
+        return new RegCustomerController.RepresentativeData(
+                fullName, email, role, username, password, firstName, lastName
+        );
     }
 }

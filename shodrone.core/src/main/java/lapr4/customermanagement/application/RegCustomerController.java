@@ -1,11 +1,11 @@
 package lapr4.customermanagement.application;
 
+import jakarta.transaction.Transactional;
 import lapr4.customermanagement.domain.*;
 import lapr4.usermanagement.application.AddUserController;
 import eapli.framework.application.ApplicationService;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.Role;
-import lapr4.usermanagement.domain.Roles;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,46 +22,7 @@ public class RegCustomerController {
         this.userController = new AddUserController();
     }
 
-    /**
-     * Registers a customer with a single representative
-     */
-    public Customer registerCustomer(String vatNumber, String name, Address address,
-                                     String email, String phone, CustomerType type,
-                                     String repName, String repEmail, String repPosition,
-                                     String username, String password, String firstName, String lastName)
-            throws IntegrityViolationException {
-
-        // Create a SystemUser for the representative with CUSTOMER_REPRESENTATIVE role
-        Set<Role> roles = new HashSet<>();
-        roles.add(Roles.CUSTOMER_REPRESENTATIVE);
-
-        var systemUser = userController.addUser(username, password, firstName, lastName, repEmail, roles);
-
-        // Create the representative with the system user
-        Representative representative = new RepresentativeBuilder()
-                .withName(repName)
-                .withEmail(repEmail)
-                .withPosition(repPosition)
-                .withSystemUser(systemUser)
-                .build();
-
-        // Create and register the customer with the representative
-        Customer newCustomer = new CustomerBuilder()
-                .withVAT(vatNumber)
-                .withName(name)
-                .withAddress(address)
-                .withEmail(email)
-                .withPhone(phone)
-                .withCustomerType(type)
-                .withRepresentative(representative)
-                .build();
-
-        return customerService.registerCustomer(newCustomer);
-    }
-
-    /**
-     * Registers a customer with multiple representatives
-     */
+    @Transactional
     public Customer registerCustomerWithMultipleRepresentatives(
             String vatNumber, String name, Address address,
             String email, String phone, CustomerType type,
@@ -74,9 +35,7 @@ public class RegCustomerController {
 
         List<Representative> representatives = new ArrayList<>();
 
-        // Create system users and representatives
         for (RepresentativeData repData : representativesData) {
-            // Create a SystemUser for each representative with CUSTOMER_REPRESENTATIVE role
             Set<Role> roles = new HashSet<>();
             roles.add(Role.valueOf("CUSTOMER_REPRESENTATIVE"));
 
@@ -88,7 +47,6 @@ public class RegCustomerController {
                     repData.email,
                     roles);
 
-            // Create the representative with the system user
             Representative representative = new RepresentativeBuilder()
                     .withName(repData.name)
                     .withEmail(repData.email)
@@ -99,7 +57,6 @@ public class RegCustomerController {
             representatives.add(representative);
         }
 
-        // Create and register the customer with all representatives
         CustomerBuilder builder = new CustomerBuilder()
                 .withVAT(vatNumber)
                 .withName(name)
@@ -120,9 +77,6 @@ public class RegCustomerController {
         return customerService.getCustomerTypes();
     }
 
-    /**
-     * Data class to hold all information needed to create a representative and its system user
-     */
     public static class RepresentativeData {
         public String name;
         public String email;
