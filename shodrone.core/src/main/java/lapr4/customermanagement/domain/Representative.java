@@ -74,6 +74,15 @@ public class Representative implements DomainEntity<Integer> {
         return this.id;
     }
 
+    public void updateEmailAndPosition(final Email newEmail, final String newPosition) {
+        if (newEmail == null || newPosition == null) {
+            throw new IllegalArgumentException("Email and position cannot be null");
+        }
+        this.email = newEmail;
+        this.position = newPosition.trim();
+    }
+
+
     public String name() {
         return this.name;
     }
