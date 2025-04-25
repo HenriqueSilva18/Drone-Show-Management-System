@@ -13,6 +13,7 @@ public class AddCustomerRepresentativeController {
     private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
 
     public void addRepresentative(VAT customerVAT, String repName, Email repEmail, String position, SystemUser systemUser) {
+        // verificar condições obrigatórias antes de executar código
         Preconditions.noneNull(customerVAT, repName, repEmail, position, systemUser);
 
         Customer customer = customerRepository.findByVAT(customerVAT)

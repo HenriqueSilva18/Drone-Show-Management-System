@@ -19,7 +19,6 @@ public class AddCustomerRepresentativeUI extends AbstractUI {
         String position = Console.readLine("Position:");
         SystemUser user = AuthzRegistry.authorizationService().session().get().authenticatedUser();
 
-
         controller.addRepresentative(new VAT(vat), name, new Email(email), position, user);
 
         System.out.println("Representative added.");
