@@ -48,7 +48,7 @@ public class RegCustomerUI extends AbstractUI {
 
         System.out.println("\nRepresentative Information (at least one required):");
         while (addMore) {
-            RepresentativeData repData = collectRepresentativeData();
+            RepresentativeData repData = Utils.collectRepresentativeData();
 
             if (repData != null) {
                 representativesData.add(repData);
@@ -85,34 +85,6 @@ public class RegCustomerUI extends AbstractUI {
         }
 
         return false;
-    }
-
-    private RepresentativeData collectRepresentativeData() {
-        try {
-            System.out.println("\nRepresentative Information:");
-            final String firstName = Console.readLine("First Name:");
-            final String lastName = Console.readLine("Last Name:");
-            final String email = Console.readLine("Representative Email:");
-            final String position = Console.readLine("Representative Position:");
-
-            System.out.println("\nSystem User Information:");
-            final String username = Console.readLine("Username:");
-            final String password = Console.readLine("Password:");
-
-
-            if (email.isBlank() || position.isBlank() ||
-                    username.isBlank() || password.isBlank() || firstName.isBlank() || lastName.isBlank()) {
-                System.out.println("Error: All fields are required!");
-                return null;
-            }
-
-            return new RepresentativeData(firstName, email, position, username, password, firstName, lastName);
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error adding representative: " + e.getMessage());
-            System.out.println("Please try again.");
-            return null;
-        }
     }
 
     private CustomerType selectCustomerType() {

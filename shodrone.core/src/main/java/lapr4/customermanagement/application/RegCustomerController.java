@@ -6,6 +6,7 @@ import lapr4.usermanagement.application.AddUserController;
 import eapli.framework.application.ApplicationService;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.Role;
+import eapli.framework.domain.services.DomainService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
