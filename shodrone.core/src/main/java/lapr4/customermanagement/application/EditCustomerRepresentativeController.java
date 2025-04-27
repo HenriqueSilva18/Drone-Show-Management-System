@@ -1,20 +1,20 @@
 package lapr4.customermanagement.application;
 
-import jakarta.transaction.Transactional;
-import eapli.framework.application.ApplicationService;
 import lapr4.customermanagement.domain.*;
+import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.validations.Preconditions;
 
-@ApplicationService
+import java.util.List;
+
 public class EditCustomerRepresentativeController {
 
-    private final CustomerService customerService = new CustomerService();
+    private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
 
-    @Transactional
-    public void editRepresentative(VAT customerVAT, Integer repId, Email newEmail, Phone newPhone) {
-        Preconditions.noneNull(customerVAT, repId, newEmail, newPhone);
+    public void editRepresentative(VAT customerVAT, Integer repId, Email newEmail, String newPosition) {
+        Preconditions.noneNull(customerVAT, repId, newEmail, newPosition);
 
-        Customer customer = customerService.findCustomerByVAT(customerVAT)
+        Customer customer = customerRepository.findByVAT(customerVAT)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
 
         Representative representative = customer.representatives().stream()
@@ -22,8 +22,8 @@ public class EditCustomerRepresentativeController {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Representative with ID " + repId + " not found."));
 
-        representative.updateContact(newEmail, newPhone); // ✅ Atualizar corretamente
+        representative.updateEmailAndPosition(newEmail, newPosition);
 
-        customerService.registerCustomer(customer);
+        customerRepository.save(customer);
     }
 }
