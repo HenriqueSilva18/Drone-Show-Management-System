@@ -1,21 +1,25 @@
 package lapr4.customermanagement.application;
 
+import eapli.framework.application.ApplicationService;
 import lapr4.customermanagement.domain.*;
-import lapr4.customermanagement.repositories.CustomerRepository;
-import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.validations.Preconditions;
-import java.util.List;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@ApplicationService
 public class ListCustomerRepresentativesController {
 
-    private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
+    private final CustomerService customerService = new CustomerService();
 
-    public List<Representative> listRepresentatives(VAT customerVAT) {
-        Preconditions.nonNull(customerVAT);
+    public List<Representative> listActiveRepresentatives(VAT customerVAT) {
+        Preconditions.noneNull(customerVAT);
 
-        Customer customer = customerRepository.findByVAT(customerVAT)
+        Customer customer = customerService.findCustomerByVAT(customerVAT)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
 
-        return customer.representatives();
+        return customer.representatives().stream()
+                .filter(rep -> rep.user().isActive()) // ✅ Só listar ativos
+                .collect(Collectors.toList());
     }
 }

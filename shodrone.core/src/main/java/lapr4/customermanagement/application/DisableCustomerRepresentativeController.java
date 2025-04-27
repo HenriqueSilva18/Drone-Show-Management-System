@@ -1,21 +1,22 @@
 package lapr4.customermanagement.application;
 
+import jakarta.transaction.Transactional;
+import eapli.framework.application.ApplicationService;
 import lapr4.customermanagement.domain.*;
-import lapr4.customermanagement.repositories.CustomerRepository;
-import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.validations.Preconditions;
 
-import java.util.List;
+import java.util.Calendar;
 
-
+@ApplicationService
 public class DisableCustomerRepresentativeController {
 
-    private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
+    private final CustomerService customerService = new CustomerService();
 
+    @Transactional
     public void disableRepresentative(VAT customerVAT, Integer repId) {
         Preconditions.noneNull(customerVAT, repId);
 
-        Customer customer = customerRepository.findByVAT(customerVAT)
+        Customer customer = customerService.findCustomerByVAT(customerVAT)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
 
         Representative representative = customer.representatives().stream()
@@ -23,8 +24,8 @@ public class DisableCustomerRepresentativeController {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Representative with ID " + repId + " not found."));
 
-        customer.representatives().remove(representative);
+        representative.user().deactivate(Calendar.getInstance());
 
-        customerRepository.save(customer);
+        customerService.registerCustomer(customer);
     }
 }
