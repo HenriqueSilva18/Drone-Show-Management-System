@@ -98,14 +98,4 @@ public class Representative implements DomainEntity<Integer> {
     public Customer customer() {
         return this.customer;
     }
-
-
-    public void updateContact(Email newEmail) {
-        if (newEmail == null ) {
-            throw new IllegalArgumentException("Email  must not be null");
-        }
-        this.email = newEmail;
-
-    }
-
 }
