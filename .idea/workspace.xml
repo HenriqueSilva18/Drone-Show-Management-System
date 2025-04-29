@@ -7,22 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Added initial customer app">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Updates to US221 CORRECTED">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/AddCustomerRepresentativeUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/AddCustomerRepresentativeUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/CustomerRepresentativeU.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/RegCustomerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/customer/RegCustomerUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/Greeter.class" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/Greeter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/HelloWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/HelloWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/persistence/H2DatabaseManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/target/classes/hello/persistence/H2DatabaseManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/delombok/hello/Greeter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/delombok/hello/HelloWorld.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app1/target/test-classes/hello/GreeterTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app1/target/test-classes/hello/GreeterTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app2/target/delombok/hello2/Greeter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app2/target/delombok/hello2/HelloWorld.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AddCustomerRepresentativeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AddCustomerRepresentativeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/RegCustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/RegCustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/EditCustomerRepresentativeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/EditCustomerRepresentativeController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,15 +32,12 @@
     &quot;assignee&quot;: &quot;HenriqueSilva18&quot;
   }
 }</component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="fc45fbe8-f317-4bca-aaf9-637b6b959599" />
-  </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git",
-    "accountId": "b54b0072-e742-4e65-b265-bc420c55792c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
+    &quot;accountId&quot;: &quot;b54b0072-e742-4e65-b265-bc420c55792c&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -193,6 +177,7 @@
       <workItem from="1744894485014" duration="1545000" />
       <workItem from="1744982623601" duration="4489000" />
       <workItem from="1745746624027" duration="10033000" />
+      <workItem from="1745915075607" duration="4027000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -242,7 +227,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744836142962</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updates to US221">
+      <option name="closed" value="true" />
+      <created>1745776687904</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745776687904</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updates to US221 CORRECTED">
+      <option name="closed" value="true" />
+      <created>1745918166417</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1745918166417</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +255,11 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
@@ -278,6 +284,8 @@
     <MESSAGE value="Global Domain Model" />
     <MESSAGE value="Added initial backoffice" />
     <MESSAGE value="Added initial customer app" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added initial customer app" />
+    <MESSAGE value="Updates to US221" />
+    <MESSAGE value="Updates to US221 CORRECTED" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to US221 CORRECTED" />
   </component>
 </project>

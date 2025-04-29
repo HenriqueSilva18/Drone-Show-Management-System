@@ -10,9 +10,6 @@
 	<version>1.4.0-SNAPSHOT</version>
 
 	<modules>
-		<module>shodrone.app1</module>
-		<module>shodrone.app2</module>
-		<module>shodrone.util.ci</module>
 		<module>shodrone.bootstrappers</module>
 		<module>shodrone.core</module>
 		<module>shodrone.infrastructure.application</module>

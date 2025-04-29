@@ -12,7 +12,7 @@ public class EditCustomerRepresentativeController {
     private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
 
     public void editRepresentative(VAT customerVAT, Integer repId, Email newEmail, String newPosition) {
-        Preconditions.noneNull(customerVAT, repId, newEmail, newPosition);
+        Preconditions.noneNull(customerVAT, repId, newEmail);
 
         Customer customer = customerRepository.findByVAT(customerVAT)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
