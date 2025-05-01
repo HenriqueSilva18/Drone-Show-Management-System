@@ -23,4 +23,9 @@ public class FigureController {
         return figureService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Figure not found with ID: " + id));
     }
+
+    public Iterable<Figure> listActivePublicFigures() {
+        return figureService.findActivePublic();
+    }
+
 }

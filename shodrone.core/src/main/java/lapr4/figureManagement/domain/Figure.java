@@ -17,6 +17,10 @@ public class Figure implements AggregateRoot<Long> {
 
     private boolean exclusive;
 
+    private boolean isActive = true;
+
+    private boolean isPublic = false;
+
     @Embedded
     private VAT clientVAT;
 
@@ -76,5 +80,21 @@ public class Figure implements AggregateRoot<Long> {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }
