@@ -48,6 +48,12 @@
             <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
             <artifactId>eapli.framework.infrastructure.pubsub</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.8.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
