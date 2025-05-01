@@ -12,24 +12,8 @@ import java.util.Optional;
 
 public class FigureService {
 
-    private final FigureRepository repo;
-    private final AuthorizationService authz;
-
-    /**
-     * Construtor padrão (produção)
-     */
-    public FigureService() {
-        this(PersistenceContext.repositories().figures(),
-                AuthzRegistry.authorizationService());
-    }
-
-    /**
-     * Construtor para testes
-     */
-    public FigureService(FigureRepository repo, AuthorizationService authz) {
-        this.repo  = repo;
-        this.authz = authz;
-    }
+    private final AuthorizationService authz = AuthzRegistry.authorizationService();
+    private final FigureRepository repo = PersistenceContext.repositories().figures();
 
     @Transactional
     public Figure registerFigure(Figure figure) {
@@ -45,11 +29,5 @@ public class FigureService {
     public Iterable<Figure> findAll() {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         return repo.findAll();
-    }
-
-    /** US231: só figuras ativas e públicas */
-    public Iterable<Figure> findActivePublic() {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
-        return repo.findActivePublic();
     }
 }
