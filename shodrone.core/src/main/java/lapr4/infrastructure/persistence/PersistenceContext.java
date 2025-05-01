@@ -22,6 +22,8 @@ package lapr4.infrastructure.persistence;
 
 import lapr4.Application;
 import eapli.framework.util.Utility;
+import lapr4.droneManagement.repositories.DroneRepository;
+import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,4 +59,6 @@ public final class PersistenceContext {
         }
         return theFactory;
     }
+
+
 }

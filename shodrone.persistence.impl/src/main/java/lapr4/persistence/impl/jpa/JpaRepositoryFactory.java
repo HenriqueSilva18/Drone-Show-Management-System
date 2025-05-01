@@ -1,61 +1,64 @@
-/*
- * Copyright (c) 2013-2024 the original author or authors.
- *
- * MIT License
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- * associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute,
- * sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
- * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- */
 package lapr4.persistence.impl.jpa;
 
 import lapr4.Application;
 import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.droneManagement.repositories.DroneRepository;
+import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
+import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
+import lapr4.utentemanagement.repositories.UtenteRepository;
+
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.jpa.JpaAutoTxUserRepository;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-/**
- *
- * Created by nuno on 21/03/16.
- */
 public class JpaRepositoryFactory implements RepositoryFactory {
 
+    private static final String PERSISTENCE_UNIT_NAME = Application.settings().getPersistenceUnitName();
+
+    // =====================
+    // Transaction Context
+    // =====================
     @Override
-    public UserRepository users(final TransactionalContext autoTx) {
+    public TransactionalContext newTransactionalContext() {
+        return JpaAutoTxRepository.buildTransactionalContext(
+                PERSISTENCE_UNIT_NAME,
+                Application.settings().getExtendedPersistenceProperties());
+    }
+
+    // =====================
+    // Users
+    // =====================
+    @Override
+    public UserRepository users(TransactionalContext autoTx) {
         return new JpaAutoTxUserRepository(autoTx);
     }
 
     @Override
     public UserRepository users() {
-        return new JpaAutoTxUserRepository(Application.settings().getPersistenceUnitName(),
+        return new JpaAutoTxUserRepository(PERSISTENCE_UNIT_NAME,
                 Application.settings().getExtendedPersistenceProperties());
     }
 
+    // =====================
+    // Utentes
+    // =====================
     @Override
-    public JpaClientUserRepository utentes(final TransactionalContext autoTx) {
+    public UtenteRepository utentes(TransactionalContext autoTx) {
         return new JpaClientUserRepository(autoTx);
     }
 
     @Override
-    public JpaClientUserRepository utentes() {
-        return new JpaClientUserRepository(Application.settings().getPersistenceUnitName());
+    public UtenteRepository utentes() {
+        return new JpaClientUserRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Customers
+    // =====================
     @Override
     public CustomerRepository customers(TransactionalContext autoTx) {
         return new JpaCustomerRepository(autoTx);
@@ -63,23 +66,51 @@ public class JpaRepositoryFactory implements RepositoryFactory {
 
     @Override
     public CustomerRepository customers() {
-        return new JpaCustomerRepository(Application.settings().getPersistenceUnitName());
+        return new JpaCustomerRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Signup Requests
+    // =====================
     @Override
-    public SignupRequestRepository signupRequests(final TransactionalContext autoTx) {
+    public SignupRequestRepository signupRequests(TransactionalContext autoTx) {
         return new JpaSignupRequestRepository(autoTx);
     }
 
     @Override
     public SignupRequestRepository signupRequests() {
-        return new JpaSignupRequestRepository(Application.settings().getPersistenceUnitName());
+        return new JpaSignupRequestRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Show Requests
+    // =====================
     @Override
-    public TransactionalContext newTransactionalContext() {
-        return JpaAutoTxRepository.buildTransactionalContext(Application.settings().getPersistenceUnitName(),
-                Application.settings().getExtendedPersistenceProperties());
+    public ShowRequestRepository showRequests() {
+        return new JpaShowRequestRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Drones
+    // =====================
+    @Override
+    public DroneRepository drones() {
+        return new JpaDroneRepository(PERSISTENCE_UNIT_NAME);
+    }
+
+    // =====================
+    // Drone Models
+    // =====================
+    @Override
+    public DroneModelRepository droneModels() {
+        return new JpaDroneModelRepository(PERSISTENCE_UNIT_NAME);
+    }
+
+    // =====================
+    // Figures
+    // =====================
+    @Override
+    public FigureRepository figures() {
+        return new JpaFigureRepository(PERSISTENCE_UNIT_NAME);
+    }
 }

@@ -10,8 +10,6 @@
         <module name="shodrone.app.backoffice.console" />
         <module name="shodrone.core" />
         <module name="shodrone.infrastructure.application" />
-        <module name="shodrone.app2" />
-        <module name="shodrone.app1" />
         <module name="shodrone.persistence.impl" />
         <module name="shodrone.app.bootstrap" />
         <module name="shodrone.bootstrappers" />
@@ -20,8 +18,11 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="exemplo.app.customer.console" target="17" />
+      <module name="shodrone.app1" target="11" />
       <module name="shodrone.app1 (1)" target="17" />
+      <module name="shodrone.app2" target="11" />
       <module name="shodrone.app2 (1)" target="17" />
+      <module name="shodrone.util.ci" target="11" />
       <module name="shodrone.util.ci (1)" target="1.8" />
     </bytecodeTargetLevel>
   </component>

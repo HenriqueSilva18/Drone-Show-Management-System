@@ -21,6 +21,10 @@
 package lapr4.infrastructure.persistence;
 
 import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.droneManagement.repositories.DroneRepository;
+import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.figureManagement.repositories.FigureRepository;
+import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
@@ -31,7 +35,7 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
  *
  */
 public interface RepositoryFactory {
-
+     ShowRequestRepository showRequests();
     /**
      * factory method to create a transactional context to use in the repositories
      *
@@ -99,5 +103,11 @@ public interface RepositoryFactory {
      */
     SignupRequestRepository signupRequests();
 
+   // ShowRequestRepository showRequests();  // ← ADICIONAR ISTO
 
+    DroneRepository drones();
+
+    DroneModelRepository droneModels();
+
+    FigureRepository figures();
 }
