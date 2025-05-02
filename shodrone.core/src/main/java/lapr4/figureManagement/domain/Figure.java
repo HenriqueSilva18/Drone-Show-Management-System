@@ -21,6 +21,9 @@ public class Figure implements AggregateRoot<Long> {
 
     private boolean isPublic = false;
 
+    @ManyToOne(optional = false)
+    private FigureCategory category;
+
     @Embedded
     private VAT clientVAT;
 
@@ -28,12 +31,16 @@ public class Figure implements AggregateRoot<Long> {
         // for JPA
     }
 
-    public Figure(String description, boolean exclusive, VAT clientVAT) {
+    public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category) {
         if (description == null || description.isBlank())
             throw new IllegalArgumentException("Description cannot be null or blank.");
         if (clientVAT == null)
             throw new IllegalArgumentException("Client VAT cannot be null.");
 
+        if (category == null)
+            throw new IllegalArgumentException("Category cannot be null.");
+
+        this.category = category;
         this.description = description;
         this.exclusive = exclusive;
         this.clientVAT = clientVAT;
@@ -97,4 +104,9 @@ public class Figure implements AggregateRoot<Long> {
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
     }
+
+    public FigureCategory category() {
+        return category;
+    }
+
 }

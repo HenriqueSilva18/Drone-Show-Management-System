@@ -37,4 +37,18 @@ public class InMemoryFigureRepository extends InMemoryDomainRepository<Figure, L
                 .filter(f -> f.isActive() && f.isPublic())
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Iterable<Figure> searchByCategoryOrKeyword(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return findActivePublic();
+        }
+
+        String normalizedTerm = searchTerm.toLowerCase();
+
+        return figures.stream()
+                .filter(f -> f.isActive() && (f.description().toLowerCase().contains(normalizedTerm) ||
+                        f.category().toString().toLowerCase().contains(normalizedTerm)))
+                .collect(Collectors.toList());
+    }
 }

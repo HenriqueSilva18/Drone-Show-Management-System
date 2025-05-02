@@ -11,4 +11,8 @@ public interface FigureRepository extends DomainRepository<Long, Figure> {
 
     /** Retorna apenas figuras com isActive=true e isPublic=true */
     Iterable<Figure> findActivePublic();
+
+    Iterable<Figure> searchByCategoryOrKeyword(String searchTerm);
+
+
 }

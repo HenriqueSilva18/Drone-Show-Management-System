@@ -52,4 +52,10 @@ public class FigureService {
         return repo.findActivePublic();
     }
 
+    /** US232: search for category and/or keyword */
+    public Iterable<Figure> searchByCategoryOrKeyword(String searchTerm) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        return repo.searchByCategoryOrKeyword(searchTerm);
+    }
+
 }

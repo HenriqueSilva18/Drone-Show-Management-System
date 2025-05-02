@@ -1,6 +1,7 @@
 package lapr4.figureManagement.application;
 
 import lapr4.figureManagement.domain.Figure;
+import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.figureManagement.repositories.FigureRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.exceptions.UnauthenticatedException;
@@ -30,9 +31,11 @@ class FigureServiceTest {
 
     @Test
     void findActivePublic_devolveListaCorreta() {
+
+        FigureCategory cat = new FigureCategory("Cat");
         // prepara figuras
-        Figure f1 = new Figure("Desc A", false, new DummyVAT());
-        Figure f2 = new Figure("Desc B", false, new DummyVAT());
+        Figure f1 = new Figure("Desc A", false, new DummyVAT(), cat);
+        Figure f2 = new Figure("Desc B", false, new DummyVAT(), cat);
         repo.setFigures(Arrays.asList(f1, f2));
 
         Iterable<Figure> resultado = service.findActivePublic();
@@ -139,6 +142,11 @@ class FigureServiceTest {
         public Iterable<Figure> findActivePublic() {
             checkCalled = true;
             return figures;
+        }
+
+        @Override
+        public Iterable<Figure> searchByCategoryOrKeyword(String searchTerm) {
+            throw new UnsupportedOperationException();
         }
     }
 

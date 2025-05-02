@@ -1,49 +1,72 @@
 package lapr4.persistence.impl.jpa;
 
+import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+import jakarta.persistence.TypedQuery;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.repositories.FigureRepository;
-import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-import java.util.List;
+
+import java.util.Collections;
+import java.util.Optional;
 
 public class JpaFigureRepository extends JpaAutoTxRepository<Figure, Long, Long> implements FigureRepository {
 
     public JpaFigureRepository(String persistenceUnitName) {
-        super(persistenceUnitName, "clientVAT");
+        super(persistenceUnitName, "id"); // Certifique-se de que 'id' é o nome correto do campo de identidade
     }
 
-    @PersistenceContext
-    private EntityManager em;
-
     @Override
-    @Transactional
     public Figure save(Figure figure) {
-        if (figure.identity() == null) {
-            em.persist(figure);
-            return figure;
-        }
-        return em.merge(figure);
+        return save(figure);
     }
 
     @Override
-    public java.util.Optional<Figure> findById(Long id) {
-        return java.util.Optional.ofNullable(em.find(Figure.class, id));
+    public Optional<Figure> findById(Long id) {
+        return ofIdentity(id);
     }
 
     @Override
     public Iterable<Figure> findAll() {
-        return em.createQuery("SELECT f FROM Figure f", Figure.class)
-                .getResultList();
+        return findAll();
     }
 
     @Override
     public Iterable<Figure> findActivePublic() {
-        return em.createQuery(
-                "SELECT f FROM Figure f WHERE f.isActive = true AND f.isPublic = true",
-                Figure.class
-        ).getResultList();
+        try {
+            final TypedQuery<Figure> query = entityManager().createQuery(
+                    "SELECT f FROM Figure f WHERE f.isActive = true AND f.isPublic = true",
+                    Figure.class);
+
+            return query.getResultList();
+        } catch (Exception e) {
+            System.err.println("Error in findActivePublic: " + e.getMessage());
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
+    @Override
+    public Iterable<Figure> searchByCategoryOrKeyword(String searchTerm) {
+        try {
+            if (searchTerm == null || searchTerm.trim().isEmpty()) {
+                return findActivePublic();
+            }
+
+            String normalizedTerm = searchTerm.toLowerCase();
+
+            final TypedQuery<Figure> query = entityManager().createQuery(
+                    "SELECT f FROM Figure f WHERE " +
+                            "(LOWER(f.category.name) LIKE :searchTerm OR " +
+                            "LOWER(f.description) LIKE :searchTerm) AND " +
+                            "f.isActive = true",
+                    Figure.class);
+
+            query.setParameter("searchTerm", "%" + normalizedTerm + "%");
+
+            return query.getResultList();
+        } catch (Exception e) {
+            System.err.println("Error in searchByCategoryOrKeyword: " + e.getMessage());
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
 }
