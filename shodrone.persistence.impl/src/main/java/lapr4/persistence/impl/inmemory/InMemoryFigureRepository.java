@@ -34,7 +34,7 @@ public class InMemoryFigureRepository extends InMemoryDomainRepository<Figure, L
     @Override
     public Iterable<Figure> findActivePublic() {
         return figures.stream()
-                .filter(f -> f.isActive() && f.isPublic())
+                .filter(f -> f.isActive() && f.isExclusive())
                 .collect(Collectors.toList());
     }
 

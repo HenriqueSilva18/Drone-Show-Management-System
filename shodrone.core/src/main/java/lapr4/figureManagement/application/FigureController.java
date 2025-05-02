@@ -8,6 +8,7 @@ import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.figureManagement.repositories.FigureRepository;
 
 import java.util.Collections;
+import java.util.Set;
 
 public class FigureController {
 
@@ -46,5 +47,13 @@ public class FigureController {
         }
     }
 
+    public Figure addFigure(String description, boolean exclusive, FigureCategory category, VAT clientVAT) {
+        return figureService.registerFigure(description, exclusive, clientVAT, category);
+    }
+
+    public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT) {
+
+        return figureService.registerFigure(description, keywords, exclusive, clientVAT, category);
+    }
 
 }

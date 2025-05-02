@@ -30,6 +30,7 @@ import lapr4.app.backoffice.console.presentation.authz.ListUsersAction;
 import lapr4.app.backoffice.console.presentation.menu.AdminMenu;
 import lapr4.app.backoffice.console.presentation.menu.CollaboratorMenu;
 import lapr4.app.backoffice.console.presentation.menu.ManagerMenu;
+import lapr4.app.backoffice.console.presentation.menu.ShowDesignerMenu;
 import lapr4.app.backoffice.console.presentation.utente.AcceptRefuseSignupRequestAction;
 import lapr4.app.common.console.presentation.authz.MyUserMenu;
 import lapr4.usermanagement.domain.Roles;
@@ -113,6 +114,10 @@ public class MainMenu extends AbstractUI {
 
 		if (authz.isAuthenticatedUserAuthorizedTo(Roles.CRM_COLLABORATOR)) {
 			CollaboratorMenu.buildCollaboratorMenu(mainMenu);
+		}
+
+		if(authz.isAuthenticatedUserAuthorizedTo(Roles.SHOW_DESIGNER)) {
+			ShowDesignerMenu.buildShowDesignerMenu(mainMenu);
 		}
 
 		if (!Application.settings().isMenuLayoutHorizontal()) {

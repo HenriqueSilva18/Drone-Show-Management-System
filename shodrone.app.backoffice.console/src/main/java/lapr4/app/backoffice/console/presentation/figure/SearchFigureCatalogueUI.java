@@ -27,7 +27,6 @@ public class SearchFigureCatalogueUI extends AbstractUI {
             System.out.printf("%d. %s\n", count, figure.description());
             System.out.printf("   Category: %s\n", figure.category().toString());
             System.out.printf("   Exclusive: %s\n", figure.isExclusive() ? "Yes" : "No");
-            System.out.printf("   Public: %s\n", figure.isPublic() ? "Yes" : "No");
             System.out.println();
         }
 

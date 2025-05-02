@@ -7,8 +7,11 @@ import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
+import lapr4.figureManagement.domain.FigureCategory;
+import lapr4.customermanagement.domain.VAT;
 
 import java.util.Optional;
+import java.util.Set;
 
 public class FigureService {
 
@@ -30,6 +33,7 @@ public class FigureService {
         this.repo  = repo;
         this.authz = authz;
     }
+
     @Transactional
     public Figure registerFigure(Figure figure) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
@@ -58,4 +62,28 @@ public class FigureService {
         return repo.searchByCategoryOrKeyword(searchTerm);
     }
 
+    @Transactional
+    public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
+
+        if (clientVAT == null) {
+            throw new IllegalArgumentException("A figure must have a client VAT associated.");
+        }
+
+        Figure figure = new Figure(description, keywords, exclusive, clientVAT, category);
+
+        return repo.save(figure);
+    }
+
+    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
+
+        if (clientVAT == null) {
+            throw new IllegalArgumentException("A figure must have a client VAT associated.");
+        }
+
+        Figure figure = new Figure(description, exclusive, clientVAT, category);
+
+        return repo.save(figure);
+    }
 }
