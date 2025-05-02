@@ -61,7 +61,6 @@ public class InMemoryShowRequestRepository implements ShowRequestRepository {
         showRequests.removeIf(showRequest -> showRequest.identity().equals(id));
     }
 
-    // Implementação do método count() exigido pela interface DomainRepository
     @Override
     public long count() {
         return showRequests.size();

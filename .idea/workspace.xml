@@ -7,50 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="LAPR4 Domain Model">
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/EditShowRequestUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/ListShowRequestsByVATUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/RegShowRequestUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/Drone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/SerialNumber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/repositories/DroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/Maintenance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/RegShowRequestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/ShowRequestService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/repositories/ShowRequestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaShowRequestRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ/schema/PUBLIC.aaZQjQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US230 + US235 + US236">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,39 +54,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Backoffice.executor": "Run",
-    "Application.H2DatabaseManager.executor": "Run",
-    "Application.HelloWorld.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
+    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jose/Downloads/eapli.base/eapli.base&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "h2"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
@@ -221,7 +180,8 @@
       <workItem from="1744982623601" duration="4489000" />
       <workItem from="1745746624027" duration="10033000" />
       <workItem from="1745915075607" duration="4027000" />
-      <workItem from="1745936757356" duration="21565000" />
+      <workItem from="1745936757356" duration="22056000" />
+      <workItem from="1746182299785" duration="1129000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -287,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745918166417</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="US230 + US235 + US236">
+      <option name="closed" value="true" />
+      <created>1746095307178</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746095307178</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +298,8 @@
     <MESSAGE value="Added initial customer app" />
     <MESSAGE value="Updates to US221" />
     <MESSAGE value="Updates to US221 CORRECTED" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to US221 CORRECTED" />
+    <MESSAGE value="US230 + US235 + US236" />
+    <option name="LAST_COMMIT_MESSAGE" value="US230 + US235 + US236" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
