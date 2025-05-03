@@ -7,6 +7,7 @@ import eapli.framework.domain.model.AggregateRoot;
 import java.util.*;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 @Entity
 public class Figure implements AggregateRoot<Long> {
@@ -33,6 +34,9 @@ public class Figure implements AggregateRoot<Long> {
     @Embedded
     private VAT clientVAT;
 
+
+    private LocalDateTime decommissionDate;
+
     protected Figure() {
         // for JPA
     }
@@ -47,6 +51,7 @@ public class Figure implements AggregateRoot<Long> {
         if (category == null)
             throw new IllegalArgumentException("Category cannot be null.");
 
+        this.decommissionDate = null;
         this.category = category;
         this.keywords = keywords;
         this.description = description;
@@ -64,6 +69,7 @@ public class Figure implements AggregateRoot<Long> {
         if (category == null)
             throw new IllegalArgumentException("Category cannot be null.");
 
+        this.decommissionDate = null;
         this.category = category;
         this.keywords = new HashSet<>();
         this.description = description;
@@ -173,6 +179,15 @@ public class Figure implements AggregateRoot<Long> {
         this.exclusive = exclusive;
     }
 
+
+    public LocalDateTime getDecommissionDate() {
+        return decommissionDate;
+    }
+
+    public void setDecommissionDate(LocalDateTime decommissionDate) {
+        this.decommissionDate = decommissionDate;
+    }
+
     @Override
     public String toString() {
         return String.format(
@@ -184,5 +199,13 @@ public class Figure implements AggregateRoot<Long> {
                 exclusive ? "Private to " + clientVAT : "Public",
                 isActive ? "Yes" : "No"
         );
+    }
+
+    /* Method to be used ONLY for tests */
+    public void setIdentity(long l) {
+        if (l <= 0) {
+            throw new IllegalArgumentException("ID must be a positive number.");
+        }
+        this.id = l;
     }
 }

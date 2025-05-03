@@ -10,6 +10,7 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.customermanagement.domain.VAT;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -85,5 +86,21 @@ public class FigureService {
         Figure figure = new Figure(description, exclusive, clientVAT, category);
 
         return repo.save(figure);
+    }
+
+    @Transactional
+    public Figure decommissionFigure(Figure figure) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.CRM_MANAGER);
+        Figure fig = repo.ofIdentity(figure.identity())
+                .orElseThrow(() -> new IllegalArgumentException("Figure not found: " + figure.identity()));
+
+        if (!fig.isActive()) {
+            throw new IllegalStateException("Figure already decommissioned: " + figure.identity());
+        }
+
+        fig.setActive(false);
+        fig.setDecommissionDate(LocalDateTime.now());
+
+        return repo.save(fig);
     }
 }

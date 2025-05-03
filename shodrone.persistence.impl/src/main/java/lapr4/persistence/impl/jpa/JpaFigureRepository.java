@@ -5,6 +5,7 @@ import jakarta.persistence.TypedQuery;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.repositories.FigureRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -33,7 +34,7 @@ public class JpaFigureRepository extends JpaAutoTxRepository<Figure, Long, Long>
     public Iterable<Figure> findActivePublic() {
         try {
             final TypedQuery<Figure> query = entityManager().createQuery(
-                    "SELECT f FROM Figure f WHERE f.isActive = true AND f.isPublic = true",
+                    "SELECT f FROM Figure f WHERE f.isActive = true AND f.exclusive = false",
                     Figure.class);
 
             return query.getResultList();
@@ -67,6 +68,18 @@ public class JpaFigureRepository extends JpaAutoTxRepository<Figure, Long, Long>
             System.err.println("Error in searchByCategoryOrKeyword: " + e.getMessage());
             e.printStackTrace();
             return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public void decommissionFigure(Figure figure) {
+        try {
+            figure.setActive(false);
+            figure.setDecommissionDate(LocalDateTime.now());
+            save(figure);
+        } catch (Exception e) {
+            System.err.println("Error in decommissionFigure: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

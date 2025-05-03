@@ -11,6 +11,7 @@ import lapr4.usermanagement.domain.Roles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -24,9 +25,16 @@ class FigureServiceTest {
         private Figure saved;
         private final List<Figure> figures = new ArrayList<>();
         private final Map<String, List<Figure>> searchResults = new HashMap<>();
+        private long currentId = 1L; // ID inicial
 
         @Override
         public Figure save(Figure f) {
+
+            if (f.identity() == null) {
+                f.setIdentity(currentId++);
+            } else {
+                figures.removeIf(figure -> figure.identity().equals(f.identity()));
+            }
             saved = f;
             figures.add(f);
             return f;
@@ -57,6 +65,13 @@ class FigureServiceTest {
         @Override
         public long count() {
             return figures.size();
+        }
+
+        @Override
+        public void decommissionFigure(Figure figure) {
+            figure.setActive(false);
+            figure.setDecommissionDate(LocalDateTime.now());
+            save(figure);
         }
 
         @Override
@@ -103,6 +118,7 @@ class FigureServiceTest {
 
         public void addFigure(Figure figure) {
             figures.add(figure);
+            figure.setIdentity(currentId++);
         }
 
         public void setSearchResults(String term, List<Figure> results) {
@@ -148,6 +164,7 @@ class FigureServiceTest {
         repository = new StubFigureRepository();
         authService = new StubAuthorizationService();
         // Configurar autenticação como true por padrão
+        authService.setAuthenticated(true);
         authService.setAuthenticated(true);
         figureService = new FigureService(repository, authService);
         defaultVAT = new VAT("PT123456789");
@@ -377,4 +394,51 @@ class FigureServiceTest {
         assertThrows(UnauthenticatedException.class, () ->
                 figureService.registerFigure("Test Figure", keywords, true, defaultVAT, category));
     }
+
+
+    @Test
+    void decommissionFigure_shouldSetInactiveAndSetDecommissionDate() {
+        // Arrange
+        FigureCategory category = new FigureCategory("Test");
+        Set<String> keywords = new HashSet<>(List.of("example", "test"));
+        Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category);
+        repository.addFigure(figure);
+
+
+        // Act
+        figureService.decommissionFigure(figure);
+
+        // Assert
+        assertFalse(figure.isActive());
+        assertNotNull(figure.getDecommissionDate());
+        assertEquals(figure, repository.getSaved());
+    }
+
+    @Test
+    void decommissionFigure_shouldThrowExceptionIfUnauthenticated() {
+        // Arrange
+        authService.setAuthenticated(false);
+        FigureCategory category = new FigureCategory("Test");
+        Set<String> keywords = new HashSet<>(List.of("example", "test"));
+        Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category);
+        figure.setActive(true);
+        repository.addFigure(figure);
+
+        // Act & Assert
+        assertThrows(UnauthenticatedException.class, () -> figureService.decommissionFigure(figure));
+    }
+
+    @Test
+    void decommissionFigureThatHasBeenDecommissioned_shouldThrowException() {
+        // Arrange
+        FigureCategory category = new FigureCategory("Test");
+        Set<String> keywords = new HashSet<>(List.of("example", "test"));
+        Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category);
+        figure.setActive(false);
+        repository.addFigure(figure);
+
+        // Act & Assert
+        assertThrows(IllegalStateException.class, () -> figureService.decommissionFigure(figure));
+    }
+
 }

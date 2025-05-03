@@ -14,5 +14,5 @@ public interface FigureRepository extends DomainRepository<Long, Figure> {
 
     Iterable<Figure> searchByCategoryOrKeyword(String searchTerm);
 
-
+    void decommissionFigure(Figure figure);
 }

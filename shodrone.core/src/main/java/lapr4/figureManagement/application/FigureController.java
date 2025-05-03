@@ -52,8 +52,11 @@ public class FigureController {
     }
 
     public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT) {
-
         return figureService.registerFigure(description, keywords, exclusive, clientVAT, category);
+    }
+
+    public Figure decommissionFigure(Figure figure) {
+        return figureService.decommissionFigure(figure);
     }
 
 }

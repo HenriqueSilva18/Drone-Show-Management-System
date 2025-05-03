@@ -4,10 +4,13 @@ import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import lapr4.app.backoffice.console.presentation.MainMenu;
 import lapr4.app.backoffice.console.presentation.authz.AddUserUI;
+import lapr4.app.backoffice.console.presentation.figure.DecommissionFigureUI;
 
 public class ManagerMenu extends MainMenu {
     private static final String RETURN_LABEL = "Return ";
 
+
+    private static final int DECOMMISSION_FIGURE = 1;
     private static final int EXIT_OPTION = 0;
 
     // MAIN MENU
@@ -19,8 +22,9 @@ public class ManagerMenu extends MainMenu {
     }
 
     private static Menu buildMMenu() {
-        final var menu = new Menu("??? >");
+        final var menu = new Menu("Managing tools >");
 
+        menu.addItem(DECOMMISSION_FIGURE, "Decommission Figure", new DecommissionFigureUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
         return menu;

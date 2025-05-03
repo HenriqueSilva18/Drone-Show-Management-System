@@ -4,6 +4,7 @@ import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.repositories.FigureRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -50,5 +51,17 @@ public class InMemoryFigureRepository extends InMemoryDomainRepository<Figure, L
                 .filter(f -> f.isActive() && (f.description().toLowerCase().contains(normalizedTerm) ||
                         f.category().toString().toLowerCase().contains(normalizedTerm)))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void decommissionFigure(Figure figure) {
+        try {
+            figure.setActive(false);
+            figure.setDecommissionDate(LocalDateTime.now());
+            save(figure);
+        } catch (Exception e) {
+            System.err.println("Error in decommissionFigure: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
