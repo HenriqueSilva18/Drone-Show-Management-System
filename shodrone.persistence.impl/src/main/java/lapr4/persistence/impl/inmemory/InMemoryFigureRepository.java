@@ -4,6 +4,7 @@ import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.repositories.FigureRepository;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -34,7 +35,33 @@ public class InMemoryFigureRepository extends InMemoryDomainRepository<Figure, L
     @Override
     public Iterable<Figure> findActivePublic() {
         return figures.stream()
-                .filter(f -> f.isActive() && f.isPublic())
+                .filter(f -> f.isActive() && f.isExclusive())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterable<Figure> searchByCategoryOrKeyword(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return findActivePublic();
+        }
+
+        String normalizedTerm = searchTerm.toLowerCase();
+
+        return figures.stream()
+                .filter(f -> f.isActive() && (f.description().toLowerCase().contains(normalizedTerm) ||
+                        f.category().toString().toLowerCase().contains(normalizedTerm)))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void decommissionFigure(Figure figure) {
+        try {
+            figure.setActive(false);
+            figure.setDecommissionDate(LocalDateTime.now());
+            save(figure);
+        } catch (Exception e) {
+            System.err.println("Error in decommissionFigure: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
