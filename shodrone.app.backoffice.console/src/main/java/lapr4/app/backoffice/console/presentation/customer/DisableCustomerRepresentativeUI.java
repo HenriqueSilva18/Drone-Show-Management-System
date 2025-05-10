@@ -12,10 +12,10 @@ public class DisableCustomerRepresentativeUI extends AbstractUI {
     protected boolean doShow() {
         System.out.println("=== Disable Customer Representative ===");
         final String vat = Console.readLine("Customer VAT:");
-        final Integer repId = Console.readInteger("Representative ID to disable:");
+        final String repNIF = Console.readLine("Representative NIF to disable:");
 
         try {
-            controller.disableRepresentative(new VAT(vat), repId);
+            controller.disableRepresentative(new VAT(vat), repNIF);
             System.out.println("Representative account disabled successfully.");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

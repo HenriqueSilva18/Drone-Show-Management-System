@@ -54,7 +54,7 @@ public class CustomerBootstrapper implements Action {
                 "PT123456789", "Company One",
                 new Address("Rua 123", "Lisbon", "1000-100", "Portugal"),
                 "companyone@email.com", "255123456",
-                List.of(newRepresentative("John Smith", "john.rep@companyone.com", "Sales Manager", "johnrep", "Password1", "John", "Smith"))
+                List.of(newRepresentative("John Smith", "543456123", "john.rep@companyone.com", "654876123", "Sales Manager", "johnrep", "Password1", "John", "Smith"))
         );
 
         registerCustomer(
@@ -62,8 +62,8 @@ public class CustomerBootstrapper implements Action {
                 new Address("Rua 321", "Porto", "4000-200", "Portugal"),
                 "companytwo@email.com", "251987654",
                 List.of(
-                        newRepresentative("Maria Silva", "maria.rep@companytwo.com", "CEO", "mariarep", "Password1", "Maria", "Silva"),
-                        newRepresentative("Carlos Santos", "carlos.rep@companytwo.com", "Sales Manager", "carlosrep", "Password1", "Carlos", "Santos")
+                        newRepresentative("Maria Silva", "987456876", "maria.rep@companytwo.com", "999333444", "CEO", "mariarep", "Password1", "Maria", "Silva"),
+                        newRepresentative("Carlos Santos", "234543567", "carlos.rep@companytwo.com", "444555666", "Sales Manager", "carlosrep", "Password1", "Carlos", "Santos")
                 )
         );
 
@@ -84,9 +84,9 @@ public class CustomerBootstrapper implements Action {
     }
 
     private RegCustomerController.RepresentativeData newRepresentative(
-            String fullName, String email, String role, String username, String password, String firstName, String lastName) {
+            String fullName, String vatin, String email, String phone, String role, String username, String password, String firstName, String lastName) {
         return new RegCustomerController.RepresentativeData(
-                fullName, email, role, username, password, firstName, lastName
+                 fullName, vatin, email, phone, role, username, password, firstName, lastName
         );
     }
 }

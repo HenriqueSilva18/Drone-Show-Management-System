@@ -6,7 +6,6 @@ import lapr4.usermanagement.application.AddUserController;
 import eapli.framework.application.ApplicationService;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.infrastructure.authz.domain.model.Role;
-import eapli.framework.domain.services.DomainService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,8 +48,10 @@ public class RegCustomerController {
                     roles);
 
             Representative representative = new RepresentativeBuilder()
+                    .withNIF(repData.nif)
                     .withName(repData.name)
                     .withEmail(repData.email)
+                    .withPhone(repData.phone)
                     .withPosition(repData.position)
                     .withSystemUser(systemUser)
                     .build();
@@ -79,6 +80,7 @@ public class RegCustomerController {
     }
 
     public static class RepresentativeData {
+        public String nif;
         public String name;
         public String email;
         public String position;
@@ -86,11 +88,14 @@ public class RegCustomerController {
         public String password;
         public String firstName;
         public String lastName;
+        public String phone;
 
-        public RepresentativeData(String name, String email, String position,
+        public RepresentativeData(String name, String nif, String email, String phone, String position,
                                   String username, String password, String firstName, String lastName) {
+            this.nif = nif;
             this.name = name;
             this.email = email;
+            this.phone = phone;
             this.position = position;
             this.username = username;
             this.password = password;
