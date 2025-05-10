@@ -13,22 +13,29 @@ public class VAT implements ValueObject, Comparable<VAT> {
     private String number;
 
     public VAT(final String vatNumber) {
-        validateVAT(vatNumber);
-        this.number = vatNumber.trim().toUpperCase();
+        String processed = processInput(vatNumber);
+        validateVAT(processed);
+        this.number = processed;
     }
 
     protected VAT() {
         // for ORM
     }
 
-    private void validateVAT(String vatNumber) {
-        if (StringPredicates.isNullOrEmpty(vatNumber)) {
+    private String processInput(String vatNumber) {
+        if (vatNumber == null) {
+            return null;
+        }
+        return vatNumber.trim().toUpperCase();
+    }
+
+    private void validateVAT(String processedVatNumber) {
+        if (StringPredicates.isNullOrEmpty(processedVatNumber)) {
             throw new IllegalArgumentException("VAT number cannot be null or empty");
         }
-        String trimmed = vatNumber.trim();
-        if (!trimmed.matches("^[A-Z]{2}[A-Z0-9]{2,13}$")) {
+        if (!processedVatNumber.matches("^[A-Z]{2}[A-Z0-9]{2,13}$")) {
             throw new IllegalArgumentException(
-                    "Invalid VAT number format. Expected format 2 letter country code followed by 2-13 alphanumeric characters)");
+                    "Invalid VAT format. Expected 2 letters followed by 2-13 alphanumerics (e.g., PT123456).");
         }
     }
 

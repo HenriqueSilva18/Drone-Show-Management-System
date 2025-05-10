@@ -84,9 +84,9 @@ public class CustomerBootstrapper implements Action {
     }
 
     private RegCustomerController.RepresentativeData newRepresentative(
-            String fullName, String vatin, String email, String phone, String role, String username, String password, String firstName, String lastName) {
+            String fullName, String nif, String email, String phone, String role, String username, String password, String firstName, String lastName) {
         return new RegCustomerController.RepresentativeData(
-                 fullName, vatin, email, phone, role, username, password, firstName, lastName
+                 fullName, nif, email, phone, role, username, password, firstName, lastName
         );
     }
 }
