@@ -72,4 +72,9 @@ public class FigureCategory implements AggregateRoot<String> {
     public String identity() {
         return name;
     }
+
+    /*Method just for testing purposes*/
+    public void setIdentity(long l) {
+        this.name = String.valueOf(l);
+    }
 }
