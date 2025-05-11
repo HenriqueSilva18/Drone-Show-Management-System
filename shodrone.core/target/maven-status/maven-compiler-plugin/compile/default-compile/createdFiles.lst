@@ -16,12 +16,12 @@ lapr4/customermanagement/repositories/CustomerRepository.class
 lapr4/droneManagement/domain/SerialNumber.class
 lapr4/usermanagement/application/eventhandlers/SignupAcceptedWatchDog.class
 lapr4/utentemanagement/domain/UtenteBuilder.class
-lapr4/customermanagement/application/AddCustomerRepresentativeController.class
 lapr4/customermanagement/domain/Customer.class
 lapr4/customermanagement/domain/Address.class
+lapr4/customermanagement/application/AddCustomerRepresentativeController.class
+lapr4/utentemanagement/domain/ApprovalStatus.class
 lapr4/droneManagement/repositories/DroneRepository.class
 lapr4/droneModelManagement/domain/Language.class
-lapr4/utentemanagement/domain/ApprovalStatus.class
 lapr4/customermanagement/application/DisableCustomerRepresentativeController.class
 lapr4/figureManagement/repositories/FigureRepository.class
 lapr4/showRequestManagement/application/ShowRequestService.class
@@ -63,9 +63,9 @@ lapr4/droneManagement/domain/Drone.class
 lapr4/customermanagement/application/RegCustomerController$RepresentativeData.class
 lapr4/customermanagement/domain/CustomerStatus.class
 lapr4/customermanagement/application/CustomerService.class
-lapr4/showRequestManagement/domain/ShowRequest.class
 lapr4/utentemanagement/domain/SignupRequestBuilder.class
 lapr4/utentemanagement/application/AcceptRefuseSignupRequestControllerEventfullImpl.class
+lapr4/showRequestManagement/domain/ShowRequest.class
 lapr4/usermanagement/application/AddUserController.class
 lapr4/usermanagement/domain/PasswordPolicy$PasswordStrength.class
 lapr4/droneModelManagement/application/DroneModelController.class
@@ -73,6 +73,6 @@ lapr4/showRequestManagement/application/RegShowRequestController.class
 lapr4/usermanagement/application/DeactivateUserController.class
 lapr4/showRequestManagement/domain/ShowRequestId.class
 lapr4/customermanagement/domain/NIF.class
-lapr4/utentemanagement/domain/Utente.class
 lapr4/utentemanagement/domain/events/SignupAcceptedEvent.class
+lapr4/utentemanagement/domain/Utente.class
 lapr4/utentemanagement/application/AcceptRefuseSignupRequestController.class

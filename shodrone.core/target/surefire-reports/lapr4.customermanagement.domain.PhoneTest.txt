@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: lapr4.customermanagement.domain.PhoneTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.175 s -- in lapr4.customermanagement.domain.PhoneTest
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.099 s -- in lapr4.customermanagement.domain.PhoneTest

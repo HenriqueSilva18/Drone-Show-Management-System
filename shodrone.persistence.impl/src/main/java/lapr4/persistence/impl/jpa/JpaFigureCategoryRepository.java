@@ -4,7 +4,6 @@ import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 
-import java.util.Optional;
 
 public class JpaFigureCategoryRepository extends JpaAutoTxRepository<FigureCategory, String, String> implements FigureCategoryRepository {
 
