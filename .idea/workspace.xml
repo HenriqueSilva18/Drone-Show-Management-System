@@ -7,14 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="LAPR4 Domain Model">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US245 Almost Done #109">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/ShowDesignerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/ShowDesignerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/FigureCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/FigureCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,39 +53,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
-    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jose/Downloads/eapli.base/eapli.base&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Backoffice.executor": "Run",
+    "Application.H2DatabaseManager.executor": "Run",
+    "Application.HelloWorld.executor": "Run",
+    "JUnit.FigureServiceTest.executor": "Run",
+    "Maven.shodrone [test].executor": "Run",
+    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
+    "Maven.shodrone.app.bootstrap [test].executor": "Run",
+    "Maven.shodrone.core [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;h2&quot;
+    "DatabaseDriversLRU": [
+      "h2"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
@@ -112,6 +111,28 @@
       <recent name="lapr4.app.bootstrap" />
       <recent name="lapr4.app.backoffice.console" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FigureServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureManagement.application.FigureServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FigureServiceTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -156,7 +177,7 @@
       <workItem from="1746479351726" duration="8192000" />
       <workItem from="1746736444442" duration="2337000" />
       <workItem from="1746794317485" duration="65000" />
-      <workItem from="1746923771324" duration="14643000" />
+      <workItem from="1746923771324" duration="17394000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -222,7 +243,23 @@
       <option name="project" value="LOCAL" />
       <updated>1745918166417</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="US245 Almost Done #109">
+      <option name="closed" value="true" />
+      <created>1746983629376</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746983629382</updated>
+    </task>
+    <task id="LOCAL-00011" summary="US245 Almost Done #109">
+      <option name="closed" value="true" />
+      <created>1746986182676</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746986182676</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +302,8 @@
     <MESSAGE value="Added initial customer app" />
     <MESSAGE value="Updates to US221" />
     <MESSAGE value="Updates to US221 CORRECTED" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to US221 CORRECTED" />
+    <MESSAGE value="US245 Almost Done #109" />
+    <option name="LAST_COMMIT_MESSAGE" value="US245 Almost Done #109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
