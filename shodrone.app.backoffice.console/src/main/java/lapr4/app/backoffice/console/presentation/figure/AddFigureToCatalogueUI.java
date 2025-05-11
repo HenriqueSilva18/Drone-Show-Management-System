@@ -23,7 +23,7 @@ public class AddFigureToCatalogueUI extends AbstractUI {
         try {
             final String description = Console.readLine("Description:");
 
-            final String categoryName = Console.readLine("Category:");
+            final String categoryName = Console.readLine("Category Name:");
             final String categoryDescription = Console.readLine("Category Description:");
             final FigureCategory category = categoryController.addFigureCategory(categoryName, categoryDescription);
 
