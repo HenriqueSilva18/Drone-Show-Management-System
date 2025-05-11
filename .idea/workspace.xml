@@ -7,8 +7,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US245 Almost Done #109">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="LAPR4 Domain Model">
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/EditShowRequestUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/ListShowRequestsByVATUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/RegShowRequestUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/Drone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/SerialNumber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/repositories/DroneRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneModelRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/Maintenance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/RegShowRequestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/ShowRequestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/repositories/ShowRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneModelRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneModelRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaShowRequestRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ/schema/PUBLIC.aaZQjQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +77,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
-    &quot;accountId&quot;: &quot;7477ff47-d21d-45b8-9bbb-791d35a5d1a1&quot;
+    &quot;accountId&quot;: &quot;b54b0072-e742-4e65-b265-bc420c55792c&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -58,11 +100,6 @@
     "Application.Backoffice.executor": "Run",
     "Application.H2DatabaseManager.executor": "Run",
     "Application.HelloWorld.executor": "Run",
-    "JUnit.FigureServiceTest.executor": "Run",
-    "Maven.shodrone [test].executor": "Run",
-    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
-    "Maven.shodrone.app.bootstrap [test].executor": "Run",
-    "Maven.shodrone.core [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -112,33 +149,45 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="FigureServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shodrone.core" />
+  <component name="RunManager" selected="Application.H2DatabaseManager">
+    <configuration name="H2DatabaseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hello.persistence.H2DatabaseManager" />
+      <module name="shodrone.app1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lapr4.figureManagement.application.*" />
+          <option name="PATTERN" value="hello.persistence.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lapr4.figureManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.figureManagement.application.FigureServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hello.HelloWorld" />
+      <module name="shodrone.app1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FigureServiceTest" />
+        <item itemvalue="Application.H2DatabaseManager" />
+        <item itemvalue="Application.HelloWorld" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
       </set>
     </attachedChunks>
   </component>
@@ -173,11 +222,6 @@
       <workItem from="1745746624027" duration="10033000" />
       <workItem from="1745915075607" duration="4027000" />
       <workItem from="1745936757356" duration="21565000" />
-      <workItem from="1746479190072" duration="69000" />
-      <workItem from="1746479351726" duration="8192000" />
-      <workItem from="1746736444442" duration="2337000" />
-      <workItem from="1746794317485" duration="65000" />
-      <workItem from="1746923771324" duration="17394000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -243,23 +287,7 @@
       <option name="project" value="LOCAL" />
       <updated>1745918166417</updated>
     </task>
-    <task id="LOCAL-00010" summary="US245 Almost Done #109">
-      <option name="closed" value="true" />
-      <created>1746983629376</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1746983629382</updated>
-    </task>
-    <task id="LOCAL-00011" summary="US245 Almost Done #109">
-      <option name="closed" value="true" />
-      <created>1746986182676</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1746986182676</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,8 +330,7 @@
     <MESSAGE value="Added initial customer app" />
     <MESSAGE value="Updates to US221" />
     <MESSAGE value="Updates to US221 CORRECTED" />
-    <MESSAGE value="US245 Almost Done #109" />
-    <option name="LAST_COMMIT_MESSAGE" value="US245 Almost Done #109" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates to US221 CORRECTED" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
