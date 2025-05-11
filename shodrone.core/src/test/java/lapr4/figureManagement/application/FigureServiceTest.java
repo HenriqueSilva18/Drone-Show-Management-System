@@ -173,7 +173,7 @@ class FigureServiceTest {
     @Test
     void listActivePublicFigures_shouldReturnActivePublic() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("test", "figure"));
         Figure figure1 = new Figure("Public Figure", keywords, false, defaultVAT, category);
         figure1.setActive(true);
@@ -194,7 +194,7 @@ class FigureServiceTest {
     @Test
     void searchByCategoryOrKeyword_byCategory_shouldReturnResults() {
         // Arrange
-        FigureCategory electronics = new FigureCategory("Electronics");
+        FigureCategory electronics = new FigureCategory("Electronics", "Devices and gadgets");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
         Figure figure1 = figureService.registerFigure("Smartphone Display", keywords,false, defaultVAT, electronics);
         figure1.setActive(true);
@@ -212,7 +212,7 @@ class FigureServiceTest {
     @Test
     void searchByCategoryOrKeyword_byKeyword_shouldReturnResults() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
         Figure figure = new Figure("Test Figure", keywords, false, defaultVAT, category);
         figure.setActive(true);
@@ -231,7 +231,7 @@ class FigureServiceTest {
     @Test
     void searchByCategoryOrKeyword_byDescription_shouldReturnResults() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("keyword1", "keyword2"));
         Figure figure = new Figure("Special Test Description", keywords, false, defaultVAT, category);
         figure.setActive(true);
@@ -250,7 +250,7 @@ class FigureServiceTest {
     @Test
     void searchByCategoryOrKeyword_nullTerm_shouldReturnActivePublic() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         VAT clientVAT1 = new VAT("PT111222333");
         VAT clientVAT2 = new VAT("PT444555666");
 
@@ -280,7 +280,7 @@ class FigureServiceTest {
     @Test
     void searchByCategoryOrKeyword_notFound_shouldReturnEmptyList() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
         Figure figure = new Figure("Test Figure", keywords, true, defaultVAT, category);
         figure.setActive(true);
@@ -305,7 +305,7 @@ class FigureServiceTest {
 
     @Test
     void registerFigure_publicFigure_shouldCreateAndSave() {
-        FigureCategory category = new FigureCategory("Acrobatic");
+        FigureCategory category = new FigureCategory("Acrobatic", "Acrobatic Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("fire", "acrobatic", "spiral"));
         Figure figure = new Figure("Fire Spiral", keywords, true, defaultVAT, category);
 
@@ -334,7 +334,7 @@ class FigureServiceTest {
     void registerFigure_exclusiveFigure_shouldCreateAndSave() {
         // Arrange
         VAT vat = new VAT("PT987654321");
-        FigureCategory category = new FigureCategory("Artistic");
+        FigureCategory category = new FigureCategory("Artistic", "Artistic Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("custom", "butterfly", "artistic"));
 
         // Act
@@ -356,7 +356,7 @@ class FigureServiceTest {
 
     @Test
     void registerFigureWithNoKeywords_withNullVAT_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Special");
+        FigureCategory category = new FigureCategory("Special", "Special Description");
 
         assertThrows(IllegalArgumentException.class, () -> {
             try {
@@ -370,7 +370,7 @@ class FigureServiceTest {
 
     @Test
     void registerFigureWithKeywords_withNullVAT_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Special");
+        FigureCategory category = new FigureCategory("Special", "Special Description");
         Set<String> keywords = new HashSet<>(Collections.singletonList("test"));
 
         assertThrows(IllegalArgumentException.class, () -> {
@@ -386,7 +386,7 @@ class FigureServiceTest {
     @Test
     void registerFigure_unauthorizedUser_shouldThrowException() {
         // Arrange
-        FigureCategory category = new FigureCategory("Special");
+        FigureCategory category = new FigureCategory("Special", "Special Description");
         Set<String> keywords = new HashSet<>(Collections.singletonList("test"));
         authService.setAuthenticated(false);
 
@@ -399,7 +399,7 @@ class FigureServiceTest {
     @Test
     void decommissionFigure_shouldSetInactiveAndSetDecommissionDate() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
         Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category);
         repository.addFigure(figure);
@@ -418,7 +418,7 @@ class FigureServiceTest {
     void decommissionFigure_shouldThrowExceptionIfUnauthenticated() {
         // Arrange
         authService.setAuthenticated(false);
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
         Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category);
         figure.setActive(true);
@@ -431,7 +431,7 @@ class FigureServiceTest {
     @Test
     void decommissionFigureThatHasBeenDecommissioned_shouldThrowException() {
         // Arrange
-        FigureCategory category = new FigureCategory("Test");
+        FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
         Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category);
         figure.setActive(false);

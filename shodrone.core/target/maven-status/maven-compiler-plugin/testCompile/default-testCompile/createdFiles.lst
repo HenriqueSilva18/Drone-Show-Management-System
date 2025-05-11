@@ -1,0 +1,9 @@
+lapr4/customermanagement/domain/VATTest.class
+lapr4/customermanagement/domain/AddressTest.class
+lapr4/customermanagement/domain/NIFTest.class
+lapr4/figureManagement/application/FigureServiceTest$StubFigureRepository.class
+lapr4/figureManagement/application/FigureServiceTest.class
+lapr4/figureManagement/application/FigureServiceTest$StubAuthorizationService.class
+lapr4/customermanagement/domain/PhoneTest.class
+lapr4/customermanagement/domain/EmailTest.class
+lapr4/utentemanagement/domain/UtenteTest.class

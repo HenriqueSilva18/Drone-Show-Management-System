@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="lapr4.figureManagement.application.FigureServiceTest" time="0.827" tests="15" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="lapr4.customermanagement.domain.VATTest" time="0.165" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -7,7 +7,6 @@
     <property name="java.vm.vendor" value="Debian"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://tracker.debian.org/openjdk-17"/>
-    <property name="user.timezone" value="Europe/Lisbon"/>
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -54,19 +53,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="registerFigure_exclusiveFigure_shouldCreateAndSave" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.622"/>
-  <testcase name="searchByCategoryOrKeyword_byDescription_shouldReturnResults" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.018"/>
-  <testcase name="registerFigure_unauthorizedUser_shouldThrowException" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.008"/>
-  <testcase name="registerFigureWithKeywords_withNullVAT_shouldThrowException" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.008"/>
-  <testcase name="decommissionFigureThatHasBeenDecommissioned_shouldThrowException" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.012"/>
-  <testcase name="decommissionFigure_shouldThrowExceptionIfUnauthenticated" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.006"/>
-  <testcase name="decommissionFigure_shouldSetInactiveAndSetDecommissionDate" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.01"/>
-  <testcase name="searchByCategoryOrKeyword_byKeyword_shouldReturnResults" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.01"/>
-  <testcase name="searchByCategoryOrKeyword_byCategory_shouldReturnResults" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.007"/>
-  <testcase name="searchByCategoryOrKeyword_notFound_shouldReturnEmptyList" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.005"/>
-  <testcase name="listActivePublicFigures_shouldReturnActivePublic" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.008"/>
-  <testcase name="searchByCategoryOrKeyword_unauthenticated_shouldThrowException" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.006"/>
-  <testcase name="registerFigure_publicFigure_shouldCreateAndSave" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.008"/>
-  <testcase name="searchByCategoryOrKeyword_nullTerm_shouldReturnActivePublic" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.007"/>
-  <testcase name="registerFigureWithNoKeywords_withNullVAT_shouldThrowException" classname="lapr4.figureManagement.application.FigureServiceTest" time="0.003"/>
+  <testcase name="testMaximumValidVAT" classname="lapr4.customermanagement.domain.VATTest" time="0.007"/>
+  <testcase name="testEquals_ReturnsFalseForDifferentVAT" classname="lapr4.customermanagement.domain.VATTest" time="0.006"/>
+  <testcase name="compareTo_CaseInsensitiveComparison" classname="lapr4.customermanagement.domain.VATTest" time="0.005"/>
+  <testcase name="compareTo_OrdersLexicographically" classname="lapr4.customermanagement.domain.VATTest" time="0.006"/>
+  <testcase name="testHashCode_ConsistentWithEquals" classname="lapr4.customermanagement.domain.VATTest" time="0.003"/>
+  <testcase name="testToString_ReturnsTrimmedUpperCaseVAT" classname="lapr4.customermanagement.domain.VATTest" time="0.015"/>
+  <testcase name="testEquals_ReturnsTrueForSameVAT" classname="lapr4.customermanagement.domain.VATTest" time="0.007"/>
+  <testcase name="testVATRejectsSpecialCharacters" classname="lapr4.customermanagement.domain.VATTest" time="0.011"/>
+  <testcase name="testVATLengthRequirement" classname="lapr4.customermanagement.domain.VATTest" time="0.012"/>
+  <testcase name="valueOf_TrimsAndConvertsToUpperCase" classname="lapr4.customermanagement.domain.VATTest" time="0.007"/>
+  <testcase name="testVATStartsWithTwoUpperCaseLetters" classname="lapr4.customermanagement.domain.VATTest" time="0.01"/>
+  <testcase name="testMinimumValidVAT" classname="lapr4.customermanagement.domain.VATTest" time="0.008"/>
+  <testcase name="testVATCannotBeNullOrEmpty" classname="lapr4.customermanagement.domain.VATTest" time="0.005"/>
+  <testcase name="testTrimAndUpperCaseConversion" classname="lapr4.customermanagement.domain.VATTest" time="0.002"/>
 </testsuite>

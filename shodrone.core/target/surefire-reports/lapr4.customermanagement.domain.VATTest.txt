@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: lapr4.customermanagement.domain.VATTest
+-------------------------------------------------------------------------------
+Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.165 s -- in lapr4.customermanagement.domain.VATTest
