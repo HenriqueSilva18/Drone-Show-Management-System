@@ -10,7 +10,6 @@
     </option>
     <option name="ignoredFiles">
       <set>
-        <option value="$PROJECT_DIR$/exemplo.app.user.console/pom.xml" />
         <option value="$PROJECT_DIR$/shodrone.util.ci/shodrone.util.ci/pom.xml" />
       </set>
     </option>
