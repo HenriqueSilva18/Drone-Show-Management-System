@@ -22,6 +22,14 @@ public class RegCustomerController {
         this.userController = new AddUserController();
     }
 
+    /**
+     * Constructor for testing purposes
+     */
+    public RegCustomerController(CustomerService customerService, AddUserController userController) {
+        this.customerService = customerService;
+        this.userController = userController;
+    }
+
     @Transactional
     public Customer registerCustomerWithMultipleRepresentatives(
             String vatNumber, String name, Address address,
