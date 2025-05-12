@@ -88,8 +88,15 @@ public class FigureCategory implements AggregateRoot<String> {
 
     @Override
     public String toString() {
-        return name;
+        return "FigureCategory{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creationDate=" + creationDate +
+                ", lastEditionDate=" + lastEditionDate +
+                ", state=" + (isActive ? "Active" : "Inactive") +
+                '}';
     }
+
 
     @Override
     public boolean sameAs(Object other) {
