@@ -7,14 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US245 Tests Completed #109">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 Completed #109">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/ShowDesignerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/ShowDesignerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/FigureCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/FigureCategory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureCategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/application/FigureCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/application/FigureCategoryServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" afterDir="false" />
@@ -28,8 +25,6 @@
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureCategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureCategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureCategoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" afterDir="false" />
     </list>
@@ -100,11 +95,17 @@
     "Application.Backoffice.executor": "Run",
     "Application.H2DatabaseManager.executor": "Run",
     "Application.HelloWorld.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
     "Maven.shodrone [test].executor": "Run",
     "Maven.shodrone.app.backoffice.console [test].executor": "Run",
     "Maven.shodrone.core [test].executor": "Run",
@@ -160,21 +161,8 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Backoffice">
-    <configuration name="Backoffice" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="lapr4.app.backoffice.console.Backoffice" />
-      <module name="shodrone.app.backoffice.console" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lapr4.app.backoffice.console.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FigureCategoryServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory">
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
@@ -184,28 +172,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
       <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shodrone.core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="METHOD_NAME" value="registerCategory_validCategory_shouldCreateAndSave" />
+      <option name="METHOD_NAME" value="listCategories_shouldIncludeInactiveCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
@@ -215,13 +188,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
       <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="METHOD_NAME" value="registerCategory_withNullDescription_shouldThrowException" />
+      <option name="METHOD_NAME" value="listCategories_shouldNotDuplicateSameCategory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
@@ -231,7 +204,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
       <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="METHOD_NAME" value="registerCategory_withNullName_shouldThrowException" />
+      <option name="METHOD_NAME" value="listCategories_shouldOverwriteCategoryWithSameName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_withNoCategories_shouldReturnEmptyList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -239,11 +244,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Backoffice" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" />
       </list>
     </recent_temporary>
   </component>
@@ -288,7 +293,7 @@
       <workItem from="1745936757356" duration="21565000" />
       <workItem from="1747008371225" duration="4175000" />
       <workItem from="1747055341567" duration="545000" />
-      <workItem from="1747056349887" duration="4403000" />
+      <workItem from="1747056349887" duration="10169000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -378,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746990062372</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="US246-US247-US248 Completed #109">
+      <option name="closed" value="true" />
+      <created>1747061384030</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747061384030</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +436,8 @@
     <MESSAGE value="Updates to US221 CORRECTED" />
     <MESSAGE value="US245 Done #109" />
     <MESSAGE value="US245 Tests Completed #109" />
-    <option name="LAST_COMMIT_MESSAGE" value="US245 Tests Completed #109" />
+    <MESSAGE value="US246-US247-US248 Completed #109" />
+    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 Completed #109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -432,6 +446,11 @@
           <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java</url>
           <line>1</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -73,4 +73,25 @@ public class FigureCategoryService {
         return repo.save(category);
     }
 
+    /*For testing purposes only*/
+    public FigureCategory activateCategory(String name) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+
+        FigureCategory category = repo.findByName(name)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found: " + name));
+
+        category.activate();
+        return repo.save(category);
+    }
+
+    public FigureCategory deactivateCategory(String name) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+
+        FigureCategory category = repo.findByName(name)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found: " + name));
+
+        category.deactivate();
+        return repo.save(category);
+    }
+
 }
