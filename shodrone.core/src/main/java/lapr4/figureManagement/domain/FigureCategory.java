@@ -46,14 +46,45 @@ public class FigureCategory implements AggregateRoot<String> {
     }
 
     public void deactivate() {
+        if (!isActive) {
+            throw new IllegalStateException("Category is already deactivated.");
+        }
         this.isActive = false;
         this.lastEditionDate = LocalDateTime.now();
     }
 
     public void activate() {
+        if (isActive) {
+            throw new IllegalStateException("Category is already active.");
+        }
         this.isActive = true;
         this.lastEditionDate = LocalDateTime.now();
     }
+
+    public String description() {
+        return description;
+    }
+
+    public LocalDateTime lastEditionDate() {
+        return lastEditionDate;
+    }
+
+    public LocalDateTime creationDate() {
+        return creationDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void updateDescription(String newDescription) {
+        if (newDescription == null || newDescription.isBlank()) {
+            throw new IllegalArgumentException("Invalid Description.");
+        }
+        this.description = newDescription;
+        this.lastEditionDate = LocalDateTime.now();
+    }
+
 
     @Override
     public String toString() {

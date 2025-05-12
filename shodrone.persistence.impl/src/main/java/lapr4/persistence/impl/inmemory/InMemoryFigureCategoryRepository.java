@@ -25,6 +25,11 @@ public class InMemoryFigureCategoryRepository implements FigureCategoryRepositor
     }
 
     @Override
+    public Optional<FigureCategory> findByName(String name) {
+        return ofIdentity(name);
+    }
+
+    @Override
     public Optional<FigureCategory> ofIdentity(String id) {
         return categories.stream()
                 .filter(category -> category.identity().equals(id))

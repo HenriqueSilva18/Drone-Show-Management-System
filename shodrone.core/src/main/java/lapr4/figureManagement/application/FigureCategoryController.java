@@ -18,4 +18,16 @@ public class FigureCategoryController {
     public FigureCategory addFigureCategory(String name, String description) {
         return service.registerCategory(name, description);
     }
+
+    public Iterable<FigureCategory> listAll() {
+        return service.findAll();
+    }
+
+    public FigureCategory editCategoryDescription(String name, String newDescription) {
+        return service.updateDescription(name, newDescription);
+    }
+
+    public FigureCategory toggleCategory(String name) {
+        return service.toggleCategory(name);
+    }
 }
