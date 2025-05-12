@@ -7,9 +7,7 @@ import lapr4.figureManagement.application.FigureCategoryController;
 import lapr4.figureManagement.application.FigureController;
 import lapr4.figureManagement.domain.FigureCategory;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class AddFigureToCatalogueUI extends AbstractUI {
 
@@ -23,9 +21,7 @@ public class AddFigureToCatalogueUI extends AbstractUI {
         try {
             final String description = Console.readLine("Description:");
 
-            final String categoryName = Console.readLine("Category Name:");
-            final String categoryDescription = Console.readLine("Category Description:");
-            final FigureCategory category = categoryController.addFigureCategory(categoryName, categoryDescription);
+            final FigureCategory category = chooseOrCreateCategory();
 
             final String keywordsLine = Console.readLine("Keywords (comma-separated):");
             final Set<String> keywords = new HashSet<>(Arrays.asList(
@@ -43,6 +39,51 @@ public class AddFigureToCatalogueUI extends AbstractUI {
 
         return false; // volta ao menu anterior
     }
+
+    private FigureCategory chooseOrCreateCategory() {
+        System.out.println("\n--- Categoria ---");
+        System.out.println("1 - Escolher categoria existente");
+        System.out.println("2 - Criar nova categoria");
+        System.out.println("0 - Cancelar");
+        System.out.print("Opção: ");
+        int option = Console.readOption(1, 2, 0);
+
+        if (option == 1) {
+            return selectExistingCategory();
+        } else {
+            return createNewCategory();
+        }
+    }
+
+    private FigureCategory selectExistingCategory() {
+        Iterable<FigureCategory> categories = categoryController.listAll();
+        List<FigureCategory> list = new ArrayList<>();
+        categories.forEach(list::add);
+
+        if (list.isEmpty()) {
+            System.out.println("⚠️ Não existem categorias. Terá de criar uma.");
+            return createNewCategory();
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            FigureCategory cat = list.get(i);
+            System.out.printf("%d - %s | %s%n", i + 1, cat.name(), cat.description());
+        }
+
+        System.out.println("0 - Cancelar");
+        System.out.print("Escolha uma categoria (1-" + list.size() + "): ");
+        int choice = Console.readOption(1, list.size(), 0);
+        return list.get(choice - 1);
+    }
+
+    private FigureCategory createNewCategory() {
+        final String name = Console.readLine("Nome da nova categoria:");
+        final String description = Console.readLine("Descrição:");
+        return categoryController.addFigureCategory(name, description);
+    }
+
+
+
 
     @Override
     public String headline() {

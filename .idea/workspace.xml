@@ -7,11 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 Completed #109">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 tests completed #109">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/application/FigureCategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/application/FigureCategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" afterDir="false" />
@@ -99,7 +98,12 @@
     "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
     "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
     "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
@@ -293,7 +297,7 @@
       <workItem from="1745936757356" duration="21565000" />
       <workItem from="1747008371225" duration="4175000" />
       <workItem from="1747055341567" duration="545000" />
-      <workItem from="1747056349887" duration="10169000" />
+      <workItem from="1747056349887" duration="11342000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -391,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747061384030</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="US246-US247-US248 tests completed #109">
+      <option name="closed" value="true" />
+      <created>1747066932287</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747066932287</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +449,8 @@
     <MESSAGE value="US245 Done #109" />
     <MESSAGE value="US245 Tests Completed #109" />
     <MESSAGE value="US246-US247-US248 Completed #109" />
-    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 Completed #109" />
+    <MESSAGE value="US246-US247-US248 tests completed #109" />
+    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 tests completed #109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
