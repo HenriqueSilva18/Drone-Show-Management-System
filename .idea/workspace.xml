@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US230 + US235 + US236">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" afterDir="false" />
-    </list>
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US230 + US235 + US236" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
