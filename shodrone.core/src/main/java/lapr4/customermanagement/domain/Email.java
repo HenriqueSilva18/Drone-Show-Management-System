@@ -27,7 +27,7 @@ public class Email implements ValueObject, Comparable<Email> {
             throw new IllegalArgumentException("Email cannot be null or empty");
         }
         String trimmed = email.trim();
-        if (!trimmed.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+        if (!trimmed.matches("^[\\w.+\\-]+@[\\w.\\-]+\\.[a-zA-Z]{2,}$")) {
             throw new IllegalArgumentException("Invalid email format");
         }
     }

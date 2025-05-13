@@ -62,7 +62,6 @@ public class Customer implements AggregateRoot<VAT> {
 		this.customerType = customerType;
 		this.customerStatus = customerStatus;
 
-		// Associate each representative with this customer
 		for (Representative rep : representatives) {
 			addRepresentative(rep);
 		}

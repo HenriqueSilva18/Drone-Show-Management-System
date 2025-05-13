@@ -5,6 +5,7 @@ import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.validations.Preconditions;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListCustomerRepresentativesController {
 
@@ -14,8 +15,11 @@ public class ListCustomerRepresentativesController {
         Preconditions.nonNull(customerVAT);
 
         Customer customer = customerRepository.findByVAT(customerVAT)
-                .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
 
-        return customer.representatives();
+        return customer.representatives().stream()
+                .filter(rep -> rep.user().isActive())
+                .collect(Collectors.toList());
     }
 }

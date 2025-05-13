@@ -6,7 +6,7 @@
     <parent>
         <groupId>lapr4</groupId>
         <artifactId>shodrone</artifactId>
-        <relativePath>../</relativePath>
+        <relativePath>../pom.xml</relativePath>
         <version>1.4.0-SNAPSHOT</version>
     </parent>
 
@@ -65,6 +65,18 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

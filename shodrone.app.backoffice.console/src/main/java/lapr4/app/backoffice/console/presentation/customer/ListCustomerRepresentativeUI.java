@@ -21,8 +21,8 @@ public class ListCustomerRepresentativeUI extends AbstractUI {
             if (reps.isEmpty()) {
                 System.out.println("No active representatives found.");
             } else {
-                reps.forEach(rep -> System.out.printf("[%d] %s | Email: %s %n",
-                        rep.identity(), rep.name(), rep.email()));
+                reps.forEach(rep -> System.out.printf("[%s] %s | Email: %s | Phone: %s %n",
+                        rep.identity(), rep.name(), rep.email(), rep.phone()));
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

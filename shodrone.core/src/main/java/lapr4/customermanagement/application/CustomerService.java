@@ -14,8 +14,21 @@ import java.util.Optional;
 
 public class CustomerService {
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
-    private final CustomerRepository repo = PersistenceContext.repositories().customers();
+    private final AuthorizationService authz;
+    private final CustomerRepository repo;
+
+    public CustomerService() {
+        this.authz = AuthzRegistry.authorizationService();
+        this.repo = PersistenceContext.repositories().customers();
+    }
+
+    /**
+     * Constructor for testing purposes
+     */
+    public CustomerService(CustomerRepository repository, AuthorizationService authorizationService) {
+        this.authz = authorizationService;
+        this.repo = repository;
+    }
 
     public Optional<Customer> findCustomerByVAT(final VAT vat) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CRM_COLLABORATOR);

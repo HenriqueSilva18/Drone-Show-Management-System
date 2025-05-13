@@ -7,50 +7,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="LAPR4 Domain Model">
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/EditShowRequestUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/ListShowRequestsByVATUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showrequest/RegShowRequestUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/application/DroneService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/Drone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/domain/SerialNumber.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneManagement/repositories/DroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/Maintenance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/RegShowRequestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/application/ShowRequestService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/domain/ShowRequestId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showRequestManagement/repositories/ShowRequestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowRequestRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneModelRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaShowRequestRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/76a0f3b5-b6e1-4dbb-be0d-e4d602d9d030/storage_v2/_src_/database/DATABASE.ewFPmQ/schema/PUBLIC.aaZQjQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 tests completed #109">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/PersistenceContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.NIFTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.NIFTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.PhoneTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.PhoneTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.VATTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.VATTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.figureManagement.application.FigureServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.figureManagement.application.FigureServiceTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.AddressTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.AddressTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.EmailTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.EmailTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.NIFTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.NIFTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +41,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -77,7 +71,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
-    &quot;accountId&quot;: &quot;b54b0072-e742-4e65-b265-bc420c55792c&quot;
+    &quot;accountId&quot;: &quot;7477ff47-d21d-45b8-9bbb-791d35a5d1a1&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -100,6 +94,25 @@
     "Application.Backoffice.executor": "Run",
     "Application.H2DatabaseManager.executor": "Run",
     "Application.HelloWorld.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
+    "Maven.shodrone [test].executor": "Run",
+    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
+    "Maven.shodrone.core [test].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -129,6 +142,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="lapr4.app.backoffice.console.presentation.figure" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console" />
@@ -149,45 +165,102 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.H2DatabaseManager">
-    <configuration name="H2DatabaseManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hello.persistence.H2DatabaseManager" />
-      <module name="shodrone.app1" />
+  <component name="RunManager" selected="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory">
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hello.persistence.*" />
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_shouldIncludeInactiveCategories" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloWorld" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="hello.HelloWorld" />
-      <module name="shodrone.app1" />
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="hello.*" />
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_shouldNotDuplicateSameCategory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_shouldOverwriteCategoryWithSameName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_withNoCategories_shouldReturnEmptyList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.H2DatabaseManager" />
-        <item itemvalue="Application.HelloWorld" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.25659.59" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.25659.59" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -222,6 +295,9 @@
       <workItem from="1745746624027" duration="10033000" />
       <workItem from="1745915075607" duration="4027000" />
       <workItem from="1745936757356" duration="21565000" />
+      <workItem from="1747008371225" duration="4175000" />
+      <workItem from="1747055341567" duration="545000" />
+      <workItem from="1747056349887" duration="11342000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -287,7 +363,47 @@
       <option name="project" value="LOCAL" />
       <updated>1745918166417</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="US245 Done #109">
+      <option name="closed" value="true" />
+      <created>1746987598732</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746987598732</updated>
+    </task>
+    <task id="LOCAL-00011" summary="US245 Tests Completed #109">
+      <option name="closed" value="true" />
+      <created>1746990037492</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746990037492</updated>
+    </task>
+    <task id="LOCAL-00012" summary="US245 Tests Completed #109">
+      <option name="closed" value="true" />
+      <created>1746990062372</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1746990062372</updated>
+    </task>
+    <task id="LOCAL-00013" summary="US246-US247-US248 Completed #109">
+      <option name="closed" value="true" />
+      <created>1747061384030</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747061384030</updated>
+    </task>
+    <task id="LOCAL-00014" summary="US246-US247-US248 tests completed #109">
+      <option name="closed" value="true" />
+      <created>1747066932287</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747066932287</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +446,11 @@
     <MESSAGE value="Added initial customer app" />
     <MESSAGE value="Updates to US221" />
     <MESSAGE value="Updates to US221 CORRECTED" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to US221 CORRECTED" />
+    <MESSAGE value="US245 Done #109" />
+    <MESSAGE value="US245 Tests Completed #109" />
+    <MESSAGE value="US246-US247-US248 Completed #109" />
+    <MESSAGE value="US246-US247-US248 tests completed #109" />
+    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 tests completed #109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -339,6 +459,11 @@
           <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java</url>
           <line>1</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
