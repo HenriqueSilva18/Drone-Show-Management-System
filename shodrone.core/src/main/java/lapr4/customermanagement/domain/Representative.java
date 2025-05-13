@@ -7,18 +7,20 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "REPRESENTATIVE")
-public class Representative implements DomainEntity<Integer> {
+public class Representative implements DomainEntity<NIF> {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @EmbeddedId
+    private NIF nif;
 
     private String name;
 
     @Embedded
     private Email email;
+
+    @Embedded
+    private Phone phone;
 
     private String position;
 
@@ -32,12 +34,14 @@ public class Representative implements DomainEntity<Integer> {
     @JoinColumn(name = "customer_vat")
     private Customer customer;
 
-    public Representative(final String name, final Email email, final String position, final SystemUser systemUser) {
-        if (name == null || email == null || position == null || systemUser == null) {
+    public Representative(final NIF nif, final String name, final Email email, final Phone phone, final String position, final SystemUser systemUser) {
+        if (nif == null || name == null || email == null || position == null || systemUser == null) {
             throw new IllegalArgumentException("All representative attributes must be provided");
         }
+        this.nif = nif;
         this.name = name.trim();
         this.email = email;
+        this.phone = phone;
         this.position = position.trim();
         this.systemUser = systemUser;
     }
@@ -70,18 +74,21 @@ public class Representative implements DomainEntity<Integer> {
     }
 
     @Override
-    public Integer identity() {
-        return this.id;
+    public NIF identity() {
+        return this.nif;
     }
 
-    public void updateEmailAndPosition(final Email newEmail, final String newPosition) {
-        if (newEmail == null || newPosition == null) {
-            throw new IllegalArgumentException("Email and position cannot be null");
+    public void updateContact(final Email newEmail, final Phone newPhone) {
+        if (newEmail == null && newPhone == null) {
+            throw new IllegalArgumentException("At least one of email or phone must be provided");
         }
-        this.email = newEmail;
-        this.position = newPosition.trim();
+        if (newEmail != null) {
+            this.email = newEmail;
+        }
+        if (newPhone != null) {
+            this.phone = newPhone;
+        }
     }
-
 
     public String name() {
         return this.name;
@@ -89,6 +96,12 @@ public class Representative implements DomainEntity<Integer> {
 
     public Email email() {
         return this.email;
+    }
+
+    public NIF nif() {return this.nif;}
+
+    public Phone phone() {
+        return this.phone;
     }
 
     public String position() {

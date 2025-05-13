@@ -45,8 +45,10 @@ public class AddCustomerRepresentativeController {
 				roles);
 
 		Representative representative = new RepresentativeBuilder()
+				.withNIF(repData.nif)
 				.withName(repData.name)
 				.withEmail(repData.email)
+				.withPhone(repData.phone)
 				.withPosition(repData.position)
 				.withSystemUser(systemUser)
 				.build();

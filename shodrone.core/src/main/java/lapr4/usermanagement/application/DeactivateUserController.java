@@ -47,7 +47,7 @@ public class DeactivateUserController {
     }
 
     public SystemUser deactivateUser(final SystemUser user) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
 
         if (authz.session().isPresent() && authz.session().get().authenticatedUser().sameAs(user)) {
             throw new IllegalStateException("You cannot deactivate your own account!");

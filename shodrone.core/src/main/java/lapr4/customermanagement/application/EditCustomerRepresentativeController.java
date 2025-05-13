@@ -11,18 +11,20 @@ public class EditCustomerRepresentativeController {
 
     private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
 
-    public void editRepresentative(VAT customerVAT, Integer repId, Email newEmail, String newPosition) {
-        Preconditions.noneNull(customerVAT, repId, newEmail);
+    public void editRepresentative(VAT customerVAT, String repNIF, Email newEmail, Phone newPhone) {
+        Preconditions.noneNull(customerVAT, repNIF);
 
         Customer customer = customerRepository.findByVAT(customerVAT)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with VAT " + customerVAT + " not found."));
 
-        Representative representative = customer.representatives().stream()
-                .filter(rep -> rep.identity().equals(repId))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Representative with ID " + repId + " not found."));
+        NIF nif = new NIF(repNIF);
 
-        representative.updateEmailAndPosition(newEmail, newPosition);
+        Representative representative = customer.representatives().stream()
+                .filter(rep -> rep.identity().equals(nif))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Representative with NIF " + repNIF + " not found."));
+
+        representative.updateContact(newEmail, newPhone);
 
         customerRepository.save(customer);
     }

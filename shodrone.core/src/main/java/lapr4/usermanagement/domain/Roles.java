@@ -56,15 +56,18 @@ public final class Roles {
 	/**
 	 *
 	 */
+	public static final Role SHOW_DESIGNER = Role.valueOf("SHOW_DESIGNER");
+	/**
+	 *
+	 */
 	public static final Role CUSTOMER_REPRESENTATIVE = Role.valueOf("CUSTOMER_REPRESENTATIVE");
-
 	/**
 	 * get available role types for adding new users
 	 *
 	 * @return
 	 */
 	public static Role[] nonUserValues() {
-		return new Role[] { ADMIN, CRM_MANAGER, CRM_COLLABORATOR};
+		return new Role[] { ADMIN, CRM_MANAGER, CRM_COLLABORATOR, SHOW_DESIGNER };
 	}
 
 	public boolean isCollaborator(final Role role) {

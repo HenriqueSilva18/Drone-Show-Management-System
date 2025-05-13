@@ -4,6 +4,7 @@ import lapr4.Application;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
@@ -112,5 +113,10 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public FigureRepository figures() {
         return new JpaFigureRepository(PERSISTENCE_UNIT_NAME);
+    }
+
+    @Override
+    public FigureCategoryRepository figureCategories() {
+        return new JpaFigureCategoryRepository(PERSISTENCE_UNIT_NAME);
     }
 }

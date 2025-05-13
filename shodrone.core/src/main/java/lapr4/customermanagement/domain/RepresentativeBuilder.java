@@ -11,8 +11,10 @@ import eapli.framework.infrastructure.authz.domain.model.SystemUser;
  */
 public class RepresentativeBuilder implements DomainFactory<Representative> {
 
+    private NIF nif;
     private String name;
     private Email email;
+    private Phone phone;
     private String position;
     private SystemUser systemUser;
 
@@ -31,6 +33,26 @@ public class RepresentativeBuilder implements DomainFactory<Representative> {
         return this;
     }
 
+    public RepresentativeBuilder withPhone(final Phone phone) {
+        this.phone = phone;
+        return this;
+    }
+
+    public RepresentativeBuilder withNIF(final String nif) {
+        this.nif = new NIF(nif);
+        return this;
+    }
+
+    public RepresentativeBuilder withNIF(final NIF nif) {
+        this.nif = nif;
+        return this;
+    }
+
+    public RepresentativeBuilder withPhone(final String phone) {
+        this.phone = new Phone(phone);
+        return this;
+    }
+
     public RepresentativeBuilder withPosition(final String position) {
         this.position = position;
         return this;
@@ -43,10 +65,10 @@ public class RepresentativeBuilder implements DomainFactory<Representative> {
 
     @Override
     public Representative build() {
-        if (this.name == null || this.email == null || this.position == null || this.systemUser == null) {
+        if (this.nif == null || this.name == null || this.email == null || this.position == null || this.systemUser == null) {
             throw new IllegalStateException("All representative attributes must be provided");
         }
 
-        return new Representative(this.name, this.email, this.position, this.systemUser);
+        return new Representative(this.nif, this.name, this.email, this.phone, this.position, this.systemUser);
     }
 }
