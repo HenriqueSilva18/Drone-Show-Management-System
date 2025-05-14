@@ -30,7 +30,7 @@ public class CustomerRepresentativeTest {
     @Test
     public void addRepresentativeToCustomer() {
         AddCustomerRepresentativeController addCustomerRepresentativeController = new AddCustomerRepresentativeController();
-        RegCustomerController.RepresentativeData repData = new RegCustomerController.RepresentativeData("name", "email", "position", "username", "password", "firstName", "lastName");
+        RegCustomerController.RepresentativeData repData = new RegCustomerController.RepresentativeData("name", "321434253", "email", "911265458", "position", "username", "password", "firstName", "lastName");
         addCustomerRepresentativeController.addRepresentative("1", repData);
         Optional<Customer> customerOptional = customerService.findCustomerByVAT("1");
         assertTrue(customerOptional.isPresent());

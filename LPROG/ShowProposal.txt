@@ -1,0 +1,51 @@
+grammar ShowProposal;
+
+proposal       : header body footer;
+
+header         : greeting? recipient reference title;
+greeting       : 'Dear,' WS NAME NL+;
+recipient      : company_name address vat NL+;
+reference      : 'Reference' WS PROPOSAL_ID WS '/' WS DATE NL+;
+title          : ('Show Proposal' | 'Proposta de Show') NL+;
+
+body           : intro video insurance closing signature pagebreak attachment;
+intro          : INTRO_TEXT NL+;
+video          : 'In the link' WS LINK WS 'there is a video' TEXT_LINE* NL+;
+insurance      : 'With the application of AI-Test©' TEXT_LINE* NL+;
+closing        : CLOSING_LINE NL+;
+signature      : SIGNOFF WS NAME WS 'CRM Manager' NL+;
+pagebreak      : PAGE_BREAK NL+;
+
+attachment     : attachment_header NL+ location date time duration drone_list figure_list;
+attachment_header : ('Attachment' | 'Anexo') WS '–' WS 'Show Details' WS PROPOSAL_ID NL+;
+location       : 'Location' WS '–' WS GPS_COORD NL+;
+date           : 'Date' WS '–' WS DATE NL+;
+time           : 'Time' WS '–' WS TIME NL+;
+duration       : 'Duration' WS '–' WS NUMBER WS 'minutes' NL+;
+
+drone_list     : DRONE_HEADER NL+ (DRONE_MODEL WS '–' WS NUMBER WS UNITS '.' NL+)+;
+figure_list    : FIGURE_HEADER NL+ (NUMBER WS '–' WS FIGURE_NAME NL+)+;
+
+// Terminais
+PROPOSAL_ID    : [A-Z0-9\-/]+;
+DATE           : [0-9]{2} '/' [0-9]{2} '/' [0-9]{4};
+TIME           : [0-9]{2} ':' [0-9]{2};
+GPS_COORD      : [0-9]+ (',' [0-9]+)? (WS [NSEW])?;
+NAME           : (~[\r\n])+;
+LINK           : ~[\r\n]+;
+TEXT_LINE      : ~[\r\n]+;
+CLOSING_LINE   : ('Best regards,' | 'Melhores cumprimentos,' | 'Looking forward to hearing from you soon.');
+SIGNOFF        : ('We subscribe at your disposal.' | 'Subscrevemo-nos ao dispor.');
+PAGE_BREAK     : '[page break]';
+DRONE_HEADER   : '#List of used drones';
+FIGURE_HEADER  : '#List of figures';
+DRONE_MODEL    : (~[\r\n\-])+;
+FIGURE_NAME    : (~[\r\n])+;
+UNITS          : ('units' | 'unidades');
+company_name   : NAME NL+;
+address        : NAME NL+;
+vat            : 'VAT Number' NL+;
+INTRO_TEXT     : ~[\r\n]+;
+
+WS             : [ \t]+ -> skip;
+NL             : ('\r'? '\n')+;
