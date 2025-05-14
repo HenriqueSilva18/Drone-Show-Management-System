@@ -1,0 +1,10 @@
+=== Simulation Report ===
+Total drones: 4
+Total timesteps: 20
+Total collisions: 2
+
+Collisions detected at: (step, drone_id, x, y, z)
+  Step 1: Drones 0 & 3 at (7,5,1)
+  Step 2: Drones 0 & 3 at (7,6,2)
+
+Figure validation: FAILED

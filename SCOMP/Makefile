@@ -1,7 +1,7 @@
 # Makefile - Compilação do simulador de drones
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall -Wextra -std=c99 -lm -g
 
 BIN_MAIN = simulator
 BIN_DRONE = drone

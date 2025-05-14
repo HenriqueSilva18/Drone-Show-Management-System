@@ -18,12 +18,6 @@
 #define MAX_Y 10
 #define MAX_Z 5
 
-typedef struct {
-	int x, y, z;
-	int drone_id;
-	int step;
-} Position;
-
 // US262 - Captura e armazenamento de posições no tempo
 Position positionMatrix[MAX_STEPS][MAX_DRONES];
 int space3D[MAX_X][MAX_Y][MAX_Z];
@@ -98,7 +92,7 @@ int main(int argc, char* argv[]) {
 			dup2(pipefds[i][1], STDOUT_FILENO);
 			char id[10];
 			sprintf(id, "%d", i);
-			execl("./drone", "drone", id, NULL);
+			execl("drone", "drone", id, NULL);
 			perror("execl failed");
 			exit(EXIT_FAILURE);
 		} else if (pid > 0) {
@@ -120,6 +114,13 @@ int main(int argc, char* argv[]) {
 			int bytes = read(pipefds[i][0], &pos, sizeof(Position));
 			if (bytes == sizeof(Position)) {
 				pos.step = step;
+
+				printf("### SPACE 3D ###\n");
+				for (int x = 0; x < MAX_X; x++)
+					for (int y = 0; y < MAX_Y; y++)
+						for (int z = 0; z < MAX_Z; z++)
+							if (space3D[x][y][z] != -1)
+								printf("space3D[%d][%d][%d] = %d\n", x, y, z, space3D[x][y][z]);
 
 				if (check_collision(pos)) {
 					kill(drone_pids[i], SIGUSR1);
