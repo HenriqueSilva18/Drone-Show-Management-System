@@ -24,9 +24,21 @@ int space3D[MAX_X][MAX_Y][MAX_Z];
 
 int num_drones;
 int pipefds[MAX_DRONES][2];
+int sync_pipes[MAX_DRONES][2]; // US264 - Pipes adicionais para sincronização
 pid_t drone_pids[MAX_DRONES];
 int collision_count = 0;
+int active_drones = 0; // Número de drones ativos
 const int COLLISION_THRESHOLD = 3;
+
+// Flag para tratamento de sinais no processo principal
+volatile sig_atomic_t terminate_simulation = 0;
+
+void handle_signal(int sig) {
+    if (sig == SIGINT || sig == SIGTERM) {
+        printf("[MAIN] Received signal %d. Terminating simulation...\n", sig);
+        terminate_simulation = 1;
+    }
+}
 
 void clear_space3D() {
 	for (int x = 0; x < MAX_X; x++)
@@ -43,6 +55,13 @@ void log_collision(int step, int x, int y, int z) {
 
 // US263 - Deteção de colisões reais no espaço 3D
 int check_collision(Position pos) {
+	if (pos.x < 0 || pos.x >= MAX_X || pos.y < 0 || pos.y >= MAX_Y ||
+        pos.z < 0 || pos.z >= MAX_Z) {
+		printf("[WARNING] Drone %d position (%d,%d,%d) out of bounds\n",
+            pos.drone_id, pos.x, pos.y, pos.z);
+		return 0;
+	}
+
 	if (space3D[pos.x][pos.y][pos.z] != -1) {
 		log_collision(pos.step, pos.x, pos.y, pos.z);
 		return 1;
@@ -53,12 +72,33 @@ int check_collision(Position pos) {
 
 // US262 - Guardar posição na matriz de passos
 void save_position(int step, Position pos) {
+	if (step < 0 || step >= MAX_STEPS) {
+		return;
+	}
+
 	for (int i = 0; i < num_drones; i++) {
-		if (positionMatrix[step][i].drone_id == -1) {
+		if (positionMatrix[step][i].drone_id == -1 ||
+            positionMatrix[step][i].drone_id == pos.drone_id) {
 			positionMatrix[step][i] = pos;
 			return;
 		}
 	}
+}
+
+// Fechar todos os pipes e terminar drones
+void cleanup_resources() {
+    for (int i = 0; i < num_drones; i++) {
+        if (drone_pids[i] > 0) {
+            // Enviar sinal para encerrar
+            kill(drone_pids[i], SIGTERM);
+        }
+
+        // Fechar os pipes
+        if (pipefds[i][0] >= 0) close(pipefds[i][0]);
+        if (pipefds[i][1] >= 0) close(pipefds[i][1]);
+        if (sync_pipes[i][0] >= 0) close(sync_pipes[i][0]);
+        if (sync_pipes[i][1] >= 0) close(sync_pipes[i][1]);
+    }
 }
 
 int main(int argc, char* argv[]) {
@@ -67,14 +107,31 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	// Configurar handler para SIGINT e SIGTERM
+    signal(SIGINT, handle_signal);
+    signal(SIGTERM, handle_signal);
+
 	num_drones = atoi(argv[1]);
+	if (num_drones <= 0) {
+		fprintf(stderr, "Error: Number of drones must be positive\n");
+		exit(EXIT_FAILURE);
+	}
+
 	if (num_drones > MAX_DRONES)
 		num_drones = MAX_DRONES;
+
+	active_drones = num_drones;
 
 	// Inicializar estruturas
 	for (int i = 0; i < MAX_STEPS; i++)
 		for (int j = 0; j < MAX_DRONES; j++)
 			positionMatrix[i][j].drone_id = -1;
+
+	// Inicializar file descriptors com -1
+    for (int i = 0; i < MAX_DRONES; i++) {
+        pipefds[i][0] = pipefds[i][1] = -1;
+        sync_pipes[i][0] = sync_pipes[i][1] = -1;
+    }
 
 	clear_space3D();
 
@@ -82,6 +139,14 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < num_drones; i++) {
 		if (pipe(pipefds[i]) == -1) {
 			perror("pipe");
+			cleanup_resources();
+			exit(EXIT_FAILURE);
+		}
+
+		// US264 - Novo pipe para sincronização
+		if (pipe(sync_pipes[i]) == -1) {
+			perror("sync pipe");
+			cleanup_resources();
 			exit(EXIT_FAILURE);
 		}
 
@@ -89,60 +154,147 @@ int main(int argc, char* argv[]) {
 		if (pid == 0) {
 			// Processo filho (drone)
 			close(pipefds[i][0]);
+			close(sync_pipes[i][1]); // Filho lê do pipe de sincronização
+
+			// Fechar pipes não utilizados por este filho
+			for (int j = 0; j < num_drones; j++) {
+				if (j != i) {
+					if (pipefds[j][0] >= 0) close(pipefds[j][0]);
+					if (pipefds[j][1] >= 0) close(pipefds[j][1]);
+					if (sync_pipes[j][0] >= 0) close(sync_pipes[j][0]);
+					if (sync_pipes[j][1] >= 0) close(sync_pipes[j][1]);
+				}
+			}
+
 			dup2(pipefds[i][1], STDOUT_FILENO);
+
 			char id[10];
 			sprintf(id, "%d", i);
-			execl("drone", "drone", id, NULL);
+			char sync_fd[10];
+			sprintf(sync_fd, "%d", sync_pipes[i][0]);
+
+			execl("drone", "drone", id, sync_fd, NULL);
 			perror("execl failed");
 			exit(EXIT_FAILURE);
 		} else if (pid > 0) {
 			// Processo pai
 			close(pipefds[i][1]);
+			close(sync_pipes[i][0]); // Pai escreve no pipe de sincronização
 			drone_pids[i] = pid;
+
+			// Configurar o pipe para operação não-bloqueante
+			fcntl(pipefds[i][0], F_SETFL, O_NONBLOCK);
 		} else {
 			perror("fork");
+			cleanup_resources();
 			exit(EXIT_FAILURE);
 		}
 	}
 
 	// Simulação por passos de tempo (timesteps)
-	for (int step = 0; step < MAX_STEPS; step++) {
+	for (int step = 0; step < MAX_STEPS && !terminate_simulation && active_drones > 0; step++) {
 		clear_space3D();
+		printf("[MAIN] Starting timestep %d (active drones: %d)\n", step, active_drones);
 
+		// US264 - Sinalizar o início do timestep para todos os drones ativos
+		char sync_signal = 1;
 		for (int i = 0; i < num_drones; i++) {
-			Position pos;
-			int bytes = read(pipefds[i][0], &pos, sizeof(Position));
-			if (bytes == sizeof(Position)) {
-				pos.step = step;
-
-				printf("### SPACE 3D ###\n");
-				for (int x = 0; x < MAX_X; x++)
-					for (int y = 0; y < MAX_Y; y++)
-						for (int z = 0; z < MAX_Z; z++)
-							if (space3D[x][y][z] != -1)
-								printf("space3D[%d][%d][%d] = %d\n", x, y, z, space3D[x][y][z]);
-
-				if (check_collision(pos)) {
-					kill(drone_pids[i], SIGUSR1);
-				}
-
-				save_position(step, pos);
-			}
+		    if (drone_pids[i] > 0) {
+                if (write(sync_pipes[i][1], &sync_signal, 1) < 0) {
+                    
+                }
+            }
 		}
 
-		sleep(1);
+        // Dar um tempo para drones processarem seus movimentos
+        usleep(100000);  // 100ms
+
+		// Array para rastrear quais drones responderam neste passo
+		int drone_responded[MAX_DRONES] = {0};
+		int responses = 0;
+
+		// Ler posições com timeout para evitar bloqueio se um drone não responder
+		time_t start_time = time(NULL);
+		time_t current_time;
+
+		while (responses < active_drones &&
+               (current_time = time(NULL)) - start_time < 2 && // 2 segundos de timeout
+               !terminate_simulation) {
+
+            for (int i = 0; i < num_drones; i++) {
+                if (drone_pids[i] <= 0 || drone_responded[i]) {
+                    continue;  // Drone já terminou ou já respondeu
+                }
+
+                Position pos;
+                int bytes = read(pipefds[i][0], &pos, sizeof(Position));
+
+                if (bytes == sizeof(Position)) {
+                    pos.step = step;
+                    drone_responded[i] = 1;
+                    responses++;
+
+                    if (check_collision(pos)) {
+                        kill(drone_pids[i], SIGUSR1);
+                    }
+
+                    save_position(step, pos);
+                } else if (bytes == 0 || (bytes < 0 && errno != EAGAIN)) {
+                    // Pipe fechado ou erro
+                    printf("[MAIN] Drone %d has terminated or had an error\n", i);
+                    drone_pids[i] = -1;
+                    close(pipefds[i][0]);
+                    close(sync_pipes[i][1]);
+                    pipefds[i][0] = -1;
+                    sync_pipes[i][1] = -1;
+                    active_drones--;
+                    drone_responded[i] = 1;
+                    responses++;
+                }
+            }
+
+            // Pequena pausa para evitar consumo excessivo de CPU
+            usleep(10000); // 10ms
+        }
+
+		// Contar drones que não responderam
+		for (int i = 0; i < num_drones; i++) {
+            if (drone_pids[i] > 0 && !drone_responded[i]) {
+                printf("[WARNING] Drone %d did not respond in timestep %d\n", i, step);
+            }
+        }
+
+		if (step == 0 || step % 5 == 0) {  // Reduzir volume de logs
+			printf("### SPACE 3D (step %d) ###\n", step);
+			for (int x = 0; x < MAX_X; x++)
+				for (int y = 0; y < MAX_Y; y++)
+					for (int z = 0; z < MAX_Z; z++)
+						if (space3D[x][y][z] != -1)
+							printf("space3D[%d][%d][%d] = %d\n", x, y, z, space3D[x][y][z]);
+		}
 
 		if (collision_count >= COLLISION_THRESHOLD) {
-			printf("Too many collisions. Terminating simulation...\n");
-			for (int i = 0; i < num_drones; i++) {
-				kill(drone_pids[i], SIGTERM);
-			}
+			printf("Too many collisions (%d). Terminating simulation...\n", collision_count);
 			break;
 		}
+
+		printf("[MAIN] Completed timestep %d\n", step);
 	}
 
+	// Limpeza e encerramento
+	cleanup_resources();
+
+	// Aguardar que todos os processos terminem
 	for (int i = 0; i < num_drones; i++) {
-		wait(NULL);
+		if (drone_pids[i] > 0) {
+            int status;
+            waitpid(drone_pids[i], &status, 0);
+            if (WIFEXITED(status)) {
+                printf("[MAIN] Drone %d exited with status %d\n", i, WEXITSTATUS(status));
+            } else if (WIFSIGNALED(status)) {
+                printf("[MAIN] Drone %d killed by signal %d\n", i, WTERMSIG(status));
+            }
+        }
 	}
 
 	generate_report("simulation_report.txt", positionMatrix, MAX_STEPS, num_drones, collision_count);
