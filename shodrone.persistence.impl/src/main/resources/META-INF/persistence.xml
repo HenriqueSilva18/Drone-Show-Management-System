@@ -16,6 +16,8 @@
     <class>lapr4.figureManagement.domain.FigureCategory</class>
 
 
+    <class>lapr4.showRequestManagement.domain.ShowRequest</class>
+
 
     <properties>
       <!--<property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/shodrone"/>-->
