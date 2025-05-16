@@ -4,10 +4,7 @@ import eapli.framework.actions.Actions;
 import eapli.framework.actions.menu.Menu;
 import lapr4.app.backoffice.console.presentation.MainMenu;
 import lapr4.app.backoffice.console.presentation.authz.AddUserUI;
-import lapr4.app.backoffice.console.presentation.figure.ActivateDeactivateFigureCategoriesUI;
-import lapr4.app.backoffice.console.presentation.figure.AddFigureToCatalogueUI;
-import lapr4.app.backoffice.console.presentation.figure.EditFigureCategoryUI;
-import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
+import lapr4.app.backoffice.console.presentation.figure.*;
 
 public class ShowDesignerMenu extends MainMenu {
     private static final String RETURN_LABEL = "Return ";
@@ -26,7 +23,7 @@ public class ShowDesignerMenu extends MainMenu {
         final var menu = new Menu("Show Design >");
 
         menu.addItem(1, "Add Figure to Catalogue", new AddFigureToCatalogueUI()::show);
-        menu.addItem(2, "Add Figure Category to Catalogue", new AddFigureToCatalogueUI()::show);
+        menu.addItem(2, "Add Figure Category to Catalogue", new AddFigureCategoryToCatalogueUI()::show);
         menu.addItem(3, "List Figure Categories", new ListFigureCategoriesUI()::show);
         menu.addItem(4, "Activate/Deactivate Figure Categories", new ActivateDeactivateFigureCategoriesUI()::show);
         menu.addItem(5, "Edit Figure Category", new EditFigureCategoryUI()::show);
