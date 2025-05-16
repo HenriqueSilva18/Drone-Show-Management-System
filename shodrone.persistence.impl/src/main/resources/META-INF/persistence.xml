@@ -14,9 +14,7 @@
     <class>lapr4.customermanagement.domain.Representative</class>
     <class>lapr4.figureManagement.domain.Figure</class>
     <class>lapr4.figureManagement.domain.FigureCategory</class>
-
-
-    <class>lapr4.showRequestManagement.domain.ShowRequest</class>
+    <!--<class>lapr4.showRequestManagement.domain.ShowRequest</class>-->
 
 
     <properties>
