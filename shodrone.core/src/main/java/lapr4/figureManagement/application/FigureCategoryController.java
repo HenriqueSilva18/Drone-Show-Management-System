@@ -23,6 +23,10 @@ public class FigureCategoryController {
         return service.findAll();
     }
 
+    public Iterable<FigureCategory> listAllActive() {
+        return service.findAllActive();
+    }
+
     public FigureCategory editCategoryDescription(String name, String newDescription) {
         return service.updateDescription(name, newDescription);
     }

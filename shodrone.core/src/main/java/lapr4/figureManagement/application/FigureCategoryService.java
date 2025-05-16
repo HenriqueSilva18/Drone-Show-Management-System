@@ -47,6 +47,11 @@ public class FigureCategoryService {
         return repo.findAll();
     }
 
+    public Iterable<FigureCategory> findAllActive() {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
+        return repo.findAllActive();
+    }
+
 
     public FigureCategory updateDescription(String name, String newDescription) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);

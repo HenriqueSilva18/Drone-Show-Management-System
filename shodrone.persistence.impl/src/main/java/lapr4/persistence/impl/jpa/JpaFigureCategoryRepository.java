@@ -24,6 +24,13 @@ public class JpaFigureCategoryRepository extends JpaAutoTxRepository<FigureCateg
     }
 
     @Override
+    public Iterable<FigureCategory> findAllActive() {
+        final TypedQuery<FigureCategory> query = entityManager().createQuery(
+                "SELECT fc FROM FigureCategory fc WHERE fc.isActive = true", FigureCategory.class);
+        return query.getResultList();
+    }
+
+    @Override
     public FigureCategory save(FigureCategory category) {
         return super.save(category);
     }
