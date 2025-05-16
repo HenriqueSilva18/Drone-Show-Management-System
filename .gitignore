@@ -27,3 +27,4 @@ replay_pid*
 .idea/
 *.iml
 out/
+.idea/workspace.xml
