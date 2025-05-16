@@ -137,7 +137,7 @@ public class Figure implements AggregateRoot<Long> {
     }
 
     public Set<String> keywords() {
-        return Collections.unmodifiableSet(keywords);
+        return keywords;
     }
 
     public void setKeywords(Set<String> keywords) {
