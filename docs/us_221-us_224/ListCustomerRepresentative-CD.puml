@@ -1,0 +1,76 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class ListCustomerRepresentativesController {
+    - customerRepository : CustomerRepository
+
+    + ListCustomerRepresentativesController()
+    + listRepresentatives(customerVAT)
+}
+
+class Customer {
+    - name : String
+    - vatNumber : String
+    - website : String
+    - phone : String
+    - email : String
+
+    + representatives()
+}
+
+class Representative {
+    - nif : String
+    - name : String
+    - email : String
+    - phone : String
+    - position : String
+
+    + isActive()
+}
+
+class SystemUser {
+    - username : String
+    - password : String
+    - firstName : String
+    - lastName : String
+    - email : String
+    - active : boolean
+
+    + isActive()
+}
+
+class CustomerRepository {
+    + findByVAT(vatNumber)
+}
+
+class Repositories {
+    - Repositories()
+    + {static} getInstance()
+    + getCustomerRepository()
+}
+
+note right of ListCustomerRepresentativesController
+    Retrieves and filters active
+    customer representatives
+end note
+
+note bottom of CustomerRepository
+    Used for retrieving customer
+    and representative data
+end note
+
+ListCustomerRepresentativesController ..> CustomerRepository
+ListCustomerRepresentativesController ..> Customer
+ListCustomerRepresentativesController ..> Representative
+
+Repositories -> "1" Repositories : instance
+Repositories --> "1" CustomerRepository : customerRepository
+
+CustomerRepository --> "*" Customer : customers
+Customer --> "*" Representative : representatives
+Representative --> "1" SystemUser : systemUser
+
+@enduml

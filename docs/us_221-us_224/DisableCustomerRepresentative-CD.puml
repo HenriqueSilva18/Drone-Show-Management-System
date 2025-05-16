@@ -1,0 +1,83 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class DisableCustomerRepresentativeController {
+    - customerRepository : CustomerRepository
+    - userDeactivator : DeactivateUserController
+
+    + DisableCustomerRepresentativeController()
+    + disableRepresentative(customerVAT, repNIF)
+}
+
+class DeactivateUserController {
+    + deactivateUser(systemUser)
+}
+
+class Customer {
+    - name : String
+    - vatNumber : String
+    - website : String
+    - phone : String
+    - email : String
+
+    + representatives()
+}
+
+class Representative {
+    - nif : String
+    - name : String
+    - email : String
+    - phone : String
+    - position : String
+
+    + user()
+}
+
+class SystemUser {
+    - username : String
+    - password : String
+    - firstName : String
+    - lastName : String
+    - email : String
+    - active : boolean
+
+    + deactivate()
+}
+
+class CustomerRepository {
+    + findByVAT(vatNumber)
+}
+
+class Repositories {
+    - Repositories()
+    + {static} getInstance()
+    + getCustomerRepository()
+}
+
+note right of DisableCustomerRepresentativeController
+    Handles the deactivation of customer
+    representatives and their system access
+end note
+
+note bottom of CustomerRepository
+    Used for retrieving customer
+    and representative data
+end note
+
+DisableCustomerRepresentativeController ..> CustomerRepository
+DisableCustomerRepresentativeController ..> DeactivateUserController
+DisableCustomerRepresentativeController ..> Customer
+DisableCustomerRepresentativeController ..> Representative
+
+Repositories -> "1" Repositories : instance
+Repositories --> "1" CustomerRepository : customerRepository
+
+CustomerRepository --> "*" Customer : customers
+Customer --> "*" Representative : representatives
+Representative --> "1" SystemUser : systemUser
+DeactivateUserController ..> SystemUser
+
+@enduml

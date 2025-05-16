@@ -1,0 +1,57 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Client" as CLIENT
+participant ":ListCustomerRepresentativeUI" as UI
+participant ":ListCustomerRepresentativeController" as CTRL
+participant "Repositories" as REPOS
+participant "repositories\n:Repositories" as REPOS_SINGLETON
+participant "customerRepository\n:CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+
+activate CLIENT
+    CLIENT -> UI : asks to list representatives
+    activate UI
+        UI --> CTRL** : create()
+
+        UI -> CTRL : listRepresentatives(customerVAT)
+        activate CTRL
+            CTRL -> REPOS : getInstance()
+            activate REPOS
+                REPOS --> CTRL : repositories
+            deactivate REPOS
+
+            CTRL -> REPOS_SINGLETON : getCustomerRepository()
+            activate REPOS_SINGLETON
+                REPOS_SINGLETON --> CTRL : customerRepository
+            deactivate REPOS_SINGLETON
+
+            CTRL -> CUST_REPO : findByVAT(customerVAT)
+            activate CUST_REPO
+                CUST_REPO --> CTRL : customer
+            deactivate CUST_REPO
+
+            CTRL -> CUSTOMER : representatives()
+            activate CUSTOMER
+                CUSTOMER --> CTRL : representatives
+            deactivate CUSTOMER
+
+            loop for each representative
+                CTRL -> REP : isActive()
+                activate REP
+                    REP --> CTRL : active status
+                deactivate REP
+            end
+
+            CTRL --> UI : activeRepresentativesList
+        deactivate CTRL
+
+        UI --> CLIENT : shows active representatives list
+    deactivate UI
+deactivate CLIENT
+
+@enduml

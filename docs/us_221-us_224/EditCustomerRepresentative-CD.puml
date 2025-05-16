@@ -1,0 +1,82 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class EditCustomerRepresentativeController {
+    - customerRepository : CustomerRepository
+
+    + EditCustomerRepresentativeController()
+    + editRepresentative(customerVAT, repNIF, newEmail, newPhone)
+}
+
+class Customer {
+    - name : String
+    - vatNumber : String
+    - website : String
+    - phone : String
+    - email : String
+
+    + representatives()
+}
+
+class Representative {
+    - nif : String
+    - name : String
+    - email : String
+    - phone : String
+    - position : String
+
+    + updateContact(email, phone)
+    + identity()
+}
+
+class Email {
+    - value : String
+    + Email(value)
+    + toString()
+}
+
+class Phone {
+    - value : String
+    + Phone(value)
+    + toString()
+}
+
+class CustomerRepository {
+    + findByVAT(vatNumber)
+    + save(customer)
+}
+
+class Repositories {
+    - Repositories()
+    + {static} getInstance()
+    + getCustomerRepository()
+}
+
+note right of EditCustomerRepresentativeController
+    Handles updating contact information
+    for customer representatives
+end note
+
+note bottom of CustomerRepository
+    Used for retrieving and updating
+    customer and representative data
+end note
+
+EditCustomerRepresentativeController ..> CustomerRepository
+EditCustomerRepresentativeController ..> Customer
+EditCustomerRepresentativeController ..> Representative
+EditCustomerRepresentativeController ..> Email
+EditCustomerRepresentativeController ..> Phone
+
+Repositories -> "1" Repositories : instance
+Repositories --> "1" CustomerRepository : customerRepository
+
+CustomerRepository --> "*" Customer : customers
+Customer --> "*" Representative : representatives
+Representative --> "1" Email : email
+Representative --> "1" Phone : phone
+
+@enduml

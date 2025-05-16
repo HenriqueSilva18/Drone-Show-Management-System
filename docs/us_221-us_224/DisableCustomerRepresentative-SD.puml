@@ -1,0 +1,61 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Client" as CLIENT
+participant ":DisableCustomerRepresentativeUI" as UI
+participant ":DisableCustomerRepresentativeController" as CTRL
+participant "Repositories" as REPOS
+participant "repositories\n:Repositories" as REPOS_SINGLETON
+participant "customerRepository\n:CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+participant ":DeactivateUserController" as USER_CTRL
+
+activate CLIENT
+    CLIENT -> UI : asks to disable a representative
+    activate UI
+        UI --> CTRL** : create()
+
+        UI -> CTRL : disableRepresentative(customerVAT, repNIF)
+        activate CTRL
+            CTRL -> REPOS : getInstance()
+            activate REPOS
+                REPOS --> CTRL : repositories
+            deactivate REPOS
+
+            CTRL -> REPOS_SINGLETON : getCustomerRepository()
+            activate REPOS_SINGLETON
+                REPOS_SINGLETON --> CTRL : customerRepository
+            deactivate REPOS_SINGLETON
+
+            CTRL -> CUST_REPO : findByVAT(customerVAT)
+            activate CUST_REPO
+                CUST_REPO --> CTRL : customer
+            deactivate CUST_REPO
+
+            CTRL -> CUSTOMER : representatives()
+            activate CUSTOMER
+                CUSTOMER --> CTRL : representatives
+            deactivate CUSTOMER
+
+            CTRL -> REP : user()
+            activate REP
+                REP --> CTRL : systemUser
+            deactivate REP
+
+            CTRL -> USER_CTRL : deactivateUser(systemUser)
+            activate USER_CTRL
+                USER_CTRL --> CTRL : success
+            deactivate USER_CTRL
+
+            CTRL --> UI : success
+        deactivate CTRL
+
+        UI --> CLIENT : displays operation success
+    deactivate UI
+deactivate CLIENT
+
+@enduml

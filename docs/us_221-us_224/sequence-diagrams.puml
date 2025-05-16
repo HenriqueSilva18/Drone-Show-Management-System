@@ -1,0 +1,172 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'1. Add Customer Representative
+actor "Client" as CLIENT
+participant ":AddCustomerRepresentativeController" as ADD_CTRL
+participant ":CustomerService" as CUST_SERVICE
+participant ":AddUserController" as USER_CTRL
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+
+activate CLIENT
+    CLIENT -> ADD_CTRL : addRepresentative(customerVAT, repData)
+    activate ADD_CTRL
+        ADD_CTRL -> CUST_SERVICE : findCustomerByVAT(customerVAT)
+        activate CUST_SERVICE
+            CUST_SERVICE --> ADD_CTRL : customer
+        deactivate CUST_SERVICE
+
+        ADD_CTRL -> USER_CTRL : addUser(username, password, firstName, lastName, email, roles)
+        activate USER_CTRL
+            USER_CTRL --> ADD_CTRL : systemUser
+        deactivate USER_CTRL
+
+        ADD_CTRL -> REP** : create(repData, systemUser)
+        activate REP
+            REP --> ADD_CTRL : representative
+        deactivate REP
+
+        ADD_CTRL -> CUSTOMER : addRepresentative(representative)
+        activate CUSTOMER
+            CUSTOMER -> CUSTOMER : validateRepresentative(representative)
+            activate CUSTOMER
+                CUSTOMER --> CUSTOMER : true
+            deactivate CUSTOMER
+            CUSTOMER --> ADD_CTRL : success
+        deactivate CUSTOMER
+
+        ADD_CTRL -> CUST_SERVICE : registerCustomer(customer)
+        activate CUST_SERVICE
+            CUST_SERVICE --> ADD_CTRL : success
+        deactivate CUST_SERVICE
+
+        ADD_CTRL --> CLIENT : success
+    deactivate ADD_CTRL
+deactivate CLIENT
+
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'2. Edit Customer Representative
+actor "Client" as CLIENT
+participant ":EditCustomerRepresentativeController" as EDIT_CTRL
+participant ":CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+
+activate CLIENT
+    CLIENT -> EDIT_CTRL : editRepresentative(customerVAT, repNIF, newEmail, newPhone)
+    activate EDIT_CTRL
+        EDIT_CTRL -> CUST_REPO : findByVAT(customerVAT)
+        activate CUST_REPO
+            CUST_REPO --> EDIT_CTRL : customer
+        deactivate CUST_REPO
+
+        EDIT_CTRL -> CUSTOMER : representatives()
+        activate CUSTOMER
+            CUSTOMER --> EDIT_CTRL : representatives
+        deactivate CUSTOMER
+
+        EDIT_CTRL -> REP : updateContact(newEmail, newPhone)
+        activate REP
+            REP --> EDIT_CTRL : success
+        deactivate REP
+
+        EDIT_CTRL -> CUST_REPO : save(customer)
+        activate CUST_REPO
+            CUST_REPO --> EDIT_CTRL : success
+        deactivate CUST_REPO
+
+        EDIT_CTRL --> CLIENT : success
+    deactivate EDIT_CTRL
+deactivate CLIENT
+
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'3. Disable Customer Representative
+actor "Client" as CLIENT
+participant ":DisableCustomerRepresentativeController" as DISABLE_CTRL
+participant ":CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+participant ":DeactivateUserController" as USER_CTRL
+participant "representative\n:Representative" as REP
+
+activate CLIENT
+    CLIENT -> DISABLE_CTRL : disableRepresentative(customerVAT, repNIF)
+    activate DISABLE_CTRL
+        DISABLE_CTRL -> CUST_REPO : findByVAT(customerVAT)
+        activate CUST_REPO
+            CUST_REPO --> DISABLE_CTRL : customer
+        deactivate CUST_REPO
+
+        DISABLE_CTRL -> CUSTOMER : representatives()
+        activate CUSTOMER
+            CUSTOMER --> DISABLE_CTRL : representatives
+        deactivate CUSTOMER
+
+        DISABLE_CTRL -> REP : user()
+        activate REP
+            REP --> DISABLE_CTRL : systemUser
+        deactivate REP
+
+        DISABLE_CTRL -> USER_CTRL : deactivateUser(systemUser)
+        activate USER_CTRL
+            USER_CTRL --> DISABLE_CTRL : success
+        deactivate USER_CTRL
+
+        DISABLE_CTRL --> CLIENT : success
+    deactivate DISABLE_CTRL
+deactivate CLIENT
+
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'4. List Customer Representatives
+actor "Client" as CLIENT
+participant ":ListCustomerRepresentativesController" as LIST_CTRL
+participant ":CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+
+activate CLIENT
+    CLIENT -> LIST_CTRL : listRepresentatives(customerVAT)
+    activate LIST_CTRL
+        LIST_CTRL -> CUST_REPO : findByVAT(customerVAT)
+        activate CUST_REPO
+            CUST_REPO --> LIST_CTRL : customer
+        deactivate CUST_REPO
+
+        LIST_CTRL -> CUSTOMER : representatives()
+        activate CUSTOMER
+            CUSTOMER --> LIST_CTRL : representatives
+        deactivate CUSTOMER
+
+        LIST_CTRL -> LIST_CTRL : filterActiveRepresentatives()
+        activate LIST_CTRL
+            LIST_CTRL --> LIST_CTRL : filteredList
+        deactivate LIST_CTRL
+
+        LIST_CTRL --> CLIENT : activeRepresentativesList
+    deactivate LIST_CTRL
+deactivate CLIENT
+
+@enduml

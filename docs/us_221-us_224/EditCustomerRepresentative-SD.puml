@@ -1,0 +1,73 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Client" as CLIENT
+participant ":EditCustomerRepresentativeUI" as UI
+participant ":EditCustomerRepresentativeController" as CTRL
+participant "Repositories" as REPOS
+participant "repositories\n:Repositories" as REPOS_SINGLETON
+participant "customerRepository\n:CustomerRepository" as CUST_REPO
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+participant "email\n:Email" as EMAIL
+participant "phone\n:Phone" as PHONE
+
+activate CLIENT
+    CLIENT -> UI : asks to edit representative contact
+    activate UI
+        UI --> CTRL** : create()
+
+        UI -> UI : requests new contact information
+        activate UI
+            UI --> CLIENT : asks for new email and phone
+        deactivate UI
+
+        CLIENT -> UI : provides new email and phone
+        activate UI
+            UI -> CTRL : editRepresentative(customerVAT, repNIF, newEmail, newPhone)
+            activate CTRL
+                CTRL -> REPOS : getInstance()
+                activate REPOS
+                    REPOS --> CTRL : repositories
+                deactivate REPOS
+
+                CTRL -> REPOS_SINGLETON : getCustomerRepository()
+                activate REPOS_SINGLETON
+                    REPOS_SINGLETON --> CTRL : customerRepository
+                deactivate REPOS_SINGLETON
+
+                CTRL -> CUST_REPO : findByVAT(customerVAT)
+                activate CUST_REPO
+                    CUST_REPO --> CTRL : customer
+                deactivate CUST_REPO
+
+                CTRL -> CUSTOMER : representatives()
+                activate CUSTOMER
+                    CUSTOMER --> CTRL : representatives
+                deactivate CUSTOMER
+
+                CTRL --> EMAIL** : create(newEmail)
+                CTRL --> PHONE** : create(newPhone)
+
+                CTRL -> REP : updateContact(email, phone)
+                activate REP
+                    REP --> CTRL : success
+                deactivate REP
+
+                CTRL -> CUST_REPO : save(customer)
+                activate CUST_REPO
+                    CUST_REPO --> CTRL : success
+                deactivate CUST_REPO
+
+                CTRL --> UI : success
+            deactivate CTRL
+
+            UI --> CLIENT : displays operation success
+        deactivate UI
+    deactivate UI
+deactivate CLIENT
+
+@enduml

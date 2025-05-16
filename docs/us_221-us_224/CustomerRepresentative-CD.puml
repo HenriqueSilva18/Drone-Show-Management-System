@@ -1,0 +1,124 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class Customer {
+    - name : String
+    - vatNumber : String
+    - website : String
+    - phone : String
+    - email : String
+
+    + Customer(name, vatNumber, website, phone, email)
+    + addRepresentative(representative)
+    + representatives()
+    - validateRepresentative(representative)
+}
+
+class Representative {
+    - nif : String
+    - name : String
+    - email : String
+    - phone : String
+    - position : String
+
+    + Representative(nif, name, email, phone, position, systemUser)
+    + updateContact(email, phone)
+    + identity()
+    + user()
+}
+
+class SystemUser {
+    - username : String
+    - password : String
+    - firstName : String
+    - lastName : String
+    - email : String
+    - active : boolean
+
+    + isActive()
+}
+
+class CustomerService {
+    + findCustomerByVAT(vatNumber)
+    + registerCustomer(customer)
+}
+
+class CustomerRepository {
+    + findByVAT(vatNumber)
+    + save(customer)
+}
+
+class AddCustomerRepresentativeController {
+    - customerService : CustomerService
+    - userController : AddUserController
+
+    + AddCustomerRepresentativeController()
+    + findCustomerByVAT(vatNumber)
+    + addRepresentative(customerVAT, repData)
+}
+
+class EditCustomerRepresentativeController {
+    - customerRepository : CustomerRepository
+
+    + editRepresentative(customerVAT, repNIF, newEmail, newPhone)
+}
+
+class DisableCustomerRepresentativeController {
+    - customerRepository : CustomerRepository
+    - userDeactivator : DeactivateUserController
+
+    + disableRepresentative(customerVAT, repNIF)
+}
+
+class ListCustomerRepresentativesController {
+    - customerRepository : CustomerRepository
+
+    + listRepresentatives(customerVAT)
+}
+
+class Repositories {
+    - Repositories()
+    + {static} getInstance()
+    + getCustomerRepository()
+}
+
+note right of AddCustomerRepresentativeController
+    repData contains all necessary
+    information to create a new
+    representative
+end note
+
+note bottom of CustomerRepository
+    Used for managing customer
+    and representative data
+end note
+
+AddCustomerRepresentativeController ..> CustomerService
+AddCustomerRepresentativeController ..> Customer
+AddCustomerRepresentativeController ..> Representative
+AddCustomerRepresentativeController .> Repositories
+
+EditCustomerRepresentativeController ..> CustomerRepository
+EditCustomerRepresentativeController ..> Customer
+EditCustomerRepresentativeController ..> Representative
+
+DisableCustomerRepresentativeController ..> CustomerRepository
+DisableCustomerRepresentativeController ..> Customer
+DisableCustomerRepresentativeController ..> Representative
+
+ListCustomerRepresentativesController ..> CustomerRepository
+ListCustomerRepresentativesController ..> Customer
+
+Repositories -> "1" Repositories : instance
+Repositories --> "1" CustomerRepository : customerRepository
+
+CustomerService ..> CustomerRepository
+CustomerRepository --> "*" Customer : customers
+
+Customer --> "*" Representative : representatives
+Representative --> "1" SystemUser : systemUser
+
+@enduml
