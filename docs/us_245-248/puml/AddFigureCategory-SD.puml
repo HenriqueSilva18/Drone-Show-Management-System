@@ -1,0 +1,46 @@
+@startuml
+actor User
+
+activate User
+User -> FigureCategoryUI : adicionar figure category
+activate FigureCategoryUI
+
+FigureCategoryUI --> User : pede nome e descrição
+User -> FigureCategoryUI : introduz nome e descrição
+FigureCategoryUI -> FigureCategoryController : addFigureCategory(name, description)
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : registerCategory(FigureCategory)
+activate FigureCategoryService
+FigureCategoryService -> AuthorizationService : ensureAuthenticatedUserHasAnyOf(...)
+activate AuthorizationService
+AuthorizationService --> FigureCategoryService : autorizado
+deactivate AuthorizationService
+FigureCategoryService -> FigureCategory : FigureCategory(name, description)
+activate FigureCategory
+FigureCategory --> FigureCategoryService : figure category instance
+deactivate FigureCategory
+FigureCategoryService -> FigureCategoryRepository : save(FigureCategory)
+activate FigureCategoryRepository
+
+alt Persistência ativa com JPA
+    FigureCategoryRepository -> JpaFigureCategoryRepository : save(FigureCategory)
+    activate JpaFigureCategoryRepository
+    JpaFigureCategoryRepository --> FigureCategoryRepository : categoria persistida
+    deactivate JpaFigureCategoryRepository
+else InMemory (testes)
+    FigureCategoryRepository -> InMemoryFigureCategoryRepository : save(FigureCategory)
+    activate InMemoryFigureCategoryRepository
+    InMemoryFigureCategoryRepository --> FigureCategoryRepository : categoria guardada em memória
+    deactivate InMemoryFigureCategoryRepository
+    deactivate FigureCategoryRepository
+end
+
+FigureCategoryRepository --> FigureCategoryService : categoria guardada
+FigureCategoryService --> FigureCategoryController : categoria guardada
+deactivate FigureCategoryService
+FigureCategoryController --> FigureCategoryUI : mostra confirmação
+deactivate FigureCategoryController
+FigureCategoryUI --> User : Figure added successfully
+deactivate FigureCategoryUI
+deactivate User
+@enduml

@@ -1,0 +1,81 @@
+@startuml
+actor User
+
+participant ActivateDeactivateFigureCategoriesUI as ToggleFigureCategoryStatusUI
+activate User
+User -> ToggleFigureCategoryStatusUI : mudar estado de figure category
+activate ToggleFigureCategoryStatusUI
+ToggleFigureCategoryStatusUI -> FigureCategoryController : findAll()
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : listAll()
+activate FigureCategoryService
+FigureCategoryService -> FigureCategoryRepository : findAll()
+activate FigureCategoryRepository
+FigureCategoryRepository --> FigureCategoryService : lista de figure categories
+deactivate FigureCategoryRepository
+
+FigureCategoryService --> FigureCategoryController : lista de figure categories
+deactivate FigureCategoryService
+FigureCategoryController --> ToggleFigureCategoryStatusUI : lista de figure categories
+deactivate FigureCategoryController
+ToggleFigureCategoryStatusUI --> User : lista de figure categories
+deactivate FigureCategoryRepository
+
+
+User -> ToggleFigureCategoryStatusUI : seleciona categoria a ativar/desativar
+ToggleFigureCategoryStatusUI -> FigureCategoryController : toggleCategory(name)
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : toggleCategory(name)
+activate FigureCategoryService
+FigureCategoryService -> AuthorizationService : ensureAuthenticatedUserHasAnyOf(...)
+activate AuthorizationService
+AuthorizationService --> FigureCategoryService : autorizado
+deactivate AuthorizationService
+FigureCategoryService -> FigureCategoryRepository : findByName(name)
+activate FigureCategoryRepository
+FigureCategoryRepository --> FigureCategoryService : FigureCategory
+deactivate FigureCategoryRepository
+
+alt Categoria está ativa
+    FigureCategoryService -> FigureCategory : deactivate()
+    activate FigureCategory
+    FigureCategory --> FigureCategoryService : estado = inativo, data atualizada
+else Categoria está inativa
+    FigureCategoryService -> FigureCategory : activate()
+    FigureCategory --> FigureCategoryService : estado = ativo, data atualizada
+    deactivate FigureCategory
+end
+
+FigureCategoryService -> FigureCategoryRepository : save(FigureCategory)
+activate FigureCategoryRepository
+
+alt Persistência ativa com JPA
+    FigureCategoryRepository -> JpaFigureCategoryRepository : save(FigureCategory)
+    activate JpaFigureCategoryRepository
+    JpaFigureCategoryRepository --> FigureCategoryRepository : categoria atualizada
+    deactivate JpaFigureCategoryRepository
+else InMemory (testes)
+    FigureCategoryRepository -> InMemoryFigureCategoryRepository : save(FigureCategory)
+    activate InMemoryFigureCategoryRepository
+    InMemoryFigureCategoryRepository --> FigureCategoryRepository : categoria atualizada
+    deactivate InMemoryFigureCategoryRepository
+end
+
+
+
+FigureCategoryRepository --> FigureCategoryService : categoria persistida
+deactivate FigureCategoryRepository
+FigureCategoryService --> FigureCategoryController : categoria atualizada
+deactivate FigureCategoryService
+FigureCategoryController --> ToggleFigureCategoryStatusUI : confirmação
+deactivate FigureCategoryController
+ToggleFigureCategoryStatusUI --> User : Estado alterado com sucesso
+ToggleFigureCategoryStatusUI -> FigureCategory : lastEditionDate()
+activate FigureCategory
+FigureCategory --> ToggleFigureCategoryStatusUI : lastEditionDate
+deactivate FigureCategory
+ToggleFigureCategoryStatusUI --> User : Sucesso da operação, Nova situação e Última edição
+deactivate ToggleFigureCategoryStatusUI
+
+deactivate User
+@enduml
