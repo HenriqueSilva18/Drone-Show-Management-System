@@ -25,13 +25,6 @@ public class InMemoryFigureCategoryRepository implements FigureCategoryRepositor
     }
 
     @Override
-    public Iterable<FigureCategory> findAllActive() {
-        return categories.stream()
-                .filter(FigureCategory::isActive)
-                .toList();
-    }
-
-    @Override
     public Optional<FigureCategory> findByName(String name) {
         return ofIdentity(name);
     }
