@@ -8,5 +8,6 @@ public interface FigureCategoryRepository  extends DomainRepository<String, Figu
    FigureCategory save(FigureCategory figureCategory);
    Iterable<FigureCategory> findAll();
    Optional<FigureCategory> findByName(String name);
+    Iterable<FigureCategory> findAllActive();
 }
 

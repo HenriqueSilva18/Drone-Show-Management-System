@@ -17,7 +17,7 @@ public class JpaFigureRepository extends JpaAutoTxRepository<Figure, Long, Long>
 
     @Override
     public Figure save(Figure figure) {
-        return save(figure);
+        return super.save(figure);
     }
 
     @Override
