@@ -33,7 +33,7 @@ The team studied the requirements to identify the major entities, value objects,
 
 ### 3.1. Domain Model
 
-![Domain Model](Domain_Model/Global_Domain_Model.png)
+![Domain Model](Domain_Model/sprint1-domain-model.png)
 
 ### 3.2. Other Remarks
 

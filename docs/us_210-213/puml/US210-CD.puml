@@ -1,0 +1,96 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class LoginUI {
+    - onlyWithThis : Role
+    - maxAttempts : int
+    + show()
+    + doShow()
+}
+
+class AuthenticationCredentialHandler {
+    - authenticationService : Authenticator
+    + authenticated(username, password, role)
+}
+
+class AuthzRegistry {
+    - AuthzRegistry()
+    + {static} getInstance()
+    + authenticationService()
+    + authorizationService()
+}
+
+class AuthenticationService {
+    + authenticate(username, password, role)
+    - validateCredentials(username, password)
+    - validateUserRole(user, role)
+}
+
+class AuthorizationService {
+    + validateCredentials(username, password)
+    + validateUserRole(user, role)
+    + hasSession()
+    + session()
+    + clearSession()
+}
+
+class UserSession {
+    - user : SystemUser
+    - roles : Set<Role>
+    + create(user, roles)
+    + authenticatedUser()
+}
+
+class SystemUser {
+    - username : Username
+    - password : Password
+    - name : String
+    - status : SystemStatus
+    + isActive()
+}
+
+enum SystemStatus {
+    ACTIVE
+    INACTIVE
+}
+
+enum SystemRole {
+    ADMIN
+    CRM_MANAGER
+    CRM_COLLABORATOR
+    SHOW_DESIGNER
+    CUSTOMER_REPRESENTATIVE
+}
+
+class Username <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+class Password <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+LoginUI ..> AuthenticationCredentialHandler
+AuthenticationCredentialHandler ..> AuthzRegistry
+AuthenticationCredentialHandler ..> AuthenticationService
+
+AuthzRegistry -> "1" AuthzRegistry : instance
+AuthzRegistry --> "1" AuthenticationService : authenticationService
+AuthzRegistry --> "1" AuthorizationService : authorizationService
+
+AuthenticationService ..> AuthorizationService
+AuthenticationService ..> UserSession
+AuthenticationService ..> SystemUser
+
+UserSession --> "1" SystemUser : authenticatedUser
+UserSession --> "*" SystemRole : roles
+
+SystemUser --> "1" SystemStatus : status
+SystemUser --> "*" SystemRole : roles
+SystemUser --> "1" Username : username
+SystemUser --> "1" Password : password
+
+@enduml 

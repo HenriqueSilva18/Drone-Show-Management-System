@@ -1,0 +1,66 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Administrator" as ADMIN
+participant ":ListUsersAction" as ACTION
+participant ":ListUsersUI" as UI
+participant ":AbstractListUI" as ABS_UI
+participant ":ListUsersController" as CTRL
+participant ":SystemUserPrinter" as PRINTER
+participant "AuthzRegistry" as AUTHZ_REG
+participant ":UserManagementService" as USER_SVC
+
+activate ADMIN
+
+ADMIN -> ACTION : execute()
+activate ACTION
+    ACTION -> UI : show()
+    activate UI
+        UI -> ABS_UI : show()
+        activate ABS_UI
+            ABS_UI -> UI : elements()
+            activate UI
+                UI -> CTRL : backofficeUsers()
+                activate CTRL
+                    CTRL -> AUTHZ_REG : userService()
+                    activate AUTHZ_REG
+                        AUTHZ_REG --> CTRL : userService
+                    deactivate AUTHZ_REG
+                    
+                    CTRL -> USER_SVC : allUsers()
+                    activate USER_SVC
+                        USER_SVC --> CTRL : userList
+                    deactivate USER_SVC
+                    
+                    CTRL --> UI : backofficeUsers
+                deactivate CTRL
+                UI --> ABS_UI : userList
+            deactivate UI
+            
+            ABS_UI -> UI : elementPrinter()
+            activate UI
+                UI --> ABS_UI : new SystemUserPrinter
+            deactivate UI
+            
+            ABS_UI -> UI : listHeader()
+            activate UI
+                UI --> ABS_UI : formatted header
+            deactivate UI
+            
+            loop for each user in userList
+                ABS_UI -> PRINTER : visit(user)
+                activate PRINTER
+                    PRINTER -> PRINTER : format user details
+                    PRINTER --> ABS_UI : formatted line
+                deactivate PRINTER
+            end
+            
+            ABS_UI --> ADMIN : displays user list
+        deactivate ABS_UI
+    deactivate UI
+deactivate ACTION
+
+deactivate ADMIN
+
+@enduml 

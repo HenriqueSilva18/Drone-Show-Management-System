@@ -1,0 +1,86 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Administrator" as ADMIN
+participant ":DeactivateUserAction" as DEACT_ACTION
+participant ":DeactivateUserUI" as DEACT_UI
+participant ":DeactivateUserController" as DEACT_CTRL
+participant ":ActivateUserAction" as ACT_ACTION
+participant ":ActivateUserUI" as ACT_UI
+participant ":ActivateUserController" as ACT_CTRL
+participant "AuthzRegistry" as AUTHZ_REG
+participant ":UserManagementService" as USER_SVC
+participant ":SystemUser" as USER
+
+activate ADMIN
+
+alt Deactivate User
+    ADMIN -> DEACT_ACTION : execute()
+    activate DEACT_ACTION
+        DEACT_ACTION -> DEACT_UI : show()
+        activate DEACT_UI
+            DEACT_UI -> DEACT_UI : doShow()
+            activate DEACT_UI
+                DEACT_UI -> DEACT_CTRL : activeUsers()
+                activate DEACT_CTRL
+                    DEACT_CTRL -> USER_SVC : activeUsers()
+                    activate USER_SVC
+                        USER_SVC --> DEACT_CTRL : userList
+                    deactivate USER_SVC
+                    DEACT_CTRL --> DEACT_UI : userList
+                deactivate DEACT_CTRL
+
+                DEACT_UI -> DEACT_UI : filterNonRepresentativeUsers()
+                DEACT_UI --> ADMIN : shows active users list
+                ADMIN -> DEACT_UI : selects user number
+                DEACT_UI -> DEACT_CTRL : deactivateUser(selectedUser)
+                activate DEACT_CTRL
+                    DEACT_CTRL -> USER_SVC : deactivateUser(user)
+                    activate USER_SVC
+                        USER_SVC -> USER : deactivate()
+                        USER_SVC --> DEACT_CTRL : user
+                    deactivate USER_SVC
+                    DEACT_CTRL --> DEACT_UI : user
+                deactivate DEACT_CTRL
+                DEACT_UI --> ADMIN : user deactivated
+            deactivate DEACT_UI
+        deactivate DEACT_UI
+    deactivate DEACT_ACTION
+else Activate User
+    ADMIN -> ACT_ACTION : execute()
+    activate ACT_ACTION
+        ACT_ACTION -> ACT_UI : show()
+        activate ACT_UI
+            ACT_UI -> ACT_UI : doShow()
+            activate ACT_UI
+                ACT_UI -> ACT_CTRL : deactiveUsers()
+                activate ACT_CTRL
+                    ACT_CTRL -> USER_SVC : deactivatedUsers()
+                    activate USER_SVC
+                        USER_SVC --> ACT_CTRL : userList
+                    deactivate USER_SVC
+                    ACT_CTRL --> ACT_UI : userList
+                deactivate ACT_CTRL
+
+                ACT_UI -> ACT_UI : filterNonRepresentativeUsers()
+                ACT_UI --> ADMIN : shows inactive users list
+                ADMIN -> ACT_UI : selects user number
+                ACT_UI -> ACT_CTRL : activateUser(selectedUser)
+                activate ACT_CTRL
+                    ACT_CTRL -> USER_SVC : activateUser(user)
+                    activate USER_SVC
+                        USER_SVC -> USER : activate()
+                        USER_SVC --> ACT_CTRL : user
+                    deactivate USER_SVC
+                    ACT_CTRL --> ACT_UI : user
+                deactivate ACT_CTRL
+                ACT_UI --> ADMIN : user activated
+            deactivate ACT_UI
+        deactivate ACT_UI
+    deactivate ACT_ACTION
+end
+
+deactivate ADMIN
+
+@enduml 

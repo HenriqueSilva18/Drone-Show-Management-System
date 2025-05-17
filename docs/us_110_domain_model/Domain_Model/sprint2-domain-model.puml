@@ -126,9 +126,19 @@ package "Figure Aggregate" as FIG {
     + String description
     + Boolean exclusive
   }
+
+    class FigureCategory <<Entity>> {
+      + String name
+      + String description
+      + Boolean isActive
+    }
+
 }
 Figure "1" --> "1" ID : FigureID
 Figure "*" --> "1" Customer : Customer
+Figure "*" --> "1" FigureCategory: FigureCategory
+FigureCategory "*" --> "1" Date: lastEditionDate
+FigureCategory "*" --> "1" Date: creationDate
 
 ' ShowProposal Aggregate
 package "ShowProposal Aggregate" as SP {
