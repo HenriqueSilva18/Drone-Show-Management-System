@@ -8,13 +8,13 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "report.h" // US262 - Incluir a definição da estrutura Position
-
+#include "report.h"	// US262 - Incluir a definição da estrutura Position
 
 int drone_id;
 int stop = 0;
 FILE* script = NULL;
-int sync_fd = -1;  
+int sync_fd = -1;
+int data_fd = -1;	 // New file descriptor for data pipe
 int script_completed = 0;
 
 // US263 - Handler para SIGUSR1 (colisão)
@@ -35,26 +35,22 @@ void handle_terminate(int sig) {
 	stop = 1;
 }
 
-
-void send_last_position(Position *pos) {
+void send_last_position(Position* pos) {
 	printf("[DRONE %d] Script completed, sending last known position at step %d\n",
-		drone_id, pos->step);
-	write(STDOUT_FILENO, pos, sizeof(Position));
+			 drone_id, pos->step);
+	write(data_fd, pos, sizeof(Position));
 }
 
 int main(int argc, char* argv[]) {
-	if (argc < 2 || argc > 3) {
-		fprintf(stderr, "Usage: %s <drone_id> [sync_fd]\n", argv[0]);
+	if (argc != 4) {
+		fprintf(stderr, "Usage: %s <drone_id> <sync_fd> <data_fd>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
 	drone_id = atoi(argv[1]);
-
-
-	if (argc == 3) {
-		sync_fd = atoi(argv[2]);
-		printf("[DRONE %d] Using sync_fd: %d\n", drone_id, sync_fd);
-	}
+	sync_fd = atoi(argv[2]);
+	data_fd = atoi(argv[3]);
+	printf("[DRONE %d] Using sync_fd: %d, data_fd: %d\n", drone_id, sync_fd, data_fd);
 
 	// US263 - Regista handlers de sinais
 	signal(SIGUSR1, handle_collision);
@@ -83,26 +79,24 @@ int main(int argc, char* argv[]) {
 
 	while (!stop) {
 		// US264 - Aguardar sinal do processo principal para avançar
-		if (sync_fd != -1) {
-			char sync_signal;
-			printf("[DRONE %d] Waiting for sync signal at step %d...\n", drone_id, step);
-			int bytes_read = read(sync_fd, &sync_signal, 1);
-			if (bytes_read <= 0) {
-				if (bytes_read == 0) {
-					printf("[DRONE %d] Sync pipe closed. Terminating.\n", drone_id);
-				} else {
-					perror("Sync pipe read error");
-				}
-				break;
+		char sync_signal;
+		printf("[DRONE %d] Waiting for sync signal at step %d...\n", drone_id, step);
+		int bytes_read = read(sync_fd, &sync_signal, 1);
+		if (bytes_read <= 0) {
+			if (bytes_read == 0) {
+				printf("[DRONE %d] Sync pipe closed. Terminating.\n", drone_id);
+			} else {
+				perror("Sync pipe read error");
 			}
-			printf("[DRONE %d] Received sync signal for step %d\n", drone_id, step);
+			break;
 		}
+		printf("[DRONE %d] Received sync signal for step %d\n", drone_id, step);
 
 		// Enviar a posição atual
 		pos.step = step++;
 		printf("[DRONE %d] Sending position (%d,%d,%d) at step %d\n",
-			drone_id, pos.x, pos.y, pos.z, pos.step);
-		write(STDOUT_FILENO, &pos, sizeof(Position));
+				 drone_id, pos.x, pos.y, pos.z, pos.step);
+		write(data_fd, &pos, sizeof(Position));
 
 		// Ler a próxima posição se o script não acabou
 		if (!script_completed) {
@@ -116,6 +110,9 @@ int main(int argc, char* argv[]) {
 
 	if (sync_fd != -1) {
 		close(sync_fd);
+	}
+	if (data_fd != -1) {
+		close(data_fd);
 	}
 
 	fclose(script);
