@@ -1,0 +1,54 @@
+@startuml
+
+actor "CRM Collaborator" as collaborator
+participant "ListActivePublicFiguresUI" as ui
+participant "FigureController" as controller
+participant "FigureService" as service
+participant "FigureRepository" as repo
+participant "JpaFigureRepository" as jpaRepo
+participant "InMemoryFigureRepository" as memRepo
+participant "AuthorizationService" as authz
+
+collaborator -> ui: show()
+activate ui
+
+ui -> controller: listActivePublicFigures()
+activate controller
+
+controller -> service: findActivePublic()
+activate service
+
+service -> authz: ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR)
+activate authz
+authz --> service: authorized
+deactivate authz
+
+service -> repo: findActivePublic()
+activate repo
+
+alt JPA Implementation
+    repo -> jpaRepo: findActivePublic()
+    activate jpaRepo
+    jpaRepo --> repo: Iterable<Figure>
+    deactivate jpaRepo
+else InMemory Implementation
+    repo -> memRepo: findActivePublic()
+    activate memRepo
+    memRepo --> repo: Iterable<Figure>
+    deactivate memRepo
+end
+
+repo --> service: Iterable<Figure>
+deactivate repo
+
+service --> controller: Iterable<Figure>
+deactivate service
+
+controller --> ui: Iterable<Figure>
+deactivate controller
+
+ui -> ui: displayFigures(figures)
+ui --> collaborator: display results
+deactivate ui
+
+@enduml 

@@ -1,0 +1,63 @@
+@startuml
+
+package "Figure Management" {
+    class SearchFigureCatalogueUI {
+        -controller: FigureController
+        +show()
+        -displaySearchResults(figures: Iterable<Figure>)
+    }
+
+    class Figure {
+        -id: Long
+        -description: String
+        -keywords: Set<String>
+        -category: FigureCategory
+        -isActive: boolean
+        +hasKeyword(keyword: String): boolean
+        +category(): FigureCategory
+        +description(): String
+        +toString(): String
+    }
+
+    class FigureCategory {
+        -name: String
+        -description: String
+        +name(): String
+        +toString(): String
+    }
+
+    class FigureController {
+        -figureService: FigureService
+        +search(searchTerm: String): Iterable<Figure>
+    }
+
+    class FigureService {
+        -repo: FigureRepository
+        -authz: AuthorizationService
+        +searchByCategoryOrKeyword(searchTerm: String): Iterable<Figure>
+    }
+
+    interface FigureRepository {
+        +searchByCategoryOrKeyword(searchTerm: String): Iterable<Figure>
+    }
+
+    class JpaFigureRepository {
+        -entityManager: EntityManager
+        +searchByCategoryOrKeyword(searchTerm: String): Iterable<Figure>
+    }
+
+    class InMemoryFigureRepository {
+        -figures: Set<Figure>
+        +searchByCategoryOrKeyword(searchTerm: String): Iterable<Figure>
+    }
+}
+
+SearchFigureCatalogueUI --> FigureController
+FigureController --> FigureService
+FigureService --> FigureRepository
+FigureService --> AuthorizationService
+Figure "1" -- "1" FigureCategory
+FigureRepository <|.. JpaFigureRepository
+FigureRepository <|.. InMemoryFigureRepository
+
+@enduml 
