@@ -94,9 +94,4 @@ public class FigureCategoryService {
         return repo.save(category);
     }
 
-    public Iterable<FigureCategory> findAllActive() {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
-        return repo.findAllActive();
-    }
-
 }

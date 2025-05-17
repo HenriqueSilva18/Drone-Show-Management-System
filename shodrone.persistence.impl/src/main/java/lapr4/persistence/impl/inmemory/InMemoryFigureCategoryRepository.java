@@ -51,11 +51,4 @@ public class InMemoryFigureCategoryRepository implements FigureCategoryRepositor
     public long count() {
         return categories.size();
     }
-
-    @Override
-    public Iterable<FigureCategory> findAllActive() {
-        return categories.stream()
-                .filter(FigureCategory::isActive)
-                .toList();
-    }
 }

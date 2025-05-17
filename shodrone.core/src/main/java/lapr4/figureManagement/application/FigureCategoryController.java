@@ -30,8 +30,4 @@ public class FigureCategoryController {
     public FigureCategory toggleCategory(String name) {
         return service.toggleCategory(name);
     }
-
-    public Iterable<FigureCategory> listAllActive() {
-        return service.findAllActive();
-    }
 }
