@@ -27,9 +27,11 @@ public class Customer implements AggregateRoot<VAT> {
 	private Address address;
 
 	@Embedded
+	@Column(unique = true)
 	private Email email;
 
 	@Embedded
+	@Column(unique = true)
 	private Phone phone;
 
 	@Enumerated(EnumType.STRING)

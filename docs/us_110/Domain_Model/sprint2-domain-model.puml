@@ -1,0 +1,191 @@
+@startuml
+' Domain Model with Aggregates and Value Objects
+skinparam packageStyle rectangle
+
+' Common Value Objects
+class ID <<(V, #ADD8E6) valueObject>> {
+  + int value
+}
+
+class Date <<(V, #ADD8E6) valueObject>> {
+  + String value
+}
+class Address <<(V, #ADD8E6) valueObject>> {
+  + String street
+    + String city
+      + String postalCode
+        + String country
+}
+
+
+' Language Aggregate
+package "Language Aggregate" as LANG {
+  class Language <<AggregateRoot>> {
+    + String name
+  }
+}
+
+' DroneModel Aggregate
+package "DroneModel Aggregate" as DM {
+  class DroneModel <<AggregateRoot>> {
+    + List<String> modelSpecifications
+  }
+}
+DroneModel "1" --> "1" ID : DroneModelID
+DroneModel "1" --> "1" Language : Language
+
+' Customer Aggregate
+package "Customer Aggregate" as CL {
+  class Customer <<AggregateRoot>> {
+    + String name
+  }
+
+  class VAT <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  entity Representative <<Entity>> {
+    + String name
+    + String position
+  }
+
+    class NIF <<(V, #ADD8E6) valueObject>> {
+      + String value
+    }
+
+ class Email <<(V, #ADD8E6) valueObject>> {
+   + String value
+ }
+ class Phone <<(V, #ADD8E6) valueObject>> {
+   + String value
+ }
+
+  enum CustomerType <<Enum>> {
+           + REGULAR
+            + VIP
+  }
+
+   enum CustomerStatus <<Enum>> {
+    + CREATED
+     + INFRINGEMENT
+      + DELETED
+   }
+
+}
+
+Customer "1" --> "1" VAT : CustomerVAT
+Customer "1" --> "1" Address : CustomerAddress
+Customer "1" --> "*" Representative : Representatives
+Customer "1" --> "1" Email : CustomerEmail
+Customer "1" --> "1" Phone : CustomerPhone
+Customer "*" --> "1" CustomerType : CustomerType
+Customer "*" --> "1" CustomerStatus : CustomerStatus
+Representative "1" --> "1" NIF : RepresentativeNIF
+Representative "1" --> "1" Email : RepresentativeEmail
+Representative "1" --> "1" Phone : RepresentativePhone
+
+
+' ShowRequest Aggregate
+package "ShowRequest Aggregate" as SRQ {
+  class ShowRequest <<AggregateRoot>> {
+    + int dronesNum
+    + int duration
+    + String showDescription
+  }
+}
+
+ShowRequest "1" --> "1" ID : ShowRequestID
+ShowRequest "*" --> "1" Customer : Customer
+ShowRequest "*" --> "1" Address : Place
+ShowRequest "*" --> "1" Date : ShowRequestDate
+
+
+' Drone Aggregate
+package "Drone Aggregate" as DR {
+  class Drone <<AggregateRoot>> {
+    + DroneModel model
+  }
+  class Maintenance <<Entity>>{
+    + String description
+  }
+  class SerialNumber <<(V, #ADD8E6) valueObject>> {
+    + int value
+  }
+}
+
+Drone "1" --> "1" SerialNumber : DroneSerialNumber
+Drone "1" --> "*" Maintenance : MaintenanceHistory
+Maintenance "*" --> "1" Date : MaintenanceStartDate
+Maintenance "*" --> "1" Date : MaintenanceEndDate
+Maintenance "1" --> "1" ID : MaintenanceID
+Drone "*" --> "1" DroneModel : DroneModel
+
+' Figure Aggregate
+package "Figure Aggregate" as FIG {
+  class Figure <<AggregateRoot>> {
+    + String description
+    + Boolean exclusive
+  }
+}
+Figure "1" --> "1" ID : FigureID
+Figure "*" --> "1" Customer : Customer
+
+' ShowProposal Aggregate
+package "ShowProposal Aggregate" as SP {
+  class ShowProposal <<AggregateRoot>> {
+    + int proposalDronesNum
+    + int proposalDuration
+    + String proposalDescription
+  }
+    class Status <<(V, #ADD8E6) valueObject>> {
+      + String value
+    }
+      class Report <<(V, #ADD8E6) valueObject>> {
+        + String value
+      }
+}
+
+ShowProposal "1" --> "1" ID : ProposalID
+ShowProposal "*" --> "1" Date : ProposalDate
+ShowProposal "1" --> "*" Drone : DronesProposal
+ShowProposal "*" --> "*" Figure : Figures
+ShowProposal "*" --> "1" Customer : Customer
+ShowProposal "1" --> "1" Status : ProposalStatus
+ShowProposal "1" --> "1" Report : SimulationResult
+
+' SystemUser Aggregate
+package "SystemUser Aggregate" as USR {
+  class SystemUser <<AggregateRoot>> {
+    + String name
+  }
+
+  enum SystemStatus <<Enum>>{
+    + ACTIVE
+    + INACTIVE
+  }
+
+    enum SystemRole <<Enum>>{
+      + ADMIN
+      + CRM_MANAGER
+      + CRM_COLLABORATOR
+      + SHOW_DESIGNER
+      + CUSTOMER_REPRESENTATIVE
+    }
+
+ class Username <<(V, #ADD8E6) valueObject>> {
+   + String value
+ }
+
+  class Password <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+}
+
+Representative "1" --> "1" SystemUser : RepresentativeUser
+SystemUser "*" --> "1" SystemStatus : UserStatus
+SystemUser "*" --> "1" SystemRole : UserRole
+SystemUser "1" --> "1" Username : Username
+SystemUser "1" --> "1" Password : Password
+
+@enduml

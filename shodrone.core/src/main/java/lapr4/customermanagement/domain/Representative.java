@@ -17,9 +17,11 @@ public class Representative implements DomainEntity<NIF> {
     private String name;
 
     @Embedded
+    @Column(unique = true)
     private Email email;
 
     @Embedded
+    @Column(unique = true)
     private Phone phone;
 
     private String position;
