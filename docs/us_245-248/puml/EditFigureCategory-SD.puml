@@ -1,0 +1,63 @@
+@startuml
+actor User
+
+activate User
+User -> EditFigureCategoryUI : editar figure category
+activate EditFigureCategoryUI
+EditFigureCategoryUI -> FigureCategoryController : findAll()
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : listAll()
+activate FigureCategoryService
+FigureCategoryService -> FigureCategoryRepository : findAll()
+activate FigureCategoryRepository
+FigureCategoryRepository --> FigureCategoryService : lista de figure categories
+deactivate FigureCategoryRepository
+FigureCategoryService --> FigureCategoryController : lista de figure categories
+deactivate FigureCategoryService
+FigureCategoryController --> EditFigureCategoryUI : lista de figure categories
+deactivate FigureCategoryController
+EditFigureCategoryUI --> User : lista de figure categories
+User -> EditFigureCategoryUI : escolhe categoria e introduz nova descrição
+EditFigureCategoryUI -> FigureCategoryController : editCategoryDescription(name, newDescription)
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : updateDescription(name, newDescription)
+activate FigureCategoryService
+FigureCategoryService -> AuthorizationService : ensureAuthenticatedUserHasAnyOf(...)
+activate AuthorizationService
+AuthorizationService --> FigureCategoryService : autorizado
+deactivate AuthorizationService
+FigureCategoryService -> FigureCategoryRepository : findByName(name)
+activate FigureCategoryRepository
+FigureCategoryRepository --> FigureCategoryService : FigureCategory
+deactivate FigureCategoryRepository
+
+FigureCategoryService -> FigureCategory : updateDescription(newDescription)
+activate FigureCategory
+FigureCategory --> FigureCategoryService : descrição atualizada, data alterada
+deactivate FigureCategory
+
+FigureCategoryService -> FigureCategoryRepository : save(FigureCategory)
+activate FigureCategoryRepository
+
+alt Persistência ativa com JPA
+    FigureCategoryRepository -> JpaFigureCategoryRepository : save(FigureCategory)
+    activate JpaFigureCategoryRepository
+    JpaFigureCategoryRepository --> FigureCategoryRepository : categoria atualizada
+    deactivate JpaFigureCategoryRepository
+else InMemory (testes)
+    FigureCategoryRepository -> InMemoryFigureCategoryRepository : save(FigureCategory)
+    activate InMemoryFigureCategoryRepository
+    InMemoryFigureCategoryRepository --> FigureCategoryRepository : categoria atualizada
+    deactivate InMemoryFigureCategoryRepository
+end
+
+FigureCategoryRepository --> FigureCategoryService : categoria persistida
+deactivate FigureCategoryRepository
+FigureCategoryService --> FigureCategoryController : categoria atualizada
+deactivate FigureCategoryService
+FigureCategoryController --> EditFigureCategoryUI : confirmação
+deactivate FigureCategoryController
+EditFigureCategoryUI --> User : Descrição editada com sucesso
+deactivate EditFigureCategoryUI
+deactivate User
+@enduml

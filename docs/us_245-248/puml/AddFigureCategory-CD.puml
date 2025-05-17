@@ -1,0 +1,71 @@
+@startuml
+
+
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+' ==== Entidade de domínio ====
+class FigureCategory {
+  - String name
+  - String description
+  - LocalDateTime creationDate
+  - LocalDateTime lastEditionDate
+  - boolean isActive
+
+  + FigureCategory(String name, String description)
+}
+
+' ==== Repositório ====
+interface FigureCategoryRepository {
+  + save(FigureCategory): FigureCategory
+}
+
+class JpaFigureCategoryRepository {
+  + save(FigureCategory): FigureCategory
+}
+
+class InMemoryFigureCategoryRepository {
+  + save(FigureCategory): FigureCategory
+}
+
+FigureCategoryRepository <|.. JpaFigureCategoryRepository
+FigureCategoryRepository <|.. InMemoryFigureCategoryRepository
+
+' ==== Serviço ====
+class FigureCategoryService {
+  - FigureCategoryRepository repo
+  - AuthorizationService authz
+
+  + registerCategory(FigureCategory): FigureCategory
+}
+
+' ==== Controlador ====
+class FigureCategoryController {
+  - FigureCategoryService service
+
+  + addFigureCategory(String, String): FigureCategory
+}
+
+' ==== UI ====
+class AddFigureCategoryUI {
+  - FigureCategoryController controller
+
+  + doShow(): boolean
+}
+
+' ==== Autorização ====
+interface AuthorizationService {
+  + ensureAuthenticatedUserHasAnyOf(String...): void
+}
+
+' ==== Relações entre classes ====
+AddFigureCategoryUI --> FigureCategoryController
+FigureCategoryController --> FigureCategoryService
+FigureCategoryService --> FigureCategoryRepository
+FigureCategoryService --> AuthorizationService
+FigureCategoryService --> FigureCategory
+JpaFigureCategoryRepository --> FigureCategory
+InMemoryFigureCategoryRepository --> FigureCategory
+@enduml

@@ -1,0 +1,41 @@
+@startuml
+
+
+actor User
+activate User
+User -> ListFigureCategoriesUI : solicita listagem de categorias
+activate ListFigureCategoriesUI
+ListFigureCategoriesUI -> FigureCategoryController : listAll()
+activate FigureCategoryController
+FigureCategoryController -> FigureCategoryService : findAll()
+activate FigureCategoryService
+FigureCategoryService -> AuthorizationService : ensureAuthenticatedUserHasAnyOf(...)
+activate AuthorizationService
+AuthorizationService --> FigureCategoryService : autorizado
+deactivate AuthorizationService
+
+FigureCategoryService -> FigureCategoryRepository : findAll()
+activate FigureCategoryRepository
+
+alt Persistência com JPA
+    FigureCategoryRepository -> JpaFigureCategoryRepository : findAll()
+    activate JpaFigureCategoryRepository
+    JpaFigureCategoryRepository --> FigureCategoryRepository : lista de figure categories
+    deactivate JpaFigureCategoryRepository
+else InMemory (testes)
+    FigureCategoryRepository -> InMemoryFigureCategoryRepository : findAll()
+    activate InMemoryFigureCategoryRepository
+    InMemoryFigureCategoryRepository --> FigureCategoryRepository : lista de figure categories
+    deactivate InMemoryFigureCategoryRepository
+end
+
+FigureCategoryRepository --> FigureCategoryService : lista de figure categories
+deactivate FigureCategoryRepository
+FigureCategoryService --> FigureCategoryController : lista de figure categories
+deactivate FigureCategoryService
+FigureCategoryController --> ListFigureCategoriesUI : lista de figure categories
+deactivate FigureCategoryController
+ListFigureCategoriesUI --> User : mostra lista de categorias
+deactivate ListFigureCategoriesUI
+deactivate User
+@enduml

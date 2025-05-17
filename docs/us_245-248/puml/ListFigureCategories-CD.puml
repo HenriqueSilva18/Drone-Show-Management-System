@@ -1,0 +1,58 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class FigureCategory {
+  - String name
+  - String description
+  - boolean isActive
+
+  + toString(): String
+}
+
+interface FigureCategoryRepository {
+  + findAll(): Iterable<FigureCategory>
+}
+
+class JpaFigureCategoryRepository {
+  + findAll(): Iterable<FigureCategory>
+}
+
+class InMemoryFigureCategoryRepository {
+  + findAll(): Iterable<FigureCategory>
+}
+
+FigureCategoryRepository <|.. JpaFigureCategoryRepository
+FigureCategoryRepository <|.. InMemoryFigureCategoryRepository
+
+class FigureCategoryService {
+  - FigureCategoryRepository repo
+  - AuthorizationService authz
+
+  + findAll(): Iterable<FigureCategory>
+}
+
+class FigureCategoryController {
+  - FigureCategoryService service
+
+  + listAll(): Iterable<FigureCategory>
+}
+
+class ListFigureCategoriesUI {
+  - FigureCategoryController controller
+
+  + doShow(): boolean
+}
+
+interface AuthorizationService {
+  + ensureAuthenticatedUserHasAnyOf(String...): void
+}
+
+ListFigureCategoriesUI --> FigureCategoryController
+ListFigureCategoriesUI --> FigureCategory
+FigureCategoryController --> FigureCategoryService
+FigureCategoryService --> FigureCategoryRepository
+FigureCategoryService --> AuthorizationService
+@enduml

@@ -1,0 +1,61 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class FigureCategory {
+  - boolean isActive
+  - LocalDateTime lastEditionDate
+  + activate(): void
+  + deactivate(): void
+  + isActive(): boolean
+}
+
+interface FigureCategoryRepository {
+  + findByName(String): Optional<FigureCategory>
+  + save(FigureCategory): FigureCategory
+}
+
+class JpaFigureCategoryRepository {
+  + findByName(String): Optional<FigureCategory>
+  + save(FigureCategory): FigureCategory
+}
+
+class InMemoryFigureCategoryRepository {
+  + findByName(String): Optional<FigureCategory>
+  + save(FigureCategory): FigureCategory
+}
+
+FigureCategoryRepository <|.. JpaFigureCategoryRepository
+FigureCategoryRepository <|.. InMemoryFigureCategoryRepository
+
+class FigureCategoryService {
+  - FigureCategoryRepository repo
+  - AuthorizationService authz
+
+  + toggleCategory(String): FigureCategory
+}
+
+class FigureCategoryController {
+  - FigureCategoryService service
+
+  + toggleCategory(String): FigureCategory
+}
+
+class ToggleFigureCategoryStatusUI {
+  - FigureCategoryController controller
+
+  + doShow(): boolean
+}
+
+interface AuthorizationService {
+  + ensureAuthenticatedUserHasAnyOf(String...): void
+}
+
+ToggleFigureCategoryStatusUI --> FigureCategoryController
+FigureCategoryController --> FigureCategoryService
+FigureCategoryService --> FigureCategoryRepository
+FigureCategoryService --> AuthorizationService
+FigureCategoryService --> FigureCategory
+@enduml

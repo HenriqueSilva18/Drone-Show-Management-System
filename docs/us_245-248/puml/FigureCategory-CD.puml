@@ -1,0 +1,100 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+    class Repositories {
+        +Repositories()
+        +figureCategoryRepository(): FigureCategoryRepository
+        +getInstance(): Repositories
+    }
+
+    class FigureCategoryController {
+        -FigureCategoryService service
+        +addFigureCategory(String name, String description)
+        +editCategoryDescription(String name, String newDescription)
+        +toggleCategory(String name)
+        +listAll(): Iterable<FigureCategory>
+    }
+
+    class FigureCategory {
+        -String name
+        -String description
+        -boolean isActive
+        -LocalDateTime creationDate
+        -LocalDateTime lastEditionDate
+        +updateDescription(String newDescription)
+        +activate()
+        +deactivate()
+        +identity(): String
+        +isActive(): boolean
+        +description(): String
+    }
+
+    class FigureCategoryService {
+        -FigureCategoryRepository repository
+        -AuthorizationService authz
+        +registerCategory(FigureCategory)
+        +findAll(): Iterable~FigureCategory~
+        +updateDescription(String name, String newDesc)
+        +toggleCategory(String name)
+    }
+
+    class FigureCategoryRepository {
+        +save(FigureCategory)
+        +findAll(): Iterable~FigureCategory~
+        +findByName(String): Optional~FigureCategory~
+    }
+
+    class JpaFigureCategoryRepository {
+        +save(FigureCategory)
+        +findAll()
+        +findByName(String)
+    }
+
+    class InMemoryFigureCategoryRepository {
+        +save(FigureCategory)
+        +findAll()
+        +findByName(String)
+    }
+
+    class AuthorizationService {
+        +ensureAuthenticatedUserHasAnyOf(String roles)
+    }
+
+    class AddFigureCategoryUI {
+        -FigureCategoryController controller
+        +doShow(): boolean
+    }
+    class EditFigureCategoryUI {
+        -FigureCategoryController controller
+        +doShow(): boolean
+    }
+    class ActivateDeactivateFigureCategoryStatusUI {
+        -FigureCategoryController controller
+        +doShow(): boolean
+    }
+    class ListFigureCategoriesUI {
+        -FigureCategoryController controller
+        +doShow(): boolean
+    }
+
+    FigureCategory --> FigureCategoryService
+    FigureCategory --> FigureCategoryController
+    Repositories "1"->"1" FigureCategoryRepository : figureCategoryRepository()
+    FigureCategoryRepository "1" -> "*" FigureCategory : figure categories
+    FigureCategoryService --> FigureCategoryRepository
+    FigureCategoryService --> AuthorizationService
+
+    FigureCategoryController --> FigureCategoryService
+
+    FigureCategoryRepository <|.. JpaFigureCategoryRepository
+    FigureCategoryRepository <|.. InMemoryFigureCategoryRepository
+
+    AddFigureCategoryUI --> FigureCategoryController
+    EditFigureCategoryUI --> FigureCategoryController
+    ListFigureCategoriesUI --> FigureCategoryController
+    ActivateDeactivateFigureCategoryStatusUI --> FigureCategoryController
+
+@enduml
