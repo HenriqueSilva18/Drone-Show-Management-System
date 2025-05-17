@@ -56,7 +56,7 @@ public class AddFigureToCatalogueUI extends AbstractUI {
     }
 
     private FigureCategory selectExistingCategory() {
-        Iterable<FigureCategory> categories = categoryController.listAllActive();
+        Iterable<FigureCategory> categories = categoryController.listAll();
         List<FigureCategory> list = new ArrayList<>();
         categories.forEach(list::add);
 
