@@ -13,6 +13,7 @@ public class JpaShowRequestRepository
         extends JpaAutoTxRepository<ShowRequest, ShowRequestId, ShowRequestId>
         implements ShowRequestRepository {
 
+
     public JpaShowRequestRepository(String persistenceUnitName) {
         super(persistenceUnitName, "showRequestId");
     }
@@ -20,7 +21,7 @@ public class JpaShowRequestRepository
     @Override
     public Iterable<ShowRequest> findByClientVAT(String vat) {
         final TypedQuery<ShowRequest> query = entityManager().createQuery(
-                "SELECT s FROM ShowRequest s WHERE s.clientVAT.number = :vat", ShowRequest.class);
+                "SELECT s FROM ShowRequest s WHERE s.clientVAT.number = :vat ORDER BY s.showRequestId.value", ShowRequest.class);
         query.setParameter("vat", vat);
         return query.getResultList();
     }
@@ -28,9 +29,9 @@ public class JpaShowRequestRepository
     @Override
     public Optional<ShowRequest> findByVATAndId(VAT vat, ShowRequestId id) {
         final TypedQuery<ShowRequest> query = entityManager().createQuery(
-                "SELECT s FROM ShowRequest s WHERE s.clientVAT = :vat AND s.showRequestId = :id", ShowRequest.class);
+                "SELECT s FROM ShowRequest s WHERE s.clientVAT = :vat AND s.showRequestId.value = :id", ShowRequest.class);
         query.setParameter("vat", vat);
-        query.setParameter("id", id);
+        query.setParameter("id", id.value());
         return query.getResultStream().findFirst();
     }
 }

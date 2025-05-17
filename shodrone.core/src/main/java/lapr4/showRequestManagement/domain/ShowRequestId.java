@@ -3,10 +3,12 @@ package lapr4.showRequestManagement.domain;
 import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
+import jakarta.persistence.Column;
 
 @Embeddable
 public class ShowRequestId implements Serializable, Comparable<ShowRequestId> {
 
+    @Column(name = "value")
     private int value;
 
     protected ShowRequestId() {
