@@ -40,6 +40,13 @@ class FigureCategoryServiceTest {
         }
 
         @Override
+        public Iterable<FigureCategory> findAllActive() {
+            return categories.stream()
+                    .filter(FigureCategory::isActive)
+                    .toList();
+        }
+
+        @Override
         public Optional<FigureCategory> ofIdentity(String id) {
             return categories.stream()
                     .filter(c -> c.identity().equals(id))
