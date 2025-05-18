@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -88,13 +89,12 @@ public class FigureCategory implements AggregateRoot<String> {
 
     @Override
     public String toString() {
-        return "FigureCategory{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", creationDate=" + creationDate +
-                ", lastEditionDate=" + lastEditionDate +
-                ", state=" + (isActive ? "Active" : "Inactive") +
-                '}';
+        String formattedCreationDate = creationDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+        return  "Name: '" + name + '\'' +
+                ", Description: '" + description + '\'' +
+                ", Creation Date: " + formattedCreationDate +
+                ", Last Edition Date: " + lastEditionDate +
+                ", State: " + (isActive ? "Active" : "Inactive");
     }
 
 
