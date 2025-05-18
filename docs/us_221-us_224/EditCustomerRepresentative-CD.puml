@@ -14,7 +14,6 @@ class EditCustomerRepresentativeController {
 class Customer {
     - name : String
     - vatNumber : String
-    - website : String
     - phone : String
     - email : String
 

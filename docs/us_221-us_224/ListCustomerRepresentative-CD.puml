@@ -14,7 +14,7 @@ class ListCustomerRepresentativesController {
 class Customer {
     - name : String
     - vatNumber : String
-    - website : String
+
     - phone : String
     - email : String
 

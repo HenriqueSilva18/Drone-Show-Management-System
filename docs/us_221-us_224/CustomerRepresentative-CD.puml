@@ -7,7 +7,6 @@ skinparam classAttributeIconSize 0
 class Customer {
     - name : String
     - vatNumber : String
-    - website : String
     - phone : String
     - email : String
 
