@@ -1,0 +1,53 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "User" as USER
+participant ":LoginUI" as UI
+participant ":AuthenticationCredentialHandler" as CRED_HANDLER
+participant ":AuthController" as CTRL
+participant "AuthzRegistry" as AUTHZ_REG
+participant ":AuthenticationService" as AUTH_SVC
+participant ":AuthorizationService" as AUTHZ_SVC
+participant ":UserSession" as SESSION
+
+activate USER
+
+USER -> UI : asks to authenticate
+activate UI
+    UI --> USER : requests credentials
+deactivate UI
+
+USER -> UI : enters username and password
+activate UI
+    UI -> CRED_HANDLER : authenticated(username, password, role)
+    activate CRED_HANDLER
+        CRED_HANDLER -> AUTHZ_REG : authenticationService()
+        activate AUTHZ_REG
+            AUTHZ_REG --> CRED_HANDLER : authService
+        deactivate AUTHZ_REG
+        
+        CRED_HANDLER -> AUTH_SVC : authenticate(username, password, role)
+        activate AUTH_SVC
+            AUTH_SVC -> AUTHZ_SVC : validateCredentials(username, password)
+            activate AUTHZ_SVC
+                AUTHZ_SVC --> AUTH_SVC : valid
+            deactivate AUTHZ_SVC
+            
+            AUTH_SVC -> AUTHZ_SVC : validateUserRole(user, role)
+            activate AUTHZ_SVC
+                AUTHZ_SVC --> AUTH_SVC : authorized
+            deactivate AUTHZ_SVC
+            
+            AUTH_SVC --> SESSION** : create(user, roles)
+            AUTH_SVC --> CRED_HANDLER : Optional<UserSession>
+        deactivate AUTH_SVC
+        
+        CRED_HANDLER --> UI : authenticated
+    deactivate CRED_HANDLER
+    
+    UI --> USER : displays success message
+deactivate UI
+
+
+@enduml 

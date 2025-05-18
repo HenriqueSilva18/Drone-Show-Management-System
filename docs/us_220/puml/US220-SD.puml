@@ -1,0 +1,125 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "CRM Collaborator" as COLLAB
+participant ":RegCustomerUI" as UI
+participant ":Utils" as UTILS
+participant ":RegCustomerController" as CTRL
+participant ":CustomerService" as CUST_SVC
+participant ":AddUserController" as USER_CTRL
+participant ":CustomerBuilder" as CUST_BUILD
+participant ":RepresentativeBuilder" as REP_BUILD
+participant "customer\n:Customer" as CUSTOMER
+participant "representative\n:Representative" as REP
+participant "customerRepository\n:CustomerRepository" as CUST_REPO
+
+activate COLLAB
+
+    COLLAB -> UI : asks to register a new customer
+    activate UI
+        UI --> COLLAB : requests customer data (VAT, name, \nemail, phone, address details)
+    deactivate UI
+
+    COLLAB -> UI : inputs customer data
+    activate UI
+        UI -> CTRL : getCustomerTypes()
+        activate CTRL
+            CTRL -> CUST_SVC : getCustomerTypes()
+            activate CUST_SVC
+                CUST_SVC --> CTRL : customerTypes
+            deactivate CUST_SVC
+            CTRL --> UI : customerTypes
+        deactivate CTRL
+        UI --> COLLAB : shows customer types and asks to select one
+    deactivate UI
+
+    COLLAB -> UI : selects customer type
+    activate UI
+        UI --> COLLAB : requests representative data
+    deactivate UI
+
+    loop while user wants to add more representatives
+        COLLAB -> UI : inputs representative data
+        activate UI
+            UI -> UTILS : collectRepresentativeData()
+            activate UTILS
+                UTILS --> UI : representativeData
+            deactivate UTILS
+            UI --> COLLAB : asks if wants to add another representative
+        deactivate UI
+        
+        COLLAB -> UI : responds (Y/N)
+    end
+
+    COLLAB -> UI : confirms data
+    activate UI
+        UI -> CTRL : registerCustomerWithMultipleRepresentatives(vatNumber, name, \naddress, email, phone, type, representativesData)
+        activate CTRL
+            create CUST_BUILD
+            CTRL -> CUST_BUILD : new()
+            CTRL -> CUST_BUILD : withVAT(vatNumber)
+            CTRL -> CUST_BUILD : withName(name)
+            CTRL -> CUST_BUILD : withAddress(address)
+            CTRL -> CUST_BUILD : withEmail(email)
+            CTRL -> CUST_BUILD : withPhone(phone)
+            CTRL -> CUST_BUILD : withCustomerType(type)
+
+            loop for each representative data
+                CTRL -> USER_CTRL : addUser(username, password, firstName, \nlastName, email, roles)
+                activate USER_CTRL
+                    USER_CTRL --> CTRL : systemUser
+                deactivate USER_CTRL
+
+                create REP_BUILD
+                CTRL -> REP_BUILD : new()
+                CTRL -> REP_BUILD : withNIF(nif)
+                CTRL -> REP_BUILD : withName(name)
+                CTRL -> REP_BUILD : withEmail(email)
+                CTRL -> REP_BUILD : withPhone(phone)
+                CTRL -> REP_BUILD : withPosition(position)
+                CTRL -> REP_BUILD : withSystemUser(systemUser)
+                CTRL -> REP_BUILD : build()
+                activate REP_BUILD
+                    REP_BUILD --> REP** : create
+                    REP_BUILD --> CTRL : representative
+                deactivate REP_BUILD
+
+                CTRL -> CUST_BUILD : withRepresentative(representative)
+            end
+
+            CTRL -> CUST_BUILD : build()
+            activate CUST_BUILD
+                CUST_BUILD --> CUSTOMER** : create
+                activate CUSTOMER
+                    loop for each representative in constructor
+                        CUSTOMER -> CUSTOMER : addRepresentative(representative)
+                        activate CUSTOMER
+                            CUSTOMER -> REP : associateCustomer(this)
+                        deactivate CUSTOMER
+                    end
+                deactivate CUSTOMER
+                CUST_BUILD --> CTRL : customer
+            deactivate CUST_BUILD
+
+            CTRL -> CUST_SVC : registerCustomer(customer)
+            activate CUST_SVC
+                CUST_SVC -> CUST_REPO : save(customer)
+                activate CUST_REPO
+                    CUST_REPO --> CUST_SVC : savedCustomer
+                deactivate CUST_REPO
+                CUST_SVC --> CTRL : savedCustomer
+            deactivate CUST_SVC
+
+            CTRL --> UI : customer
+        deactivate CTRL
+
+        UI --> COLLAB : displays operation success
+    deactivate UI
+
+deactivate COLLAB
+
+@enduml

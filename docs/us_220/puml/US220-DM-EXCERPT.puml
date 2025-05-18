@@ -1,0 +1,87 @@
+@startuml
+' Domain Model Excerpt for US220 - Customer Registration
+skinparam packageStyle rectangle
+
+' Common Value Objects
+class Address <<(V, #ADD8E6) valueObject>> {
+  + String street
+  + String city
+  + String postalCode
+  + String country
+}
+
+' Customer Aggregate
+package "Customer Aggregate" as CL {
+  class Customer <<AggregateRoot>> {
+    + String name
+  }
+
+  class VAT <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  entity Representative <<Entity>> {
+    + String name
+    + String position
+  }
+
+  class NIF <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  class Email <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  class Phone <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  enum CustomerType <<Enum>> {
+    + REGULAR
+    + VIP
+  }
+
+  enum CustomerStatus <<Enum>> {
+    + CREATED
+    + INFRINGEMENT
+    + DELETED
+  }
+}
+
+' SystemUser Aggregate (relevant parts)
+package "SystemUser Aggregate" as USR {
+  class SystemUser <<AggregateRoot>> {
+    + String name
+  }
+
+  enum SystemRole <<Enum>> {
+    + CUSTOMER_REPRESENTATIVE
+  }
+
+  class Username <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  class Password <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+}
+
+' Relationships
+Customer "1" --> "1" VAT : CustomerVAT
+Customer "1" --> "1" Address : CustomerAddress
+Customer "1" --> "*" Representative : Representatives
+Customer "1" --> "1" Email : CustomerEmail
+Customer "1" --> "1" Phone : CustomerPhone
+Customer "*" --> "1" CustomerType : CustomerType
+Customer "*" --> "1" CustomerStatus : CustomerStatus
+Representative "1" --> "1" NIF : RepresentativeNIF
+Representative "1" --> "1" Email : RepresentativeEmail
+Representative "1" --> "1" Phone : RepresentativePhone
+Representative "1" --> "1" SystemUser : RepresentativeUser
+SystemUser "*" --> "1" SystemRole : UserRole
+SystemUser "1" --> "1" Username : Username
+SystemUser "1" --> "1" Password : Password
+
+@enduml
