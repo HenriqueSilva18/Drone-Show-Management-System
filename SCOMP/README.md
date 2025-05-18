@@ -130,12 +130,11 @@ Gera o arquivo `simulation_report.txt` contendo:
 
 ## Autoavaliação do Grupo
 
-| Membro  | Contribuição (%) |
-|---------|------------------|
-| Nome A  | 100%             |
-| Nome B  | 100%             |
-| Nome C  | 100%             |
+| Membro       | Contribuição (%) |
+|--------------|------------------|
+| José Sousa   | 100%             |
+| José Moreira | 100%             |
+| João Ribeiro | 100%             |
 
 **Comentário:**  
-Todos os membros do grupo contribuíram de forma ativa e equilibrada, participando da implementação, testes e documentação.  
-Reuniões regulares garantiram o alinhamento e a colaboração eficiente.
+Todos os membros do grupo contribuíram de forma ativa e equilibrada, participando na implementação.  
