@@ -1,6 +1,7 @@
 lapr4\customermanagement\domain\EmailTest.class
 lapr4\showRequestManagement\application\RegShowRequestControllerTest.class
 lapr4\showRequestManagement\application\ShowRequestServiceTest.class
+lapr4\figureCategoryManagement\domain\FigureCategoryTest.class
 lapr4\showRequestManagement\domain\ShowRequestTest.class
 lapr4\customermanagement\domain\AddressTest.class
 lapr4\customermanagement\domain\VATTest.class
