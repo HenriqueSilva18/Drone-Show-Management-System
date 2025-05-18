@@ -21,14 +21,16 @@ This README covers the implementation of user stories US210 through US213 for au
 **Acceptance Criteria:**
 - n/a
 
+---
 ### US211 - Register users
 
 **As** Administrator
 **I want** to be able to register backoffice users, both via UI and bootstrap script.
 
 **Acceptance Criteria:**
-- This must also be achieved by a bootstrap process
+- US211.1: This must also be achieved by a bootstrap process
 
+---
 ### US212 - Disable/enable users
 
 **As** Administrator
@@ -37,6 +39,7 @@ This README covers the implementation of user stories US210 through US213 for au
 **Acceptance Criteria:**
 - n/a
 
+---
 ### US213 - List users
 
 **As** Administrator
@@ -44,6 +47,7 @@ This README covers the implementation of user stories US210 through US213 for au
 
 **Acceptance Criteria:**
 - n/a
+---
 
 ## 3. Analysis
 
@@ -56,24 +60,32 @@ This README covers the implementation of user stories US210 through US213 for au
 ### US210 - Authentication and authorization
 - **Sequence Diagram**
 ![US210 Class Diagram](svg/US210-SD.svg)
+
+
 - **Class Diagram**
 ![US210 Class Diagram](svg/US210-CD.svg)
 
 ### US211 - Register users
 - **Sequence Diagram**
 ![US211 Class Diagram](svg/US211-SD.svg)
+
+
 - **Class Diagram**
 ![US211 Class Diagram](svg/US211-CD.svg)
 
 ### US212 - Disable/enable users
 - **Sequence Diagram**
 ![US212 Class Diagram](svg/US212-SD.svg)
+
+
 - **Class Diagram**
 ![US212 Class Diagram](svg/US212-CD.svg)
 
 ### US213 - List users
 - **Sequence Diagram**
 ![US213 Class Diagram](svg/US213-SD.svg)
+
+
 - **Class Diagram**
 ![US213 Class Diagram](svg/US213-CD.svg)
 
