@@ -61,7 +61,8 @@ public class ListUsersController{
                 Roles.POWER_USER,
                 Roles.ADMIN,
                 Roles.CRM_MANAGER,
-                Roles.CRM_COLLABORATOR
+                Roles.CRM_COLLABORATOR,
+                Roles.SHOW_DESIGNER
         };
 
         for (SystemUser user : allUsers) {

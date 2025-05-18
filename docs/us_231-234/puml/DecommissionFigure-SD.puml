@@ -1,0 +1,77 @@
+@startuml
+
+actor "CRM Manager" as manager
+participant "DecommissionFigureUI" as ui
+participant "FigureController" as controller
+participant "FigureService" as service
+participant "FigureRepository" as repo
+participant "JpaFigureRepository" as jpaRepo
+participant "InMemoryFigureRepository" as memRepo
+participant "AuthorizationService" as authz
+
+manager -> ui: show()
+activate ui
+
+ui -> controller: decommissionFigure(figureId)
+activate controller
+
+controller -> service: decommissionFigure(figureId)
+activate service
+
+service -> authz: ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_MANAGER)
+activate authz
+authz --> service: authorized
+deactivate authz
+
+service -> repo: findById(figureId)
+activate repo
+
+alt JPA Implementation
+    repo -> jpaRepo: findById(figureId)
+    activate jpaRepo
+    jpaRepo --> repo: Optional<Figure>
+    deactivate jpaRepo
+else InMemory Implementation
+    repo -> memRepo: findById(figureId)
+    activate memRepo
+    memRepo --> repo: Optional<Figure>
+    deactivate memRepo
+end
+
+repo --> service: Optional<Figure>
+deactivate repo
+
+service -> service: decommissionFigure(figure)
+activate service
+service --> service: Figure
+deactivate service
+
+service -> repo: save(figure)
+activate repo
+
+alt JPA Implementation
+    repo -> jpaRepo: save(figure)
+    activate jpaRepo
+    jpaRepo --> repo: Figure
+    deactivate jpaRepo
+else InMemory Implementation
+    repo -> memRepo: save(figure)
+    activate memRepo
+    memRepo --> repo: Figure
+    deactivate memRepo
+end
+
+repo --> service: Figure
+deactivate repo
+
+service --> controller: Figure
+deactivate service
+
+controller --> ui: Figure
+deactivate controller
+
+ui -> ui: displaySuccessMessage()
+ui --> manager: display success message
+deactivate ui
+
+@enduml 

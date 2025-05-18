@@ -1,0 +1,76 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class AddUserAction {
+    + execute() : boolean
+}
+
+class AddUserUI {
+    - theController : AddUserController
+    + show() : boolean
+    # doShow() : boolean
+    - showRoles(roleTypes : Set<Role>) : boolean
+    - buildRolesMenu(roleTypes : Set<Role>) : Menu
+}
+
+class AddUserController {
+    - authz : AuthorizationService
+    - userSvc : UserManagementService
+    + getRoleTypes() : Role[]
+    + addUser(username, password, firstName, lastName, email, roles) : SystemUser
+    + addUser(username, password, firstName, lastName, email, roles, createdOn) : SystemUser
+}
+
+class AuthzRegistry {
+    + {static} authorizationService() : AuthorizationService
+    + {static} userService() : UserManagementService
+}
+
+class UserManagementService {
+    + registerNewUser(username, password, firstName, lastName, email, roles) : SystemUser
+}
+
+class SystemUser {
+    - username : Username
+    - password : Password
+    - name : String
+    - email : String
+    - roles : Set<Role>
+    - active : boolean
+    + isActive() : boolean
+}
+
+enum SystemRole {
+    ADMIN
+    CRM_MANAGER
+    CRM_COLLABORATOR
+    SHOW_DESIGNER
+    CUSTOMER_REPRESENTATIVE
+}
+
+class Username <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+class Password <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+AddUserAction ..> AddUserUI : creates
+AddUserUI --> "1" AddUserController : uses
+AddUserController ..> AuthzRegistry
+AddUserController ..> UserManagementService
+AddUserController ..> SystemUser
+
+AuthzRegistry --> "1" UserManagementService : provides
+
+UserManagementService ..> SystemUser : creates
+
+SystemUser --> "1..*" SystemRole : has
+SystemUser --> "1" Username : has
+SystemUser --> "1" Password : has
+
+@enduml 

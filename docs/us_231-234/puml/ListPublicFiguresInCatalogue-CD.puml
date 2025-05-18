@@ -1,0 +1,53 @@
+@startuml
+
+package "Figure Management" {
+    class ListActivePublicFiguresUI {
+        -controller: FigureController
+        +show()
+        -displayFigures(figures: Iterable<Figure>)
+    }
+
+    class Figure {
+        -id: Long
+        -description: String
+        -exclusive: boolean
+        -isActive: boolean
+        +isActive(): boolean
+        +isExclusive(): boolean
+        +toString(): String
+    }
+
+    class FigureController {
+        -figureService: FigureService
+        +listActivePublicFigures(): Iterable<Figure>
+    }
+
+    class FigureService {
+        -repo: FigureRepository
+        -authz: AuthorizationService
+        +findActivePublic(): Iterable<Figure>
+    }
+
+    interface FigureRepository {
+        +findActivePublic(): Iterable<Figure>
+    }
+
+    class JpaFigureRepository {
+        -entityManager: EntityManager
+        +findActivePublic(): Iterable<Figure>
+    }
+
+    class InMemoryFigureRepository {
+        -figures: Set<Figure>
+        +findActivePublic(): Iterable<Figure>
+    }
+}
+
+ListActivePublicFiguresUI --> FigureController
+FigureController --> FigureService
+FigureService --> FigureRepository
+FigureService --> AuthorizationService
+FigureRepository <|.. JpaFigureRepository
+FigureRepository <|.. InMemoryFigureRepository
+
+@enduml 

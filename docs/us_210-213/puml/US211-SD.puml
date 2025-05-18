@@ -1,0 +1,71 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Administrator" as ADMIN
+participant ":AddUserAction" as ACTION
+participant ":AddUserUI" as UI
+participant ":AddUserController" as CTRL
+participant "AuthzRegistry" as AUTHZ_REG
+participant ":UserManagementService" as USER_SVC
+participant ":SystemUser" as USER
+
+activate ADMIN
+
+ADMIN -> ACTION : asks to register backoffice user
+activate ACTION
+    ACTION -> UI : show()
+    activate UI
+        UI -> UI : doShow()
+        activate UI
+            UI --> ADMIN : requests username
+            ADMIN -> UI : enters username
+            UI --> ADMIN : requests password
+            ADMIN -> UI : enters password
+            UI --> ADMIN : requests firstName
+            ADMIN -> UI : enters firstName
+            UI --> ADMIN : requests lastName
+            ADMIN -> UI : enters lastName
+            UI --> ADMIN : requests email
+            ADMIN -> UI : enters email
+            
+            UI -> UI : showRoles(roleTypes)
+            activate UI
+                UI -> CTRL : getRoleTypes()
+                activate CTRL
+                    CTRL --> UI : availableRoles
+                deactivate CTRL
+                UI -> UI : buildRolesMenu(roleTypes)
+                deactivate UI
+
+                UI --> ADMIN : shows role menu
+                deactivate UI
+                ADMIN -> UI : selects roles
+
+            
+            UI -> CTRL : addUser(username, password, firstName,\nlastName, email, roleTypes)
+            activate CTRL
+                CTRL -> AUTHZ_REG : userService()
+                activate AUTHZ_REG
+                    AUTHZ_REG --> CTRL : userService
+                deactivate AUTHZ_REG
+                
+                CTRL -> USER_SVC : registerNewUser(username, password,\nfirstName, lastName, email, roleTypes)
+                activate USER_SVC
+                    USER_SVC --> USER** : create
+                    USER_SVC --> CTRL : user
+                deactivate USER_SVC
+                
+                CTRL --> UI : user
+
+            deactivate CTRL
+
+                UI --> ADMIN : operation successful
+                            deactivate ACTION
+
+    deactivate UI
+
+
+
+
+@enduml 

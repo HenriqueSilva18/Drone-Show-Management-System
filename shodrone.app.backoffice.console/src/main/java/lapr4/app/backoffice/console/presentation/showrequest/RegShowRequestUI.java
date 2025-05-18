@@ -2,12 +2,21 @@ package lapr4.app.backoffice.console.presentation.showrequest;
 
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.io.util.Console;
+import lapr4.customermanagement.repositories.CustomerRepository;
+import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showRequestManagement.application.RegShowRequestController;
+import lapr4.showRequestManagement.application.ShowRequestService;
 import lapr4.showRequestManagement.domain.ShowRequest;
 
 public class RegShowRequestUI extends AbstractUI {
 
-    private final RegShowRequestController controller = new RegShowRequestController();
+    private final RegShowRequestController controller;
+
+    public RegShowRequestUI() {
+        ShowRequestService service = new ShowRequestService();
+        CustomerRepository customerRepo = PersistenceContext.repositories().customers();
+        this.controller = new RegShowRequestController(service, customerRepo);
+    }
 
     @Override
     protected boolean doShow() {

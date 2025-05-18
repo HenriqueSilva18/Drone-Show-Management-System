@@ -1,0 +1,59 @@
+@startuml
+
+actor "Show Designer" as designer
+participant "AddFigureToCatalogueUI" as ui
+participant "FigureController" as controller
+participant "FigureService" as service
+participant "FigureRepository" as repo
+participant "JpaFigureRepository" as jpaRepo
+participant "InMemoryFigureRepository" as memRepo
+participant "AuthorizationService" as authz
+
+designer -> ui: show()
+activate ui
+
+ui -> controller: addFigure(name, category, description)
+activate controller
+
+controller -> service: addFigure(name, category, description)
+activate service
+
+service -> authz: ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.SHOW_DESIGNER)
+activate authz
+authz --> service: authorized
+deactivate authz
+
+service -> service: createFigure(name, category, description)
+activate service
+service --> service: Figure
+deactivate service
+
+service -> repo: save(figure)
+activate repo
+
+alt JPA Implementation
+    repo -> jpaRepo: save(figure)
+    activate jpaRepo
+    jpaRepo --> repo: Figure
+    deactivate jpaRepo
+else InMemory Implementation
+    repo -> memRepo: save(figure)
+    activate memRepo
+    memRepo --> repo: Figure
+    deactivate memRepo
+end
+
+repo --> service: Figure
+deactivate repo
+
+service --> controller: Figure
+deactivate service
+
+controller --> ui: Figure
+deactivate controller
+
+ui -> ui: displaySuccessMessage()
+ui --> designer: display success message
+deactivate ui
+
+@enduml 

@@ -1,0 +1,61 @@
+@startuml
+
+package "Figure Management" {
+    class AddFigureToCatalogueUI {
+        -controller: FigureController
+        +show()
+        -displaySuccess(figure: Figure)
+    }
+
+    class Figure {
+        -id: Long
+        -description: String
+        -keywords: Set<String>
+        -exclusive: boolean
+        -clientVAT: VAT
+        -category: FigureCategory
+        +Figure(description: String, exclusive: boolean, clientVAT: VAT, category: FigureCategory)
+        +toString(): String
+    }
+
+    class FigureCategory {
+        -name: String
+        -description: String
+        +name(): String
+    }
+
+    class FigureController {
+        -figureService: FigureService
+        +addFigure(description: String, exclusive: boolean, category: FigureCategory, clientVAT: VAT): Figure
+    }
+
+    class FigureService {
+        -repo: FigureRepository
+        -authz: AuthorizationService
+        +registerFigure(description: String, exclusive: boolean, clientVAT: VAT, category: FigureCategory): Figure
+    }
+
+    interface FigureRepository {
+        +save(figure: Figure): Figure
+    }
+
+    class JpaFigureRepository {
+        -entityManager: EntityManager
+        +save(figure: Figure): Figure
+    }
+
+    class InMemoryFigureRepository {
+        -figures: Set<Figure>
+        +save(figure: Figure): Figure
+    }
+}
+
+AddFigureToCatalogueUI --> FigureController
+FigureController --> FigureService
+FigureService --> FigureRepository
+FigureService --> AuthorizationService
+Figure "1" -- "1" FigureCategory
+FigureRepository <|.. JpaFigureRepository
+FigureRepository <|.. InMemoryFigureRepository
+
+@enduml 

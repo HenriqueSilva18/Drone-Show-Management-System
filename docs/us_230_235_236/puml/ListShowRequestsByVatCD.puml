@@ -1,0 +1,56 @@
+@startuml
+package "lapr4.showRequestManagement.application" {
+    class ShowRequestService {
+        - AuthorizationService authz
+        - ShowRequestRepository repo
+        + findByClientVAT(vatStr: String): Iterable<ShowRequest>
+    }
+}
+
+package "lapr4.showRequestManagement.repositories" {
+    interface ShowRequestRepository {
+        + findByClientVAT(vatStr: String): Iterable<ShowRequest>
+    }
+}
+
+package "lapr4.showRequestManagement.domain" {
+    class ShowRequest {
+        - ShowRequestId showRequestId
+        - VAT clientVAT
+        - int numDrones
+        - double duration
+        - String showDescription
+        - String dateValue
+        - String status
+    }
+
+    class ShowRequestId {
+        - int value
+    }
+}
+
+package "lapr4.customermanagement.domain" {
+    class VAT {
+        - String number
+    }
+}
+
+package "eapli.framework.infrastructure.authz.application" {
+    class AuthorizationService {
+        + ensureAuthenticatedUserHasAnyOf(roles: Role...): void
+    }
+
+    enum Role {
+        POWER_USER
+        ADMIN
+        CRM_COLLABORATOR
+    }
+}
+
+ShowRequestService --> AuthorizationService
+ShowRequestService --> ShowRequestRepository
+ShowRequestRepository --> ShowRequest
+ShowRequest --> ShowRequestId
+ShowRequest --> VAT
+
+@enduml

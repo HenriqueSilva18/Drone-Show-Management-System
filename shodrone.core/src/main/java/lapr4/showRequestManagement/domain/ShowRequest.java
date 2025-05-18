@@ -6,33 +6,54 @@ import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.domain.VAT;
 import lapr4.droneManagement.domain.Drone;
 import lapr4.figureManagement.domain.Figure;
+import jakarta.persistence.Entity;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "SHOW_REQUEST")
 public class ShowRequest implements AggregateRoot<ShowRequestId> {
 
     @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "value", column = @Column(name = "show_request_id"))
+    })
     private ShowRequestId showRequestId;
 
+    @Column(name = "num_drones")
     private int numDrones;
+
+    @Column(name = "duration")
     private double duration;
+
+    @Column(name = "show_description")
     private String showDescription;
+
+    @Column(name = "date_value")
     private String dateValue;
 
+    @Column(name = "status")
     private String status;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_vat")
     private Customer customer;
 
     @Embedded
+    @AttributeOverride(name = "number", column = @Column(name = "client_vat"))
     private VAT clientVAT;
 
     @ManyToMany
+    @JoinTable(
+            name = "SHOW_REQUEST_DRONES",
+            joinColumns = @JoinColumn(name = "show_request_id"),
+            inverseJoinColumns = @JoinColumn(name = "drone_id")
+    )
     private List<Drone> drones;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "show_request_id")
     private List<Figure> figures;
 
     // private User user; // futuramente

@@ -1,0 +1,35 @@
+@startuml
+skinparam packageStyle rectangle
+
+package "SystemUser Aggregate" as USR {
+  class SystemUser <<AggregateRoot>> {
+    + String name
+  }
+
+  enum SystemStatus <<Enum>> {
+    ACTIVE
+    INACTIVE
+  }
+
+  enum SystemRole <<Enum>> {
+    ADMIN
+    CRM_MANAGER
+    CRM_COLLABORATOR
+    SHOW_DESIGNER
+    CUSTOMER_REPRESENTATIVE
+  }
+
+  class Username <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+
+  class Password <<(V, #ADD8E6) valueObject>> {
+    + String value
+  }
+}
+
+SystemUser "*" --> "1" SystemStatus : UserStatus
+SystemUser "*" --> "1" SystemRole : UserRole
+SystemUser "1" --> "1" Username : Username
+SystemUser "1" --> "1" Password : Password
+@enduml

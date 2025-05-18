@@ -5,16 +5,23 @@ import lapr4.customermanagement.domain.VAT;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.domain.Drone;
 import lapr4.figureManagement.domain.Figure;
-import lapr4.infrastructure.persistence.PersistenceContext;
-import lapr4.showRequestManagement.domain.*;
+import lapr4.showRequestManagement.domain.ShowRequest;
+import lapr4.showRequestManagement.domain.ShowRequestBuilder;
+import lapr4.showRequestManagement.domain.ShowRequestId;
 
 import java.util.Collections;
 import java.util.List;
 
 public class RegShowRequestController {
 
-    private final ShowRequestService service = new ShowRequestService();
-    private final CustomerRepository customerRepository = PersistenceContext.repositories().customers();
+    private final ShowRequestService service;
+    private final CustomerRepository customerRepository;
+
+
+    public RegShowRequestController(ShowRequestService service, CustomerRepository customerRepository) {
+        this.service = service;
+        this.customerRepository = customerRepository;
+    }
 
     /**
      * Regista um novo ShowRequest com os campos obrigatórios.
@@ -72,5 +79,4 @@ public class RegShowRequestController {
         return service.findByVATAndId(vat, id)
                 .orElseThrow(() -> new IllegalArgumentException("No ShowRequest found for given VAT and ID"));
     }
-
 }

@@ -10,14 +10,23 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showRequestManagement.domain.ShowRequestId;
 
-
 import java.util.Optional;
 
 public class ShowRequestService {
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
-    private final ShowRequestRepository repo = PersistenceContext.repositories().showRequests();
+    private final AuthorizationService authz;
+    private final ShowRequestRepository repo;
 
+    // ✅ Construtor com injeção para testes e modularidade
+    public ShowRequestService(AuthorizationService authz, ShowRequestRepository repo) {
+        this.authz = authz;
+        this.repo = repo;
+    }
+
+    // ✅ Construtor sem argumentos para compatibilidade com código atual
+    public ShowRequestService() {
+        this(AuthzRegistry.authorizationService(), PersistenceContext.repositories().showRequests());
+    }
 
     @Transactional
     public ShowRequest registerShowRequest(final ShowRequest request) {
@@ -63,5 +72,4 @@ public class ShowRequestService {
 
         repo.save(request);
     }
-
 }

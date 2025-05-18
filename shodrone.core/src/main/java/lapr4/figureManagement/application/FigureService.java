@@ -42,7 +42,7 @@ public class FigureService {
     }
 
     public Optional<Figure> findById(Long id) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.CRM_MANAGER);
         return repo.ofIdentity(id);
     }
 

@@ -1,0 +1,105 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class DeactivateUserAction {
+    + execute() : boolean
+}
+
+class ActivateUserAction {
+    + execute() : boolean
+}
+
+class DeactivateUserUI {
+    - theController : DeactivateUserController
+    + show() : boolean
+    # doShow() : boolean
+    - isRepresentative(user : SystemUser) : boolean
+}
+
+class ActivateUserUI {
+    - theController : ActivateUserController
+    + show() : boolean
+    # doShow() : boolean
+    - isRepresentative(user : SystemUser) : boolean
+}
+
+class DeactivateUserController {
+    - authz : AuthorizationService
+    - userSvc : UserManagementService
+    + activeUsers() : Iterable<SystemUser>
+    + deactivateUser(user : SystemUser) : SystemUser
+}
+
+class ActivateUserController {
+    - authz : AuthorizationService
+    - userSvc : UserManagementService
+    + deactiveUsers() : Iterable<SystemUser>
+    + activateUser(user : SystemUser) : SystemUser
+}
+
+class AuthzRegistry {
+    + {static} authorizationService() : AuthorizationService
+    + {static} userService() : UserManagementService
+}
+
+class UserManagementService {
+    + activeUsers() : Iterable<SystemUser>
+    + deactivatedUsers() : Iterable<SystemUser>
+    + activateUser(user : SystemUser) : SystemUser
+    + deactivateUser(user : SystemUser) : SystemUser
+}
+
+class SystemUser {
+    - username : Username
+    - password : Password
+    - name : String
+    - email : String
+    - roles : Set<Role>
+    - active : boolean
+    + isActive() : boolean
+    + activate() : void
+    + deactivate() : void
+}
+
+enum SystemRole {
+    ADMIN
+    CRM_MANAGER
+    CRM_COLLABORATOR
+    SHOW_DESIGNER
+    CUSTOMER_REPRESENTATIVE
+}
+
+class Username <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+class Password <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+DeactivateUserAction ..> DeactivateUserUI : creates
+ActivateUserAction ..> ActivateUserUI : creates
+
+DeactivateUserUI --> "1" DeactivateUserController : uses
+ActivateUserUI --> "1" ActivateUserController : uses
+
+DeactivateUserController ..> AuthzRegistry
+DeactivateUserController ..> UserManagementService
+DeactivateUserController ..> SystemUser
+
+ActivateUserController ..> AuthzRegistry
+ActivateUserController ..> UserManagementService
+ActivateUserController ..> SystemUser
+
+AuthzRegistry --> "1" UserManagementService : provides
+
+UserManagementService ..> SystemUser : manages
+
+SystemUser --> "1..*" SystemRole : has
+SystemUser --> "1" Username : has
+SystemUser --> "1" Password : has
+
+@enduml 

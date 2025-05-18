@@ -40,6 +40,13 @@ class FigureCategoryServiceTest {
         }
 
         @Override
+        public Iterable<FigureCategory> findAllActive() {
+            return categories.stream()
+                    .filter(FigureCategory::isActive)
+                    .toList();
+        }
+
+        @Override
         public Optional<FigureCategory> ofIdentity(String id) {
             return categories.stream()
                     .filter(c -> c.identity().equals(id))
@@ -101,7 +108,10 @@ class FigureCategoryServiceTest {
 
         assertNotNull(result);
         assertEquals("Artistic", result.name());
-        assertEquals(1, categoryRepository.count());
+
+        List<FigureCategory> list = new ArrayList<>();
+        categoryService.findAll().forEach(list::add);
+        assertEquals(1, list.size());
     }
 
     @Test
@@ -115,31 +125,32 @@ class FigureCategoryServiceTest {
     @Test
     void registerCategory_withEmptyName_shouldThrowException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FigureCategory("  ", "Some description"));
+                categoryService.registerCategory(new FigureCategory("  ", "Some description")));
     }
 
     @Test
     void registerCategory_withEmptyDescription_shouldThrowException() {
         assertThrows(IllegalArgumentException.class, () ->
-                new FigureCategory("Name", ""));
+                categoryService.registerCategory(new FigureCategory("Name", "")));
     }
 
     @Test
     void updateDescription_authorizedUser_shouldEditAndSave() {
-        FigureCategory category = new FigureCategory("Tecnica", "Original");
-        categoryRepository.save(category);
+        categoryService.registerCategory(new FigureCategory("Tecnica", "Original"));
 
         categoryService.updateDescription("Tecnica", "Nova descrição");
 
-        FigureCategory updated = categoryRepository.findByName("Tecnica").orElseThrow();
+        List<FigureCategory> list = new ArrayList<>();
+        categoryService.findAll().forEach(list::add);
+        FigureCategory updated = list.get(0);
+
         assertEquals("Nova descrição", updated.description());
         assertNotNull(updated.lastEditionDate());
     }
 
     @Test
     void updateDescription_unauthorizedUser_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Tecnica", "Original");
-        categoryRepository.save(category);
+        categoryService.registerCategory(new FigureCategory("Tecnica", "Original"));
         authService.setAuthenticated(false);
 
         assertThrows(UnauthenticatedException.class, () ->
@@ -148,8 +159,7 @@ class FigureCategoryServiceTest {
 
     @Test
     void updateDescription_withEmptyDescription_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Tecnica", "Original");
-        categoryRepository.save(category);
+        categoryService.registerCategory(new FigureCategory("Tecnica", "Original"));
 
         assertThrows(IllegalArgumentException.class, () ->
                 categoryService.updateDescription("Tecnica", "  "));
@@ -157,22 +167,21 @@ class FigureCategoryServiceTest {
 
     @Test
     void toggleCategory_authorizedUser_shouldToggleAndSave() {
-        FigureCategory category = new FigureCategory("Formação", "Categoria ativa");
-        categoryRepository.save(category);
-
-        assertTrue(category.isActive());
+        categoryService.registerCategory(new FigureCategory("Formação", "Categoria ativa"));
 
         categoryService.toggleCategory("Formação");
 
-        FigureCategory updated = categoryRepository.findByName("Formação").orElseThrow();
+        List<FigureCategory> list = new ArrayList<>();
+        categoryService.findAll().forEach(list::add);
+        FigureCategory updated = list.get(0);
+
         assertFalse(updated.isActive());
         assertNotNull(updated.lastEditionDate());
     }
 
     @Test
     void toggleCategory_unauthorizedUser_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Formação", "Categoria ativa");
-        categoryRepository.save(category);
+        categoryService.registerCategory(new FigureCategory("Formação", "Categoria ativa"));
         authService.setAuthenticated(false);
 
         assertThrows(UnauthenticatedException.class, () ->
@@ -183,7 +192,7 @@ class FigureCategoryServiceTest {
     void deactivateAlreadyInactive_shouldThrowException() {
         FigureCategory category = new FigureCategory("Especial", "Inativa");
         category.deactivate();
-        categoryRepository.save(category);
+        categoryService.registerCategory(category);
 
         assertThrows(IllegalStateException.class, () ->
                 categoryService.deactivateCategory("Especial"));
@@ -191,8 +200,7 @@ class FigureCategoryServiceTest {
 
     @Test
     void activateAlreadyActive_shouldThrowException() {
-        FigureCategory category = new FigureCategory("Treino", "Já ativa");
-        categoryRepository.save(category);
+        categoryService.registerCategory(new FigureCategory("Treino", "Já ativa"));
 
         assertThrows(IllegalStateException.class, () ->
                 categoryService.activateCategory("Treino"));
@@ -200,52 +208,33 @@ class FigureCategoryServiceTest {
 
     @Test
     void listCategories_shouldReturnAllSavedCategories() {
-        // Arrange
-        FigureCategory cat1 = new FigureCategory("Acrobática", "Categoria para acrobacias");
-        FigureCategory cat2 = new FigureCategory("Técnica", "Categoria técnica");
+        categoryService.registerCategory(new FigureCategory("Acrobática", "Categoria para acrobacias"));
+        categoryService.registerCategory(new FigureCategory("Técnica", "Categoria técnica"));
 
-        categoryRepository.save(cat1);
-        categoryRepository.save(cat2);
-
-        // Act
         Iterable<FigureCategory> result = categoryService.findAll();
 
-        // Assert
         List<FigureCategory> resultList = new ArrayList<>();
         result.forEach(resultList::add);
 
         assertEquals(2, resultList.size());
-        assertTrue(resultList.contains(cat1));
-        assertTrue(resultList.contains(cat2));
+        assertTrue(resultList.stream().anyMatch(c -> c.name().equals("Acrobática")));
+        assertTrue(resultList.stream().anyMatch(c -> c.name().equals("Técnica")));
     }
 
     @Test
     void listCategories_withNoCategories_shouldReturnEmptyList() {
-        // Arrange — nenhum save feito
-
-        // Act
         Iterable<FigureCategory> result = categoryService.findAll();
-
-        // Assert
         assertNotNull(result);
         assertFalse(result.iterator().hasNext());
     }
 
     @Test
     void listCategories_shouldOverwriteCategoryWithSameName() {
-        // Arrange
-        FigureCategory original = new FigureCategory("Estilo Livre", "Descrição antiga");
-        categoryRepository.save(original);
+        categoryService.registerCategory(new FigureCategory("Estilo Livre", "Descrição antiga"));
+        categoryService.registerCategory(new FigureCategory("Estilo Livre", "Descrição nova"));
 
-        FigureCategory updated = new FigureCategory("Estilo Livre", "Descrição nova");
-        categoryRepository.save(updated);
-
-        // Act
-        Iterable<FigureCategory> result = categoryService.findAll();
-
-        // Assert
         List<FigureCategory> list = new ArrayList<>();
-        result.forEach(list::add);
+        categoryService.findAll().forEach(list::add);
 
         assertEquals(1, list.size());
         assertEquals("Descrição nova", list.get(0).description());
@@ -253,20 +242,15 @@ class FigureCategoryServiceTest {
 
     @Test
     void listCategories_shouldIncludeInactiveCategories() {
-        // Arrange
         FigureCategory ativa = new FigureCategory("Ativa", "Em uso");
         FigureCategory inativa = new FigureCategory("Inativa", "Obsoleta");
         inativa.deactivate();
 
-        categoryRepository.save(ativa);
-        categoryRepository.save(inativa);
+        categoryService.registerCategory(ativa);
+        categoryService.registerCategory(inativa);
 
-        // Act
-        Iterable<FigureCategory> result = categoryService.findAll();
-
-        // Assert
         List<FigureCategory> list = new ArrayList<>();
-        result.forEach(list::add);
+        categoryService.findAll().forEach(list::add);
 
         assertEquals(2, list.size());
         assertTrue(list.stream().anyMatch(FigureCategory::isActive));
@@ -275,18 +259,11 @@ class FigureCategoryServiceTest {
 
     @Test
     void listCategories_withSpecialCharacters_shouldBeHandledCorrectly() {
-        // Arrange
-        FigureCategory cat1 = new FigureCategory("Espaço Livre", "Com espaço");
-        FigureCategory cat2 = new FigureCategory("Árbitros", "Com acento");
-        categoryRepository.save(cat1);
-        categoryRepository.save(cat2);
+        categoryService.registerCategory(new FigureCategory("Espaço Livre", "Com espaço"));
+        categoryService.registerCategory(new FigureCategory("Árbitros", "Com acento"));
 
-        // Act
-        Iterable<FigureCategory> result = categoryService.findAll();
-
-        // Assert
         List<FigureCategory> list = new ArrayList<>();
-        result.forEach(list::add);
+        categoryService.findAll().forEach(list::add);
 
         assertEquals(2, list.size());
         assertTrue(list.stream().anyMatch(c -> c.name().equals("Espaço Livre")));
@@ -295,16 +272,13 @@ class FigureCategoryServiceTest {
 
     @Test
     void listCategories_shouldNotDuplicateSameCategory() {
-        // Arrange
         FigureCategory cat = new FigureCategory("Única", "Única descrição");
-        categoryRepository.save(cat);
-        categoryRepository.save(cat); // guardar novamente
+        categoryService.registerCategory(cat);
+        categoryService.registerCategory(cat); // guardar novamente
 
-        // Act
         List<FigureCategory> list = new ArrayList<>();
         categoryService.findAll().forEach(list::add);
 
-        // Assert
         assertEquals(1, list.size());
     }
 

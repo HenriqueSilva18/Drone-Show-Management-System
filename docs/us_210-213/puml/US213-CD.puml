@@ -1,0 +1,96 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class ListUsersAction {
+    + execute() : boolean
+}
+
+class ListUsersUI {
+    - theController : ListUsersController
+    + headline() : String
+    # emptyMessage() : String
+    # elements() : Iterable<SystemUser>
+    # elementPrinter() : Visitor<SystemUser>
+    # elementName() : String
+    # listHeader() : String
+}
+
+abstract class AbstractListUI<T> {
+    + show() : boolean
+    # {abstract} elements() : Iterable<T>
+    # {abstract} elementPrinter() : Visitor<T>
+    # {abstract} listHeader() : String
+}
+
+class ListUsersController {
+    - authz : AuthorizationService
+    - userSvc : UserManagementService
+    + allUsers() : Iterable<SystemUser>
+    + backofficeUsers() : Iterable<SystemUser>
+    + find(username : Username) : Optional<SystemUser>
+}
+
+class SystemUserPrinter {
+    + visit(user : SystemUser) : void
+}
+
+class AuthzRegistry {
+    + {static} authorizationService() : AuthorizationService
+    + {static} userService() : UserManagementService
+}
+
+class UserManagementService {
+    + allUsers() : Iterable<SystemUser>
+}
+
+class SystemUser {
+    - username : Username
+    - password : Password
+    - name : String
+    - email : String
+    - roles : Set<Role>
+    - active : boolean
+    + isActive() : boolean
+    + username() : String
+    + name() : Name
+}
+
+enum SystemRole {
+    ADMIN
+    CRM_MANAGER
+    CRM_COLLABORATOR
+    SHOW_DESIGNER
+    CUSTOMER_REPRESENTATIVE
+}
+
+class Username <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+class Password <<(V, #ADD8E6) valueObject>> {
+    - value : String
+}
+
+ListUsersAction ..> ListUsersUI : creates
+ListUsersUI -|> AbstractListUI
+ListUsersUI --> "1" ListUsersController : uses
+ListUsersUI ..> SystemUserPrinter : creates
+
+ListUsersController ..> AuthzRegistry
+ListUsersController ..> UserManagementService
+ListUsersController ..> SystemUser
+
+SystemUserPrinter ..> SystemUser : visits
+
+AuthzRegistry --> "1" UserManagementService : provides
+
+UserManagementService ..> SystemUser : manages
+
+SystemUser --> "1..*" SystemRole : has
+SystemUser --> "1" Username : has
+SystemUser --> "1" Password : has
+
+@enduml 

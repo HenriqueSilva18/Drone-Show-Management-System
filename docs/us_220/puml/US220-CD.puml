@@ -1,0 +1,215 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+class Utils {
+    + {static} collectRepresentativeData() : RepresentativeData
+}
+
+class RegCustomerUI {
+    - theController : RegCustomerController
+    + doShow() : boolean
+    - selectCustomerType() : CustomerType
+    - showCustomerTypes(selectedTypes : Set<CustomerType>) : boolean
+    - buildCustomerTypeMenu(selectedTypes : Set<CustomerType>) : Menu
+    + headline() : String
+}
+
+class RegCustomerAction {
+    + execute() : boolean
+}
+
+class RegCustomerController {
+    - customerService : CustomerService
+    - userController : AddUserController
+    + RegCustomerController()
+    + RegCustomerController(customerService : CustomerService, userController : AddUserController)
+    + registerCustomerWithMultipleRepresentatives(vatNumber : String, name : String, \n    address : Address, email : String, phone : String, type : CustomerType, \n    representativesData : List<RepresentativeData>) : Customer
+    + getCustomerTypes() : Iterable<CustomerType>
+}
+
+class CustomerService {
+    - authz : AuthorizationService
+    - repo : CustomerRepository
+    + CustomerService()
+    + CustomerService(repository : CustomerRepository, authorizationService : AuthorizationService)
+    + findCustomerByVAT(vat : VAT) : Optional<Customer>
+    + findCustomerByVAT(vatNumber : String) : Optional<Customer>
+    + findAllActiveCustomers() : Iterable<Customer>
+    + registerCustomer(customer : Customer) : Customer
+    + getCustomerTypes() : Iterable<CustomerType>
+}
+
+class Address <<(V, #ADD8E6) valueObject>> {
+    - street : String
+    - city : String
+    - postalCode : String
+    - country : String
+    + Address(street : String, city : String, postalCode : String, country : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + toString() : String
+    + compareTo(other : Address) : int
+}
+
+class Customer <<AggregateRoot>> {
+    - vat : VAT
+    - name : String
+    - address : Address
+    - email : Email
+    - phone : Phone
+    - customerType : CustomerType
+    - customerStatus : CustomerStatus
+    - representatives : List<Representative>
+    + Customer(vat : VAT, name : String, address : Address, email : Email, \n    phone : Phone, customerType : CustomerType, customerStatus : CustomerStatus, \n    representatives : List<Representative>)
+    + addRepresentative(representative : Representative)
+    + representatives() : List<Representative>
+    + identity() : VAT
+}
+
+class CustomerBuilder {
+    - vat : VAT
+    - name : String
+    - address : Address
+    - email : Email
+    - phone : Phone
+    - customerType : CustomerType
+    - customerStatus : CustomerStatus
+    - representatives : List<Representative>
+    + withVAT(vat : String) : CustomerBuilder
+    + withName(name : String) : CustomerBuilder
+    + withAddress(address : Address) : CustomerBuilder
+    + withEmail(email : String) : CustomerBuilder
+    + withPhone(phone : String) : CustomerBuilder
+    + withCustomerType(customerType : CustomerType) : CustomerBuilder
+    + withRepresentative(representative : Representative) : CustomerBuilder
+    + build() : Customer
+}
+
+enum CustomerStatus {
+    CREATED
+    INFRINGEMENT
+    DELETED
+}
+
+enum CustomerType {
+    REGULAR
+    VIP
+    + {static} asList() : Iterable<CustomerType>
+}
+
+class Email <<(V, #ADD8E6) valueObject>> {
+    - email : String
+    + Email(email : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + toString() : String
+    + compareTo(other : Email) : int
+}
+
+class NIF <<(V, #ADD8E6) valueObject>> {
+    - nif : String
+    + NIF(nif : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + toString() : String
+    + compareTo(other : NIF) : int
+}
+
+class Phone <<(V, #ADD8E6) valueObject>> {
+    - phoneNumber : String
+    + Phone(phoneNumber : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + toString() : String
+    + compareTo(other : Phone) : int
+}
+
+class Representative {
+    - nif : NIF
+    - name : String
+    - email : Email
+    - phone : Phone
+    - position : String
+    - systemUser : SystemUser
+    - customer : Customer
+    + Representative(nif : NIF, name : String, email : Email, phone : Phone, \n    position : String, systemUser : SystemUser)
+    + associateCustomer(customer : Customer)
+    + updateContact(newEmail : Email, newPhone : Phone)
+}
+
+class RepresentativeBuilder {
+    - nif : NIF
+    - name : String
+    - email : Email
+    - phone : Phone
+    - position : String
+    - systemUser : SystemUser
+    + withNIF(nif : String) : RepresentativeBuilder
+    + withName(name : String) : RepresentativeBuilder
+    + withEmail(email : String) : RepresentativeBuilder
+    + withPhone(phone : String) : RepresentativeBuilder
+    + withPosition(position : String) : RepresentativeBuilder
+    + withSystemUser(systemUser : SystemUser) : RepresentativeBuilder
+    + build() : Representative
+}
+
+class VAT <<(V, #ADD8E6) valueObject>> {
+    - number : String
+    + VAT(vatNumber : String)
+    + equals(o : Object) : boolean
+    + hashCode() : int
+    + toString() : String
+    + compareTo(other : VAT) : int
+}
+
+interface CustomerRepository {
+    + findByVAT(vatNumber : VAT) : Optional<Customer>
+    + findByVAT(vatNumber : String) : Optional<Customer>
+    + findAllActive() : Iterable<Customer>
+    + findByType(type : CustomerType) : Iterable<Customer>
+}
+
+RegCustomerUI ..> RegCustomerController
+RegCustomerUI ..> Utils
+RegCustomerAction ..> RegCustomerUI
+
+RegCustomerController --> CustomerService
+RegCustomerController ..> CustomerBuilder
+RegCustomerController ..> RepresentativeBuilder
+
+CustomerService --> CustomerRepository
+CustomerService ..> Customer
+
+Customer --> "1" VAT
+Customer --> "1" Address
+Customer --> "1" Email
+Customer --> "1" Phone
+Customer --> "1" CustomerType
+Customer --> "1" CustomerStatus
+Customer --> "*" Representative
+
+Representative --> "1" NIF
+Representative --> "1" Email
+Representative --> "1" Phone
+Representative --> "1" Customer
+
+CustomerBuilder ..> Customer
+CustomerBuilder ..> VAT
+CustomerBuilder ..> Address
+CustomerBuilder ..> Email
+CustomerBuilder ..> Phone
+CustomerBuilder ..> CustomerType
+CustomerBuilder ..> Representative
+
+RepresentativeBuilder ..> Representative
+RepresentativeBuilder ..> NIF
+RepresentativeBuilder ..> Email
+RepresentativeBuilder ..> Phone
+
+@enduml

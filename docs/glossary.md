@@ -56,6 +56,7 @@
 | **Dynamic Figure**       | A figure where drones move in the air performing a routine with a fixed duration.                                     |
 | **Exclusive**            | Indicates whether a figure is exclusive to a client.                                                                  |
 | **Figure**               | Represents a sequence that drones perform during a show.                                                              |
+|**Figure Category**       | Represents a category of figures,with a description, name , creation date, last edition date and if it is active or not |
 | **Id**                   | Value object that encapsulates unique identifiers for entities.                                                       |
 | **Language**             | Domain-specific language used to code drone figures.                                                                  |
 | **Maintenance**          | Value object containing information about drone maintenance periods.                                                  |

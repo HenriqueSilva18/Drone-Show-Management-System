@@ -37,6 +37,13 @@ public class InMemoryFigureCategoryRepository implements FigureCategoryRepositor
     }
 
     @Override
+    public Iterable<FigureCategory> findAllActive() {
+        return categories.stream()
+                .filter(FigureCategory::isActive)
+                .toList();
+    }
+
+    @Override
     public void delete(FigureCategory category) {
         categories.remove(category);
     }

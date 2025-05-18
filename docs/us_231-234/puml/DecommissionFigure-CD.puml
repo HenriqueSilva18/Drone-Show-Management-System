@@ -1,0 +1,56 @@
+@startuml
+
+package "Figure Management" {
+    class DecommissionFigureUI {
+        -controller: FigureController
+        +show()
+        -displaySuccess(figure: Figure)
+    }
+
+    class Figure {
+        -id: Long
+        -isActive: boolean
+        -decommissionDate: LocalDateTime
+        +setActive(active: boolean)
+        +setDecommissionDate(date: LocalDateTime)
+        +identity(): Long
+        +toString(): String
+    }
+
+    class FigureController {
+        -figureService: FigureService
+        +decommissionFigure(figure: Figure): Figure
+    }
+
+    class FigureService {
+        -repo: FigureRepository
+        -authz: AuthorizationService
+        +decommissionFigure(figure: Figure): Figure
+    }
+
+    interface FigureRepository {
+        +ofIdentity(id: Long): Optional<Figure>
+        +save(figure: Figure): Figure
+    }
+
+    class JpaFigureRepository {
+        -entityManager: EntityManager
+        +ofIdentity(id: Long): Optional<Figure>
+        +save(figure: Figure): Figure
+    }
+
+    class InMemoryFigureRepository {
+        -figures: Set<Figure>
+        +ofIdentity(id: Long): Optional<Figure>
+        +save(figure: Figure): Figure
+    }
+}
+
+DecommissionFigureUI --> FigureController
+FigureController --> FigureService
+FigureService --> FigureRepository
+FigureService --> AuthorizationService
+FigureRepository <|.. JpaFigureRepository
+FigureRepository <|.. InMemoryFigureRepository
+
+@enduml 
