@@ -1,0 +1,37 @@
+@startuml
+actor User
+participant "ShowRequestService" as Service
+participant "AuthorizationService" as Auth
+participant "ShowRequestRepository" as Repo
+participant "ShowRequest" as Request
+
+User -> Service : updateShowRequest(vat, id, numDrones, duration, description, date, status)
+activate Service
+
+Service -> Auth : ensureAuthenticatedUserHasAnyOf(...)
+activate Auth
+Auth --> Service : (OK)
+deactivate Auth
+
+Service -> Repo : findByVATAndId(vat, id)
+activate Repo
+Repo --> Service : Optional<ShowRequest>
+deactivate Repo
+
+alt ShowRequest not found
+    Service --> User : throws IllegalArgumentException
+    deactivate Service
+else status == "ShowProposalDone"
+    Service --> User : throws IllegalStateException
+    deactivate Service
+else update allowed
+    Service -> Request : setNumDrones(...)
+    Service -> Request : setDuration(...)
+    Service -> Request : setShowDescription(...)
+    Service -> Request : setDate(...)
+    Service -> Request : setStatus(...)
+
+    Service -> Repo : save(Request)
+    deactivate Service
+end
+@enduml

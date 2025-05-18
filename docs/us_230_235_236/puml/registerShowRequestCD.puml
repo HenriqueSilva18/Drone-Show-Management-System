@@ -1,0 +1,65 @@
+@startuml
+' Define os pacotes
+package "Application Layer" {
+    class RegShowRequestController {
+        - service: ShowRequestService
+        + registerShowRequest(...)
+    }
+
+    class ShowRequestService {
+        - authz: AuthorizationService
+        - repo: ShowRequestRepository
+        + registerShowRequest(request: ShowRequest): ShowRequest
+    }
+}
+
+package "Domain Layer" {
+    class ShowRequest {
+        - showRequestId: ShowRequestId
+        - numDrones: int
+        - duration: double
+        - showDescription: String
+        - dateValue: String
+        - status: String
+        - customer: Customer
+        - clientVAT: VAT
+        - drones: List<Drone>
+        - figures: List<Figure>
+    }
+
+    class ShowRequestBuilder {
+        - request: ShowRequest
+        + withNumDrones(int): ShowRequestBuilder
+        + withDuration(double): ShowRequestBuilder
+        + withDescription(String): ShowRequestBuilder
+        + withDate(String): ShowRequestBuilder
+        + withCustomer(Customer): ShowRequestBuilder
+        + withVAT(VAT): ShowRequestBuilder
+        + withFigures(List<Figure>): ShowRequestBuilder
+        + withDrones(List<Drone>): ShowRequestBuilder
+        + build(): ShowRequest
+    }
+}
+
+package "Infrastructure Layer" {
+    interface ShowRequestRepository {
+        + save(ShowRequest): ShowRequest
+    }
+
+    interface AuthorizationService {
+        + ensureAuthenticatedUserHasAnyOf(...)
+    }
+}
+
+' Relações
+RegShowRequestController --> ShowRequestService
+ShowRequestService --> AuthorizationService
+ShowRequestService --> ShowRequestRepository
+ShowRequestService --> ShowRequest
+ShowRequestService --> ShowRequestBuilder
+ShowRequest --> Customer
+ShowRequest --> VAT
+ShowRequest --> "1..*" Drone
+ShowRequest --> "1..*" Figure
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+actor User
+
+participant "ListShowRequestsByVatUI" as UI
+participant "ShowRequestService" as Service
+participant "AuthorizationService" as Authz
+participant "ShowRequestRepository" as Repository
+
+User -> UI : listShowRequestsByVat()
+UI -> Service : findByClientVAT(vatString)
+Service -> Authz : ensureAuthenticatedUserHasAnyOf(POWER_USER, ADMIN, CRM_COLLABORATOR)
+Service -> Repository : findByClientVAT(vatString)
+Repository --> Service : Iterable<ShowRequest>
+Service --> UI : Iterable<ShowRequest>
+UI --> User : Show the List of ShowRequests
+
+@enduml

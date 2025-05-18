@@ -1,0 +1,48 @@
+@startuml
+package "showRequestManagement" {
+    class ShowRequestService {
+        - AuthorizationService authz
+        - ShowRequestRepository repo
+        + updateShowRequest(vat: VAT, id: ShowRequestId, numDrones: int, duration: double, description: String, date: String, status: String): void
+    }
+
+    class ShowRequestRepository {
+        + findByVATAndId(vat: VAT, id: ShowRequestId): Optional<ShowRequest>
+        + save(showRequest: ShowRequest): ShowRequest
+    }
+
+    class ShowRequest {
+        - showRequestId: ShowRequestId
+        - numDrones: int
+        - duration: double
+        - showDescription: String
+        - dateValue: String
+        - status: String
+        + setNumDrones(int): void
+        + setDuration(double): void
+        + setShowDescription(String): void
+        + setDate(String): void
+        + setStatus(String): void
+    }
+
+    class ShowRequestId {
+        - value: int
+        + value(): int
+    }
+
+    class VAT {
+        - value: String
+        + value(): String
+    }
+
+    class AuthorizationService {
+        + ensureAuthenticatedUserHasAnyOf(...): void
+    }
+
+    ShowRequestService --> ShowRequestRepository
+    ShowRequestService --> AuthorizationService
+    ShowRequestService --> ShowRequest
+    ShowRequest --> ShowRequestId
+    ShowRequest --> VAT
+}
+@enduml

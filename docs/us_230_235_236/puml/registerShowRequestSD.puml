@@ -1,0 +1,32 @@
+@startuml
+actor User
+
+participant "RegShowRequestController" as Controller
+participant "ShowRequestService" as Service
+participant "AuthorizationService" as Authz
+participant "ShowRequestBuilder" as Builder
+participant "ShowRequestRepository" as Repository
+
+User -> Controller : registerShowRequest(inputData)
+Controller -> Service : registerShowRequest(inputData)
+Service -> Authz : ensureAuthenticatedUserHasAnyOf(POWER_USER, ADMIN, CRM_COLLABORATOR)
+
+activate Builder
+Service -> Builder : withNumDrones(inputData.numDrones)
+Service -> Builder : withDuration(inputData.duration)
+Service -> Builder : withDescription(inputData.description)
+Service -> Builder : withDate(inputData.date)
+Service -> Builder : withCustomer(inputData.customer)
+Service -> Builder : withVAT(inputData.vat)
+Service -> Builder : withFigures(inputData.figures)
+Service -> Builder : withDrones(inputData.drones)
+Service -> Builder : build()
+Builder --> Service : ShowRequest
+deactivate Builder
+
+Service -> Repository : save(ShowRequest)
+Repository --> Service : ShowRequest
+Service --> Controller : ShowRequest
+Controller --> User : ShowRequest
+
+@enduml

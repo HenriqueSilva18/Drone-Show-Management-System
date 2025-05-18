@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: lapr4.customermanagement.domain.NIFTest
 -------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in lapr4.customermanagement.domain.NIFTest
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in lapr4.customermanagement.domain.NIFTest
