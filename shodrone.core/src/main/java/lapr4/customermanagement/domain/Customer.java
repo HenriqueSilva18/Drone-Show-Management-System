@@ -67,7 +67,7 @@ public class Customer implements AggregateRoot<VAT> {
 		}
 	}
 
-	protected Customer() {
+	public Customer() {
 		// for ORM only
 	}
 
