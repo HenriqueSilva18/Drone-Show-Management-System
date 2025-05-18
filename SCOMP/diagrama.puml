@@ -1,0 +1,42 @@
+@startuml
+skinparam monochrome true
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+left to right direction
+
+' Scripts
+file "script0.txt\n(x, y, z)" as Script0
+file "scriptN.txt\n(x, y, z)" as ScriptN
+
+' Drones
+rectangle "Processo Drone 0\n(drone executable)" as Drone0
+rectangle "Processo Drone 1\n(drone executable)" as Drone1
+rectangle "Processo Drone N\n(drone executable)" as DroneN
+
+' Processo Principal
+rectangle "Processo Principal\n(simulator / main)" as Main
+
+' Armazenamento
+database "Matriz de Posições\n[MAX_STEPS][MAX_DRONES]" as Matrix
+database "Relatório\n(simulation_report.txt)" as Report
+
+' Sinais
+rectangle "Sinais:\nSIGUSR1 (colisão)\nSIGTERM (término)" as Sinais
+
+' Conexões com scripts
+Script0 --> Drone0 : .
+ScriptN --> DroneN : .
+
+' Comunicação: main ↔ drones
+Drone0 --> Main : .
+
+Drone1 --> Main : .
+
+DroneN --> Main : .
+
+' Armazenamento e sinais
+Main --> Matrix : .
+Main --> Report : .
+Main --> Sinais : Envia sinais
+
+@enduml
