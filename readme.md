@@ -45,7 +45,15 @@ To run tests on the project, execute the test script.
 
 ## 5. How to Run
 
-*To Do*
+### On Windows:
+
+    ./run-backoffice.bat
+    ./run-user.bat
+
+### On Linux/unix/macOS:
+
+    ./run-backoffice.sh
+    ./run-user.sh
 
 ## 6. How to Install/Deploy into Another Machine (or Virtual Machine)
 
