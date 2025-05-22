@@ -19,8 +19,6 @@ salutation: TEXT NEWLINE;
 proposal_title: TEXT NEWLINE NEWLINE?;
 
 paragraph: TEXT NEWLINE NEWLINE?;
-section: (HASH+ | NUMBER DOT | NEWLINE)? TEXT NEWLINE*;
-
 location: TEXT NEWLINE+;
 date: TEXT NEWLINE+;
 time: TEXT NEWLINE+;
@@ -34,7 +32,6 @@ title: TEXT NEWLINE+;
 page_break: PAGE_BREAK NEWLINE+ | SEPARATOR_LINE NEWLINE+ | NEWLINE+;
 attachment_section: attachment_title location date time duration list_drones list_figures;
 attachment_title: TEXT NEWLINE+;
-key_value_pair: TEXT (COLON | DASH) TEXT NEWLINE;
 
 DATE_SEPARATOR: '/' | '-' | '.';
 PAGE_BREAK: '[page break]';
