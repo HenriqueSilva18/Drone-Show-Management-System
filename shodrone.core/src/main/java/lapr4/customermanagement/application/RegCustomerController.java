@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Optional;
 
 @ApplicationService
 public class RegCustomerController {
@@ -30,6 +31,16 @@ public class RegCustomerController {
         this.userController = userController;
     }
 
+    public boolean representativeExists(String nif) {
+        Optional<Representative> existingRep = customerService.findRepresentativeByNIF(nif);
+        return existingRep.isPresent();
+    }
+
+    public boolean customerExists(String vatNumber) {
+        Optional<Customer> existingCustomer = customerService.findCustomerByVAT(vatNumber);
+        return existingCustomer.isPresent();
+    }
+
     @Transactional
     public Customer registerCustomerWithMultipleRepresentatives(
             String vatNumber, String name, Address address,
@@ -39,6 +50,17 @@ public class RegCustomerController {
 
         if (representativesData == null || representativesData.isEmpty()) {
             throw new IllegalArgumentException("At least one representative must be provided");
+        }
+
+        Set<String> providedNIFs = new HashSet<>();
+        for (RepresentativeData repData : representativesData) {
+            if (!providedNIFs.add(repData.nif)) {
+                throw new IllegalArgumentException("Duplicate NIF found in provided representatives: " + repData.nif);
+            }
+
+            if (representativeExists(repData.nif)) {
+                throw new IllegalArgumentException("A representative with NIF " + repData.nif + " already exists in the system");
+            }
         }
 
         List<Representative> representatives = new ArrayList<>();

@@ -42,4 +42,12 @@ public class InMemoryCustomerRepository
                 .filter(c -> c.customerType() == type)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Optional<Representative> findRepresentativeByNIF(String nif) {
+        return StreamSupport.stream(super.findAll().spliterator(), false)
+                .flatMap(customer -> customer.representatives().stream())
+                .filter(representative -> representative.identity().toString().equals(nif))
+                .findFirst();
+    }
 }

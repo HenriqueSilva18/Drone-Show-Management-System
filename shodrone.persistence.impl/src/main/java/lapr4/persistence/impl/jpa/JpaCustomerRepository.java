@@ -5,6 +5,7 @@ import lapr4.Application;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.domain.CustomerType;
 import lapr4.customermanagement.domain.VAT;
+import lapr4.customermanagement.domain.Representative;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
@@ -50,5 +51,16 @@ class JpaCustomerRepository
         final Map<String, Object> params = new HashMap<>();
         params.put("type", type);
         return match("e.customerType = :type", params);
+    }
+
+    @Override
+    public Optional<Representative> findRepresentativeByNIF(String nif) {
+        final Map<String, Object> params = new HashMap<>();
+        params.put("nif", nif);
+        return entityManager()
+                .createQuery("SELECT r FROM Representative r WHERE r.nif.nif = :nif", Representative.class)
+                .setParameter("nif", nif)
+                .getResultStream()
+                .findFirst();
     }
 }

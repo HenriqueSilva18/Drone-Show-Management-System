@@ -6,6 +6,7 @@ import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.domain.VAT;
+import lapr4.customermanagement.domain.Representative;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
@@ -53,5 +54,10 @@ public class CustomerService {
 
     public Iterable<CustomerType> getCustomerTypes() {
         return CustomerType.asList();
+    }
+
+    public Optional<Representative> findRepresentativeByNIF(String nif) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
+        return repo.findRepresentativeByNIF(nif);
     }
 }

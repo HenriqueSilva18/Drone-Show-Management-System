@@ -29,7 +29,7 @@ public class Utils {
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error adding representative: " + e.getMessage());
-            System.out.println("Please try again.");
+            System.out.println("Please try again with a different NIF or contact support if you believe this is an error.");
             return null;
         }
     }

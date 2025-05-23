@@ -3,12 +3,6 @@ package lapr4.customermanagement.domain;
 import eapli.framework.domain.model.DomainFactory;
 import eapli.framework.infrastructure.authz.domain.model.SystemUser;
 
-/**
- * A factory for Representative entities.
- *
- * This class follows the factory (DDD) pattern using a fluent interface
- * and acts as a Builder (GoF).
- */
 public class RepresentativeBuilder implements DomainFactory<Representative> {
 
     private NIF nif;

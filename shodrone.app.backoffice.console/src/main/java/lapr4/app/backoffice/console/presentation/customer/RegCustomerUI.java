@@ -65,6 +65,12 @@ public class RegCustomerUI extends AbstractUI {
         }
 
         try {
+            if (theController.customerExists(vatNumber)) {
+                System.out.println("\nError: A customer with VAT " + vatNumber + " already exists in the system!");
+                System.out.println("Please try again with a different VAT number.");
+                return false;
+            }
+
             Customer customer = this.theController.registerCustomerWithMultipleRepresentatives(
                     vatNumber,
                     name,
@@ -82,6 +88,11 @@ public class RegCustomerUI extends AbstractUI {
             System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            if (e.getMessage().contains("VAT")) {
+                System.out.println("Please try again with a different VAT number.");
+            } else if (e.getMessage().contains("NIF")) {
+                System.out.println("Please try again with different NIFs for the representatives.");
+            }
         }
 
         return false;
