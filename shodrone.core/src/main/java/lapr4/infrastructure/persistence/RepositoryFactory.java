@@ -25,6 +25,7 @@ import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
+import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
@@ -36,75 +37,60 @@ import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
  *
  */
 public interface RepositoryFactory {
-     ShowRequestRepository showRequests();
+    /**
+     * repository will be created in auto transaction mode
+     */
+    ShowRequestRepository showRequests();
+
+    /**
+     * @param autoTx the transactional context to enroll
+     */
+    ShowRequestRepository showRequests(TransactionalContext autoTx);
+
     /**
      * factory method to create a transactional context to use in the repositories
-     *
-     * @return
      */
     TransactionalContext newTransactionalContext();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enrol
-     * @return
+     * @param autoTx the transactional context to enroll
      */
     UserRepository users(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
-     *
-     * @return
      */
     UserRepository users();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enroll
-     * @return
+     * @param autoTx the transactional context to enroll
      */
     UtenteRepository utentes(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
-     *
-     * @return
      */
     UtenteRepository utentes();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enroll
-     * @return
+     * @param autoTx the transactional context to enroll
      */
     CustomerRepository customers(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
-     *
-     * @return
      */
     CustomerRepository customers();
 
     /**
-     *
-     * @param autoTx
-     *            the transactional context to enroll
-     * @return
+     * @param autoTx the transactional context to enroll
      */
     SignupRequestRepository signupRequests(TransactionalContext autoTx);
 
     /**
      * repository will be created in auto transaction mode
-     *
-     * @return
      */
     SignupRequestRepository signupRequests();
-
-   // ShowRequestRepository showRequests();  // ← ADICIONAR ISTO
 
     DroneRepository drones();
 
@@ -113,4 +99,14 @@ public interface RepositoryFactory {
     FigureRepository figures();
 
     FigureCategoryRepository figureCategories();
+
+    /**
+     * @param autoTx the transactional context to enroll
+     */
+    ShowProposalRepository showProposals(TransactionalContext autoTx);
+
+    /**
+     * repository will be created in auto transaction mode
+     */
+    ShowProposalRepository showProposals();
 }

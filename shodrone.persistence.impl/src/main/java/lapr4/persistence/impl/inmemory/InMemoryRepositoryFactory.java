@@ -4,8 +4,10 @@ import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
+import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
+import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
@@ -20,6 +22,10 @@ import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryU
  * Created by nuno on 20/03/16.
  */
 public class InMemoryRepositoryFactory implements RepositoryFactory {
+
+	static {
+		InMemoryInitializer.init();
+	}
 
 	@Override
 	public UserRepository users(final TransactionalContext tx) {
@@ -86,6 +92,11 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	}
 
 	@Override
+	public ShowRequestRepository showRequests(TransactionalContext tx) {
+		return new InMemoryShowRequestRepository();
+	}
+
+	@Override
 	public DroneRepository drones() {
 		return new InMemoryDroneRepository();
 	}
@@ -98,6 +109,16 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public FigureCategoryRepository figureCategories() {
 		return new InMemoryFigureCategoryRepository();
+	}
+
+	@Override
+	public ShowProposalRepository showProposals() {
+		return new InMemoryShowProposalRepository();
+	}
+
+	@Override
+	public ShowProposalRepository showProposals(TransactionalContext tx) {
+		return new InMemoryShowProposalRepository();
 	}
 
 }

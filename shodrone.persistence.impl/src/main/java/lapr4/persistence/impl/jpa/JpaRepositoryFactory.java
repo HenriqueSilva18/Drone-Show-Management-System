@@ -10,6 +10,7 @@ import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
+import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
@@ -91,6 +92,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaShowRequestRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    @Override
+    public ShowRequestRepository showRequests(TransactionalContext autoTx) {
+        return new JpaShowRequestRepository(autoTx);
+    }
+
     // =====================
     // Drones
     // =====================
@@ -118,5 +124,19 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public FigureCategoryRepository figureCategories() {
         return new JpaFigureCategoryRepository(PERSISTENCE_UNIT_NAME);
+    }
+
+
+    // =====================
+    // Show Proposals
+    // =====================
+    @Override
+    public ShowProposalRepository showProposals(TransactionalContext autoTx) {
+        return new JpaShowProposalRepository(autoTx);
+    }
+
+    @Override
+    public ShowProposalRepository showProposals() {
+        return new JpaShowProposalRepository(PERSISTENCE_UNIT_NAME);
     }
 }

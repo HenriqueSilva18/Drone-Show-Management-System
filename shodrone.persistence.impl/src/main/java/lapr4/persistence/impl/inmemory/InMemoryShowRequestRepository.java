@@ -31,6 +31,13 @@ public class InMemoryShowRequestRepository implements ShowRequestRepository {
     }
 
     @Override
+    public Optional<ShowRequest> findById(int showRequestId) {
+        return showRequests.stream()
+                .filter(showRequest -> showRequest.identity().value() == showRequestId)
+                .findFirst();
+    }
+
+    @Override
     public ShowRequest save(ShowRequest entity) {
         showRequests.removeIf(existing -> existing.identity().equals(entity.identity()));
         showRequests.add(entity);

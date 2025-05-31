@@ -6,6 +6,7 @@ import lapr4.customermanagement.domain.VAT;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showRequestManagement.domain.ShowRequestId;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
+import eapli.framework.domain.repositories.TransactionalContext;
 
 import java.util.Optional;
 
@@ -16,6 +17,18 @@ public class JpaShowRequestRepository
 
     public JpaShowRequestRepository(String persistenceUnitName) {
         super(persistenceUnitName, "showRequestId");
+    }
+
+    public JpaShowRequestRepository(TransactionalContext tx) {
+        super(tx, "showRequestId");
+    }
+
+    @Override
+    public Optional<ShowRequest> findById(int showRequestId) {
+        final TypedQuery<ShowRequest> query = entityManager().createQuery(
+                "SELECT s FROM ShowRequest s WHERE s.showRequestId.value = :id", ShowRequest.class);
+        query.setParameter("id", showRequestId);
+        return query.getResultStream().findFirst();
     }
 
     @Override

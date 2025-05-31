@@ -8,6 +8,7 @@ import lapr4.app.backoffice.console.presentation.customer.*;
 import lapr4.app.backoffice.console.presentation.figure.ListActivePublicFiguresUI;
 import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
 import lapr4.app.backoffice.console.presentation.figure.SearchFigureCatalogueUI;
+import lapr4.app.backoffice.console.presentation.showproposal.CreateShowProposalUI;
 import lapr4.app.backoffice.console.presentation.showrequest.RegShowRequestUI;
 import lapr4.app.backoffice.console.presentation.showrequest.ListShowRequestsByVATUI;
 import lapr4.app.backoffice.console.presentation.showrequest.EditShowRequestUI;
@@ -29,12 +30,18 @@ public class CollaboratorMenu extends MainMenu {
 	private static final int SEARCH_FIGURE_CATALOGUE = 10;
 	private static final int LIST_FIGURE_CATEGORIES = 11;
 
+	// SHOW PROPOSALS
+	private static final int CREATE_SHOW_PROPOSAL = 1;
+
 	// MAIN MENU
 	private static final int CUSTOMERS_OPTION = 2;
+	private static final int PROPOSAL_OPTION = 3;
 
 	public static void buildCollaboratorMenu(Menu mainMenu) {
 		final Menu customersMenu = CollaboratorMenu.buildCustomersMenu();
+		final Menu proposalsMenu = CollaboratorMenu.buildProposalsMenu();
 		mainMenu.addSubMenu(CUSTOMERS_OPTION, customersMenu);
+		mainMenu.addSubMenu(PROPOSAL_OPTION, proposalsMenu);
 	}
 
 	private static Menu buildCustomersMenu() {
@@ -51,6 +58,15 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(LIST_ACTIVE_PUBLIC_FIGURES, "List Active Public Figures", new ListActivePublicFiguresUI()::show);
 		menu.addItem(SEARCH_FIGURE_CATALOGUE, "Search Figure Catalogue", new SearchFigureCatalogueUI()::show);
 		menu.addItem(LIST_FIGURE_CATEGORIES, "List Figure Categories", new ListFigureCategoriesUI()::show);
+		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+		return menu;
+	}
+
+	private static Menu buildProposalsMenu() {
+		final var menu = new Menu("Show Proposals >");
+
+		menu.addItem(CREATE_SHOW_PROPOSAL, "Create Show Proposal", new CreateShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

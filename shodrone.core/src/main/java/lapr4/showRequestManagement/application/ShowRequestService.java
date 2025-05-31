@@ -9,6 +9,7 @@ import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showRequestManagement.domain.ShowRequestId;
+import eapli.framework.domain.repositories.TransactionalContext;
 
 import java.util.Optional;
 
