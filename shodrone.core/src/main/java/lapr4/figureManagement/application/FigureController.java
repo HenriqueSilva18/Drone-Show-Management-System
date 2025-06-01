@@ -13,8 +13,8 @@ public class FigureController {
     private final FigureService figureService = new FigureService();
 
     @Transactional
-    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category) {
-        Figure figure = new Figure(description, exclusive, clientVAT, category);
+    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
+        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
         return figureService.registerFigure(figure);
     }
 
@@ -45,12 +45,12 @@ public class FigureController {
         }
     }
 
-    public Figure addFigure(String description, boolean exclusive, FigureCategory category, VAT clientVAT) {
-        return figureService.registerFigure(description, exclusive, clientVAT, category);
+    public Figure addFigure(String description, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion) {
+        return figureService.registerFigure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
     }
 
-    public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT) {
-        return figureService.registerFigure(description, keywords, exclusive, clientVAT, category);
+    public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion) {
+        return figureService.registerFigure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion);
     }
 
     public Figure decommissionFigure(Figure figure) {

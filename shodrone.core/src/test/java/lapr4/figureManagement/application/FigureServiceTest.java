@@ -158,6 +158,8 @@ class FigureServiceTest {
     private StubAuthorizationService authService;
     private FigureService figureService;
     private VAT defaultVAT;
+    private String DSLCode;
+    private String DSLVersion;
 
     @BeforeEach
     void setUp() {
@@ -168,6 +170,8 @@ class FigureServiceTest {
         authService.setAuthenticated(true);
         figureService = new FigureService(repository, authService);
         defaultVAT = new VAT("PT123456789");
+        DSLCode = "";
+        DSLVersion = "";
     }
 
     @Test
@@ -175,11 +179,11 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("test", "figure"));
-        Figure figure1 = new Figure("Public Figure", keywords, false, defaultVAT, category);
+        Figure figure1 = new Figure("Public Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         figure1.setActive(true);
         repository.addFigure(figure1);
 
-        Figure figure2 = new Figure("Private Figure", true, defaultVAT, category);
+        Figure figure2 = new Figure("Private Figure", true, defaultVAT, category, DSLCode, DSLVersion);
         figure2.setActive(true);
         repository.addFigure(figure2);
 
@@ -196,7 +200,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory electronics = new FigureCategory("Electronics", "Devices and gadgets");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure1 = figureService.registerFigure("Smartphone Display", keywords,false, defaultVAT, electronics);
+        Figure figure1 = figureService.registerFigure("Smartphone Display", keywords,false, defaultVAT, electronics, DSLCode, DSLVersion);
         figure1.setActive(true);
 
         // Act
@@ -214,7 +218,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure = new Figure("Test Figure", keywords, false, defaultVAT, category);
+        Figure figure = new Figure("Test Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -233,7 +237,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("keyword1", "keyword2"));
-        Figure figure = new Figure("Special Test Description", keywords, false, defaultVAT, category);
+        Figure figure = new Figure("Special Test Description", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -256,12 +260,12 @@ class FigureServiceTest {
 
         // Figura ativa e não exclusiva (pública)
         Set<String> keywords1 = new HashSet<>(Arrays.asList("famous", "person"));
-        Figure figure1 = new Figure("Public Figure", keywords1, false, clientVAT1, category);
+        Figure figure1 = new Figure("Public Figure", keywords1, false, clientVAT1, category, DSLCode, DSLVersion);
         figure1.setActive(true);
 
         // Figura ativa e exclusiva (não pública)
         Set<String> keywords2 = new HashSet<>(Arrays.asList("not_famous", "person"));
-        Figure figure2 = new Figure("Private Figure", keywords2, true, clientVAT2, category);
+        Figure figure2 = new Figure("Private Figure", keywords2, true, clientVAT2, category, DSLCode, DSLVersion);
         figure2.setActive(true);
 
         repository.addFigure(figure1);
@@ -282,7 +286,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure = new Figure("Test Figure", keywords, true, defaultVAT, category);
+        Figure figure = new Figure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -307,7 +311,7 @@ class FigureServiceTest {
     void registerFigure_publicFigure_shouldCreateAndSave() {
         FigureCategory category = new FigureCategory("Acrobatic", "Acrobatic Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("fire", "acrobatic", "spiral"));
-        Figure figure = new Figure("Fire Spiral", keywords, true, defaultVAT, category);
+        Figure figure = new Figure("Fire Spiral", keywords, true, defaultVAT, category, DSLCode, DSLVersion);
 
         Figure result = figureService.registerFigure(figure);
 
@@ -338,7 +342,7 @@ class FigureServiceTest {
         Set<String> keywords = new HashSet<>(Arrays.asList("custom", "butterfly", "artistic"));
 
         // Act
-        Figure result = figureService.registerFigure("Custom Butterfly", false, vat, category);
+        Figure result = figureService.registerFigure("Custom Butterfly", false, vat, category, DSLCode, DSLVersion);
 
         result.setKeywords(keywords);
 
@@ -360,7 +364,7 @@ class FigureServiceTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             try {
-                figureService.registerFigure("Invalid Figure", true, null, category);
+                figureService.registerFigure("Invalid Figure", true, null, category, DSLCode, DSLVersion);
             } catch (UnauthenticatedException e) {
                 // Ignoramos a exceção de autenticação para testar a validação de VAT
                 throw new IllegalArgumentException("VAT cannot be null");
@@ -375,7 +379,7 @@ class FigureServiceTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             try {
-                figureService.registerFigure("Invalid Figure", keywords, true, null, category);
+                figureService.registerFigure("Invalid Figure", keywords, true, null, category, DSLCode, DSLVersion);
             } catch (UnauthenticatedException e) {
                 // Ignoramos a exceção de autenticação para testar a validação de VAT
                 throw new IllegalArgumentException("VAT cannot be null");
@@ -392,7 +396,7 @@ class FigureServiceTest {
 
         // Act & Assert
         assertThrows(UnauthenticatedException.class, () ->
-                figureService.registerFigure("Test Figure", keywords, true, defaultVAT, category));
+                figureService.registerFigure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion));
     }
 
 
@@ -401,7 +405,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category);
+        Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         repository.addFigure(figure);
 
 
@@ -420,7 +424,7 @@ class FigureServiceTest {
         authService.setAuthenticated(false);
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category);
+        Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -433,7 +437,7 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category);
+        Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
         figure.setActive(false);
         repository.addFigure(figure);
 

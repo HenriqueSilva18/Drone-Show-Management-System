@@ -5,7 +5,10 @@ import eapli.framework.presentation.console.AbstractUI;
 import lapr4.customermanagement.domain.VAT;
 import lapr4.figureManagement.application.FigureCategoryController;
 import lapr4.figureManagement.application.FigureController;
+import lapr4.figureManagement.application.FigureDescriptionValidationService;
+import lapr4.figureManagement.application.ValidateFigureDescriptionController;
 import lapr4.figureManagement.domain.FigureCategory;
+import lapr4.figureManagement.domain.ValidationResult;
 
 import java.util.*;
 
@@ -13,6 +16,7 @@ public class AddFigureToCatalogueUI extends AbstractUI {
 
     private final FigureController controller = new FigureController();
     private final FigureCategoryController categoryController = new FigureCategoryController();
+    private final ValidateFigureDescriptionUI validateDslUI = new ValidateFigureDescriptionUI();
 
     @Override
     protected boolean doShow() {
@@ -30,7 +34,26 @@ public class AddFigureToCatalogueUI extends AbstractUI {
             final String vatStr = Console.readLine("Customer VAT (leave empty if public):");
             final VAT vat = vatStr.isBlank() ? null : new VAT(vatStr);
 
-            controller.addFigure(description, true, category, vat);
+            boolean dslProcessAttempted = validateDslUI.requestAndPerformDslValidation();
+
+            if (!dslProcessAttempted || !validateDslUI.wasDslInputAttemptedAndCompleted()) {
+                // Message about cancellation/incompletion already printed by validateDslUI
+                System.out.println("Figure addition cancelled due to incomplete DSL information.");
+                return false;
+            }
+
+            if (!validateDslUI.wasValidationSuccessful()) {
+                // Errors already printed by validateDslUI
+                System.out.println("Figure addition cancelled due to invalid DSL.");
+                return false;
+            }
+            // --- End of DSL Validation ---
+
+            // DSL is valid, retrieve the code and version
+            String dslCode = validateDslUI.getDslCode();
+            String dslVersion = validateDslUI.getDslVersion();
+
+            controller.addFigure(description, keywords,true, category, vat, dslCode, dslVersion);
             System.out.println("✅ Figure added successfully.");
 
         } catch (Exception e) {
@@ -89,4 +112,5 @@ public class AddFigureToCatalogueUI extends AbstractUI {
     public String headline() {
         return "Add Figure to Catalogue";
     }
+
 }

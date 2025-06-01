@@ -37,11 +37,16 @@ public class Figure implements AggregateRoot<Long> {
 
     private LocalDateTime decommissionDate;
 
+    @Column(columnDefinition="CLOB")
+    private String dslCode;
+
+    private String dslVersion;
+
     protected Figure() {
         // for JPA
     }
 
-    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category) {
+    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {
         if (description == null || description.isBlank())
             throw new IllegalArgumentException("Description cannot be null or blank.");
 
@@ -57,9 +62,11 @@ public class Figure implements AggregateRoot<Long> {
         this.description = description;
         this.exclusive = exclusive;
         this.clientVAT = clientVAT;
+        this.dslCode = dslCode;
+        this.dslVersion = dslVersion;
     }
 
-    public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category) {
+    public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {
         if (description == null || description.isBlank())
             throw new IllegalArgumentException("Description cannot be null or blank.");
 
@@ -75,6 +82,8 @@ public class Figure implements AggregateRoot<Long> {
         this.description = description;
         this.exclusive = exclusive;
         this.clientVAT = clientVAT;
+        this.dslCode = dslCode;
+        this.dslVersion = dslVersion;
     }
 
     public String description() {

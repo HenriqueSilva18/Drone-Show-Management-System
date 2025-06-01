@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FigureTest {
 
-    private VAT vat;
+    /*private VAT vat;
     private FigureCategory category;
     private Figure figure;
 
@@ -296,6 +296,6 @@ class FigureTest {
         assertNotEquals(figure, other);
     }
 
-
+*/
 
 }

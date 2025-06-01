@@ -64,26 +64,26 @@ public class FigureService {
     }
 
     @Transactional
-    public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category) {
+    public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
         }
 
-        Figure figure = new Figure(description, keywords, exclusive, clientVAT, category);
+        Figure figure = new Figure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion);
 
         return repo.save(figure);
     }
 
-    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category) {
+    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
         }
 
-        Figure figure = new Figure(description, exclusive, clientVAT, category);
+        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
 
         return repo.save(figure);
     }
