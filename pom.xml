@@ -18,7 +18,8 @@
 		<module>shodrone.app.bootstrap</module>
 		<module>shodrone.app.common.console</module>
 		<module>shodrone.app.customer.console</module>
-	</modules>
+        <module>DSL-PLUGIN-1.1.23</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,6 +94,15 @@
 						<goals>
 							<goal>antlr4</goal>
 						</goals>
+						<configuration>
+							<!-- This is the default, but being explicit helps -->
+							<sourceDirectory>${project.basedir}/src/main/antlr4</sourceDirectory>
+							<arguments>
+								<argument>-listener</argument>
+								<argument>-visitor</argument>
+							</arguments>
+							<outputDirectory>${project.build.directory}/generated-sources/antlr4</outputDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
