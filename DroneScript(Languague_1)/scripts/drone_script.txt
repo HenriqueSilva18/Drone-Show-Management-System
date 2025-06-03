@@ -1,0 +1,4 @@
+takeOff(10.0, 2.5);
+move((0.0,0.0,10.0), 3.0);
+hoover(1000);
+lightsOff();

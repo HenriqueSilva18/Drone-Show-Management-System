@@ -7,7 +7,13 @@
 	<groupId>lapr4</groupId>
 	<artifactId>shodrone</artifactId>
 	<packaging>pom</packaging>
-	<version>1.4.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+        </dependency>
+    </dependencies>
+    <version>1.4.0-SNAPSHOT</version>
 
 	<modules>
 		<module>shodrone.bootstrappers</module>
