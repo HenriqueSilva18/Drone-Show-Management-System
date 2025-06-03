@@ -88,13 +88,26 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     // Show Requests
     // =====================
     @Override
+    public ShowRequestRepository showRequests(TransactionalContext autoTx) {
+        return new JpaShowRequestRepository(autoTx);
+    }
+
+    @Override
     public ShowRequestRepository showRequests() {
         return new JpaShowRequestRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Show Proposals
+    // =====================
     @Override
-    public ShowRequestRepository showRequests(TransactionalContext autoTx) {
-        return new JpaShowRequestRepository(autoTx);
+    public ShowProposalRepository showProposals(TransactionalContext autoTx) {
+        return new JpaShowProposalRepository(autoTx);
+    }
+
+    @Override
+    public ShowProposalRepository showProposals() {
+        return new JpaShowProposalRepository(PERSISTENCE_UNIT_NAME);
     }
 
     // =====================
@@ -124,19 +137,5 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     @Override
     public FigureCategoryRepository figureCategories() {
         return new JpaFigureCategoryRepository(PERSISTENCE_UNIT_NAME);
-    }
-
-
-    // =====================
-    // Show Proposals
-    // =====================
-    @Override
-    public ShowProposalRepository showProposals(TransactionalContext autoTx) {
-        return new JpaShowProposalRepository(autoTx);
-    }
-
-    @Override
-    public ShowProposalRepository showProposals() {
-        return new JpaShowProposalRepository(PERSISTENCE_UNIT_NAME);
     }
 }

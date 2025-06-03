@@ -29,7 +29,7 @@ public class ShowRequestBootstrapper implements Action {
         registerShowRequest(8, 45.0, "Show of Logo",
             3, "2024-08-15", "PT987654321");
 
-        updateShowRequestStatus("PT987654321", 2, "HAS_PROPOSAL");
+        updateShowRequestStatus("PT987654321", 2, "ShowProposalDone");
         
         return true;
     }
@@ -51,8 +51,6 @@ public class ShowRequestBootstrapper implements Action {
 
     private void updateShowRequestStatus(String vatStr, int requestId, String newStatus) {
         try {
-            // -1 values for numDrones and duration mean "don't change these values"
-            // Empty strings for description and date mean "don't change these values"
             controller.updateShowRequest(vatStr, requestId, -1, -1, "", "", newStatus);
             LOGGER.debug("»»» Updated show request {} status to {}", requestId, newStatus);
         } catch (Exception e) {

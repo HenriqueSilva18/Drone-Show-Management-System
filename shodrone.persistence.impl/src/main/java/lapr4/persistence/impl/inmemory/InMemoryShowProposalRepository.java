@@ -4,13 +4,21 @@ import eapli.framework.domain.repositories.TransactionalContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showProposalManagement.domain.ProposalStatus;
+import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class InMemoryShowProposalRepository implements ShowProposalRepository {
+public class InMemoryShowProposalRepository
+        extends InMemoryDomainRepository<ShowProposal, Integer>
+        implements ShowProposalRepository {
+
+    static {
+        InMemoryInitializer.init();
+    }
+
     private final List<ShowProposal> showProposals;
 
     public InMemoryShowProposalRepository() {
@@ -18,18 +26,25 @@ public class InMemoryShowProposalRepository implements ShowProposalRepository {
     }
 
     @Override
-    public Optional<ShowProposal> findByProposalNumber(int proposalNumber) {
-        return showProposals.stream()
-                .filter(proposal -> proposal.identity() == proposalNumber)
-                .findFirst();
+    public Optional<ShowProposal> findById(Integer number) {
+        return matchOne(e -> e.identity().equals(number));
     }
 
     @Override
     public Iterable<ShowProposal> findByStatus(String status) {
-        ProposalStatus proposalStatus = ProposalStatus.valueOf(status);
+        try {
+            ProposalStatus proposalStatus = ProposalStatus.valueOf(status.toUpperCase());
+            return match(e -> e.getStatus().equals(proposalStatus));
+        } catch (IllegalArgumentException e) {
+            return new ArrayList<>(); // Return empty list for invalid status
+        }
+    }
+
+    @Override
+    public Optional<ShowProposal> findByProposalNumber(int proposalNumber) {
         return showProposals.stream()
-                .filter(proposal -> proposal.proposalStatus() == proposalStatus)
-                .collect(Collectors.toList());
+                .filter(proposal -> proposal.identity() == proposalNumber)
+                .findFirst();
     }
 
     @Override
