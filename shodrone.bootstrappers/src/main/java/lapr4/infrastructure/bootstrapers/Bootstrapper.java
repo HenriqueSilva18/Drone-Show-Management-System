@@ -25,6 +25,7 @@ package lapr4.infrastructure.bootstrapers;
 
 import lapr4.infrastructure.bootstrapers.demo.BackofficeUsersBootstrapper;
 import lapr4.infrastructure.bootstrapers.demo.CustomerBootstrapper;
+import lapr4.infrastructure.bootstrapers.demo.ShowRequestBootstrapper;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
@@ -60,7 +61,8 @@ public class Bootstrapper implements Action {
 	@Override
 	public boolean execute() {
 		// declare bootstrap actions
-		final Action[] actions = { new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), new CustomerBootstrapper()};
+		final Action[] actions = { new MasterUsersBootstrapper(), new BackofficeUsersBootstrapper(), 
+			new CustomerBootstrapper(), new ShowRequestBootstrapper()};
 
 		registerPowerUser();
 		authenticateForBootstrapping();
