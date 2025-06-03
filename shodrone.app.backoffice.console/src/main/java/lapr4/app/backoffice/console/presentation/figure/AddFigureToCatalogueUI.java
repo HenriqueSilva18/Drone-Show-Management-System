@@ -5,10 +5,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import lapr4.customermanagement.domain.VAT;
 import lapr4.figureManagement.application.FigureCategoryController;
 import lapr4.figureManagement.application.FigureController;
-import lapr4.figureManagement.application.FigureDescriptionValidationService;
-import lapr4.figureManagement.application.ValidateFigureDescriptionController;
 import lapr4.figureManagement.domain.FigureCategory;
-import lapr4.figureManagement.domain.ValidationResult;
 
 import java.util.*;
 
