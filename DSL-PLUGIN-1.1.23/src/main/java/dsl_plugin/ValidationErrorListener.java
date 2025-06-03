@@ -1,4 +1,4 @@
-package dsl.validation;
+package dsl_plugin;
 
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;

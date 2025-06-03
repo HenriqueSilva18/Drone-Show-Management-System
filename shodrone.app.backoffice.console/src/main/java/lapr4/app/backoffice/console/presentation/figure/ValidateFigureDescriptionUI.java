@@ -1,9 +1,10 @@
 package lapr4.app.backoffice.console.presentation.figure;
 
+import dsl_plugin.ValidationResult;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import lapr4.figureManagement.application.ValidateFigureDescriptionController;
-import lapr4.figureManagement.domain.ValidationResult;
+
 
 import java.io.IOException;
 import java.nio.file.Files;
