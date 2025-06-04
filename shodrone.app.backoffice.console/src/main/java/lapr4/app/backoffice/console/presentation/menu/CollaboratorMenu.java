@@ -8,6 +8,7 @@ import lapr4.app.backoffice.console.presentation.customer.*;
 import lapr4.app.backoffice.console.presentation.figure.ListActivePublicFiguresUI;
 import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
 import lapr4.app.backoffice.console.presentation.figure.SearchFigureCatalogueUI;
+import lapr4.app.backoffice.console.presentation.showproposal.AddVideoProposalUI;
 import lapr4.app.backoffice.console.presentation.showproposal.CreateShowProposalUI;
 import lapr4.app.backoffice.console.presentation.showproposal.PopulateModelListUI;
 import lapr4.app.backoffice.console.presentation.showrequest.RegShowRequestUI;
@@ -35,6 +36,7 @@ public class CollaboratorMenu extends MainMenu {
 
 	// SHOW PROPOSALS
 	private static final int CREATE_SHOW_PROPOSAL = 1;
+	private static final int ADD_VIDEO_PROPOSAL = 2;
 
 	// MAIN MENU
 	private static final int CUSTOMERS_OPTION = 2;
@@ -71,6 +73,7 @@ public class CollaboratorMenu extends MainMenu {
 		final var menu = new Menu("Show Proposals >");
 
 		menu.addItem(CREATE_SHOW_PROPOSAL, "Create Show Proposal", new CreateShowProposalUI()::show);
+		menu.addItem(ADD_VIDEO_PROPOSAL, "Add/Change Video of Simulation", new AddVideoProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

@@ -26,21 +26,6 @@ public class InMemoryShowProposalRepository
     }
 
     @Override
-    public Optional<ShowProposal> findById(Integer number) {
-        return matchOne(e -> e.identity().equals(number));
-    }
-
-    @Override
-    public Iterable<ShowProposal> findByStatus(String status) {
-        try {
-            ProposalStatus proposalStatus = ProposalStatus.valueOf(status.toUpperCase());
-            return match(e -> e.getStatus().equals(proposalStatus));
-        } catch (IllegalArgumentException e) {
-            return new ArrayList<>(); // Return empty list for invalid status
-        }
-    }
-
-    @Override
     public Optional<ShowProposal> findByProposalNumber(int proposalNumber) {
         return showProposals.stream()
                 .filter(proposal -> proposal.identity() == proposalNumber)
@@ -49,9 +34,17 @@ public class InMemoryShowProposalRepository
 
     @Override
     public Optional<ShowProposal> ofIdentity(Integer id) {
-        return showProposals.stream()
-                .filter(proposal -> proposal.identity().equals(id))
-                .findFirst();
+        return findById(id);
+    }
+
+    @Override
+    public Iterable<ShowProposal> findByStatus(String status) {
+        try {
+            ProposalStatus proposalStatus = ProposalStatus.valueOf(status.toUpperCase());
+            return match(e -> e.getStatus().equals(proposalStatus));
+        } catch (IllegalArgumentException e) {
+            return new ArrayList<>();
+        }
     }
 
     @Override

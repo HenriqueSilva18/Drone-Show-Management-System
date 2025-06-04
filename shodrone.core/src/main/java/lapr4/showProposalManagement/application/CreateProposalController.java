@@ -3,10 +3,9 @@ package lapr4.showProposalManagement.application;
 import lapr4.usermanagement.domain.Roles;
 import org.springframework.transaction.annotation.Transactional;
 
-import lapr4.showProposalManagement.dto.CreateProposalDTO;
+import lapr4.showProposalManagement.dto.ProposalDTO;
 import lapr4.showProposalManagement.dto.ListRequestDTO;
 import lapr4.showProposalManagement.domain.ShowProposal;
-import lapr4.showProposalManagement.domain.ProposalStatus;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.showRequestManagement.domain.ShowRequest;
@@ -88,8 +87,15 @@ public class CreateProposalController {
         return latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180;
     }
 
+    public boolean validateEventHour(String eventHour) {
+        if (eventHour == null || eventHour.trim().isEmpty()) {
+            return false;
+        }
+        return eventHour.matches("^([01]?[0-9]|2[0-3]):[0-5][0-9]$");
+    }
+
     @Transactional
-    public CreateProposalDTO createProposal(final CreateProposalDTO dto) {
+    public ProposalDTO createProposal(final ProposalDTO dto) {
         authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.CRM_COLLABORATOR);
 
         if (dto == null) {
@@ -114,6 +120,10 @@ public class CreateProposalController {
             throw new IllegalArgumentException("Invalid proposal date");
         }
 
+        if (!validateEventHour(dto.getEventHour())) {
+            throw new IllegalArgumentException("Invalid event hour format. Use HH:mm (24-hour format)");
+        }
+
         if (!validateCoordinates(dto.getLatitude(), dto.getLongitude())) {
             throw new IllegalArgumentException("Invalid coordinates");
         }
@@ -123,9 +133,9 @@ public class CreateProposalController {
             dto.getTotalNumDrones(),
             dto.getDurationMinutes(),
             dto.getProposalDate(),
+            dto.getEventHour(),
             dto.getLatitude(),
-            dto.getLongitude(),
-            ProposalStatus.CREATED
+            dto.getLongitude()
         );
 
         ShowProposal saved = showProposalRepository.save(showProposal);

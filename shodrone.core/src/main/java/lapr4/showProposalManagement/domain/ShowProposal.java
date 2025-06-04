@@ -2,10 +2,11 @@ package lapr4.showProposalManagement.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
+import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.showRequestManagement.domain.ShowRequest;
-import lapr4.showProposalManagement.dto.CreateProposalDTO;
+import lapr4.showProposalManagement.dto.ProposalDTO;
 import eapli.framework.representations.dto.DTOable;
 
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreateProposalDTO> {
+public class ShowProposal implements AggregateRoot<Integer>, DTOable<ProposalDTO> {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,6 +35,9 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
     private LocalDate proposalDate;
 
     @Column(nullable = false)
+    private String eventHour;
+
+    @Column(nullable = false)
     private double latitude;
 
     @Column(nullable = false)
@@ -52,45 +56,28 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
     private List<DroneModel> modelList;
 
 
-    // TEMPLATE TYPE -> VIP
+    // TEMPLATE TYPE -> 3 tipos (PT, EN, VIP)
 
     // LIST DRONES
     // LIST FIGURES
 
     // VALOR SEGURO (POR DRONE MODEL E QUANTITY)
 
-    // DATA & HOURS -> SHOW REQUEST?
     // PROPOSAL SENT DATE
-    // GPS COORDINATES -> SHOW REQUEST?
-    // DURATION -> SHOW REQUEST?
+
 
     public ShowProposal(ShowRequest showRequest, int totalNumDrones, int durationMinutes, 
-                       LocalDate proposalDate, double latitude, double longitude, 
-                       ProposalStatus proposalStatus) {
-        if (showRequest == null || proposalStatus == null) {
-            throw new IllegalArgumentException("Show request and proposal status cannot be null");
-        }
-        if (totalNumDrones <= 0) {
-            throw new IllegalArgumentException("Total number of drones must be greater than 0");
-        }
-        if (durationMinutes <= 0) {
-            throw new IllegalArgumentException("Duration must be greater than 0");
-        }
-        if (proposalDate == null) {
-            throw new IllegalArgumentException("Proposal date cannot be null");
-        }
-        if (proposalDate.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Proposal date must be in the future");
-        }
+                       LocalDate proposalDate, String eventHour, double latitude, double longitude) {
         
         this.showRequest = showRequest;
         this.totalNumDrones = totalNumDrones;
         this.durationMinutes = durationMinutes;
         this.proposalDate = proposalDate;
+        this.eventHour = eventHour;
         this.latitude = latitude;
         this.longitude = longitude;
         this.proposalStatus = ProposalStatus.CREATED;
-        this.simulationStatus = SimulationStatus.Untested;
+        this.simulationStatus = SimulationStatus.UNTESTED;
         this.modelList = initializeEmptyModelList(totalNumDrones);
     }
 
@@ -113,18 +100,23 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
         return proposalStatus;
     }
 
-    public void setProposalStatus(ProposalStatus proposalStatus) {
+    public void changeProposalStatus(ProposalStatus proposalStatus) {
         if (proposalStatus == null) {
             throw new IllegalArgumentException("Proposal status cannot be null");
         }
         this.proposalStatus = proposalStatus;
     }
 
-    public void setSimulationStatus(SimulationStatus simulationStatus) {
+    public void changeSimulationStatus(SimulationStatus simulationStatus) {
         if (simulationStatus == null) {
             throw new IllegalArgumentException("Simulation status cannot be null");
         }
         this.simulationStatus = simulationStatus;
+    }
+
+    public void changeVideoTo(String newVideoLink) {
+        Preconditions.nonEmpty(newVideoLink, "Video link cannot be empty.");
+        this.simulationVideoLink = newVideoLink;
     }
 
     @Override
@@ -142,14 +134,17 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
     }
 
     @Override
-    public CreateProposalDTO toDTO() {
-        return new CreateProposalDTO(
+    public ProposalDTO toDTO() {
+        return new ProposalDTO(
             showRequest.identity().value(),
             totalNumDrones,
             durationMinutes,
             proposalDate,
+            eventHour,
             latitude,
-            longitude
+            longitude,
+            simulationVideoLink,
+            proposalStatus != null ? proposalStatus.toString() : "N/A"
         );
     }
 
@@ -160,8 +155,6 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
     public List<DroneModel> modelList() {
         return modelList;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -180,6 +173,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
                 ", totalNumDrones=" + totalNumDrones +
                 ", durationMinutes=" + durationMinutes +
                 ", proposalDate=" + proposalDate +
+                ", eventHour=" + eventHour +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", status=" + proposalStatus +

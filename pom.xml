@@ -25,6 +25,8 @@
 		<module>shodrone.app.common.console</module>
 		<module>shodrone.app.customer.console</module>
         <module>DSL-PLUGIN-1.1.23</module>
+		<module>DroneScript(Languague_1)</module>
+		<module>Drone_Script(Languague_2)</module>
     </modules>
 
 	<properties>
