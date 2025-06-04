@@ -3,14 +3,11 @@ package lapr4.showProposalManagement.domain;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import jakarta.persistence.*;
-import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showProposalManagement.dto.CreateProposalDTO;
 import eapli.framework.representations.dto.DTOable;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreateProposalDTO> {
@@ -47,10 +44,6 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
 
     @Enumerated(EnumType.STRING)
     private ProposalStatus proposalStatus;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<DroneModel> modelList;
-
 
     // TEMPLATE TYPE -> VIP
 
@@ -91,17 +84,11 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
         this.longitude = longitude;
         this.proposalStatus = ProposalStatus.CREATED;
         this.simulationStatus = SimulationStatus.Untested;
-        this.modelList = initializeEmptyModelList(totalNumDrones);
     }
 
     protected ShowProposal() {
         // for ORM
     }
-
-    public int proposalNumber() {
-        return proposalNumber;
-    }
-
 
     @Override
     public Integer identity() {
@@ -153,16 +140,6 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
         );
     }
 
-    public int totalNumDrones() {
-        return totalNumDrones;
-    }
-
-    public List<DroneModel> modelList() {
-        return modelList;
-    }
-
-
-
     @Override
     public boolean equals(Object o) {
         return DomainEntities.areEqual(this, o);
@@ -185,13 +162,4 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<CreatePropo
                 ", status=" + proposalStatus +
                 '}';
     }
-
-    private List<DroneModel> initializeEmptyModelList(int totalNumDrones) {
-        List<DroneModel> models = new ArrayList<>();
-        for (int i = 0; i < totalNumDrones; i++) {
-            models.add(null); // espaço reservado para cada drone
-        }
-        return models;
-    }
-
 }
