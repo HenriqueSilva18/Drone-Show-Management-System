@@ -1,11 +1,13 @@
 package lapr4.droneManagement.repositories;
 
-import eapli.framework.domain.repositories.DomainRepository;
 import lapr4.droneManagement.domain.Drone;
 import lapr4.droneManagement.domain.SerialNumber;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import eapli.framework.domain.repositories.DomainRepository;
 
 public interface DroneRepository extends DomainRepository<SerialNumber, Drone> {
 
-    // Exemplo de método específico se precisares futuramente:
-    // Optional<Drone> findByModelName(String modelName);
+    @Query("SELECT COUNT(d) FROM Drone d WHERE d.model.id = :modelId")
+    int countAvailableOfModelById(@Param("modelId") Long modelId);
 }

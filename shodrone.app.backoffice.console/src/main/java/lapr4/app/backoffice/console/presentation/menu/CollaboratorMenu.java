@@ -9,6 +9,7 @@ import lapr4.app.backoffice.console.presentation.figure.ListActivePublicFiguresU
 import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
 import lapr4.app.backoffice.console.presentation.figure.SearchFigureCatalogueUI;
 import lapr4.app.backoffice.console.presentation.showproposal.CreateShowProposalUI;
+import lapr4.app.backoffice.console.presentation.showproposal.PopulateModelListUI;
 import lapr4.app.backoffice.console.presentation.showrequest.RegShowRequestUI;
 import lapr4.app.backoffice.console.presentation.showrequest.ListShowRequestsByVATUI;
 import lapr4.app.backoffice.console.presentation.showrequest.EditShowRequestUI;
@@ -29,6 +30,8 @@ public class CollaboratorMenu extends MainMenu {
 	private static final int LIST_ACTIVE_PUBLIC_FIGURES = 9;
 	private static final int SEARCH_FIGURE_CATALOGUE = 10;
 	private static final int LIST_FIGURE_CATEGORIES = 11;
+
+	private static final int POPULATE_MODEL_LIST = 12;
 
 	// SHOW PROPOSALS
 	private static final int CREATE_SHOW_PROPOSAL = 1;
@@ -58,6 +61,7 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(LIST_ACTIVE_PUBLIC_FIGURES, "List Active Public Figures", new ListActivePublicFiguresUI()::show);
 		menu.addItem(SEARCH_FIGURE_CATALOGUE, "Search Figure Catalogue", new SearchFigureCatalogueUI()::show);
 		menu.addItem(LIST_FIGURE_CATEGORIES, "List Figure Categories", new ListFigureCategoriesUI()::show);
+		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
