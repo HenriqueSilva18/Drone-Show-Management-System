@@ -12,15 +12,15 @@ public class FigureDescriptionValidationService {
         }
 
         try {
-            DSL_FIGURELexer lexer = new DSL_FIGURELexer(CharStreams.fromString(dslCode));
+            DSL_GRAMMARLexer lexer = new DSL_GRAMMARLexer(CharStreams.fromString(dslCode));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
-            DSL_FIGUREParser parser = new DSL_FIGUREParser(tokens);
+            DSL_GRAMMARParser parser = new DSL_GRAMMARParser(tokens);
 
             ValidationErrorListener errorListener = new ValidationErrorListener();
             parser.removeErrorListeners();
             parser.addErrorListener(errorListener);
 
-            DSL_FIGUREParser.ProgramContext programContext = parser.program();
+            DSL_GRAMMARParser.ProgramContext programContext = parser.program();
 
             if (errorListener.hasErrors()) {
                 return ValidationResult.invalid(errorListener.getErrors());
