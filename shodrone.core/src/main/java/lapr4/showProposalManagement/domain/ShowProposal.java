@@ -188,4 +188,5 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ProposalDTO
         return models;
     }
 
+
 }

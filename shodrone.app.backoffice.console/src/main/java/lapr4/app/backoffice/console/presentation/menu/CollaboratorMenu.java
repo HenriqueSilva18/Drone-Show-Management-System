@@ -8,6 +8,7 @@ import lapr4.app.backoffice.console.presentation.customer.*;
 import lapr4.app.backoffice.console.presentation.figure.ListActivePublicFiguresUI;
 import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
 import lapr4.app.backoffice.console.presentation.figure.SearchFigureCatalogueUI;
+import lapr4.app.backoffice.console.presentation.showproposal.AcceptShowProposalUI;
 import lapr4.app.backoffice.console.presentation.showproposal.AddVideoProposalUI;
 import lapr4.app.backoffice.console.presentation.showproposal.CreateShowProposalUI;
 import lapr4.app.backoffice.console.presentation.showproposal.PopulateModelListUI;
@@ -33,6 +34,8 @@ public class CollaboratorMenu extends MainMenu {
 	private static final int LIST_FIGURE_CATEGORIES = 11;
 
 	private static final int POPULATE_MODEL_LIST = 12;
+
+	private static final int ACCEPT_SHOW_PROPOSAL = 13;
 
 	// SHOW PROPOSALS
 	private static final int CREATE_SHOW_PROPOSAL = 1;
@@ -64,6 +67,7 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(SEARCH_FIGURE_CATALOGUE, "Search Figure Catalogue", new SearchFigureCatalogueUI()::show);
 		menu.addItem(LIST_FIGURE_CATEGORIES, "List Figure Categories", new ListFigureCategoriesUI()::show);
 		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
+		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
