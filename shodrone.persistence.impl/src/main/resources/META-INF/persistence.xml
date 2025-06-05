@@ -17,8 +17,10 @@
     <class>lapr4.droneManagement.domain.Drone</class>
     <class>lapr4.figureManagement.domain.Figure</class>
     <class>lapr4.droneModelManagement.domain.DroneModel</class>
+    <class>lapr4.droneModelManagement.domain.DroneType</class>
     <class>lapr4.figureManagement.domain.FigureCategory</class>
     <class>lapr4.maintenanceManagement.domain.Maintenance</class>
+    <class>lapr4.maintenanceManagement.domain.MaintenanceType</class>
     <class>lapr4.utentemanagement.domain.Utente</class>
     <class>lapr4.utentemanagement.domain.SignupRequest</class>
 

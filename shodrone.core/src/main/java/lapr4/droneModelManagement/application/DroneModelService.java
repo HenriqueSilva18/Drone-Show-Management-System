@@ -36,4 +36,5 @@ public class DroneModelService {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         return repo.save(model);
     }
+
 }
