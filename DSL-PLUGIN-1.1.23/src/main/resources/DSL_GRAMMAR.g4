@@ -1,6 +1,46 @@
-grammar Figure;
+grammar DSL_GRAMMAR;
 
-program: dslVersion declarations statements EOF;
+// The program can be a show or a figure.
+program: dslVersion (show_definition | figure_standalone) EOF;
+
+// DEFINITION FOR A FIGURE
+figure_standalone: declarations statements;
+
+// DEFINITION FOR A SHOW DESCRIPTION
+show_definition:
+    'Show' ID '{'
+        drones_section
+        sequence_section
+    '}';
+
+// Defines the drone models and their quantities.
+drones_section:
+    'Drones' '{'
+        (ID ':' NUMBER ';')+
+    '}';
+
+// Defines the sequence of figures.
+sequence_section:
+    'Sequence' '{'
+        figure_in_show+
+    '}';
+
+// Defines a single figure.
+figure_in_show:
+    'Figure' ID '{'
+         mapping_section
+         declarations
+         statements
+    '}';
+
+// Maps the logical drone types in a figure to the actual drone models for the show.
+mapping_section:
+    'Map' '{'
+        (ID '->' ID ';')+
+    '}';
+
+
+// --- EXISTING FIGURE GRAMMAR RULES (Unchanged) ---
 
 dslVersion: 'DSL' 'version' VERSION ';';
 declarations: declaration*;
