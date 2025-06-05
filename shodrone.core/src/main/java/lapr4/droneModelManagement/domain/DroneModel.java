@@ -2,9 +2,10 @@ package lapr4.droneModelManagement.domain;
 
 import eapli.framework.domain.model.AggregateRoot;
 import jakarta.persistence.*;
+import lapr4.maintenanceManagement.domain.Maintenance;
+import lapr4.maintenanceManagement.domain.MaintenanceType;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class DroneModel implements AggregateRoot<Long> {
@@ -20,6 +21,9 @@ public class DroneModel implements AggregateRoot<Long> {
 
     @Embedded
     private Language language;
+
+    @OneToMany(mappedBy = "droneModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private final Set<Maintenance> maintenances = new HashSet<>();
 
     protected DroneModel() {
         // for JPA
@@ -48,6 +52,18 @@ public class DroneModel implements AggregateRoot<Long> {
 
     public Language language() {
         return language;
+    }
+
+    public Set<Maintenance> maintenances() {
+        return Collections.unmodifiableSet(maintenances);
+    }
+
+    /**
+     * Agendar nova manutenção para este modelo.
+     */
+    public void scheduleMaintenance(String description, String startDate, String endDate, MaintenanceType type) {
+        Maintenance m = new Maintenance(description, startDate, endDate, type, this);
+        maintenances.add(m);
     }
 
     @Override

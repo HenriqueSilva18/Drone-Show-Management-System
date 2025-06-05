@@ -29,10 +29,7 @@ public class AddCustomerRepresentativeController {
 
 	@Transactional
 	public void addRepresentative(String customerVAT, RepresentativeData repData) {
-		Customer customer = customerService.findCustomerByVAT(customerVAT)
-				.orElseThrow(
-						() -> new IllegalArgumentException("Can't find customer with this VAT number: " + customerVAT));
-
+		Customer customer = customerService.findCustomerByVAT(customerVAT).orElseThrow(() -> new IllegalArgumentException("Can't find customer with this VAT number: " + customerVAT));
 		Set<Role> roles = new HashSet<>();
 		roles.add(Role.valueOf("CUSTOMER_REPRESENTATIVE"));
 

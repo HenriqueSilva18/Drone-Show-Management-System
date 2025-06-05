@@ -1,13 +1,18 @@
 package lapr4.droneModelManagement.domain;
+
 public class Language {
 
     private String value;
 
     public Language(String value) {
-        this.value = value;
+        if (value == null || value.isBlank()) throw new IllegalArgumentException("Language cannot be blank.");
+        this.value = value.trim().toUpperCase();
     }
 
-    // Getter e Setter
+    public static Language valueOf(String input) {
+        return new Language(input); // cria nova instância, não enum
+    }
+
     public String getValue() {
         return value;
     }

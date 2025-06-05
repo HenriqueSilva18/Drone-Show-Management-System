@@ -1,36 +1,50 @@
 package lapr4.maintenanceManagement.domain;
 
 import jakarta.persistence.*;
+import lapr4.droneModelManagement.domain.DroneModel;
+
+
 import java.util.Objects;
 
 @Entity
 public class Maintenance {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
-
     private String startDate;
     private String endDate;
+
+    @ManyToOne(optional = false)
+    private MaintenanceType maintenanceType;
+
+    @ManyToOne(optional = false)
+    private DroneModel droneModel;
 
     protected Maintenance() {
         // for JPA
     }
 
-    public Maintenance(String description, String startDate, String endDate) {
+    public Maintenance(String description, String startDate, String endDate,
+                       MaintenanceType maintenanceType, DroneModel droneModel) {
         if (description == null || description.isBlank())
-            throw new IllegalArgumentException("Description cannot be empty.");
+            throw new IllegalArgumentException("Descrição inválida");
         if (startDate == null || endDate == null)
-            throw new IllegalArgumentException("Dates cannot be null.");
+            throw new IllegalArgumentException("Datas não podem ser nulas");
+        if (maintenanceType == null)
+            throw new IllegalArgumentException("Tipo de manutenção obrigatório");
+        if (droneModel == null)
+            throw new IllegalArgumentException("DroneModel obrigatório");
 
-        this.description = description;
+        this.description = description.trim();
         this.startDate = startDate;
         this.endDate = endDate;
+        this.maintenanceType = maintenanceType;
+        this.droneModel = droneModel;
     }
 
-    // Getters
     public Long id() {
         return id;
     }
@@ -47,7 +61,13 @@ public class Maintenance {
         return endDate;
     }
 
-    // equals and hashCode based on ID (JPA identity)
+    public MaintenanceType maintenanceType() {
+        return maintenanceType;
+    }
+
+    public DroneModel droneModel() {
+        return droneModel;
+    }
 
     @Override
     public boolean equals(Object o) {

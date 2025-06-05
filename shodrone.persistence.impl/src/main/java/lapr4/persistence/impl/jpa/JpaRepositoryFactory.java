@@ -7,6 +7,7 @@ import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
+import lapr4.maintenanceManagement.repositories.MaintenanceTypeRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
@@ -110,6 +111,11 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaShowProposalRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    @Override
+    public MaintenanceTypeRepository maintenanceTypes() {
+        return new JpaMaintenanceTypeRepository(PERSISTENCE_UNIT_NAME);
+    }
+
     // =====================
     // Drones
     // =====================
@@ -138,4 +144,5 @@ public class JpaRepositoryFactory implements RepositoryFactory {
     public FigureCategoryRepository figureCategories() {
         return new JpaFigureCategoryRepository(PERSISTENCE_UNIT_NAME);
     }
+
 }

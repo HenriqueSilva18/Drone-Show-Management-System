@@ -2,8 +2,8 @@ package lapr4.droneModelManagement.application;
 
 import jakarta.transaction.Transactional;
 import lapr4.droneModelManagement.domain.DroneModel;
-import lapr4.droneModelManagement.application.DroneModelService;
 import lapr4.droneModelManagement.domain.Language;
+import lapr4.maintenanceManagement.domain.MaintenanceType;
 
 import java.util.List;
 
@@ -24,5 +24,19 @@ public class DroneModelController {
     public DroneModel findModelById(Long id) {
         return droneModelService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("DroneModel not found with ID: " + id));
+    }
+
+    /**
+     * Adiciona uma manutenção a um modelo de drone.
+     */
+    @Transactional
+    public void addMaintenanceToDroneModel(Long droneModelId,
+                                           String description,
+                                           String startDate,
+                                           String endDate,
+                                           MaintenanceType type) {
+        DroneModel model = findModelById(droneModelId);
+        model.scheduleMaintenance(description, startDate, endDate, type);
+        droneModelService.save(model); // persiste alterações
     }
 }

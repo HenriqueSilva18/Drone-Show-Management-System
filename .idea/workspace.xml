@@ -7,25 +7,163 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 tests completed #109">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="EAPLI US312-US323 ( Mostly Done )">
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US321/Drone.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US321/Maintanace.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US321/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US322/ListM.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US322/ListMaintanace.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US322/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US323/Edit.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US323/Edit2.puml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Sprint3/US323/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddMaintenanceTypeUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/EditDroneModelUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/EditMaintenanceTypeUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/ListDroneModelsUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/ListMaintenanceTypesUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/application/CreateMaintenanceTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/application/EditMaintenanceTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/application/ListMaintenanceTypesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/MaintenanceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/dto/MaintenanceTypeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/repositories/MaintenanceTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryMaintenanceTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaMaintenanceTypeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.AddressTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.EmailTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.NIFTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.NIFTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.PhoneTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.PhoneTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.VATTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.customermanagement.domain.VATTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.figureManagement.application.FigureServiceTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/TEST-lapr4.figureManagement.application.FigureServiceTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.AddressTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.AddressTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.EmailTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.EmailTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.NIFTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.NIFTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.PhoneTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.customermanagement.domain.VATTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/target/surefire-reports/lapr4.figureManagement.application.FigureServiceTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/target/classes/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGURE.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGURE.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGUREBaseListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGUREBaseVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGURELexer.interp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGURELexer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGURELexer.tokens" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGUREListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGUREParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSL-PLUGIN-1.1.23/src/main/java/dsl_plugin/generated_code/DSL_FIGUREVisitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_101/class-diagram-us101.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_101/class-diagram-us101.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_101/class-diagram-us101.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_101/class-diagram-us101.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_101/readme-us101.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_101/readme-us101.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_102/class-diagram-us102.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_102/class-diagram-us102.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_102/class-diagram-us102.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_102/class-diagram-us102.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_102/readme-us102.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_102/readme-us102.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_103/class-diagram-us103.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_103/class-diagram-us103.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_103/class-diagram-us103.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_103/class-diagram-us103.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_103/readme-us103.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_103/readme-us103.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_104/class-diagram-us104.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_104/class-diagram-us104.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_104/class-diagram-us104.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_104/class-diagram-us104.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_104/readme-us104.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_104/readme-us104.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_105/class-diagram-us105.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_105/class-diagram-us105.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_105/class-diagram-us105.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_105/class-diagram-us105.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_105/readme-us105.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_105/readme-us105.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/Domain_Model/sprint1-domain-model.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/Domain_Model/sprint1-domain-model.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/Domain_Model/sprint2-domain-model.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/Domain_Model/sprint2-domain-model.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/Domain_Model/sprint2-domain-model.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/Domain_Model/sprint2-domain-model.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregare_language.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregare_language.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_client.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_client.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_drone.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_drone.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_drone_model.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_drone_model.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_figure.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_figure.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_show.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_show.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_show_proposal.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_show_proposal.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_show_request.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_show_request.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/aggregates/aggregate_user.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/aggregates/aggregate_user.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_110_domain_model/readme-us110.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint1/us_110_domain_model/readme-us110.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/DM-EXCERPT.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/DM-EXCERPT.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US210-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US210-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US210-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US210-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US211-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US211-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US211-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US211-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US212-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US212-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US212-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US212-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US213-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US213-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/puml/US213-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/puml/US213-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/readme-us210-213.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/readme-us210-213.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/DM-EXCERPT.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/DM-EXCERPT.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US210-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US210-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US210-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US210-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US211-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US211-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US211-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US211-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US212-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US212-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US212-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US212-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US213-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US213-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_210-213/svg/US213-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_210-213/svg/US213-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/puml/US220-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/puml/US220-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/puml/US220-DM-EXCERPT.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/puml/US220-DM-EXCERPT.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/puml/US220-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/puml/US220-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/readme-us220.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/readme-us220.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/svg/US220-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/svg/US220-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/svg/US220-DM-EXCERPT.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/svg/US220-DM-EXCERPT.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_220/svg/US220-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_220/svg/US220-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/CustomerRepresentative-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/CustomerRepresentative-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/DisableCustomerRepresentative-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/DisableCustomerRepresentative-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/DisableCustomerRepresentative-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/DisableCustomerRepresentative-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/EditCustomerRepresentative-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/EditCustomerRepresentative-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/EditCustomerRepresentative-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/EditCustomerRepresentative-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/ListCustomerRepresentative-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/ListCustomerRepresentative-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/ListCustomerRepresentative-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/ListCustomerRepresentative-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/class-diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/class-diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_221-us_224/sequence-diagrams.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_221-us_224/sequence-diagrams.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/class-diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/class-diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/ListShowRequestsByVatCD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/ListShowRequestsByVatCD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/ListShowRequestsByVatSD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/ListShowRequestsByVatSD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/registerShowRequestCD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/registerShowRequestCD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/registerShowRequestSD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/registerShowRequestSD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/updateShowRequestCD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/updateShowRequestCD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_230_235_236/puml/updateShowRequestSD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_230_235_236/puml/updateShowRequestSD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/class-diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/class-diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/AddFigureToCatalogue-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/AddFigureToCatalogue-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/AddFigureToCatalogue-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/AddFigureToCatalogue-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/DecommissionFigure-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/DecommissionFigure-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/DecommissionFigure-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/DecommissionFigure-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/ListPublicFiguresInCatalogue-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/ListPublicFiguresInCatalogue-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/ListPublicFiguresInCatalogue-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/ListPublicFiguresInCatalogue-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/SearchFigureCatalogue-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/SearchFigureCatalogue-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/puml/SearchFigureCatalogue-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/puml/SearchFigureCatalogue-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/AddFigureToCatalogue-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/AddFigureToCatalogue-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/AddFigureToCatalogue-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/AddFigureToCatalogue-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/DecommissionFigure-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/DecommissionFigure-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/DecommissionFigure-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/DecommissionFigure-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/ListPublicFiguresInCatalogue-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/ListPublicFiguresInCatalogue-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/ListPublicFiguresInCatalogue-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/ListPublicFiguresInCatalogue-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/SearchFigureCatalogue-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/SearchFigureCatalogue-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_231-234/svg/SearchFigureCatalogue-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_231-234/svg/SearchFigureCatalogue-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/class-diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/class-diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/AddFigureCategory-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/AddFigureCategory-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/AddFigureCategory-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/AddFigureCategory-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/EditFigureCategory-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/EditFigureCategory-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/EditFigureCategory-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/EditFigureCategory-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/FigureCategory-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/FigureCategory-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/ListFigureCategories-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/ListFigureCategories-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/ListFigureCategories-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/ListFigureCategories-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/ToggleFigureCategory-CD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/ToggleFigureCategory-CD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/puml/ToggleFigureCategory-SD.puml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/puml/ToggleFigureCategory-SD.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/AddFigureCategory-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/AddFigureCategory-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/AddFigureCategory-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/AddFigureCategory-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/EditFigureCategory-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/EditFigureCategory-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/EditFigureCategory-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/EditFigureCategory-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/FigureCategory-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/FigureCategory-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/ListFigureCategories-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/ListFigureCategories-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/ListFigureCategories-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/ListFigureCategories-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/ToggleFigureCategory-CD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/ToggleFigureCategory-CD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/us_245-248/svg/ToggleFigureCategory-SD.svg" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Sprint2/us_245-248/svg/ToggleFigureCategory-SD.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AddCustomerRepresentativeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/customermanagement/application/AddCustomerRepresentativeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/Maintenance.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/maintenanceManagement/domain/Maintenance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +209,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
-    &quot;accountId&quot;: &quot;7477ff47-d21d-45b8-9bbb-791d35a5d1a1&quot;
+    &quot;accountId&quot;: &quot;b54b0072-e742-4e65-b265-bc420c55792c&quot;
   }
 }</component>
   <component name="MarkdownSettingsMigration">
@@ -89,73 +227,77 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Backoffice.executor": "Run",
-    "Application.H2DatabaseManager.executor": "Run",
-    "Application.HelloWorld.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
-    "Maven.shodrone [test].executor": "Run",
-    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
-    "Maven.shodrone.core [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
+    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.plantuml-1.2023.1.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.main.java.drone_plugin.generated_code in Drone_Validation.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone.app.backoffice.console [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone.core [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/berna/IdeaProjects/sem4pi-2024-2025-sem4pi_2024_2025_g39/Drone_Validation/src/main/java/drone_plugin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "h2"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="lapr4.app.backoffice.console.presentation.figure" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\Drone_Validation\src\main\java\drone_plugin" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console\src\main\resources" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console\src\main\java\lapr4\app\customer\console" />
-      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console\src\main\java\lapr4\app\common\console\presentation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\lapr4" />
-      <recent name="C:\Users\senke\IdeaProjects\sem4pi_2024_2025_g39\docs\us_110\Domain_Model" />
-      <recent name="$PROJECT_DIR$/database" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\Sprint1" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\Sprint2" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\Drone_Script(Languague_2)" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\DroneScript" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="lapr4.maintenanceManagement.domain" />
@@ -165,7 +307,7 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory">
+  <component name="RunManager" selected="JUnit.main.java.drone_plugin.generated_code in Drone_Validation">
     <configuration name="FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
@@ -198,38 +340,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shodrone.core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="METHOD_NAME" value="listCategories_shouldOverwriteCategoryWithSameName" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shodrone.core" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
-      <option name="METHOD_NAME" value="listCategories_withNoCategories_shouldReturnEmptyList" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
@@ -246,21 +356,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="main.java.drone_plugin.generated_code in Drone_Validation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Drone_Validation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.java.drone_plugin.generated_code.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="main.java.drone_plugin.generated_code" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="plantuml-1.2023.1.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/libs/plantuml-1.2023.1.jar" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.main.java.drone_plugin.generated_code in Drone_Validation" />
+        <item itemvalue="JAR Application.plantuml-1.2023.1.jar" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
         <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" />
         <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26574.91" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26574.91" />
       </set>
     </attachedChunks>
   </component>
@@ -298,6 +426,20 @@
       <workItem from="1747008371225" duration="4175000" />
       <workItem from="1747055341567" duration="545000" />
       <workItem from="1747056349887" duration="11342000" />
+      <workItem from="1748443146305" duration="2605000" />
+      <workItem from="1748520536132" duration="3114000" />
+      <workItem from="1748597168370" duration="4168000" />
+      <workItem from="1748606806378" duration="1530000" />
+      <workItem from="1748610319866" duration="628000" />
+      <workItem from="1748617776422" duration="4226000" />
+      <workItem from="1748710589923" duration="1090000" />
+      <workItem from="1748772502200" duration="1832000" />
+      <workItem from="1748796275497" duration="767000" />
+      <workItem from="1748939605128" duration="482000" />
+      <workItem from="1748940119518" duration="5741000" />
+      <workItem from="1748959815765" duration="12931000" />
+      <workItem from="1749046466689" duration="6127000" />
+      <workItem from="1749125784938" duration="12289000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -403,7 +545,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747066932287</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="test">
+      <option name="closed" value="true" />
+      <created>1748358183785</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748358183785</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Lprog US345">
+      <option name="closed" value="true" />
+      <created>1748972866868</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748972866868</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,16 +608,14 @@
     <MESSAGE value="US245 Tests Completed #109" />
     <MESSAGE value="US246-US247-US248 Completed #109" />
     <MESSAGE value="US246-US247-US248 tests completed #109" />
-    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 tests completed #109" />
+    <MESSAGE value="test" />
+    <MESSAGE value="Lprog US345" />
+    <MESSAGE value="EAPLI US312-US323 ( Mostly Done )" />
+    <option name="LAST_COMMIT_MESSAGE" value="EAPLI US312-US323 ( Mostly Done )" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java</url>
           <line>54</line>

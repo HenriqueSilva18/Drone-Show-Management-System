@@ -20,17 +20,17 @@ was carried out as described in the following table.
 | Task                            | Sprint 1 | Sprint 2 | Sprint 3 |
 |---------------------------------|----------|----------|----------|
 | [Glossary](glossary.md)         | all      | all      | all      |
-| [US101](us_101/readme-us101.md) | all      | ---      | ---      |
-| [US102](us_102/readme-us102.md) | all      | ---      | ---      |
-| [US103](us_103/readme-us103.md) | all      | ---      | ---      |
-| [US104](us_104/readme-us104.md) | all      | ---      | ---      |
-| [US105](us_105/readme-us105.md) | all      | ---      | ---      |
-| [US110](us_110_domain_model/readme-us110.md) | all      | ---      | ---      |
+| [US101](Sprint1/us_101/readme-us101.md) | all      | ---      | ---      |
+| [US102](Sprint1/us_102/readme-us102.md) | all      | ---      | ---      |
+| [US103](Sprint1/us_103/readme-us103.md) | all      | ---      | ---      |
+| [US104](Sprint1/us_104/readme-us104.md) | all      | ---      | ---      |
+| [US105](Sprint1/us_105/readme-us105.md) | all      | ---      | ---      |
+| [US110](Sprint1/us_110_domain_model/readme-us110.md) | all      | ---      | ---      |
 | [US210](us_210/readme-us210.md) | ---      | 1220848  | ---      |
 | [US211](us_211/readme-us211.md) | ---      | 1220848  | ---      |
 | [US212](us_212/readme-us212.md) | ---      | 1220848  | ---      |
 | [US213](us_213/readme-us213.md) | ---      | 1220848  | ---      |
-| [US220](us_220/readme-us220.md) | ---      | 1220848  | ---      |
+| [US220](Sprint2/us_220/readme-us220.md) | ---      | 1220848  | ---      |
 | [US221](us_221/readme-us221.md) | ---      | 1230596  | ---      |
 | [US222](us_222/readme-us222.md) | ---      | 1230596  | ---      |
 | [US223](us_223/readme-us223.md) | ---      | 1230596  | ---      |

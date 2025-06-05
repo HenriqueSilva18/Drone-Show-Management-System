@@ -1,0 +1,18 @@
+
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+actor CRM
+participant ListMaintenanceTypesUI
+participant ListMaintenanceTypesController
+participant MaintenanceTypeRepository
+
+CRM -> ListMaintenanceTypesUI : start()
+ListMaintenanceTypesUI -> ListMaintenanceTypesController : listAllTypes()
+ListMaintenanceTypesController -> MaintenanceTypeRepository : findAll()
+MaintenanceTypeRepository --> ListMaintenanceTypesController : List
+ListMaintenanceTypesController --> ListMaintenanceTypesUI : List
+ListMaintenanceTypesUI -> CRM : display list
+@enduml

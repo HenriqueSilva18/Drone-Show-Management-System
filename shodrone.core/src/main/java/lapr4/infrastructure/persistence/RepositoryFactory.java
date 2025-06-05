@@ -25,6 +25,7 @@ import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
+import lapr4.maintenanceManagement.repositories.MaintenanceTypeRepository;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
@@ -109,4 +110,6 @@ public interface RepositoryFactory {
      * repository will be created in auto transaction mode
      */
     ShowProposalRepository showProposals();
+
+    MaintenanceTypeRepository maintenanceTypes();
 }

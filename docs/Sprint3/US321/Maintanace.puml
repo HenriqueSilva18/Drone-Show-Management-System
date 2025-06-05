@@ -1,0 +1,41 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+actor "CRM Collaborator" as CRM
+participant AddMaintenanceTypeUI
+participant CreateMaintenanceTypeController
+participant MaintenanceType
+participant MaintenanceTypeRepository
+
+== Maintenance Type Registration ==
+CRM -> AddMaintenanceTypeUI : Launch UI
+AddMaintenanceTypeUI -> CreateMaintenanceTypeController : registerType(name, description)
+CreateMaintenanceTypeController -> MaintenanceType : new(name, description)
+CreateMaintenanceTypeController -> MaintenanceTypeRepository : save(type)
+AddMaintenanceTypeUI --> CRM : Confirmation message
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class CreateMaintenanceTypeController {
+  + registerType(name, description) : MaintenanceType
+}
+class EditMaintenanceTypeController {
+  + editType(id, newName, newDescription) : MaintenanceType
+}
+class ListMaintenanceTypesController {
+  + listAllTypes() : Iterable<MaintenanceType>
+}
+class MaintenanceTypeRepository {
+  + save(type) : MaintenanceType
+  + findById(id) : Optional<MaintenanceType>
+  + findAll() : List<MaintenanceType>
+}
+CreateMaintenanceTypeController --> MaintenanceTypeRepository
+EditMaintenanceTypeController --> MaintenanceTypeRepository
+ListMaintenanceTypesController --> MaintenanceTypeRepository
+@enduml

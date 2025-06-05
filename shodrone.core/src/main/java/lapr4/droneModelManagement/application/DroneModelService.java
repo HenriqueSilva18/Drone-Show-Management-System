@@ -30,4 +30,10 @@ public class DroneModelService {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         return repo.findAll();
     }
+
+    @Transactional
+    public DroneModel save(DroneModel model) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        return repo.save(model);
+    }
 }

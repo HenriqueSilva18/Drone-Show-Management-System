@@ -1,0 +1,19 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+' US323 - Edit Maintenance Type
+class EditMaintenanceTypeController {
+  + editType(id, name, description) : MaintenanceType
+}
+class MaintenanceType {
+  + update(name, description)
+}
+class MaintenanceTypeRepository {
+  + findById(id)
+  + save(type)
+}
+EditMaintenanceTypeController --> MaintenanceTypeRepository
+EditMaintenanceTypeController --> MaintenanceType
+@enduml
