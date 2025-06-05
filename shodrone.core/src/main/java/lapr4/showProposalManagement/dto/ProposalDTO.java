@@ -12,11 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuppressWarnings("java:S1068")
-public class CreateProposalDTO {
+public class ProposalDTO {
     private int showRequestID;
     private int totalNumDrones;
     private int durationMinutes;
     private LocalDate proposalDate;
+    private String eventHour;
     private double latitude;
     private double longitude;
+    private String simulationVideoLink;
+    private String status;
 }

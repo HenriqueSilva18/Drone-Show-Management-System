@@ -1,0 +1,26 @@
+package lapr4.showProposalManagement.application;
+
+import lapr4.infrastructure.persistence.PersistenceContext;
+import lapr4.showProposalManagement.domain.ProposalStatus;
+import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.repositories.ShowProposalRepository;
+
+import java.util.Optional;
+
+public class AcceptShowProposalController {
+
+    private final ShowProposalRepository repo = PersistenceContext.repositories().showProposals();
+
+    public Optional<ShowProposal> findNonAcceptedProposalByNumber(int proposalNumber) {
+        return repo.findByProposalNumber(proposalNumber)
+                .filter(p -> p.getStatus() != ProposalStatus.ACCEPTED);
+    }
+
+    public void acceptProposal(int proposalNumber) {
+        ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
+
+        proposal.changeProposalStatus(ProposalStatus.ACCEPTED);
+        repo.save(proposal);
+    }
+}

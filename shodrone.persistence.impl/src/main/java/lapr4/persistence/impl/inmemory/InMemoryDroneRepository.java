@@ -8,4 +8,16 @@ import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainR
 public class InMemoryDroneRepository
         extends InMemoryDomainRepository<Drone, SerialNumber>
         implements DroneRepository {
+
+    @Override
+    public int countAvailableOfModelById(Long modelId) {
+        int count = 0;
+        for (Drone drone : findAll()) {
+            if (drone.model().identity().equals(modelId)) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
+
