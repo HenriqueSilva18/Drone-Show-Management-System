@@ -1,15 +1,13 @@
 package lapr4.persistence.impl.inmemory;
 
-import eapli.framework.domain.repositories.TransactionalContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
-import lapr4.showProposalManagement.domain.ProposalStatus;
+import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class InMemoryShowProposalRepository
         extends InMemoryDomainRepository<ShowProposal, Integer>
@@ -26,9 +24,9 @@ public class InMemoryShowProposalRepository
     }
 
     @Override
-    public Optional<ShowProposal> findByProposalNumber(int proposalNumber) {
+    public Optional<ShowProposal> findByProposalNumber(int number) {
         return showProposals.stream()
-                .filter(proposal -> proposal.identity() == proposalNumber)
+                .filter(proposal -> proposal.identity() == number)
                 .findFirst();
     }
 
@@ -40,8 +38,8 @@ public class InMemoryShowProposalRepository
     @Override
     public Iterable<ShowProposal> findByStatus(String status) {
         try {
-            ProposalStatus proposalStatus = ProposalStatus.valueOf(status.toUpperCase());
-            return match(e -> e.getStatus().equals(proposalStatus));
+            ShowProposalStatus showProposalStatus = ShowProposalStatus.valueOf(status.toUpperCase());
+            return match(e -> e.status().equals(showProposalStatus));
         } catch (IllegalArgumentException e) {
             return new ArrayList<>();
         }

@@ -5,7 +5,7 @@ import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import lapr4.showProposalManagement.application.ChangeProposalController;
-import lapr4.showProposalManagement.dto.ProposalDTO;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import org.apache.logging.log4j.LogManager;
@@ -29,8 +29,8 @@ public class AddVideoProposalUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         try {
-            Iterable<ProposalDTO> allProposals = this.theController.allProposals();
-            List<ProposalDTO> proposalList = new ArrayList<>();
+            Iterable<ShowProposalDTO> allProposals = this.theController.allProposals();
+            List<ShowProposalDTO> proposalList = new ArrayList<>();
             allProposals.forEach(proposalList::add);
 
             if (proposalList.isEmpty()) {
@@ -41,7 +41,7 @@ public class AddVideoProposalUI extends AbstractUI {
             System.out.println("\nAvailable Proposals:");
             System.out.println("===================");
             for (int i = 0; i < proposalList.size(); i++) {
-                ProposalDTO proposal = proposalList.get(i);
+                ShowProposalDTO proposal = proposalList.get(i);
                 System.out.printf("%d. Proposal ID: %d | Status: %s%n", 
                     i + 1, 
                     proposal.getShowRequestID(),
@@ -54,14 +54,14 @@ public class AddVideoProposalUI extends AbstractUI {
                 choice = Console.readInteger("Select a proposal (number):");
             } while (choice < 1 || choice > proposalList.size());
 
-            ProposalDTO selectedProposal = proposalList.get(choice - 1);
+            ShowProposalDTO selectedProposal = proposalList.get(choice - 1);
 
             String currentVideo = selectedProposal.getSimulationVideoLink();
             System.out.println("\nCurrent video link: " + (currentVideo != null ? currentVideo : "N/A"));
 
             String newVideoLink = Console.readLine("\nEnter new video link: ");
 
-            ProposalDTO updatedProposal = theController.changeProposalVideo(selectedProposal.getShowRequestID(), newVideoLink);
+            ShowProposalDTO updatedProposal = theController.changeProposalVideo(selectedProposal.getShowRequestID(), newVideoLink);
             System.out.println("\nVideo link updated successfully for proposal ID: " + updatedProposal.getShowRequestID());
 
             return true;

@@ -4,7 +4,7 @@ import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.validations.Preconditions;
 import lapr4.showProposalManagement.domain.ShowProposal;
-import lapr4.showProposalManagement.dto.ProposalDTO;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.usermanagement.domain.Roles;
 import org.springframework.stereotype.Component;
@@ -26,16 +26,16 @@ public class ChangeProposalController {
         this.authorizationService = authorizationService;
     }
 
-    public Iterable<ProposalDTO> allProposals() {
+    public Iterable<ShowProposalDTO> allProposals() {
         this.authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         Iterable<ShowProposal> proposals = this.proposalRepository.findAll();
-        List<ProposalDTO> dtos = new ArrayList<>();
+        List<ShowProposalDTO> dtos = new ArrayList<>();
         proposals.forEach(p -> dtos.add(p.toDTO()));
         return dtos;
     }
 
     @Transactional
-    public ProposalDTO changeProposalVideo(final Integer proposalId, final String newVideoLink) {
+    public ShowProposalDTO changeProposalVideo(final Integer proposalId, final String newVideoLink) {
         this.authorizationService.ensureAuthenticatedUserHasAnyOf(
                 Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         Preconditions.nonNull(proposalId, "Proposal ID cannot be null.");
