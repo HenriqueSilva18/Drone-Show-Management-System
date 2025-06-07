@@ -30,7 +30,7 @@ public class CreateShowProposalUI extends AbstractUI {
         final int totalNumDrones = ReadValidations.readValidInteger("Total number of drones:", 1);
         final double latitude = ReadValidations.readValidDouble("Event Latitude (-90 to 90):", -90.0, 90.0);
         final double longitude = ReadValidations.readValidDouble("Event Longitude (-180 to 180):", -180.0, 180.0);
-        final String eventDate = ReadValidations.readValidDateString("Event Date (format YYYY-MM-DD):");
+        final String eventDate = ReadValidations.readValidDateString("Event Date (format yyyy-MM-dd):");
         final String eventHour = ReadValidations.readValidTimeString("Event Hour (format HH:mm):");
         final int eventDuration = ReadValidations.readValidInteger("Event Duration (in minutes):", 1);
 

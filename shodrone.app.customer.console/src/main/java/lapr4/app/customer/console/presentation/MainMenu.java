@@ -32,6 +32,7 @@ import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
+import lapr4.app.customer.console.presentation.proposal.DownloadProposalUI;
 
 /**
  * @author Paulo Gandra Sousa
@@ -70,7 +71,7 @@ class MainMenu extends CustomerBaseUI {
         mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
         mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-
+        mainMenu.addItem(MenuItem.of(2, "Download Proposal", () -> new DownloadProposalUI().show()));
         mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         return mainMenu;
