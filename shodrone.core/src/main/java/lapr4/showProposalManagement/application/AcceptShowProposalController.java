@@ -23,4 +23,13 @@ public class AcceptShowProposalController {
         proposal.changeProposalStatus(ShowProposalStatus.ACCEPTED);
         repo.save(proposal);
     }
+
+    public void rejectProposal(int proposalNumber, String feedback) {
+        ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
+
+        proposal.changeProposalStatus(ShowProposalStatus.REJECTED);
+
+        repo.save(proposal);
+    }
 }
