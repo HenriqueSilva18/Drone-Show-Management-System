@@ -14,6 +14,8 @@
         <module name="shodrone.persistence.impl" />
         <module name="shodrone.app.bootstrap" />
         <module name="shodrone.bootstrappers" />
+        <module name="droneone-plugin" />
+        <module name="dronetwo-plugin" />
         <module name="shodrone.app.common.console" />
       </profile>
     </annotationProcessing>
