@@ -3,6 +3,7 @@ package lapr4.figureManagement.domain;
 import jakarta.persistence.*;
 import lapr4.customermanagement.domain.VAT;
 import eapli.framework.domain.model.AggregateRoot;
+import lapr4.droneModelManagement.domain.DroneType;
 
 import java.util.*;
 import java.util.Objects;
@@ -34,6 +35,12 @@ public class Figure implements AggregateRoot<Long> {
     @Embedded
     private VAT clientVAT;
 
+    @ElementCollection
+    @CollectionTable(name = "figure_drone_requirements", joinColumns = @JoinColumn(name = "figure_id"))
+    @MapKeyJoinColumn(name = "drone_type_id") // DroneType é uma entidade
+    @Column(name = "quantity")
+    private Map<DroneType, Integer> droneTypes;
+
 
     private LocalDateTime decommissionDate;
 
@@ -42,8 +49,31 @@ public class Figure implements AggregateRoot<Long> {
 
     private String dslVersion;
 
+
+
     protected Figure() {
         // for JPA
+    }
+
+    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion, Map<DroneType, Integer> droneTypes) {
+        if (description == null || description.isBlank())
+            throw new IllegalArgumentException("Description cannot be null or blank.");
+
+        if (clientVAT == null)
+            throw new IllegalArgumentException("Client VAT cannot be null.");
+
+        if (category == null)
+            throw new IllegalArgumentException("Category cannot be null.");
+
+        this.decommissionDate = null;
+        this.category = category;
+        this.keywords = keywords;
+        this.description = description;
+        this.exclusive = exclusive;
+        this.clientVAT = clientVAT;
+        this.droneTypes = droneTypes ;
+        this.dslCode = dslCode;
+        this.dslVersion = dslVersion;
     }
 
     public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {
@@ -64,6 +94,7 @@ public class Figure implements AggregateRoot<Long> {
         this.clientVAT = clientVAT;
         this.dslCode = dslCode;
         this.dslVersion = dslVersion;
+        this.droneTypes = null;
     }
 
     public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {

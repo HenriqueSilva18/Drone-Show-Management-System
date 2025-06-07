@@ -2,6 +2,8 @@ package lapr4.droneModelManagement.application;
 
 import jakarta.transaction.Transactional;
 import lapr4.droneModelManagement.domain.DroneModel;
+import lapr4.droneModelManagement.application.DroneModelService;
+import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.droneModelManagement.domain.Language;
 import lapr4.maintenanceManagement.domain.MaintenanceType;
 
@@ -12,23 +14,11 @@ public class DroneModelController {
     private final DroneModelService droneModelService = new DroneModelService();
 
     @Transactional
-    public DroneModel registerDroneModel(String name, List<String> specifications, Language language) {
-        DroneModel model = new DroneModel(specifications, name, language);
+    public DroneModel registerDroneModel(String name, List<String> specifications, Language language, DroneType droneType) {
+        DroneModel model = new DroneModel(specifications, name, language, droneType);
         return droneModelService.registerDroneModel(model);
     }
 
-    public Iterable<DroneModel> listAllModels() {
-        return droneModelService.findAll();
-    }
-
-    public DroneModel findModelById(Long id) {
-        return droneModelService.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("DroneModel not found with ID: " + id));
-    }
-
-    /**
-     * Adiciona uma manutenção a um modelo de drone.
-     */
     @Transactional
     public void addMaintenanceToDroneModel(Long droneModelId,
                                            String description,
@@ -38,5 +28,14 @@ public class DroneModelController {
         DroneModel model = findModelById(droneModelId);
         model.scheduleMaintenance(description, startDate, endDate, type);
         droneModelService.save(model); // persiste alterações
+    }
+
+    public Iterable<DroneModel> listAllModels() {
+        return droneModelService.findAll();
+    }
+
+    public DroneModel findModelById(Long id) {
+        return droneModelService.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("DroneModel not found with ID: " + id));
     }
 }

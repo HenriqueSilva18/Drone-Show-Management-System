@@ -183,8 +183,8 @@ class FigureTest {
 
     @Test
     void setNullOrBlankDescription() {
-        assertThrows(IllegalArgumentException.class, () -> figure.setDescription(null));
-        assertThrows(IllegalArgumentException.class, () -> figure.setDescription(" "));
+        assertThrows(IllegalArgumentException.class, () -> figure.updateDescription(null));
+        assertThrows(IllegalArgumentException.class, () -> figure.updateDescription(" "));
     }
 
     @Test
@@ -200,8 +200,8 @@ class FigureTest {
     }
 
     @Test
-    void setDescription() {
-        figure.setDescription("Nova descrição");
+    void updateDescription() {
+        figure.updateDescription("Nova descrição");
         assertEquals("Nova descrição", figure.description());
     }
 

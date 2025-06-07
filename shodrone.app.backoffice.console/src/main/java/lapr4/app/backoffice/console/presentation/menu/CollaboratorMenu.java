@@ -8,16 +8,14 @@ import lapr4.app.backoffice.console.presentation.customer.*;
 import lapr4.app.backoffice.console.presentation.figure.ListActivePublicFiguresUI;
 import lapr4.app.backoffice.console.presentation.figure.ListFigureCategoriesUI;
 import lapr4.app.backoffice.console.presentation.figure.SearchFigureCatalogueUI;
-import lapr4.app.backoffice.console.presentation.showproposal.AcceptShowProposalUI;
-import lapr4.app.backoffice.console.presentation.showproposal.AddVideoProposalUI;
-import lapr4.app.backoffice.console.presentation.showproposal.CreateShowProposalUI;
-import lapr4.app.backoffice.console.presentation.showproposal.PopulateModelListUI;
+import lapr4.app.backoffice.console.presentation.showproposal.*;
 import lapr4.app.backoffice.console.presentation.showrequest.RegShowRequestUI;
 import lapr4.app.backoffice.console.presentation.showrequest.ListShowRequestsByVATUI;
 import lapr4.app.backoffice.console.presentation.showrequest.EditShowRequestUI;
 
 public class CollaboratorMenu extends MainMenu {
 	private static final String RETURN_LABEL = "Return ";
+
 	private static final int EXIT_OPTION = 0;
 
 	// CUSTOMERS
@@ -35,7 +33,8 @@ public class CollaboratorMenu extends MainMenu {
 
 	private static final int POPULATE_MODEL_LIST = 12;
 
-	private static final int ACCEPT_SHOW_PROPOSAL = 13;
+	private static final int ACCEPT_SHOW_PROPOSAL = 14;
+	private static final int ADD_FIGURE_TO_PROPOSAL = 13;
 
 	// SHOW PROPOSALS
 	private static final int CREATE_SHOW_PROPOSAL = 1;
@@ -67,6 +66,7 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(SEARCH_FIGURE_CATALOGUE, "Search Figure Catalogue", new SearchFigureCatalogueUI()::show);
 		menu.addItem(LIST_FIGURE_CATEGORIES, "List Figure Categories", new ListFigureCategoriesUI()::show);
 		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
+		menu.addItem(ADD_FIGURE_TO_PROPOSAL, "Add Figure to Show Proposal", new AddFigureToProposalUI()::show);
 		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 

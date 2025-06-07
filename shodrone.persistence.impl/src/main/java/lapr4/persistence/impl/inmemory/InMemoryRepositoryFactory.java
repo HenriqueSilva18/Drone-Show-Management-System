@@ -3,6 +3,7 @@ package lapr4.persistence.impl.inmemory;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.droneModelManagement.repositories.DroneTypeRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
@@ -100,6 +101,11 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public DroneRepository drones() {
 		return new InMemoryDroneRepository();
+	}
+
+	@Override
+	public DroneTypeRepository droneTypes() {
+		return new InMemoryDroneTypeRepository();
 	}
 
 	@Override

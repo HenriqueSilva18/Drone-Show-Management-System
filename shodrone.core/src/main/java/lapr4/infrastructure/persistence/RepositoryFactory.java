@@ -23,6 +23,7 @@ package lapr4.infrastructure.persistence;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.droneModelManagement.repositories.DroneTypeRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.maintenanceManagement.repositories.MaintenanceTypeRepository;
@@ -94,6 +95,8 @@ public interface RepositoryFactory {
     SignupRequestRepository signupRequests();
 
     DroneRepository drones();
+
+    DroneTypeRepository droneTypes();
 
     DroneModelRepository droneModels();
 

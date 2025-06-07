@@ -1,117 +1,112 @@
 package lapr4.showProposalManagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlElement;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import lapr4.customermanagement.domain.Customer;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.showRequestManagement.domain.ShowRequest;
-import lapr4.showProposalManagement.dto.ProposalDTO;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import eapli.framework.representations.dto.DTOable;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@XmlRootElement
 @Entity
-public class ShowProposal implements AggregateRoot<Integer>, DTOable<ProposalDTO> {
+public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposalDTO> {
 
     private static final long serialVersionUID = 1L;
 
+    @Version
+    private Long version;
+
     @Id
     @GeneratedValue
-    private int proposalNumber;
+    private int number;
 
-    @ManyToOne
+    @XmlElement
+    @JsonProperty
+    @ManyToOne(optional = false)
+    private Customer customer;
+
+    @XmlElement
+    @JsonProperty
+    @ManyToOne(optional = false)
     private ShowRequest showRequest;
 
+    @XmlElement
+    @JsonProperty
     @Column(nullable = false)
     private int totalNumDrones;
 
-    @Column(nullable = false)
-    private int durationMinutes;
+    // TODO TEMPLATE
 
-    @Column(nullable = false)
-    private LocalDate proposalDate;
-
-    @Column(nullable = false)
-    private String eventHour;
-
-    @Column(nullable = false)
-    private double latitude;
-
-    @Column(nullable = false)
-    private double longitude;
-
+    @XmlElement
+    @JsonProperty
     @Column
     private String simulationVideoLink;
 
+    // TODO INSURANCE VALUE
+
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = false)
+    private Coordinates eventLocation;
+
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = false)
+    private LocalDateTime eventDateTime;
+
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = false)
+    private int eventDuration;
+
+    @XmlElement
+    @JsonProperty
+    @Enumerated(EnumType.STRING)
+    private ShowProposalStatus status;
+
+    @XmlElement
+    @JsonProperty
     @Enumerated(EnumType.STRING)
     private SimulationStatus simulationStatus;
 
-    @Enumerated(EnumType.STRING)
-    private ProposalStatus proposalStatus;
-
+    @XmlElement
+    @JsonProperty
     @OneToMany(cascade = CascadeType.ALL)
     private List<DroneModel> modelList;
 
+    // TODO LIST FIGURES
 
-    // TEMPLATE TYPE -> 3 tipos (PT, EN, VIP)
+    // TODO SENT DATE & SENT BY MANAGER
 
-    // LIST DRONES
-    // LIST FIGURES
+    // TODO SHOW DESCRIPTION
 
-    // VALOR SEGURO (POR DRONE MODEL E QUANTITY)
+    public ShowProposal(final ShowRequest showRequest, final int totalNumDrones, final Coordinates eventLocation,
+                        final LocalDateTime eventDateTime, final int eventDuration) {
+        Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration);
 
-    // PROPOSAL SENT DATE
-
-
-    public ShowProposal(ShowRequest showRequest, int totalNumDrones, int durationMinutes, 
-                       LocalDate proposalDate, String eventHour, double latitude, double longitude) {
-        
+        this.customer = showRequest.getCustomer();
         this.showRequest = showRequest;
         this.totalNumDrones = totalNumDrones;
-        this.durationMinutes = durationMinutes;
-        this.proposalDate = proposalDate;
-        this.eventHour = eventHour;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.proposalStatus = ProposalStatus.CREATED;
+        this.eventLocation = eventLocation;
+        this.eventDateTime = eventDateTime;
+        this.eventDuration = eventDuration;
+        this.status = ShowProposalStatus.CREATED;
         this.simulationStatus = SimulationStatus.UNTESTED;
-        this.modelList = initializeEmptyModelList(totalNumDrones);
     }
 
     protected ShowProposal() {
         // for ORM
-    }
-
-    public int proposalNumber() {
-        return proposalNumber;
-    }
-
-
-    @Override
-    public Integer identity() {
-        return proposalNumber;
-    }
-
-
-    public ProposalStatus getStatus() {
-        return proposalStatus;
-    }
-
-    public void changeProposalStatus(ProposalStatus proposalStatus) {
-        if (proposalStatus == null) {
-            throw new IllegalArgumentException("Proposal status cannot be null");
-        }
-        this.proposalStatus = proposalStatus;
-    }
-
-    public void changeSimulationStatus(SimulationStatus simulationStatus) {
-        if (simulationStatus == null) {
-            throw new IllegalArgumentException("Simulation status cannot be null");
-        }
-        this.simulationStatus = simulationStatus;
     }
 
     public void changeVideoTo(String newVideoLink) {
@@ -119,45 +114,15 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ProposalDTO
         this.simulationVideoLink = newVideoLink;
     }
 
-    @Override
-    public boolean sameAs(Object other) {
-        if (!(other instanceof ShowProposal)) {
-            return false;
+    public void changeProposalStatus(ShowProposalStatus status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Proposal status cannot be null");
         }
-
-        final ShowProposal that = (ShowProposal) other;
-        if (this == that) {
-            return true;
-        }
-
-        return identity().equals(that.identity());
+        this.status = status;
     }
 
     @Override
-    public ProposalDTO toDTO() {
-        return new ProposalDTO(
-            showRequest.identity().value(),
-            totalNumDrones,
-            durationMinutes,
-            proposalDate,
-            eventHour,
-            latitude,
-            longitude,
-            simulationVideoLink,
-            proposalStatus != null ? proposalStatus.toString() : "N/A"
-        );
-    }
-
-    public int totalNumDrones() {
-        return totalNumDrones;
-    }
-
-    public List<DroneModel> modelList() {
-        return modelList;
-    }
-
-    @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         return DomainEntities.areEqual(this, o);
     }
 
@@ -167,17 +132,58 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ProposalDTO
     }
 
     @Override
-    public String toString() {
-        return "ShowProposal{" +
-                "proposalNumber=" + proposalNumber +
-                ", totalNumDrones=" + totalNumDrones +
-                ", durationMinutes=" + durationMinutes +
-                ", proposalDate=" + proposalDate +
-                ", eventHour=" + eventHour +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", status=" + proposalStatus +
-                '}';
+    public boolean sameAs(final Object other) {
+        if (!(other instanceof ShowProposal)) {
+            return false;
+        }
+
+        final var that = (ShowProposal) other;
+        if (this == that) {
+            return true;
+        }
+
+        return identity().equals(that.identity())
+                && this.customer.equals(that.customer)
+                && this.showRequest.equals(that.showRequest)
+                && this.totalNumDrones == that.totalNumDrones
+                && this.eventLocation.equals(that.eventLocation)
+                && this.eventDateTime.equals(that.eventDateTime)
+                && this.eventDuration == that.eventDuration;
+    }
+
+    @Override
+    public Integer identity() {
+        return this.number;
+    }
+
+    public ShowProposalStatus status() {
+        return this.status;
+    }
+
+    public int totalNumDrones() {
+        return this.totalNumDrones;
+    }
+
+    public List<DroneModel> modelList() {
+        return this.modelList;
+    }
+
+    @Override
+    public ShowProposalDTO toDTO() {
+        return new ShowProposalDTO(
+                this.number,
+                this.customer.identity().toString(),
+                this.showRequest.identity().value(),
+                this.totalNumDrones,
+                this.simulationVideoLink,
+                this.eventLocation.latitude(),
+                this.eventLocation.longitude(),
+                this.eventDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                this.eventDateTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                this.eventDuration,
+                this.status.name(),
+                this.simulationStatus.name()
+        );
     }
 
     private List<DroneModel> initializeEmptyModelList(int totalNumDrones) {

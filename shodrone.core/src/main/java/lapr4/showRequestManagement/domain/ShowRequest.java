@@ -7,6 +7,7 @@ import lapr4.customermanagement.domain.VAT;
 import lapr4.droneManagement.domain.Drone;
 import lapr4.figureManagement.domain.Figure;
 import jakarta.persistence.Entity;
+import lapr4.showRequestManagement.dto.ShowRequestDTO;
 
 import java.util.List;
 import java.util.Objects;
@@ -171,5 +172,17 @@ public class ShowRequest implements AggregateRoot<ShowRequestId> {
     @Override
     public int hashCode() {
         return Objects.hash(showRequestId);
+    }
+
+    public ShowRequestDTO toDTO() {
+        return new ShowRequestDTO(
+                this.identity().value(),
+                this.customer.identity().toString(),
+                this.showDescription,
+                this.numDrones,
+                this.duration,
+                this.dateValue,
+                this.status
+        );
     }
 }

@@ -23,11 +23,11 @@ public class ShowRequestBootstrapper implements Action {
     @Override
     public boolean execute() {
         registerShowRequest(5, 30.0, "Show of Logo",
-            1, "2024-06-15", "PT123456789");
+            100, "2024-06-15", "PT123456789");
         registerShowRequest(3, 20.0, "Show of Logo",
-            2, "2024-07-01", "PT987654321");
+            101, "2024-07-01", "PT987654321");
         registerShowRequest(8, 45.0, "Show of Logo",
-            3, "2024-08-15", "PT987654321");
+            102, "2024-08-15", "PT987654321");
 
         updateShowRequestStatus("PT987654321", 2, "ShowProposalDone");
         

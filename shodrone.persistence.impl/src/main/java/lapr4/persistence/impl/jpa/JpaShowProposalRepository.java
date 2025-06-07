@@ -3,6 +3,7 @@ package lapr4.persistence.impl.jpa;
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 
 import java.util.List;
@@ -12,28 +13,28 @@ public class JpaShowProposalRepository extends JpaAutoTxRepository<ShowProposal,
         implements ShowProposalRepository {
 
     public JpaShowProposalRepository(final String puname) {
-        super(puname, "proposalNumber");
+        super(puname, "number");
     }
 
     public JpaShowProposalRepository(TransactionalContext tx) {
-        super(tx, "proposalNumber");
+        super(tx, "number");
     }
 
     @Override
-    public Optional<ShowProposal> findByProposalNumber(int proposalNumber) {
+    public Optional<ShowProposal> findByProposalNumber(int number) {
         final var query = entityManager().createQuery(
-                "SELECT p FROM ShowProposal p WHERE p.proposalNumber = :proposalNumber",
+                "SELECT p FROM ShowProposal p WHERE p.number = :number",
                 ShowProposal.class);
-        query.setParameter("proposalNumber", proposalNumber);
+        query.setParameter("number", number);
         return query.getResultList().stream().findFirst();
     }
 
     @Override
     public Iterable<ShowProposal> findByStatus(String status) {
         final var query = entityManager().createQuery(
-                "SELECT p FROM ShowProposal p WHERE p.proposalStatus = :status",
+                "SELECT p FROM ShowProposal p WHERE p.status = :status",
                 ShowProposal.class);
-        query.setParameter("status", lapr4.showProposalManagement.domain.ProposalStatus.valueOf(status));
+        query.setParameter("status", ShowProposalStatus.valueOf(status));
         return query.getResultList();
     }
 

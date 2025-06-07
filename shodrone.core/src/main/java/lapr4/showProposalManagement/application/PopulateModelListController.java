@@ -28,7 +28,7 @@ public class PopulateModelListController {
         for (ShowProposal p : proposals) {
             int assigned = (int) p.modelList().stream().filter(m -> m != null).count();
             if (assigned < p.totalNumDrones()) {
-                dtos.add(new PopulateProposalDTO(p.proposalNumber(), p.totalNumDrones(), assigned));
+                dtos.add(new PopulateProposalDTO(p.identity(), p.totalNumDrones(), assigned));
             }
         }
         return dtos;
@@ -39,7 +39,7 @@ public class PopulateModelListController {
         if (opt.isEmpty()) return null;
         ShowProposal p = opt.get();
         int assigned = (int) p.modelList().stream().filter(m -> m != null).count();
-        return new PopulateProposalDTO(p.proposalNumber(), p.totalNumDrones(), assigned);
+        return new PopulateProposalDTO(p.identity(), p.totalNumDrones(), assigned);
     }
 
     public List<DroneModelDTO> listAvailableDroneModels() {

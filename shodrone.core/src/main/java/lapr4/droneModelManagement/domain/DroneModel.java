@@ -25,11 +25,14 @@ public class DroneModel implements AggregateRoot<Long> {
     @OneToMany(mappedBy = "droneModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final Set<Maintenance> maintenances = new HashSet<>();
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private DroneType droneType;
+
     protected DroneModel() {
         // for JPA
     }
 
-    public DroneModel(List<String> modelSpecifications, String name, Language language) {
+    public DroneModel(List<String> modelSpecifications, String name, Language language, DroneType droneType) {
         if (modelSpecifications == null || modelSpecifications.isEmpty())
             throw new IllegalArgumentException("Model specifications cannot be empty.");
         if (name == null || name.isBlank())
@@ -40,6 +43,21 @@ public class DroneModel implements AggregateRoot<Long> {
         this.modelSpecifications = modelSpecifications;
         this.name = name;
         this.language = language;
+        this.droneType = droneType;
+    }
+
+    public DroneModel(List<String> modelSpecifications, String name, Language language, String droneTypeName, String droneTypeDescription) {
+        if (modelSpecifications == null || modelSpecifications.isEmpty())
+            throw new IllegalArgumentException("Model specifications cannot be empty.");
+        if (name == null || name.isBlank())
+            throw new IllegalArgumentException("Name cannot be null or blank.");
+        if (language == null)
+            throw new IllegalArgumentException("Language cannot be null.");
+
+        this.modelSpecifications = modelSpecifications;
+        this.name = name;
+        this.language = language;
+        this.droneType = new DroneType(droneTypeName, droneTypeDescription);
     }
 
     public List<String> modelSpecifications() {

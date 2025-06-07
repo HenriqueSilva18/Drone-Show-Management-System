@@ -7,10 +7,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="EAPLI US312-US323 ( Mostly Done )">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="US246-US247-US248 tests completed #109">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureManagement/domain/FigureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureManagement/domain/FigureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,9 +67,14 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Departamento-de-Engenharia-Informatica/sem4pi-2024-2025-sem4pi_2024_2025_g39.git&quot;,
-    &quot;accountId&quot;: &quot;b54b0072-e742-4e65-b265-bc420c55792c&quot;
+    &quot;accountId&quot;: &quot;7477ff47-d21d-45b8-9bbb-791d35a5d1a1&quot;
   }
 }</component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="MavenRunConfiguration" name="shodrone [test]" />
+    </enabled-run-configurations>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -74,77 +90,77 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
-    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.plantuml-1.2023.1.jar.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.main.java.drone_plugin.generated_code in Drone_Validation.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone.app.backoffice.console [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone.core [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/berna/IdeaProjects/sem4pi-2024-2025-sem4pi_2024_2025_g39/Drone_Validation/src/main/java/drone_plugin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Backoffice.executor": "Run",
+    "Application.Bootstrap.executor": "Run",
+    "Application.H2DatabaseManager.executor": "Run",
+    "Application.HelloWorld.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
+    "Maven.shodrone [clean].executor": "Run",
+    "Maven.shodrone [test].executor": "Run",
+    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
+    "Maven.shodrone.core [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;h2&quot;
+    "DatabaseDriversLRU": [
+      "h2"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="lapr4.persistence.impl.inmemory" />
+      <recent name="lapr4.droneModelManagement.application" />
       <recent name="lapr4.app.backoffice.console.presentation.figure" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\Drone_Validation\src\main\java\drone_plugin" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console\src\main\resources" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.user.console\src\main\java\lapr4\app\customer\console" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console\src\main\java\lapr4\app\common\console\presentation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\Sprint1" />
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\Sprint2" />
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\Drone_Script(Languague_2)" />
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\DroneScript" />
-      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39" />
+      <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\lapr4" />
+      <recent name="C:\Users\senke\IdeaProjects\sem4pi_2024_2025_g39\docs\us_110\Domain_Model" />
+      <recent name="$PROJECT_DIR$/database" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="lapr4.maintenanceManagement.domain" />
@@ -154,7 +170,20 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.main.java.drone_plugin.generated_code in Drone_Validation">
+  <component name="RunManager" selected="Application.Bootstrap">
+    <configuration name="Bootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lapr4.app.bootstrap.Bootstrap" />
+      <module name="shodrone.app.bootstrap" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.app.bootstrap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
@@ -187,6 +216,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shodrone.core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_shouldOverwriteCategoryWithSameName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
@@ -203,39 +248,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main.java.drone_plugin.generated_code in Drone_Validation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Drone_Validation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.drone_plugin.generated_code.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="main.java.drone_plugin.generated_code" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="plantuml-1.2023.1.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/libs/plantuml-1.2023.1.jar" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.main.java.drone_plugin.generated_code in Drone_Validation" />
-        <item itemvalue="JAR Application.plantuml-1.2023.1.jar" />
-        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
+        <item itemvalue="Application.Bootstrap" />
         <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" />
         <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26574.91" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26574.91" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
       </set>
     </attachedChunks>
   </component>
@@ -273,21 +300,6 @@
       <workItem from="1747008371225" duration="4175000" />
       <workItem from="1747055341567" duration="545000" />
       <workItem from="1747056349887" duration="11342000" />
-      <workItem from="1748443146305" duration="2605000" />
-      <workItem from="1748520536132" duration="3114000" />
-      <workItem from="1748597168370" duration="4168000" />
-      <workItem from="1748606806378" duration="1530000" />
-      <workItem from="1748610319866" duration="628000" />
-      <workItem from="1748617776422" duration="4226000" />
-      <workItem from="1748710589923" duration="1090000" />
-      <workItem from="1748772502200" duration="1832000" />
-      <workItem from="1748796275497" duration="767000" />
-      <workItem from="1748939605128" duration="482000" />
-      <workItem from="1748940119518" duration="5741000" />
-      <workItem from="1748959815765" duration="12931000" />
-      <workItem from="1749046466689" duration="6127000" />
-      <workItem from="1749125784938" duration="12505000" />
-      <workItem from="1749220136001" duration="1233000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -393,31 +405,7 @@
       <option name="project" value="LOCAL" />
       <updated>1747066932287</updated>
     </task>
-    <task id="LOCAL-00015" summary="test">
-      <option name="closed" value="true" />
-      <created>1748358183785</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1748358183785</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Lprog US345">
-      <option name="closed" value="true" />
-      <created>1748972866868</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1748972866868</updated>
-    </task>
-    <task id="LOCAL-00017" summary="EAPLI US312-US323 ( Mostly Done )">
-      <option name="closed" value="true" />
-      <created>1749138581678</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1749138581678</updated>
-    </task>
-    <option name="localTasksCounter" value="18" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,19 +452,20 @@
     <MESSAGE value="US245 Tests Completed #109" />
     <MESSAGE value="US246-US247-US248 Completed #109" />
     <MESSAGE value="US246-US247-US248 tests completed #109" />
-    <MESSAGE value="test" />
-    <MESSAGE value="Lprog US345" />
-    <MESSAGE value="EAPLI US312-US323 ( Mostly Done )" />
-    <option name="LAST_COMMIT_MESSAGE" value="EAPLI US312-US323 ( Mostly Done )" />
+    <option name="LAST_COMMIT_MESSAGE" value="US246-US247-US248 tests completed #109" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/Language.java</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="org.hibernate.AnnotationException" package="org.hibernate" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
