@@ -28,8 +28,7 @@
 		<module>DroneScript(Languague_1)</module>
 		<module>Drone_Script(Languague_2)</module>
         <module>shodrone.app.customer.server</module>
-		<module>ShowProposal_Plugin</module>
-	</modules>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
