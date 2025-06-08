@@ -66,7 +66,7 @@ int main(int argc, char* argv[]) {
 	snprintf(filename, sizeof(filename), "script%d.txt", drone_id);
 	FILE* script = fopen(filename, "r");
 	if (!script) {
-		perror("fopen script");
+		fprintf(stderr, "[DRONE %d] ERRO: Não foi possível abrir o ficheiro de script '%s'.\n", drone_id, filename);
 		exit(EXIT_FAILURE);
 	}
 

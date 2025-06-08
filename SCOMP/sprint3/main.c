@@ -57,6 +57,8 @@ void* collision_thread_func(void* arg) {
 					if (shm->collision_log_count < MAX_COLLISION_LOG) {
 						CollisionEvent ev = {step, i, j, di.x, di.y, di.z};
 						shm->collision_log[shm->collision_log_count++] = ev;
+					} else {
+						printf("[AVISO] Limite de colisões registadas atingido (%d). Colisões adicionais não serão registadas.\n", MAX_COLLISION_LOG);
 					}
 					shm->total_collisions++;
 					// Stop the simulation when collision is detected
@@ -106,6 +108,19 @@ int main(int argc, char* argv[]) {
 	if (num_drones < 1 || num_drones > MAX_DRONES) {
 		fprintf(stderr, "Número inválido de drones.\n");
 		exit(EXIT_FAILURE);
+	}
+
+	// Verificação dos ficheiros de script antes de iniciar
+	for (int i = 0; i < num_drones; i++) {
+		char filename[64];
+		snprintf(filename, sizeof(filename), "script%d.txt", i);
+		FILE* f = fopen(filename, "r");
+		if (!f) {
+			fprintf(stderr, "[ERRO] Ficheiro de script '%s' não encontrado.\n", filename);
+			cleanup_resources();
+			exit(EXIT_FAILURE);
+		}
+		fclose(f);
 	}
 
 	signal(SIGINT, sigint_handler);
