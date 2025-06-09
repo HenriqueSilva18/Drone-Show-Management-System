@@ -1,3 +1,4 @@
+// Controller: PopulateModelListController.java
 package lapr4.showProposalManagement.application;
 
 import lapr4.droneModelManagement.domain.DroneModel;
@@ -11,32 +12,34 @@ import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PopulateModelListController {
 
-    private ShowProposalRepository proposalRepo = PersistenceContext.repositories().showProposals();
-    private DroneModelRepository modelRepo = PersistenceContext.repositories().droneModels();
-    private DroneRepository droneRepo = PersistenceContext.repositories().drones();
+    private final ShowProposalRepository proposalRepo = PersistenceContext.repositories().showProposals();
+    private final DroneModelRepository modelRepo = PersistenceContext.repositories().droneModels();
+    private final DroneRepository droneRepo = PersistenceContext.repositories().drones();
 
     public List<PopulateProposalDTO> listUnassignedShowProposals() {
+        List<ShowProposal> proposals = new ArrayList<>();
+        proposalRepo.findAll().forEach(proposals::add);
         List<PopulateProposalDTO> dtos = new ArrayList<>();
-        proposalRepo.findAll().forEach(p -> {
-            long assigned = p.modelList().stream().filter(Objects::nonNull).count();
+
+        for (ShowProposal p : proposals) {
+            int assigned = (int) p.modelList().stream().filter(m -> m != null).count();
             if (assigned < p.totalNumDrones()) {
-                dtos.add(new PopulateProposalDTO(p.identity(), p.totalNumDrones(), (int) assigned));
+                dtos.add(new PopulateProposalDTO(p.identity(), p.totalNumDrones(), assigned));
             }
-        });
+        }
         return dtos;
     }
 
     public PopulateProposalDTO getProposalByNumber(int proposalNumber) {
         Optional<ShowProposal> opt = proposalRepo.findByProposalNumber(proposalNumber);
-        return opt.map(p -> {
-            long assigned = p.modelList().stream().filter(Objects::nonNull).count();
-            return new PopulateProposalDTO(p.identity(), p.totalNumDrones(), (int) assigned);
-        }).orElse(null);
+        if (opt.isEmpty()) return null;
+        ShowProposal p = opt.get();
+        int assigned = (int) p.modelList().stream().filter(m -> m != null).count();
+        return new PopulateProposalDTO(p.identity(), p.totalNumDrones(), assigned);
     }
 
     public List<DroneModelDTO> listAvailableDroneModels() {
@@ -55,8 +58,8 @@ public class PopulateModelListController {
         DroneModel model = modelRepo.ofIdentity(modelId)
                 .orElseThrow(() -> new IllegalArgumentException("Drone model not found"));
 
-        List<DroneModel> list = proposal.modelList();
         int assigned = 0;
+        List<DroneModel> list = proposal.modelList();
         for (int i = 0; i < list.size() && assigned < quantity; i++) {
             if (list.get(i) == null) {
                 list.set(i, model);
@@ -64,16 +67,6 @@ public class PopulateModelListController {
             }
         }
 
-        if (assigned > 0) {
-            proposalRepo.save(proposal);
-        }
+        proposalRepo.save(proposal);
     }
-
-    public PopulateModelListController(ShowProposalRepository proposalRepo, DroneModelRepository modelRepo, DroneRepository droneRepo) {
-        this.proposalRepo = proposalRepo;
-        this.modelRepo = modelRepo;
-        this.droneRepo = droneRepo;
-    }
-
-
-}
+} 
