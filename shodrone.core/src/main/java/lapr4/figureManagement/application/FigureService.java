@@ -1,6 +1,7 @@
 package lapr4.figureManagement.application;
 
 import jakarta.transaction.Transactional;
+import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.customermanagement.domain.VAT;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -64,26 +66,26 @@ public class FigureService {
     }
 
     @Transactional
-    public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
+    public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
         }
 
-        Figure figure = new Figure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion);
+        Figure figure = new Figure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
 
         return repo.save(figure);
     }
 
-    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
+    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
         }
 
-        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
+        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
 
         return repo.save(figure);
     }

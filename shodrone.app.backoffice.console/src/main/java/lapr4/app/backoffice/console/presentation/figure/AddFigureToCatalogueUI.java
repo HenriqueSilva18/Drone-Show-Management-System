@@ -3,6 +3,7 @@ package lapr4.app.backoffice.console.presentation.figure;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
 import lapr4.customermanagement.domain.VAT;
+import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.application.FigureCategoryController;
 import lapr4.figureManagement.application.FigureController;
 import lapr4.figureManagement.domain.FigureCategory;
@@ -31,6 +32,26 @@ public class AddFigureToCatalogueUI extends AbstractUI {
             final String vatStr = Console.readLine("Customer VAT (leave empty if public):");
             final VAT vat = vatStr.isBlank() ? null : new VAT(vatStr);
 
+            final int numTypes = Console.readInteger("Quantos tipos de drone esta figura usa?");
+            final List<DroneType> droneTypes = new ArrayList<>();
+
+            for (int i = 0; i < numTypes; i++) {
+                System.out.printf("%n=== Tipo %d ===%n", i + 1);
+
+                final String name = Console.readLine("Nome do drone type:");
+                final String typeDescription = Console.readLine("Descrição do drone type:");
+                if (name.isBlank() || description.isBlank()) {
+                    System.out.println("❌ Nome e descrição não podem ser vazios.");
+                    i--;
+                    continue;
+                }
+
+                DroneType type = new DroneType(name, typeDescription);
+                droneTypes.add(type);
+            }
+
+
+
             boolean dslProcessAttempted = validateDslUI.requestAndPerformDslValidation();
 
             if (!dslProcessAttempted || !validateDslUI.wasDslInputAttemptedAndCompleted()) {
@@ -50,7 +71,7 @@ public class AddFigureToCatalogueUI extends AbstractUI {
             String dslCode = validateDslUI.getDslCode();
             String dslVersion = validateDslUI.getDslVersion();
 
-            controller.addFigure(description, keywords,true, category, vat, dslCode, dslVersion);
+            controller.addFigure(description, keywords,true, category, vat, dslCode, dslVersion, droneTypes);
             System.out.println("✅ Figure added successfully.");
 
         } catch (Exception e) {

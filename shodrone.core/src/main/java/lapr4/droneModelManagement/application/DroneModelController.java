@@ -14,8 +14,8 @@ public class DroneModelController {
     private final DroneModelService droneModelService = new DroneModelService();
 
     @Transactional
-    public DroneModel registerDroneModel(String name, List<String> specifications, Language language, DroneType droneType) {
-        DroneModel model = new DroneModel(specifications, name, language, droneType);
+    public DroneModel registerDroneModel(String name, List<String> specifications, Language language) {
+        DroneModel model = new DroneModel(specifications, name, language);
         return droneModelService.registerDroneModel(model);
     }
 

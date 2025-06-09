@@ -6,6 +6,8 @@ import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.droneModelManagement.domain.DroneModel;
+import lapr4.droneModelManagement.domain.DroneType;
+import lapr4.figureManagement.domain.Figure;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import eapli.framework.representations.dto.DTOable;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposalDTO> {
@@ -61,7 +64,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @OneToMany(cascade = CascadeType.ALL)
     private List<DroneModel> modelList;
 
-    // TODO LIST FIGURES
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<FigureInShowProposal> figuresList;
 
     // TODO SENT DATE & SENT BY MANAGER
 
@@ -79,6 +83,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         this.eventDuration = eventDuration;
         this.status = ShowProposalStatus.CREATED;
         this.simulationStatus = SimulationStatus.UNTESTED;
+        this.modelList = new ArrayList<>();
     }
 
     protected ShowProposal() {
@@ -144,6 +149,10 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return this.modelList;
     }
 
+    public List<FigureInShowProposal> figuresList() {
+        return this.figuresList;
+    }
+
     @Override
     public ShowProposalDTO toDTO() {
         return new ShowProposalDTO(
@@ -171,4 +180,17 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     }
 
 
+    public void addFigure(Figure figure, Map<DroneType, DroneModel> droneMapping) {
+        Preconditions.nonNull(figure, "Figure cannot be null");
+        Preconditions.nonNull(droneMapping, "Drone mapping cannot be null");
+
+        for (FigureInShowProposal fig : figuresList) {
+            if (fig.figure().sameAs(figure)) {
+                throw new IllegalArgumentException("Figure already exists in the proposal.");
+            }
+        }
+
+        FigureInShowProposal figureInProposal = new FigureInShowProposal(figure, droneMapping);
+        figuresList.add(figureInProposal);
+    }
 }

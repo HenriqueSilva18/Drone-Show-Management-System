@@ -150,7 +150,7 @@ class FigureCategoryTest {
     @Test
     void equals_shouldReturnFalseForDifferentClass() {
         FigureCategory cat = new FigureCategory("Um", "Descrição");
-        String str = "Não sou uma categoria";
+        String str = "Um";
         assertNotEquals(cat, str);
     }
 
