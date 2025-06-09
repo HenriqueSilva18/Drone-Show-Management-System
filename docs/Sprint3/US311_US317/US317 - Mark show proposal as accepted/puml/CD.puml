@@ -1,0 +1,38 @@
+@startuml
+package "showProposalManagement" {
+
+    class AcceptShowProposalController {
+        +findNonAcceptedProposalByNumber(proposalNumber: int): Optional<ShowProposal>
+        +acceptProposal(proposalNumber: int): void
+        +rejectProposal(proposalNumber: int): void
+    }
+
+    class ShowProposal {
+        +identity(): int
+        +status(): ShowProposalStatus
+        +changeProposalStatus(status: ShowProposalStatus): void
+    }
+
+    enum ShowProposalStatus {
+        CREATED
+        PENDENT
+        ACCEPTED
+        REJECTED
+    }
+
+    interface ShowProposalRepository {
+        +findByProposalNumber(proposalNumber: int): Optional<ShowProposal>
+        +save(proposal: ShowProposal): ShowProposal
+    }
+
+    class AcceptShowProposalUI {
+        +doShow(): boolean
+        +headline(): String
+    }
+
+    AcceptShowProposalUI --> AcceptShowProposalController
+    AcceptShowProposalController --> ShowProposalRepository
+    AcceptShowProposalController --> ShowProposal
+    ShowProposal --> ShowProposalStatus
+}
+@enduml
