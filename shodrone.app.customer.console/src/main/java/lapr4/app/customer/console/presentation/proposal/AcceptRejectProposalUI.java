@@ -56,7 +56,7 @@ public class AcceptRejectProposalUI extends AbstractUI {
             System.out.println("Proposal accepted successfully!");
         } else {
             // Similarly, a call to reject the proposal
-            controller.rejectProposal(proposalNumber, feedback);
+            controller.rejectProposal(proposalNumber);
             System.out.println("Proposal rejected successfully!");
         }
 
