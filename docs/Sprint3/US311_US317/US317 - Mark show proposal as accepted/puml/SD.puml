@@ -1,0 +1,29 @@
+@startuml
+actor Manager
+participant UI as "AcceptShowProposalUI"
+participant Controller as "AcceptShowProposalController"
+participant Repo as "ShowProposalRepository"
+participant Proposal as "ShowProposal"
+
+== Manager starts the UI ==
+Manager -> UI : doShow()
+
+== UI requests the proposal ==
+UI -> Controller : findNonAcceptedProposalByNumber(proposalNumber)
+Controller -> Repo : findByProposalNumber(proposalNumber)
+Repo --> Controller : Optional<ShowProposal>
+Controller -> Proposal : status()
+Controller --> UI : Optional<ShowProposal>
+
+== Manager confirms acceptance ==
+Manager -> UI : confirms action
+UI -> Controller : acceptProposal(proposalNumber)
+Controller -> Repo : findByProposalNumber(proposalNumber)
+Repo --> Controller : ShowProposal
+
+Controller -> Proposal : status()
+Controller -> Proposal : changeProposalStatus(ACCEPTED)
+Controller -> Repo : save(proposal)
+Controller --> UI : confirmation message
+
+@enduml

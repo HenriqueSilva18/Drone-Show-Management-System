@@ -1,0 +1,79 @@
+@startuml
+
+package "showProposalManagement" {
+
+    class ShowProposal {
+        +identity(): int
+        +totalNumDrones(): int
+        +modelList(): List<DroneModel>
+        +changeProposalStatus(status: ShowProposalStatus): void
+        +toDTO(): ShowProposalDTO
+    }
+
+    class ShowProposalDTO {
+        +number: int
+        +customerVAT: String
+        +showRequestID: int
+        +totalNumDrones: int
+        +simulationVideoLink: String
+        +latitude: double
+        +longitude: double
+        +eventDate: String
+        +eventHour: String
+        +eventDuration: int
+        +status: String
+        +simulationStatus: String
+    }
+
+    class ShowRequest
+    class Customer
+
+    class DroneModel {
+        +identity(): Long
+        +name(): String
+    }
+
+    class DroneModelDTO {
+        +id: Long
+        +name: String
+    }
+
+    class PopulateProposalDTO {
+        +proposalNumber: int
+        +totalDrones: int
+        +dronesAssigned: int
+    }
+
+    class PopulateModelListController {
+        +listUnassignedShowProposals(): List<PopulateProposalDTO>
+        +getProposalByNumber(num: int): PopulateProposalDTO
+        +listAvailableDroneModels(): List<DroneModelDTO>
+        +countAvailableOfModel(id: Long): int
+        +assignModelToProposal(num: int, modelId: Long, qty: int): void
+    }
+
+    interface ShowProposalRepository
+    interface DroneModelRepository
+    interface DroneRepository
+
+    class PopulateModelListUI
+
+
+    PopulateModelListUI --> PopulateModelListController
+
+    PopulateModelListController --> ShowProposalRepository
+    PopulateModelListController --> DroneModelRepository
+    PopulateModelListController --> DroneRepository
+
+    PopulateModelListController --> PopulateProposalDTO
+    PopulateModelListController --> DroneModelDTO
+    PopulateModelListController --> ShowProposal
+    PopulateModelListController --> DroneModel
+
+    ShowProposal --> DroneModel
+    ShowProposal --> ShowProposalDTO
+    ShowProposal --> ShowRequest
+    ShowProposal --> Customer
+}
+
+@enduml

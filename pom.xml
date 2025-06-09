@@ -27,7 +27,9 @@
         <module>DSL-PLUGIN-1.1.23</module>
 		<module>DroneScript(Languague_1)</module>
 		<module>Drone_Script(Languague_2)</module>
-    </modules>
+        <module>shodrone.app.customer.server</module>
+		<module>ShowProposal_Plugin</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -87,6 +89,12 @@
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr4-runtime</artifactId>
 				<version>4.13.0</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.xml.bind</groupId>
+				<artifactId>jakarta.xml.bind-api</artifactId>
+				<version>4.0.2</version>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

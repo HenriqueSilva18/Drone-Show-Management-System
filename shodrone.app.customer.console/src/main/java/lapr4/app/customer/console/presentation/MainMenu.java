@@ -32,6 +32,9 @@ import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
 import eapli.framework.presentation.console.menu.VerticalMenuRenderer;
+import lapr4.app.customer.console.http.HttpClient;
+import lapr4.app.customer.console.presentation.proposal.AcceptRejectProposalUI;
+import lapr4.app.customer.console.presentation.proposal.DownloadProposalUI;
 
 /**
  * @author Paulo Gandra Sousa
@@ -44,8 +47,11 @@ class MainMenu extends CustomerBaseUI {
 
     // MAIN MENU
     private static final int MY_USER_OPTION = 1;
+    private static final int DOWNLOAD_PROPOSAL_OPTION = 2;
+    private static final int ACCEPT_REJECT_PROPOSAL_OPTION = 3;
 
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
+    private final HttpClient httpClient = new HttpClient("localhost", 8080); // Configure as needed
 
     @Override
     public boolean show() {
@@ -70,7 +76,8 @@ class MainMenu extends CustomerBaseUI {
         mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
 
         mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-
+        mainMenu.addItem(MenuItem.of(DOWNLOAD_PROPOSAL_OPTION, "Download Proposal", () -> new DownloadProposalUI().show()));
+        mainMenu.addItem(MenuItem.of(ACCEPT_REJECT_PROPOSAL_OPTION, "Accept/Reject Proposal", () -> new AcceptRejectProposalUI(httpClient).show()));
         mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
 
         return mainMenu;

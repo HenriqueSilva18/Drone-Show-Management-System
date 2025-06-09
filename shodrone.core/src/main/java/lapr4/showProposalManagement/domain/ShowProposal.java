@@ -1,9 +1,12 @@
 package lapr4.showProposalManagement.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlElement;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lapr4.customermanagement.domain.Customer;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.droneModelManagement.domain.DroneType;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+@XmlRootElement
 @Entity
 public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposalDTO> {
 
@@ -30,37 +34,57 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @GeneratedValue
     private int number;
 
+    @XmlElement
+    @JsonProperty
     @ManyToOne(optional = false)
     private Customer customer;
 
+    @XmlElement
+    @JsonProperty
     @ManyToOne(optional = false)
     private ShowRequest showRequest;
 
+    @XmlElement
+    @JsonProperty
     @Column(nullable = false)
     private int totalNumDrones;
 
     // TODO TEMPLATE
 
+    @XmlElement
+    @JsonProperty
     @Column
     private String simulationVideoLink;
 
     // TODO INSURANCE VALUE
 
+    @XmlElement
+    @JsonProperty
     @Column(nullable = false)
     private Coordinates eventLocation;
 
+    @XmlElement
+    @JsonProperty
     @Column(nullable = false)
     private LocalDateTime eventDateTime;
 
+    @XmlElement
+    @JsonProperty
     @Column(nullable = false)
     private int eventDuration;
 
+    @XmlElement
+    @JsonProperty
     @Enumerated(EnumType.STRING)
     private ShowProposalStatus status;
 
+    @XmlElement
+    @JsonProperty
     @Enumerated(EnumType.STRING)
     private SimulationStatus simulationStatus;
 
+    @XmlElement
+    @JsonProperty
     @OneToMany(cascade = CascadeType.ALL)
     private List<DroneModel> modelList;
 

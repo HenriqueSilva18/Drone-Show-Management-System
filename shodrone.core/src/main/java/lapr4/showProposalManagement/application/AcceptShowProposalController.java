@@ -9,7 +9,17 @@ import java.util.Optional;
 
 public class AcceptShowProposalController {
 
-    private final ShowProposalRepository repo = PersistenceContext.repositories().showProposals();
+    private final ShowProposalRepository repo;
+
+    // Production constructor
+    public AcceptShowProposalController() {
+        this(PersistenceContext.repositories().showProposals());
+    }
+
+    // Test constructor (mock-friendly)
+    public AcceptShowProposalController(ShowProposalRepository repo) {
+        this.repo = repo;
+    }
 
     public Optional<ShowProposal> findNonAcceptedProposalByNumber(int proposalNumber) {
         return repo.findByProposalNumber(proposalNumber)
@@ -20,7 +30,19 @@ public class AcceptShowProposalController {
         ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
                 .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
 
+        if (proposal.status() == ShowProposalStatus.ACCEPTED) {
+            throw new IllegalStateException("Proposal is already accepted.");
+        }
+
         proposal.changeProposalStatus(ShowProposalStatus.ACCEPTED);
+        repo.save(proposal);
+    }
+
+    public void rejectProposal(int proposalNumber) {
+        ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
+                .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
+
+        proposal.changeProposalStatus(ShowProposalStatus.REJECTED);
         repo.save(proposal);
     }
 }

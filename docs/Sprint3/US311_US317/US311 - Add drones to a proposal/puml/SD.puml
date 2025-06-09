@@ -1,0 +1,55 @@
+@startuml
+actor Manager
+participant UI as "PopulateModelListUI"
+participant Controller as "PopulateModelListController"
+participant ProposalRepo as "ShowProposalRepository"
+participant ModelRepo as "DroneModelRepository"
+participant DroneRepo as "DroneRepository"
+participant Proposal as "ShowProposal"
+participant Model as "DroneModel"
+
+== List proposals with unassigned drones ==
+Manager -> UI : launch()
+UI -> Controller : listUnassignedShowProposals()
+Controller -> ProposalRepo : findAll()
+ProposalRepo --> Controller : Iterable<ShowProposal>
+Controller -> Controller : build List<PopulateProposalDTO>
+Controller --> UI : List<PopulateProposalDTO>
+
+== Choose proposal ==
+Manager -> UI : selects proposal number
+UI -> Controller : getProposalByNumber(proposalNumber)
+Controller -> ProposalRepo : findByProposalNumber(proposalNumber)
+ProposalRepo --> Controller : Optional<ShowProposal>
+Controller -> Controller : build PopulateProposalDTO
+Controller --> UI : PopulateProposalDTO
+
+== List drone models ==
+UI -> Controller : listAvailableDroneModels()
+Controller -> ModelRepo : findAll()
+ModelRepo --> Controller : Iterable<DroneModel>
+Controller -> Controller : build List<DroneModelDTO>
+Controller --> UI : List<DroneModelDTO>
+
+== Check available drones of a model ==
+UI -> Controller : countAvailableOfModel(modelId)
+Controller -> DroneRepo : countAvailableOfModelById(modelId)
+DroneRepo --> Controller : int
+Controller --> UI : int
+
+== Assign drone model to proposal ==
+UI -> Controller : assignModelToProposal(proposalNumber, modelId, quantity)
+Controller -> ProposalRepo : findByProposalNumber(proposalNumber)
+ProposalRepo --> Controller : Optional<ShowProposal>
+
+Controller -> ModelRepo : ofIdentity(modelId)
+ModelRepo --> Controller : Optional<DroneModel>
+
+Controller -> Proposal : modelList() (returns list with nulls or models)
+Controller -> Proposal : fill available positions with model
+
+Controller -> ProposalRepo : save(proposal)
+
+Controller --> UI : confirmation message
+
+@enduml
