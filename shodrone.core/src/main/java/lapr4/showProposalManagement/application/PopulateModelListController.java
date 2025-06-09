@@ -1,4 +1,3 @@
-// Controller: PopulateModelListController.java
 package lapr4.showProposalManagement.application;
 
 import lapr4.droneModelManagement.domain.DroneModel;
@@ -16,16 +15,31 @@ import java.util.Optional;
 
 public class PopulateModelListController {
 
-    private final ShowProposalRepository proposalRepo = PersistenceContext.repositories().showProposals();
-    private final DroneModelRepository modelRepo = PersistenceContext.repositories().droneModels();
-    private final DroneRepository droneRepo = PersistenceContext.repositories().drones();
+    private final ShowProposalRepository proposalRepo;
+    private final DroneModelRepository modelRepo;
+    private final DroneRepository droneRepo;
+
+    // Constructor for production use
+    public PopulateModelListController() {
+        this(
+                PersistenceContext.repositories().showProposals(),
+                PersistenceContext.repositories().droneModels(),
+                PersistenceContext.repositories().drones()
+        );
+    }
+
+    // Constructor for testing (allows mock injection)
+    public PopulateModelListController(ShowProposalRepository proposalRepo,
+                                       DroneModelRepository modelRepo,
+                                       DroneRepository droneRepo) {
+        this.proposalRepo = proposalRepo;
+        this.modelRepo = modelRepo;
+        this.droneRepo = droneRepo;
+    }
 
     public List<PopulateProposalDTO> listUnassignedShowProposals() {
-        List<ShowProposal> proposals = new ArrayList<>();
-        proposalRepo.findAll().forEach(proposals::add);
         List<PopulateProposalDTO> dtos = new ArrayList<>();
-
-        for (ShowProposal p : proposals) {
+        for (ShowProposal p : proposalRepo.findAll()) {
             int assigned = (int) p.modelList().stream().filter(m -> m != null).count();
             if (assigned < p.totalNumDrones()) {
                 dtos.add(new PopulateProposalDTO(p.identity(), p.totalNumDrones(), assigned));
@@ -69,4 +83,4 @@ public class PopulateModelListController {
 
         proposalRepo.save(proposal);
     }
-} 
+}
