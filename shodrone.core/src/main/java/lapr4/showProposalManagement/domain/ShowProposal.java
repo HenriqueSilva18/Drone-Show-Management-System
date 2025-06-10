@@ -165,6 +165,10 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return this.status;
     }
 
+    public String simulationVideoLink() {
+        return this.simulationVideoLink;
+    }
+
     public int totalNumDrones() {
         return this.totalNumDrones;
     }

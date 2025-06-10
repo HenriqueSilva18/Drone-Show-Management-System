@@ -33,4 +33,15 @@ public class ShowProposalDTO {
         this.eventHour = eventHour;
         this.eventDuration = eventDuration;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ID: %d | Customer: %s | Status: %s | Date: %s",
+                number,
+                customerVAT,
+                status,
+                eventDate
+        );
+    }
 }

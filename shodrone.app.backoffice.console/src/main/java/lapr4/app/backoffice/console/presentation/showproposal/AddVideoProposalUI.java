@@ -4,83 +4,61 @@ import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import lapr4.showProposalManagement.application.ChangeProposalController;
+import eapli.framework.presentation.console.SelectWidget; // Import SelectWidget
+import lapr4.showProposalManagement.application.AddVideoProposalController;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddVideoProposalUI extends AbstractUI {
     private static final Logger LOGGER = LogManager.getLogger(AddVideoProposalUI.class);
 
-    private final ChangeProposalController theController;
+    private final AddVideoProposalController theController;
 
     public AddVideoProposalUI() {
-        this.theController = new ChangeProposalController(
-            PersistenceContext.repositories().showProposals(),
-            AuthzRegistry.authorizationService()
+        this.theController = new AddVideoProposalController(
+                PersistenceContext.repositories().showProposals(),
+                AuthzRegistry.authorizationService()
         );
     }
 
     @Override
     protected boolean doShow() {
-        try {
-            Iterable<ShowProposalDTO> allProposals = this.theController.allProposals();
-            List<ShowProposalDTO> proposalList = new ArrayList<>();
-            allProposals.forEach(proposalList::add);
+        final Iterable<ShowProposalDTO> eligibleProposals = theController.listProposalsForVideoAddition();
 
-            if (proposalList.isEmpty()) {
-                System.out.println("There are no registered proposals.");
-                return false;
-            }
-
-            System.out.println("\nAvailable Proposals:");
-            System.out.println("===================");
-            for (int i = 0; i < proposalList.size(); i++) {
-                ShowProposalDTO proposal = proposalList.get(i);
-                System.out.printf("%d. Proposal ID: %d | Status: %s%n", 
-                    i + 1, 
-                    proposal.getShowRequestID(),
-                    proposal.getStatus());
-            }
-            System.out.println("===================\n");
-
-            int choice;
-            do {
-                choice = Console.readInteger("Select a proposal (number):");
-            } while (choice < 1 || choice > proposalList.size());
-
-            ShowProposalDTO selectedProposal = proposalList.get(choice - 1);
-
-            String currentVideo = selectedProposal.getSimulationVideoLink();
-            System.out.println("\nCurrent video link: " + (currentVideo != null ? currentVideo : "N/A"));
-
-            String newVideoLink = Console.readLine("\nEnter new video link: ");
-
-            ShowProposalDTO updatedProposal = theController.changeProposalVideo(selectedProposal.getShowRequestID(), newVideoLink);
-            System.out.println("\nVideo link updated successfully for proposal ID: " + updatedProposal.getShowRequestID());
-
-            return true;
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            return false;
-        } catch (ConcurrencyException ex) {
-            System.out.println("It is not possible to change the proposal's video link because it was changed by another user. Please try again.");
-            return false;
-        } catch (IntegrityViolationException e) {
-            LOGGER.error("Integrity violation while changing video link: ", e);
-            System.out.println("Unfortunately, there was an unexpected error in the application. Please try again, and if the problem persists, contact your system administrator.");
-            return false;
-        } catch (Exception e) {
-            LOGGER.error("An unexpected error occurred: ", e);
-            System.out.println("An unexpected error occurred. Please check the logs.");
+        if (!eligibleProposals.iterator().hasNext()) {
+            System.out.println("There are no proposals awaiting a video link.");
             return false;
         }
+
+        final SelectWidget<ShowProposalDTO> selector = new SelectWidget<>("Select a Proposal to add a video to:", eligibleProposals);
+        selector.show();
+
+        final ShowProposalDTO selectedProposal = selector.selectedElement();
+
+        if (selectedProposal == null) {
+            return false;
+        }
+
+        try {
+            final String newVideoLink = Console.readLine("\nEnter the video link for proposal #" + selectedProposal.number + ": ");
+
+            theController.addProposalVideo(selectedProposal.number, newVideoLink);
+
+            System.out.println("\nVideo link added successfully!");
+
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            System.out.println("\nError: " + e.getMessage());
+        } catch (ConcurrencyException | IntegrityViolationException ex) {
+            System.out.println("\nError: The data was modified by another user. Please try again.");
+        } catch (Exception e) {
+            LOGGER.error("An unexpected error occurred: ", e);
+            System.out.println("\nAn unexpected error occurred. Please check the logs for more details.");
+        }
+
+        return false;
     }
 
     @Override

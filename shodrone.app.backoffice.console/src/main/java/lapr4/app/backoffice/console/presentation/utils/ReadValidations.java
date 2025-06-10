@@ -2,33 +2,31 @@ package lapr4.app.backoffice.console.presentation.utils;
 
 import eapli.framework.io.util.Console;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public final class ReadValidations {
 
     private ReadValidations() {
     }
 
     public static String readValidDateString(String message) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();
+
         while (true) {
             String input = Console.readLine(message);
-            String[] parts = input.split("-");
-
-            if (parts.length != 3) {
-                System.out.println("Error: Invalid format. Please use YYYY-MM-DD.");
-                continue;
-            }
-
             try {
-                int year = Integer.parseInt(parts[0]);
-                int month = Integer.parseInt(parts[1]);
-                int day = Integer.parseInt(parts[2]);
+                LocalDate date = LocalDate.parse(input, formatter);
 
-                if (parts[0].length() != 4 || month < 1 || month > 12 || day < 1 || day > 31) {
-                    System.out.println("Error: Invalid date values. Ensure year has 4 digits, month is 1-12, and day is 1-31.");
-                } else {
+                if (date.isAfter(today)) {
                     return input;
+                } else {
+                    System.out.println("Error: The date must be in the future.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Year, month, and day must be numbers.");
+            } catch (DateTimeParseException e) {
+                System.out.println("Error: Invalid date or format. Please use yyyy-MM-dd and enter a valid date.");
             }
         }
     }
