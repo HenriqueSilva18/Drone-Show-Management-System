@@ -1,33 +1,8 @@
-/*
- * Copyright (c) 2013-2024 the original author or authors.
- *
- * MIT License
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package lapr4.app.customer.console.presentation;
 
-import lapr4.app.common.console.presentation.authz.MyUserMenu;
 import eapli.framework.actions.menu.Menu;
 import eapli.framework.actions.menu.MenuItem;
-import eapli.framework.infrastructure.authz.application.AuthorizationService;
-import eapli.framework.infrastructure.authz.application.AuthzRegistry;
+import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.ExitWithMessageAction;
 import eapli.framework.presentation.console.menu.MenuItemRenderer;
 import eapli.framework.presentation.console.menu.MenuRenderer;
@@ -36,22 +11,18 @@ import lapr4.app.customer.console.http.HttpClient;
 import lapr4.app.customer.console.presentation.proposal.AcceptRejectProposalUI;
 import lapr4.app.customer.console.presentation.proposal.DownloadProposalUI;
 
-/**
- * @author Paulo Gandra Sousa
- */
-class MainMenu extends CustomerBaseUI {
+
+public class MainMenu extends AbstractUI {
 
     private static final String SEPARATOR_LABEL = "--------------";
-
     private static final int EXIT_OPTION = 0;
 
-    // MAIN MENU
-    private static final int MY_USER_OPTION = 1;
-    private static final int DOWNLOAD_PROPOSAL_OPTION = 2;
-    private static final int ACCEPT_REJECT_PROPOSAL_OPTION = 3;
+    // Opções do menu principal re-numeradas
+    private static final int DOWNLOAD_PROPOSAL_OPTION = 1;
+    private static final int ACCEPT_REJECT_PROPOSAL_OPTION = 2;
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
-    private final HttpClient httpClient = new HttpClient("localhost", 8080); // Configure as needed
+    // O serviço de autenticação da framework foi removido pois não é usado aqui.
+    private final HttpClient httpClient = new HttpClient("localhost", 8080); // Configure se necessário
 
     @Override
     public boolean show() {
@@ -59,9 +30,6 @@ class MainMenu extends CustomerBaseUI {
         return doShow();
     }
 
-    /**
-     * @return true if the user selected the exit option
-     */
     @Override
     public boolean doShow() {
         final Menu menu = buildMainMenu();
@@ -72,14 +40,25 @@ class MainMenu extends CustomerBaseUI {
     private Menu buildMainMenu() {
         final Menu mainMenu = new Menu();
 
-        final Menu myUserMenu = new MyUserMenu();
-        mainMenu.addSubMenu(MY_USER_OPTION, myUserMenu);
-
+        // A secção "My User" foi removida porque depende do sistema de autenticação
+        // da framework eapli, que não estamos a usar neste contexto. A opção "Exit"
+        // serve como funcionalidade de logout.
         mainMenu.addItem(MenuItem.separator(SEPARATOR_LABEL));
-        mainMenu.addItem(MenuItem.of(DOWNLOAD_PROPOSAL_OPTION, "Download Proposal", () -> new DownloadProposalUI().show()));
-        mainMenu.addItem(MenuItem.of(ACCEPT_REJECT_PROPOSAL_OPTION, "Accept/Reject Proposal", () -> new AcceptRejectProposalUI(httpClient).show()));
-        mainMenu.addItem(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye"));
+        mainMenu.addItem(MenuItem.of(DOWNLOAD_PROPOSAL_OPTION, "Download Proposal", () -> {
+            new DownloadProposalUI().show();
+            return false;
+        }));
+        mainMenu.addItem(MenuItem.of(ACCEPT_REJECT_PROPOSAL_OPTION, "Accept/Reject Proposal", () -> {
+            new AcceptRejectProposalUI(httpClient).show();
+            return false;
+        }));
+        mainMenu.addItem(MenuItem.of(EXIT_OPTION, "Exit", new ExitWithMessageAction("Bye, Bye")));
 
         return mainMenu;
+    }
+
+    @Override
+    public String headline() {
+        return "Main Menu";
     }
 }
