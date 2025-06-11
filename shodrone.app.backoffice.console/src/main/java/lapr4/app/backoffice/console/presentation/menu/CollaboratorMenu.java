@@ -31,9 +31,9 @@ public class CollaboratorMenu extends MainMenu {
 	private static final int SEARCH_FIGURE_CATALOGUE = 10;
 	private static final int LIST_FIGURE_CATEGORIES = 11;
 
-	private static final int POPULATE_MODEL_LIST = 12;
+	private static final int POPULATE_MODEL_LIST =3;
 
-	private static final int ACCEPT_SHOW_PROPOSAL = 14;
+	private static final int ACCEPT_SHOW_PROPOSAL = 4;
 	private static final int ADD_FIGURE_TO_PROPOSAL = 13;
 
 	// SHOW PROPOSALS
@@ -65,9 +65,7 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(LIST_ACTIVE_PUBLIC_FIGURES, "List Active Public Figures", new ListActivePublicFiguresUI()::show);
 		menu.addItem(SEARCH_FIGURE_CATALOGUE, "Search Figure Catalogue", new SearchFigureCatalogueUI()::show);
 		menu.addItem(LIST_FIGURE_CATEGORIES, "List Figure Categories", new ListFigureCategoriesUI()::show);
-		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
 		menu.addItem(ADD_FIGURE_TO_PROPOSAL, "Add Figure to Show Proposal", new AddFigureToProposalUI()::show);
-		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
@@ -78,6 +76,8 @@ public class CollaboratorMenu extends MainMenu {
 
 		menu.addItem(CREATE_SHOW_PROPOSAL, "Create Show Proposal", new CreateShowProposalUI()::show);
 		menu.addItem(ADD_VIDEO_PROPOSAL, "Add Video of Simulation", new AddVideoProposalUI()::show);
+		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
+		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;
