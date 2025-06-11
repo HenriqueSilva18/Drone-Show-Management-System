@@ -1,0 +1,58 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+actor "Drone Tech" as DT
+participant EditMaintenanceTypeUI as UI
+participant EditMaintenanceTypeController as CTRL
+participant MaintenanceTypeRepository as REPO
+participant MaintenanceType as MT
+
+DT -> UI : requests to edit maintenance type
+activate UI
+
+UI -> UI : asks for type ID
+UI -> UI : asks for new name
+UI -> UI : asks for new description
+
+UI -> CTRL : editType(id, newName, newDesc)
+activate CTRL
+
+CTRL -> REPO : findById(id)
+activate REPO
+REPO --> CTRL : Optional<MaintenanceType>
+deactivate REPO
+
+alt type not found
+    CTRL --> UI : throws NotFoundException
+    UI --> DT : shows error message
+else type found
+    CTRL -> REPO : hasMaintenanceRecords(id)
+    activate REPO
+    REPO --> CTRL : boolean
+    deactivate REPO
+
+    alt has maintenance records
+        CTRL --> UI : throws CannotEditException
+        UI --> DT : shows error message
+    else no maintenance records
+        CTRL -> MT : update(newName, newDesc)
+        activate MT
+        MT --> CTRL
+        deactivate MT
+
+        CTRL -> REPO : save(type)
+        activate REPO
+        REPO --> CTRL : saved type
+        deactivate REPO
+
+        CTRL --> UI : success
+        UI --> DT : shows success message
+    end
+end
+
+deactivate CTRL
+deactivate UI
+
+@enduml

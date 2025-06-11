@@ -1,0 +1,68 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "Presentation" {
+    class AddMaintenanceTypeUI {
+        + doShow()
+        + headline()
+    }
+}
+
+package "Application" {
+    class CreateMaintenanceTypeController {
+        - authz: AuthorizationService
+        - repo: MaintenanceTypeRepository
+        + create(name: String, description: String): MaintenanceTypeDTO
+    }
+}
+
+package "Domain" {
+    class MaintenanceType <<aggregate root>> {
+        - id: Long
+        - name: String
+        - description: String
+        + update(name: String, description: String)
+        + {static} create(name: String, description: String)
+    }
+
+    class DroneModel <<aggregate root>> {
+        - id: Long
+        - name: String
+    }
+
+    class Maintenance <<entity>> {
+        - id: Long
+        - startDate: String
+        - endDate: String
+        - description: String
+    }
+}
+
+package "DTO" {
+    class MaintenanceTypeDTO {
+        + id: Long
+        + name: String
+        + description: String
+        + {static} fromDomain(type: MaintenanceType)
+    }
+}
+
+package "Repository" {
+    interface MaintenanceTypeRepository {
+        + save(type: MaintenanceType): MaintenanceType
+        + findById(id: Long): Optional<MaintenanceType>
+        + existsByNameIgnoreCase(name: String): boolean
+    }
+}
+
+DroneModel "1" -- "*" Maintenance
+Maintenance "*" -- "1" MaintenanceType
+AddMaintenanceTypeUI ..> CreateMaintenanceTypeController
+CreateMaintenanceTypeController ..> MaintenanceTypeRepository
+CreateMaintenanceTypeController ..> MaintenanceType
+CreateMaintenanceTypeController ..> MaintenanceTypeDTO
+MaintenanceTypeDTO ..> MaintenanceType : converts
+
+@enduml

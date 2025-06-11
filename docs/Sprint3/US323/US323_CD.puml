@@ -1,0 +1,67 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "Presentation" {
+    class EditMaintenanceTypeUI {
+        + doShow()
+        + headline()
+    }
+}
+
+package "Application" {
+    class EditMaintenanceTypeController {
+        - authz: AuthorizationService
+        - typeRepo: MaintenanceTypeRepository
+        - maintenanceRepo: MaintenanceRepository
+        + edit(id: Long, name: String, description: String): MaintenanceTypeDTO
+    }
+}
+
+package "Domain" {
+    class MaintenanceType <<aggregate root>> {
+        - id: Long
+        - name: String
+        - description: String
+        + update(name: String, description: String)
+    }
+
+    class Maintenance <<entity>> {
+        - id: Long
+        - startDate: String
+        - endDate: String
+        - description: String
+    }
+}
+
+package "DTO" {
+    class MaintenanceTypeDTO {
+        + id: Long
+        + name: String
+        + description: String
+        + {static} fromDomain(type: MaintenanceType)
+    }
+}
+
+package "Repository" {
+    interface MaintenanceTypeRepository {
+        + findById(id: Long): Optional<MaintenanceType>
+        + save(type: MaintenanceType): MaintenanceType
+        + existsByNameIgnoreCase(name: String): boolean
+    }
+
+    interface MaintenanceRepository {
+        + existsByMaintenanceType(type: MaintenanceType): boolean
+    }
+}
+
+EditMaintenanceTypeUI ..> EditMaintenanceTypeController
+EditMaintenanceTypeController ..> MaintenanceTypeRepository
+EditMaintenanceTypeController ..> MaintenanceRepository
+EditMaintenanceTypeController ..> MaintenanceType
+EditMaintenanceTypeController ..> MaintenanceTypeDTO
+MaintenanceTypeDTO ..> MaintenanceType : converts
+Maintenance "*" -- "1" MaintenanceType
+
+@enduml

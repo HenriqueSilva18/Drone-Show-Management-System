@@ -1,0 +1,51 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "Presentation" {
+    class ListMaintenanceTypesUI {
+        + doShow()
+        + headline()
+    }
+}
+
+package "Application" {
+    class ListMaintenanceTypesController {
+        - authz: AuthorizationService
+        - repo: MaintenanceTypeRepository
+        + listAll(): List<MaintenanceTypeDTO>
+        + findById(id: Long): MaintenanceTypeDTO
+    }
+}
+
+package "Domain" {
+    class MaintenanceType <<aggregate root>> {
+        - id: Long
+        - name: String
+        - description: String
+    }
+}
+
+package "DTO" {
+    class MaintenanceTypeDTO {
+        + id: Long
+        + name: String
+        + description: String
+        + {static} fromDomain(type: MaintenanceType)
+    }
+}
+
+package "Repository" {
+    interface MaintenanceTypeRepository {
+        + findAll(): List<MaintenanceType>
+        + findById(id: Long): Optional<MaintenanceType>
+    }
+}
+
+ListMaintenanceTypesUI ..> ListMaintenanceTypesController
+ListMaintenanceTypesController ..> MaintenanceTypeRepository
+ListMaintenanceTypesController ..> MaintenanceTypeDTO
+MaintenanceTypeDTO ..> MaintenanceType : converts
+
+@enduml
