@@ -37,9 +37,9 @@ public class Figure implements AggregateRoot<Long> {
 
     @ElementCollection
     @CollectionTable(name = "figure_drone_requirements", joinColumns = @JoinColumn(name = "figure_id"))
-    @MapKeyJoinColumn(name = "drone_type_id") // DroneType é uma entidade
+    @MapKeyJoinColumn(name = "drone_type_id")
     @Column(name = "quantity")
-    private Map<DroneType, Integer> droneTypes;
+    private List<DroneType> droneTypes;
 
 
     private LocalDateTime decommissionDate;
@@ -55,7 +55,7 @@ public class Figure implements AggregateRoot<Long> {
         // for JPA
     }
 
-    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion, Map<DroneType, Integer> droneTypes) {
+    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion, List<DroneType> droneTypes) {
         if (description == null || description.isBlank())
             throw new IllegalArgumentException("Description cannot be null or blank.");
 
@@ -76,28 +76,8 @@ public class Figure implements AggregateRoot<Long> {
         this.dslVersion = dslVersion;
     }
 
-    public Figure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {
-        if (description == null || description.isBlank())
-            throw new IllegalArgumentException("Description cannot be null or blank.");
 
-        if (clientVAT == null)
-            throw new IllegalArgumentException("Client VAT cannot be null.");
-
-        if (category == null)
-            throw new IllegalArgumentException("Category cannot be null.");
-
-        this.decommissionDate = null;
-        this.category = category;
-        this.keywords = keywords;
-        this.description = description;
-        this.exclusive = exclusive;
-        this.clientVAT = clientVAT;
-        this.dslCode = dslCode;
-        this.dslVersion = dslVersion;
-        this.droneTypes = null;
-    }
-
-    public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion) {
+    public Figure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String dslCode, String dslVersion, List<DroneType> droneTypes) {
         if (description == null || description.isBlank())
             throw new IllegalArgumentException("Description cannot be null or blank.");
 
@@ -115,6 +95,7 @@ public class Figure implements AggregateRoot<Long> {
         this.clientVAT = clientVAT;
         this.dslCode = dslCode;
         this.dslVersion = dslVersion;
+        this.droneTypes = droneTypes;
     }
 
     public String description() {
@@ -226,6 +207,10 @@ public class Figure implements AggregateRoot<Long> {
 
     public void setDecommissionDate(LocalDateTime decommissionDate) {
         this.decommissionDate = decommissionDate;
+    }
+
+    public List<DroneType> droneTypes() {
+        return droneTypes;
     }
 
     @Override

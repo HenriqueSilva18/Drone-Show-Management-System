@@ -4,6 +4,7 @@ import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
 import eapli.framework.validations.Preconditions;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.usermanagement.domain.Roles;
@@ -13,29 +14,34 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @UseCaseController
 @Component
-public class ChangeProposalController {
+public class AddVideoProposalController {
 
     private final ShowProposalRepository proposalRepository;
     private final AuthorizationService authorizationService;
 
-    public ChangeProposalController(ShowProposalRepository showProposalRepository, AuthorizationService authorizationService) {
+    public AddVideoProposalController(ShowProposalRepository showProposalRepository, AuthorizationService authorizationService) {
         this.proposalRepository = showProposalRepository;
         this.authorizationService = authorizationService;
     }
 
-    public Iterable<ShowProposalDTO> allProposals() {
-        this.authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
-        Iterable<ShowProposal> proposals = this.proposalRepository.findAll();
-        List<ShowProposalDTO> dtos = new ArrayList<>();
-        proposals.forEach(p -> dtos.add(p.toDTO()));
-        return dtos;
+    public Iterable<ShowProposalDTO> listProposalsForVideoAddition() {
+        authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+
+        Iterable<ShowProposal> createdProposals = proposalRepository.findByStatus(ShowProposalStatus.CREATED.name());
+
+        return StreamSupport.stream(createdProposals.spliterator(), false)
+                .filter(proposal -> proposal.simulationVideoLink() == null || proposal.simulationVideoLink().isEmpty())
+                .map(ShowProposal::toDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public ShowProposalDTO changeProposalVideo(final Integer proposalId, final String newVideoLink) {
+    public ShowProposalDTO addProposalVideo(final Integer proposalId, final String newVideoLink) {
         this.authorizationService.ensureAuthenticatedUserHasAnyOf(
                 Roles.POWER_USER, Roles.CRM_COLLABORATOR);
         Preconditions.nonNull(proposalId, "Proposal ID cannot be null.");
@@ -47,6 +53,7 @@ public class ChangeProposalController {
         }
 
         ShowProposal proposal = optionalProposal.get();
+
         proposal.changeVideoTo(newVideoLink);
         ShowProposal savedProposal = this.proposalRepository.save(proposal);
 

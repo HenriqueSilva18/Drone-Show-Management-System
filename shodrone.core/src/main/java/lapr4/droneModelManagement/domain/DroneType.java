@@ -5,11 +5,8 @@ import jakarta.persistence.*;
 @Entity
 public class DroneType {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Id
     private String name;
 
     @Column(nullable = false)
@@ -26,10 +23,10 @@ public class DroneType {
         this.description = description;
     }
 
-    public String getName() {
+    public String name() {
         return name;
     }
-    public String getDescription() {
+    public String description() {
         return description;
     }
 
@@ -43,10 +40,10 @@ public class DroneType {
         if (this == o) return true;
         if (!(o instanceof DroneType)) return false;
         DroneType droneType = (DroneType) o;
-        return id != null && id.equals(droneType.id);
+        return name != null && name.equals(droneType.name);
     }
 
-    public Long identity() {
-        return id;
+    public String identity() {
+        return name;
     }
 }

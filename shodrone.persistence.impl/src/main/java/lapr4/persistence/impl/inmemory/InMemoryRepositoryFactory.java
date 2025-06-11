@@ -3,7 +3,6 @@ package lapr4.persistence.impl.inmemory;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
-import lapr4.droneModelManagement.repositories.DroneTypeRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
@@ -14,7 +13,6 @@ import lapr4.usermanagement.domain.Roles;
 import lapr4.usermanagement.domain.UserBuilderHelper;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
-import lapr4.figureManagement.repositories.FigureRepository; // Importe a interface
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.authz.domain.repositories.UserRepository;
 import eapli.framework.infrastructure.authz.repositories.impl.inmemory.InMemoryUserRepository;
@@ -101,11 +99,6 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public DroneRepository drones() {
 		return new InMemoryDroneRepository();
-	}
-
-	@Override
-	public DroneTypeRepository droneTypes() {
-		return new InMemoryDroneTypeRepository();
 	}
 
 	@Override

@@ -77,7 +77,7 @@ public class CollaboratorMenu extends MainMenu {
 		final var menu = new Menu("Show Proposals >");
 
 		menu.addItem(CREATE_SHOW_PROPOSAL, "Create Show Proposal", new CreateShowProposalUI()::show);
-		menu.addItem(ADD_VIDEO_PROPOSAL, "Add/Change Video of Simulation", new AddVideoProposalUI()::show);
+		menu.addItem(ADD_VIDEO_PROPOSAL, "Add Video of Simulation", new AddVideoProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

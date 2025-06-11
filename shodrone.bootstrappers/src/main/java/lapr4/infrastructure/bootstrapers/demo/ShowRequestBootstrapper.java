@@ -29,7 +29,7 @@ public class ShowRequestBootstrapper implements Action {
         registerShowRequest(8, 45.0, "Show of Logo",
             102, "2024-08-15", "PT987654321");
 
-        updateShowRequestStatus("PT987654321", 2, "ShowProposalDone");
+        updateShowRequestStatus("PT987654321", 102, "ShowProposalDone");
         
         return true;
     }

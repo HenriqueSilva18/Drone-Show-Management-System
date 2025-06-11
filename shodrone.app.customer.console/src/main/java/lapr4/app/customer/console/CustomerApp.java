@@ -44,8 +44,6 @@ public final class CustomerApp {
 		System.out.println("(C) 2016 - 2024");
 		System.out.println("=====================================");
 
-		AuthzRegistry.configure(PersistenceContext.repositories().users(), new PasswordPolicy(),
-				new PlainTextEncoder());
 
 		new FrontMenu().show();
 

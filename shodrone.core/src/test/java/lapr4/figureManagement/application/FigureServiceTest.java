@@ -1,6 +1,7 @@
 package lapr4.figureManagement.application;
 
 import lapr4.customermanagement.domain.VAT;
+import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.figureManagement.repositories.FigureRepository;
@@ -179,11 +180,30 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("test", "figure"));
-        Figure figure1 = new Figure("Public Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+
+        Figure figure1 = new Figure("Public Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
+
         figure1.setActive(true);
         repository.addFigure(figure1);
 
-        Figure figure2 = new Figure("Private Figure", true, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes2 = new ArrayList<>();
+        DroneType droneType4 = new DroneType("4", "A quadcopter drone");
+        DroneType droneType5 = new DroneType("5", "A hexacopter drone");
+        DroneType droneType6 = new DroneType("6", "An octocopter drone");
+
+        droneTypes.add(droneType4);
+        droneTypes.add(droneType5);
+        droneTypes.add(droneType6);
+
+        Figure figure2 = new Figure("Private Figure", true, defaultVAT, category, DSLCode, DSLVersion, droneTypes2);
         figure2.setActive(true);
         repository.addFigure(figure2);
 
@@ -199,8 +219,19 @@ class FigureServiceTest {
     void searchByCategoryOrKeyword_byCategory_shouldReturnResults() {
         // Arrange
         FigureCategory electronics = new FigureCategory("Electronics", "Devices and gadgets");
+
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+
+
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure1 = figureService.registerFigure("Smartphone Display", keywords,false, defaultVAT, electronics, DSLCode, DSLVersion);
+        Figure figure1 = figureService.registerFigure("Smartphone Display", keywords,false, defaultVAT, electronics, DSLCode, DSLVersion, droneTypes);
         figure1.setActive(true);
 
         // Act
@@ -218,7 +249,15 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure = new Figure("Test Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Test Figure", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -237,7 +276,15 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("keyword1", "keyword2"));
-        Figure figure = new Figure("Special Test Description", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Special Test Description", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -258,14 +305,32 @@ class FigureServiceTest {
         VAT clientVAT1 = new VAT("PT111222333");
         VAT clientVAT2 = new VAT("PT444555666");
 
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+
         // Figura ativa e não exclusiva (pública)
         Set<String> keywords1 = new HashSet<>(Arrays.asList("famous", "person"));
-        Figure figure1 = new Figure("Public Figure", keywords1, false, clientVAT1, category, DSLCode, DSLVersion);
+        Figure figure1 = new Figure("Public Figure", keywords1, false, clientVAT1, category, DSLCode, DSLVersion, droneTypes);
         figure1.setActive(true);
 
         // Figura ativa e exclusiva (não pública)
         Set<String> keywords2 = new HashSet<>(Arrays.asList("not_famous", "person"));
-        Figure figure2 = new Figure("Private Figure", keywords2, true, clientVAT2, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes2 = new ArrayList<>();
+        DroneType droneType4 = new DroneType("4", "A quadcopter drone");
+        DroneType droneType5 = new DroneType("5", "A hexacopter drone");
+        DroneType droneType6 = new DroneType("6", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure2 = new Figure("Private Figure", keywords2, true, clientVAT2, category, DSLCode, DSLVersion, droneTypes2);
+
         figure2.setActive(true);
 
         repository.addFigure(figure1);
@@ -286,7 +351,15 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("smartphone", "display"));
-        Figure figure = new Figure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -311,7 +384,15 @@ class FigureServiceTest {
     void registerFigure_publicFigure_shouldCreateAndSave() {
         FigureCategory category = new FigureCategory("Acrobatic", "Acrobatic Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("fire", "acrobatic", "spiral"));
-        Figure figure = new Figure("Fire Spiral", keywords, true, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Fire Spiral", keywords, true, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
 
         Figure result = figureService.registerFigure(figure);
 
@@ -340,9 +421,17 @@ class FigureServiceTest {
         VAT vat = new VAT("PT987654321");
         FigureCategory category = new FigureCategory("Artistic", "Artistic Description");
         Set<String> keywords = new HashSet<>(Arrays.asList("custom", "butterfly", "artistic"));
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
 
         // Act
-        Figure result = figureService.registerFigure("Custom Butterfly", false, vat, category, DSLCode, DSLVersion);
+        Figure result = figureService.registerFigure("Custom Butterfly", false, vat, category, DSLCode, DSLVersion, droneTypes);
 
         result.setKeywords(keywords);
 
@@ -361,10 +450,18 @@ class FigureServiceTest {
     @Test
     void registerFigureWithNoKeywords_withNullVAT_shouldThrowException() {
         FigureCategory category = new FigureCategory("Special", "Special Description");
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
 
         assertThrows(IllegalArgumentException.class, () -> {
             try {
-                figureService.registerFigure("Invalid Figure", true, null, category, DSLCode, DSLVersion);
+                figureService.registerFigure("Invalid Figure", true, null, category, DSLCode, DSLVersion, droneTypes);
             } catch (UnauthenticatedException e) {
                 // Ignoramos a exceção de autenticação para testar a validação de VAT
                 throw new IllegalArgumentException("VAT cannot be null");
@@ -377,9 +474,18 @@ class FigureServiceTest {
         FigureCategory category = new FigureCategory("Special", "Special Description");
         Set<String> keywords = new HashSet<>(Collections.singletonList("test"));
 
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+
         assertThrows(IllegalArgumentException.class, () -> {
             try {
-                figureService.registerFigure("Invalid Figure", keywords, true, null, category, DSLCode, DSLVersion);
+                figureService.registerFigure("Invalid Figure", keywords, true, null, category, DSLCode, DSLVersion, droneTypes);
             } catch (UnauthenticatedException e) {
                 // Ignoramos a exceção de autenticação para testar a validação de VAT
                 throw new IllegalArgumentException("VAT cannot be null");
@@ -392,11 +498,21 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Special", "Special Description");
         Set<String> keywords = new HashSet<>(Collections.singletonList("test"));
+
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+
         authService.setAuthenticated(false);
 
         // Act & Assert
         assertThrows(UnauthenticatedException.class, () ->
-                figureService.registerFigure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion));
+                figureService.registerFigure("Test Figure", keywords, true, defaultVAT, category, DSLCode, DSLVersion, droneTypes));
     }
 
 
@@ -405,7 +521,15 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("To be decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         repository.addFigure(figure);
 
 
@@ -424,7 +548,15 @@ class FigureServiceTest {
         authService.setAuthenticated(false);
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Restricted Action", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         figure.setActive(true);
         repository.addFigure(figure);
 
@@ -437,7 +569,15 @@ class FigureServiceTest {
         // Arrange
         FigureCategory category = new FigureCategory("Test", "Test Description");
         Set<String> keywords = new HashSet<>(List.of("example", "test"));
-        Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion);
+        List<DroneType> droneTypes = new ArrayList<>();
+        DroneType droneType1 = new DroneType("Quadcopter", "A quadcopter drone");
+        DroneType droneType2 = new DroneType("Hexacopter", "A hexacopter drone");
+        DroneType droneType3 = new DroneType("Octocopter", "An octocopter drone");
+
+        droneTypes.add(droneType1);
+        droneTypes.add(droneType2);
+        droneTypes.add(droneType3);
+        Figure figure = new Figure("Already Decommissioned", keywords, false, defaultVAT, category, DSLCode, DSLVersion, droneTypes);
         figure.setActive(false);
         repository.addFigure(figure);
 

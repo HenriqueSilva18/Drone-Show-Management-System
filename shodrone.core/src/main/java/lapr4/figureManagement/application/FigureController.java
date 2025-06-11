@@ -2,10 +2,12 @@ package lapr4.figureManagement.application;
 
 import jakarta.transaction.Transactional;
 import lapr4.customermanagement.domain.VAT;
+import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.domain.FigureCategory;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class FigureController {
@@ -13,8 +15,8 @@ public class FigureController {
     private final FigureService figureService = new FigureService();
 
     @Transactional
-    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion) {
-        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
+    public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
+        Figure figure = new Figure(description, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
         return figureService.registerFigure(figure);
     }
 
@@ -45,12 +47,12 @@ public class FigureController {
         }
     }
 
-    public Figure addFigure(String description, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion) {
-        return figureService.registerFigure(description, exclusive, clientVAT, category, DSLCode, DSLVersion);
+    public Figure addFigure(String description, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
+        return figureService.registerFigure(description, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
     }
 
-    public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion) {
-        return figureService.registerFigure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion);
+    public Figure addFigure(String description, Set<String> keywords, boolean exclusive, FigureCategory category, VAT clientVAT, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
+        return figureService.registerFigure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
     }
 
     public Figure decommissionFigure(Figure figure) {
