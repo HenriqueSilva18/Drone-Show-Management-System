@@ -57,6 +57,8 @@ public final class Roles {
 	 *
 	 */
 	public static final Role SHOW_DESIGNER = Role.valueOf("SHOW_DESIGNER");
+	public static final Role DRONE_TECH = Role.valueOf("DRONE_TECH");
+
 	/**
 	 *
 	 */
@@ -67,7 +69,7 @@ public final class Roles {
 	 * @return
 	 */
 	public static Role[] nonUserValues() {
-		return new Role[] { ADMIN, CRM_MANAGER, CRM_COLLABORATOR, SHOW_DESIGNER };
+		return new Role[] { ADMIN, CRM_MANAGER, CRM_COLLABORATOR, SHOW_DESIGNER, DRONE_TECH };
 	}
 
 	public boolean isCollaborator(final Role role) {

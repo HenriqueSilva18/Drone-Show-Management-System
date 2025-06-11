@@ -1,0 +1,36 @@
+package lapr4.app.backoffice.console.presentation.menu;
+
+import eapli.framework.actions.Actions;
+import eapli.framework.actions.menu.Menu;
+import lapr4.app.backoffice.console.presentation.MainMenu;
+import lapr4.app.backoffice.console.presentation.authz.AddUserUI;
+import lapr4.app.backoffice.console.presentation.dronemodel.*;
+import lapr4.app.backoffice.console.presentation.figure.*;
+
+public class DroneTechMenu extends MainMenu {
+    private static final String RETURN_LABEL = "Return ";
+
+    private static final int EXIT_OPTION = 0;
+
+    // MAIN MENU
+    private static final int OPTION = 2;
+
+    public static void buildDroneTechMenu(Menu mainMenu) {
+        final Menu sdMenu = DroneTechMenu.buildDroneTechMenu();
+        mainMenu.addSubMenu(OPTION, sdMenu);
+    }
+
+    private static Menu buildDroneTechMenu() {
+        final var menu = new Menu("Drone Tech >");
+
+        menu.addItem(1, "Add DroneModel ", new AddDroneModelUI()::show);
+        menu.addItem(2, "Add MaintenanceType ", new AddMaintenanceTypeUI()::show);
+        menu.addItem(3, "Edit Drone Model ", new EditDroneModelUI()::show);
+        menu.addItem(4, "Edit MaintenanceType ", new EditMaintenanceTypeUI()::show);
+        menu.addItem(5, "List DroneModels ", new ListDroneModelsUI()::show);
+        menu.addItem(6, "List MaintenanceTypes ", new EditMaintenanceTypeUI()::show);
+        menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
+
+        return menu;
+    }
+}

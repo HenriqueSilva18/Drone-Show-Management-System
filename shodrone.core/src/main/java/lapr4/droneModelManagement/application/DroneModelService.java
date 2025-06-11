@@ -17,23 +17,23 @@ public class DroneModelService {
 
     @Transactional
     public DroneModel registerDroneModel(DroneModel model) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
         return repo.save(model);
     }
 
     public Optional<DroneModel> findById(Long id) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
         return repo.ofIdentity(id);
     }
 
     public Iterable<DroneModel> findAll() {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
         return repo.findAll();
     }
 
     @Transactional
     public DroneModel save(DroneModel model) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
         return repo.save(model);
     }
 

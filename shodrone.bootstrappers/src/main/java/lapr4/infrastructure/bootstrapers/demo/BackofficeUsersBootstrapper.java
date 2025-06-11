@@ -44,6 +44,8 @@ public class BackofficeUsersBootstrapper extends AbstractUserBootstrapper implem
         registerCrmCollaborator("collab2", PASSWORD1, "Rui", "Neves", "rui.neves@emai.l.com");
         registerShowDesigner("showdesigner1", PASSWORD1, "João", "Palhinha", "johnnystraw@email.pt");
         registerShowDesigner("showdesigner2", PASSWORD1, "Ric", "Gomes", "ricgomes@email.com");
+        registerDroneTech("dronetech1", PASSWORD1, "JOSE", "RIBEIRO", "zeribas@email.com");
+
         return true;
     }
 
@@ -67,6 +69,13 @@ public class BackofficeUsersBootstrapper extends AbstractUserBootstrapper implem
             final String firstName, final String lastName, final String email) {
         final Set<Role> roles = new HashSet<>();
         roles.add(Roles.SHOW_DESIGNER);
+
+        registerUser(username, password, firstName, lastName, email, roles);
+    }
+    private void registerDroneTech(final String username, final String password,
+                                      final String firstName, final String lastName, final String email) {
+        final Set<Role> roles = new HashSet<>();
+        roles.add(Roles.DRONE_TECH);
 
         registerUser(username, password, firstName, lastName, email, roles);
     }

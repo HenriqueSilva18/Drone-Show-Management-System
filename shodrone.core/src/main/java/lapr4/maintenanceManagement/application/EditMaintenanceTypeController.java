@@ -10,17 +10,17 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 
 public class EditMaintenanceTypeController {
 
-    private final AuthorizationService authz = AuthzRegistry.authorizationService();
-    private final MaintenanceTypeRepository repo = PersistenceContext.repositories().maintenanceTypes();
+	private final AuthorizationService authz = AuthzRegistry.authorizationService();
+	private final MaintenanceTypeRepository repo = PersistenceContext.repositories().maintenanceTypes();
 
-    @Transactional
-    public MaintenanceType edit(Long id, String newName, String newDescription) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+	@Transactional
+	public MaintenanceType edit(Long id, String newName, String newDescription) {
+		authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
 
-        MaintenanceType type = repo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Tipo de manutenção não encontrado com ID: " + id));
+		MaintenanceType type = repo.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Tipo de manutenção não encontrado com ID: " + id));
 
-        type.update(newName, newDescription);
-        return repo.save(type);
-    }
+		type.update(newName, newDescription);
+		return repo.save(type);
+	}
 }

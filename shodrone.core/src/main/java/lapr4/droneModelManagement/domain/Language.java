@@ -1,28 +1,41 @@
 package lapr4.droneModelManagement.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Language {
 
-    private String value;
+	@Column(name = "LANGUAGE_VALUE", nullable = false)
+	private String value;
 
-    public Language(String value) {
-        if (value == null || value.isBlank()) throw new IllegalArgumentException("Language cannot be blank.");
-        this.value = value.trim().toUpperCase();
-    }
+	// Required no-args constructor for JPA
+	protected Language() {
+		// for JPA
+	}
 
-    public static Language valueOf(String input) {
-        return new Language(input); // cria nova instância, não enum
-    }
+	public Language(String value) {
+		if (value == null || value.isBlank())
+			throw new IllegalArgumentException("Language cannot be blank.");
+		this.value = value.trim().toUpperCase();
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public void setValue(String value) {
+		if (value == null || value.isBlank())
+			throw new IllegalArgumentException("Language cannot be blank.");
+		this.value = value.trim().toUpperCase();
+	}
 
-    @Override
-    public String toString() {
-        return value;
-    }
+	public static Language valueOf(String input) {
+		return new Language(input);
+	}
+
+	@Override
+	public String toString() {
+		return value;
+	}
 }

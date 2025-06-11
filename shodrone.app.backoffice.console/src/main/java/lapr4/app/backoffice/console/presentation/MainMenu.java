@@ -27,10 +27,7 @@ import lapr4.Application;
 import lapr4.app.backoffice.console.presentation.authz.AddUserUI;
 import lapr4.app.backoffice.console.presentation.authz.DeactivateUserAction;
 import lapr4.app.backoffice.console.presentation.authz.ListUsersAction;
-import lapr4.app.backoffice.console.presentation.menu.AdminMenu;
-import lapr4.app.backoffice.console.presentation.menu.CollaboratorMenu;
-import lapr4.app.backoffice.console.presentation.menu.ManagerMenu;
-import lapr4.app.backoffice.console.presentation.menu.ShowDesignerMenu;
+import lapr4.app.backoffice.console.presentation.menu.*;
 import lapr4.app.backoffice.console.presentation.utente.AcceptRefuseSignupRequestAction;
 import lapr4.app.common.console.presentation.authz.MyUserMenu;
 import lapr4.usermanagement.domain.Roles;
@@ -118,6 +115,10 @@ public class MainMenu extends AbstractUI {
 
 		if(authz.isAuthenticatedUserAuthorizedTo(Roles.SHOW_DESIGNER)) {
 			ShowDesignerMenu.buildShowDesignerMenu(mainMenu);
+		}
+
+		if(authz.isAuthenticatedUserAuthorizedTo(Roles.DRONE_TECH)) {
+			DroneTechMenu.buildDroneTechMenu(mainMenu);
 		}
 
 		if (!Application.settings().isMenuLayoutHorizontal()) {

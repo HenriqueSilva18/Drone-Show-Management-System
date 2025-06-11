@@ -4,9 +4,10 @@ import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
 
-public class JpaDroneModelRepository extends JpaAutoTxRepository<DroneModel, Long, Long> implements DroneModelRepository {
+public class JpaDroneModelRepository extends JpaAutoTxRepository<DroneModel, Long, Long>
+		implements DroneModelRepository {
 
-    public JpaDroneModelRepository(String persistenceUnitName) {
-        super(persistenceUnitName, "name");
-    }
+	public JpaDroneModelRepository(String persistenceUnitName) {
+		super(persistenceUnitName, "id");
+	}
 }
