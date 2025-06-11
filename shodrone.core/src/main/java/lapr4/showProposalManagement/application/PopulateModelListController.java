@@ -80,7 +80,9 @@ public class PopulateModelListController {
                 assigned++;
             }
         }
+        proposal.calculateInsuranceValue();
 
         proposalRepo.save(proposal);
     }
+
 }

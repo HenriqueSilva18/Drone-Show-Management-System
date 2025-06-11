@@ -21,8 +21,11 @@ public class ShowProposalDTO {
     public int eventDuration;
     public String status;
     public String simulationStatus;
+    public double insuranceValue;  // <-- NOVO CAMPO
 
-    // CONSTRUCTOR FOR INITIAL CREATION
+    /**
+     * Construtor alternativo para criação inicial da proposta.
+     */
     public ShowProposalDTO(final int showRequestID, final int totalNumDrones, final double latitude, final double longitude,
                            final String eventDate, final String eventHour, final int eventDuration) {
         this.showRequestID = showRequestID;
@@ -37,11 +40,12 @@ public class ShowProposalDTO {
     @Override
     public String toString() {
         return String.format(
-                "ID: %d | Customer: %s | Status: %s | Date: %s",
+                "ID: %d | Customer: %s | Status: %s | Date: %s | Seguro: %.2f€",
                 number,
                 customerVAT,
                 status,
-                eventDate
+                eventDate,
+                insuranceValue
         );
     }
 }

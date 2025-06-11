@@ -57,6 +57,11 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     private String simulationVideoLink;
 
     // TODO INSURANCE VALUE
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = false)
+    private double insuranceValue;
+
 
     @XmlElement
     @JsonProperty
@@ -195,7 +200,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
                 this.eventDateTime.format(DateTimeFormatter.ofPattern("HH:mm")),
                 this.eventDuration,
                 this.status.name(),
-                this.simulationStatus.name()
+                this.simulationStatus.name(),
+                this.insuranceValue
         );
     }
 
@@ -221,4 +227,18 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         FigureInShowProposal figureInProposal = new FigureInShowProposal(figure, droneMapping);
         figuresList.add(figureInProposal);
     }
+
+    public void calculateInsuranceValue() {
+        if (modelList == null || modelList.isEmpty())
+            throw new IllegalStateException("Model list is empty, cannot calculate insurance.");
+
+        this.insuranceValue = modelList.stream()
+                .mapToDouble(DroneModel::securePrice)
+                .sum();
+    }
+
+    public double insuranceValue() {
+        return insuranceValue;
+    }
+
 }

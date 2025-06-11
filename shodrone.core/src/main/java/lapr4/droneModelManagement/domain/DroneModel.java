@@ -33,22 +33,29 @@ public class DroneModel implements AggregateRoot<Long> {
 	@OneToMany(mappedBy = "droneModel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private final Set<Maintenance> maintenances = new HashSet<>();
 
+	@Column(name = "SECURE_PRICE", nullable = false)
+	private double securePrice;
+
 	protected DroneModel() {
 		// for JPA
 	}
 
-	public DroneModel(List<String> modelSpecifications, String name, Language language) {
+	public DroneModel(List<String> modelSpecifications, String name, Language language, double securePrice) {
 		if (modelSpecifications == null || modelSpecifications.isEmpty())
 			throw new IllegalArgumentException("Model specifications cannot be empty.");
 		if (name == null || name.isBlank())
 			throw new IllegalArgumentException("Name cannot be null or blank.");
 		if (language == null)
 			throw new IllegalArgumentException("Language cannot be null.");
+		if (securePrice < 0)
+			throw new IllegalArgumentException("Secure price must be non-negative.");
 
-		this.modelSpecifications = modelSpecifications;
+		this.modelSpecifications = List.copyOf(modelSpecifications);
 		this.name = name;
 		this.language = language;
+		this.securePrice = securePrice;
 	}
+
 
 	public List<String> modelSpecifications() {
 		return modelSpecifications;
@@ -102,6 +109,10 @@ public class DroneModel implements AggregateRoot<Long> {
 			return false;
 		DroneModel that = (DroneModel) o;
 		return Objects.equals(id, that.id);
+	}
+
+	public double securePrice() {
+		return securePrice;
 	}
 
 	@Override

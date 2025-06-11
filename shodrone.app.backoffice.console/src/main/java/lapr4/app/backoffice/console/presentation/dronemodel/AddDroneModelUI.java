@@ -29,10 +29,21 @@ public class AddDroneModelUI extends AbstractUI {
         List<String> specifications = Arrays.stream(specsInput.split(","))
                 .map(String::trim)
                 .toList();
+        final double securePrice;
+        try {
+            securePrice = Double.parseDouble(Console.readLine("Preço de seguro (€):"));
+            if (securePrice < 0) {
+                System.out.println("O preço do seguro não pode ser negativo.");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Preço inválido. Introduz um número válido.");
+            return false;
+        }
 
 
         try {
-            controller.registerDroneModel(name, specifications, language);
+            controller.registerDroneModel(name, specifications, language, securePrice);
             System.out.println("DroneModel adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
