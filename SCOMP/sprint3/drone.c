@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
 	int x = 0, y = 0, z = 0;
 	int script_completed = 0;
 
-	// Read initial position
+	// Lê a primeira posição ANTES de entrar no loop
 	if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
 		printf("[DRONE %d] Script vazio ou mal formatado.\n", drone_id);
 		script_completed = 1;
@@ -88,7 +88,7 @@ int main(int argc, char* argv[]) {
 		if (!shm->simulation_active || terminate)
 			break;
 
-		// Update shared memory with current position
+		// Escreve a posição atual na memória partilhada
 		sem_wait(sem_mutex);
 		shm->drone_data[drone_id].x = x;
 		shm->drone_data[drone_id].y = y;
@@ -99,7 +99,7 @@ int main(int argc, char* argv[]) {
 
 		sem_post(sem_main_sync);
 
-		// Read next position for the next step if script not completed
+		// Lê a próxima posição para o próximo passo
 		if (!script_completed) {
 			if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
 				printf("[DRONE %d] Script terminado. Última posição mantida.\n", drone_id);
