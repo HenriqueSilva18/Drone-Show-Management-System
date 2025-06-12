@@ -4,7 +4,22 @@ program: (statement NEWLINE?)* EOF;
 
 statement
     : variableDeclaration
-    | command
+    | figure
+    ;
+
+figure
+    : 'figure' ID 'requires' capabilities '{' (command NEWLINE?)* '}' ';'
+    ;
+
+capabilities
+    : capability (',' capability)*
+    ;
+
+capability
+    : 'TRANSLATION'
+    | 'ROTATION'
+    | 'HOVER'
+    | 'LED'
     ;
 
 variableDeclaration

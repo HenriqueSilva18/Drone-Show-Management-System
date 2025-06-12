@@ -23,6 +23,24 @@ public interface DroneOneVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(DroneOneParser.StatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DroneOneParser#figure}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFigure(DroneOneParser.FigureContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneOneParser#capabilities}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCapabilities(DroneOneParser.CapabilitiesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneOneParser#capability}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCapability(DroneOneParser.CapabilityContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DroneOneParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
