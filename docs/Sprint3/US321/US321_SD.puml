@@ -1,0 +1,91 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+actor "Drone Tech" as DT
+participant AddMaintenanceTypeUI as UI
+participant AddMaintenanceTypeController as CTRL
+participant MaintenanceTypeRepository as REPO
+participant MaintenanceType as MT
+
+DT -> UI : starts maintenance type creation
+activate UI
+
+UI -> UI : asks for name
+UI -> UI : asks for description
+
+UI -> CTRL : createMaintenanceType(name, description)
+activate CTRL
+
+CTRL -> REPO : existsByName(name)
+activate REPO
+REPO --> CTRL : boolean
+deactivate REPO
+
+alt name already exists
+    CTRL --> UI : throws DuplicateNameException
+    UI --> DT : shows error message
+else name is unique
+    CTRL -> MT ** : create(name, description)
+    activate MT
+    MT --> CTRL : type
+    deactivate MT
+
+    CTRL -> REPO : save(type)
+    activate REPO
+    REPO --> CTRL : saved type
+    deactivate REPO
+
+    CTRL --> UI : success
+    UI --> DT : shows success message
+end
+
+deactivate CTRL
+deactivate UI
+
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class CreateMaintenanceTypeController {
+  - authz : AuthorizationService
+  - repo : MaintenanceTypeRepository
+  + registerType(name, description) : MaintenanceType
+}
+
+class EditMaintenanceTypeController {
+  - authz : AuthorizationService
+  - repo : MaintenanceTypeRepository
+  + editType(id, newName, newDescription) : MaintenanceType
+}
+
+class ListMaintenanceTypesController {
+  - authz : AuthorizationService
+  - repo : MaintenanceTypeRepository
+  + listAllTypes() : Iterable<MaintenanceType>
+}
+
+class MaintenanceTypeRepository {
+  + save(type) : MaintenanceType
+  + findById(id) : Optional<MaintenanceType>
+  + findAll() : List<MaintenanceType>
+  + existsByName(name) : boolean
+}
+
+class MaintenanceType {
+  - id : Long
+  - name : String
+  - description : String
+  + update(name, description) : void
+  + {static} create(name, description) : MaintenanceType
+}
+
+CreateMaintenanceTypeController --> MaintenanceTypeRepository
+EditMaintenanceTypeController --> MaintenanceTypeRepository
+ListMaintenanceTypesController --> MaintenanceTypeRepository
+MaintenanceTypeRepository --> MaintenanceType
+@enduml

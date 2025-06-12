@@ -1,0 +1,30 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+actor "Drone Tech" as DT
+participant ListMaintenanceTypesUI as UI
+participant ListMaintenanceTypesController as CTRL
+participant MaintenanceTypeRepository as REPO
+
+DT -> UI : requests to list maintenance types
+activate UI
+
+UI -> CTRL : listAllTypes()
+activate CTRL
+
+CTRL -> REPO : findAll()
+activate REPO
+REPO --> CTRL : List<MaintenanceType>
+deactivate REPO
+
+CTRL --> UI : types
+deactivate CTRL
+
+UI -> UI : formatList(types)
+UI --> DT : shows maintenance types list
+
+deactivate UI
+
+@enduml
