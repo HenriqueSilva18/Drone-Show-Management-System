@@ -70,17 +70,29 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	signal(SIGTERM, handle_sigterm);
+	struct sigaction sa;
+	sa.sa_handler = handle_sigterm;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGTERM, &sa, NULL);
 	signal(SIGINT, SIG_IGN);
 
 	int x = 0, y = 0, z = 0;
 	int script_completed = 0;
 
-	// Lê a primeira posição ANTES de entrar no loop
 	if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
 		printf("[DRONE %d] Script vazio ou mal formatado.\n", drone_id);
 		script_completed = 1;
 	}
+
+	// ✅ Correção: escreve a posição inicial imediatamente
+	sem_wait(sem_mutex);
+	shm->drone_data[drone_id].x = x;
+	shm->drone_data[drone_id].y = y;
+	shm->drone_data[drone_id].z = z;
+	shm->drone_data[drone_id].drone_id = drone_id;
+	shm->drone_data[drone_id].script_completed = script_completed;
+	sem_post(sem_mutex);
 
 	while (!terminate) {
 		sem_wait(sem_drone_sync);
@@ -88,7 +100,6 @@ int main(int argc, char* argv[]) {
 		if (!shm->simulation_active || terminate)
 			break;
 
-		// Escreve a posição atual na memória partilhada
 		sem_wait(sem_mutex);
 		shm->drone_data[drone_id].x = x;
 		shm->drone_data[drone_id].y = y;
@@ -99,7 +110,6 @@ int main(int argc, char* argv[]) {
 
 		sem_post(sem_main_sync);
 
-		// Lê a próxima posição para o próximo passo
 		if (!script_completed) {
 			if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
 				printf("[DRONE %d] Script terminado. Última posição mantida.\n", drone_id);

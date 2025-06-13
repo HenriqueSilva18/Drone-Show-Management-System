@@ -8,38 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Drone Type Logic added">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build-all.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-backoffice.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-backoffice.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-bootstrap.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-bootstrap.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/AddDroneTypeUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/EditDroneTypeUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/figure/AddFigureToCatalogueUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AddFigureToProposalUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AddFigureToProposalUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneModelController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneTypeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/application/DroneTypeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneType.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/dto/DroneModelDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/dto/DroneModelDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneModelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneModelRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/repositories/DroneTypeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/domain/Figure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AddFigureToProposalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AddFigureToProposalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/domain/ShowProposal.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/domain/ShowProposal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/dto/AddFigureProposalDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/domain/FigureCategoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureCategoryManagement/domain/FigureCategoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureManagement/application/FigureServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/figureManagement/application/FigureServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryDroneTypeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaDroneTypeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/shared.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/simulator_report.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,8 +257,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26574.91" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26574.91" />
       </set>
     </attachedChunks>
   </component>
@@ -315,6 +298,7 @@
       <workItem from="1747056349887" duration="11342000" />
       <workItem from="1749208062082" duration="3547000" />
       <workItem from="1749219319019" duration="33390000" />
+      <workItem from="1749824416323" duration="5976000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
