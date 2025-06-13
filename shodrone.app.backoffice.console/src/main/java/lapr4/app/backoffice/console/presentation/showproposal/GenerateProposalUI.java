@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 public class GenerateProposalUI extends AbstractUI {
@@ -32,7 +34,6 @@ public class GenerateProposalUI extends AbstractUI {
         }
         ShowProposalDTO proposalDTO = opt.get();
 
-        //print showproposal details
         System.out.println("Proposal found:" + proposalDTO);
 
         String proposalTemplate = controller.readProposalTemplate();
@@ -66,6 +67,19 @@ public class GenerateProposalUI extends AbstractUI {
                 directory.mkdirs();
             }
             String filePath = "docs/ShowProposals/proposal_" + proposalNumber + ".txt";
+            //input date by date input manually, NOT .NOW
+            LocalDate date = null;
+            while (date == null) {
+                try {
+                    String input = Console.readLine("Enter the date sent (YYYY-MM-DD): ");
+                    date = LocalDate.parse(input);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format. Please try again using YYYY-MM-DD.");
+                }
+            }
+
+            controller.setDateAndManagerSent(proposalDTO, date);
+
             FileWriter writer = new FileWriter(filePath);
 
             writer.write(showProposal);

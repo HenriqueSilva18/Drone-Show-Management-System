@@ -1,6 +1,7 @@
 package lapr4.showProposalManagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import eapli.framework.infrastructure.authz.domain.model.Name;
 import jakarta.xml.bind.annotation.XmlElement;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -16,6 +17,7 @@ import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import eapli.framework.representations.dto.DTOable;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -106,7 +108,16 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     private Map<DroneModel, Integer> modelCountMap = new HashMap<>();
 
 
-    // TODO SENT DATE & SENT BY MANAGER
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true)
+    private LocalDate sentDate;
+
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true)
+    private Name sentBy;
+
 
     // TODO SHOW DESCRIPTION
 
@@ -283,6 +294,14 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
                         entry -> entry.getKey().name(),
                         Map.Entry::getValue
                 ));
+    }
+
+    public void changeSentDate(LocalDate sentDate) {
+        this.sentDate = sentDate;
+    }
+
+    public void changeSentBy(Name sentBy) {
+        this.sentBy = sentBy;
     }
 
 }

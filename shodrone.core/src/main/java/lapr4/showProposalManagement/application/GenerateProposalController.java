@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.io.Console;
 
 public class GenerateProposalController {
 
@@ -274,4 +275,23 @@ public class GenerateProposalController {
 
         return string_proposal;
     }
+
+    public boolean setDateAndManagerSent(ShowProposalDTO proposalDTO, LocalDate date) {
+        Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.getNumber());
+        if (opt.isEmpty()) {
+            System.out.println("Proposal not found.");
+            return false;
+        }
+
+        ShowProposal proposal = opt.get();
+
+        proposal.changeSentBy(userSession.authenticatedUser().name());
+        proposal.changeSentDate(date);
+
+        repo.save(proposal);
+
+        System.out.println("Proposal updated successfully.");
+        return true;
+    }
+
 }
