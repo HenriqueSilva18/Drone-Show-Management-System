@@ -2,6 +2,7 @@ package lapr4.showProposalManagement.repositories;
 
 import eapli.framework.domain.repositories.DomainRepository;
 import eapli.framework.domain.repositories.TransactionalContext;
+import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface ShowProposalRepository extends DomainRepository<Integer, ShowPr
     Iterable<ShowProposal> findByStatus(String status);
     
     List<ShowProposal> findAll();
+
+    List<ShowProposal> findByCustomerVAT(VAT customerVAT);
 }

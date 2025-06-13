@@ -8,6 +8,7 @@ import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lapr4.customermanagement.domain.Customer;
+import lapr4.customermanagement.domain.VAT;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.domain.Figure;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @XmlRootElement
 @Entity
@@ -174,6 +176,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return this.number;
     }
 
+    public Customer customer() {return this.customer;}
+
     public ShowProposalStatus status() {
         return this.status;
     }
@@ -257,6 +261,28 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
             }
         }
         calculateInsuranceValue(); // atualiza o seguro com base no novo mapa
+    }
+
+    public LocalDateTime eventDateTime() {return this.eventDateTime;}
+
+    public VAT CustomerVAT(){
+        return customer.identity();
+    }
+
+    public Coordinates coordinates () {
+        return this.eventLocation;
+    }
+
+    public int eventDuration() {
+        return this.eventDuration;
+    }
+
+    public Map<String, Integer> modelCountMap() {
+        return modelCountMap.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().name(),
+                        Map.Entry::getValue
+                ));
     }
 
 }

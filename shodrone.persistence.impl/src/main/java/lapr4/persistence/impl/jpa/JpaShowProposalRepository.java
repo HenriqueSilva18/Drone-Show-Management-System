@@ -2,6 +2,7 @@ package lapr4.persistence.impl.jpa;
 
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
@@ -43,6 +44,15 @@ public class JpaShowProposalRepository extends JpaAutoTxRepository<ShowProposal,
         final var query = entityManager().createQuery(
                 "SELECT p FROM ShowProposal p",
                 ShowProposal.class);
+        return query.getResultList();
+    }
+
+
+
+    @Override
+    public List<ShowProposal> findByCustomerVAT(VAT customerVAT){
+        final var query = entityManager().createQuery(
+                "SELECT p FROM ShowProposal p WHERE p.customer.vat = :vat", ShowProposal.class);
         return query.getResultList();
     }
 } 

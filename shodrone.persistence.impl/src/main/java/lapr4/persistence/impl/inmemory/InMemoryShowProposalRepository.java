@@ -1,5 +1,6 @@
 package lapr4.persistence.impl.inmemory;
 
+import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
@@ -71,4 +72,12 @@ public class InMemoryShowProposalRepository
     public long count() {
         return showProposals.size();
     }
+
+    @Override
+    public List<ShowProposal> findByCustomerVAT(VAT customerVAT){
+        return showProposals.stream()
+                .filter(proposal -> proposal.CustomerVAT().equals(customerVAT))
+                .toList();
+    }
+
 } 
