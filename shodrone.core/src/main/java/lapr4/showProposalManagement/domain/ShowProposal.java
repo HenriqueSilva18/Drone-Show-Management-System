@@ -18,6 +18,7 @@ import eapli.framework.representations.dto.DTOable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -95,6 +96,13 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<FigureInShowProposal> figuresList;
+
+    @ElementCollection
+    @CollectionTable(name = "SHOW_PROPOSAL_MODEL_COUNTS", joinColumns = @JoinColumn(name = "show_proposal_id"))
+    @MapKeyJoinColumn(name = "drone_model_id")
+    @Column(name = "quantity", nullable = false)
+    private Map<DroneModel, Integer> modelCountMap = new HashMap<>();
+
 
     // TODO SENT DATE & SENT BY MANAGER
 
@@ -239,6 +247,16 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
 
     public double insuranceValue() {
         return insuranceValue;
+    }
+
+    public void rebuildModelCountMapFromModelList() {
+        modelCountMap.clear();
+        for (DroneModel model : modelList) {
+            if (model != null) {
+                modelCountMap.merge(model, 1, Integer::sum);
+            }
+        }
+        calculateInsuranceValue(); // atualiza o seguro com base no novo mapa
     }
 
 }

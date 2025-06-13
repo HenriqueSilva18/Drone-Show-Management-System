@@ -81,7 +81,7 @@ public class PopulateModelListController {
             }
         }
         proposal.calculateInsuranceValue();
-
+        proposal.rebuildModelCountMapFromModelList();
         proposalRepo.save(proposal);
     }
 
