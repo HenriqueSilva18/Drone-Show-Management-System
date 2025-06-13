@@ -28,6 +28,36 @@ public interface DroneOneListener extends ParseTreeListener {
 	 */
 	void exitStatement(DroneOneParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DroneOneParser#figure}.
+	 * @param ctx the parse tree
+	 */
+	void enterFigure(DroneOneParser.FigureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneOneParser#figure}.
+	 * @param ctx the parse tree
+	 */
+	void exitFigure(DroneOneParser.FigureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneOneParser#capabilities}.
+	 * @param ctx the parse tree
+	 */
+	void enterCapabilities(DroneOneParser.CapabilitiesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneOneParser#capabilities}.
+	 * @param ctx the parse tree
+	 */
+	void exitCapabilities(DroneOneParser.CapabilitiesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneOneParser#capability}.
+	 * @param ctx the parse tree
+	 */
+	void enterCapability(DroneOneParser.CapabilityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneOneParser#capability}.
+	 * @param ctx the parse tree
+	 */
+	void exitCapability(DroneOneParser.CapabilityContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DroneOneParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */

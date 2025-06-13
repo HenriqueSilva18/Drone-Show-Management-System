@@ -1,6 +1,1 @@
-takeOff(10.0, 2.5);
-move((0.0,0.0,10.0), 3.0);
-moveCircle((5.0,5.0,5.0), 1.57, 0.5);
-lightsOn(red);
-hoover(2000);
-lightsOff();
+figure basicFlight{takeOff(10.0,2.5);move((0.0,0.0,10.0),3.0);moveCircle((5.0,5.0,5.0),1.57,0.5);lightsOn(red);hoover(2000);lightsOff();}requires TRANSLATION,ROTATION,HOVER,LED

@@ -23,6 +23,24 @@ public interface DroneTwoVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatement(DroneTwoParser.StatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#figureDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFigureDeclaration(DroneTwoParser.FigureDeclarationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#droneCapabilities}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDroneCapabilities(DroneTwoParser.DroneCapabilitiesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#capability}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCapability(DroneTwoParser.CapabilityContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DroneTwoParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -94,6 +112,48 @@ public interface DroneTwoVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLightsOff(DroneTwoParser.LightsOffContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#waitCommand}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWaitCommand(DroneTwoParser.WaitCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#environmentCheck}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnvironmentCheck(DroneTwoParser.EnvironmentCheckContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#condition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCondition(DroneTwoParser.ConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#environmentCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnvironmentCondition(DroneTwoParser.EnvironmentConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#timeCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTimeCondition(DroneTwoParser.TimeConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#positionCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPositionCondition(DroneTwoParser.PositionConditionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DroneTwoParser#comparison}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComparison(DroneTwoParser.ComparisonContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DroneTwoParser#expression}.
 	 * @param ctx the parse tree

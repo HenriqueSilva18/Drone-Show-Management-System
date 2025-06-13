@@ -28,6 +28,36 @@ public interface DroneTwoListener extends ParseTreeListener {
 	 */
 	void exitStatement(DroneTwoParser.StatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#figureDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterFigureDeclaration(DroneTwoParser.FigureDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#figureDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitFigureDeclaration(DroneTwoParser.FigureDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#droneCapabilities}.
+	 * @param ctx the parse tree
+	 */
+	void enterDroneCapabilities(DroneTwoParser.DroneCapabilitiesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#droneCapabilities}.
+	 * @param ctx the parse tree
+	 */
+	void exitDroneCapabilities(DroneTwoParser.DroneCapabilitiesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#capability}.
+	 * @param ctx the parse tree
+	 */
+	void enterCapability(DroneTwoParser.CapabilityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#capability}.
+	 * @param ctx the parse tree
+	 */
+	void exitCapability(DroneTwoParser.CapabilityContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DroneTwoParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -147,6 +177,76 @@ public interface DroneTwoListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLightsOff(DroneTwoParser.LightsOffContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#waitCommand}.
+	 * @param ctx the parse tree
+	 */
+	void enterWaitCommand(DroneTwoParser.WaitCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#waitCommand}.
+	 * @param ctx the parse tree
+	 */
+	void exitWaitCommand(DroneTwoParser.WaitCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#environmentCheck}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnvironmentCheck(DroneTwoParser.EnvironmentCheckContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#environmentCheck}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnvironmentCheck(DroneTwoParser.EnvironmentCheckContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void enterCondition(DroneTwoParser.ConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#condition}.
+	 * @param ctx the parse tree
+	 */
+	void exitCondition(DroneTwoParser.ConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#environmentCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnvironmentCondition(DroneTwoParser.EnvironmentConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#environmentCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnvironmentCondition(DroneTwoParser.EnvironmentConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#timeCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterTimeCondition(DroneTwoParser.TimeConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#timeCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitTimeCondition(DroneTwoParser.TimeConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#positionCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterPositionCondition(DroneTwoParser.PositionConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#positionCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitPositionCondition(DroneTwoParser.PositionConditionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DroneTwoParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void enterComparison(DroneTwoParser.ComparisonContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DroneTwoParser#comparison}.
+	 * @param ctx the parse tree
+	 */
+	void exitComparison(DroneTwoParser.ComparisonContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DroneTwoParser#expression}.
 	 * @param ctx the parse tree
