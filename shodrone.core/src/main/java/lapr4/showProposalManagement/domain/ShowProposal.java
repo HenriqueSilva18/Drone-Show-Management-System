@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 @XmlRootElement
 @Entity
+@Table(name = "SHOW_PROPOSAL")
 public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposalDTO> {
 
     private static final long serialVersionUID = 1L;
@@ -54,14 +55,16 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(nullable = false)
     private int totalNumDrones;
 
-    // TODO TEMPLATE
+    @XmlElement
+    @JsonProperty
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
+    private ProposalTemplate template;
 
     @XmlElement
     @JsonProperty
     @Column
     private String simulationVideoLink;
 
-    // TODO INSURANCE VALUE
     @XmlElement
     @JsonProperty
     @Column(nullable = false)
@@ -118,12 +121,11 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(nullable = true)
     private Name sentBy;
 
-
     // TODO SHOW DESCRIPTION
 
     public ShowProposal(final ShowRequest showRequest, final int totalNumDrones, final Coordinates eventLocation,
-                        final LocalDateTime eventDateTime, final int eventDuration) {
-        Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration);
+                        final LocalDateTime eventDateTime, final int eventDuration, final ProposalTemplate template) {
+        Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration, template);
 
         this.customer = showRequest.getCustomer();
         this.showRequest = showRequest;
@@ -133,6 +135,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         this.eventDuration = eventDuration;
         this.status = ShowProposalStatus.CREATED;
         this.simulationStatus = SimulationStatus.UNTESTED;
+        this.template = template;
         this.modelList = new ArrayList<>();
     }
 
@@ -224,7 +227,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
                 this.eventDuration,
                 this.status.name(),
                 this.simulationStatus.name(),
-                this.insuranceValue
+                this.insuranceValue,
+                this.template.toString()
         );
     }
 

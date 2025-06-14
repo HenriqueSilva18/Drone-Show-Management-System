@@ -4,7 +4,7 @@ import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.SelectWidget; // Import SelectWidget
+import eapli.framework.presentation.console.SelectWidget;
 import lapr4.showProposalManagement.application.AddVideoProposalController;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.infrastructure.persistence.PersistenceContext;

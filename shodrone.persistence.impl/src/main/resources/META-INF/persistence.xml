@@ -14,6 +14,7 @@
         <class>lapr4.customermanagement.domain.Representative</class>
         <class>lapr4.showRequestManagement.domain.ShowRequest</class>
         <class>lapr4.showProposalManagement.domain.ShowProposal</class>
+        <class>lapr4.showProposalManagement.domain.ProposalTemplate</class>
         <class>lapr4.showProposalManagement.domain.FigureInShowProposal</class>
         <class>lapr4.droneManagement.domain.Drone</class>
         <class>lapr4.figureManagement.domain.Figure</class>
@@ -27,8 +28,8 @@
 
 
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/shodrone"/>
-            <!--<property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~\shodrone"/> -->
+            <!-- <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/shodrone"/> -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~\shodrone"/>
 
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value=""/>

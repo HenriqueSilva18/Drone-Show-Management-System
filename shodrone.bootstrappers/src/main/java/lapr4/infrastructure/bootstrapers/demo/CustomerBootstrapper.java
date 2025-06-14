@@ -38,6 +38,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lapr4.customermanagement.domain.CustomerType.VIP;
+
 /**
  *
  * @author Paulo Sousa

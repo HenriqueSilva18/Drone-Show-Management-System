@@ -1,5 +1,9 @@
 package lapr4.showProposalManagement.application;
 
+import lapr4.infrastructure.persistence.PersistenceContext;
+import lapr4.showProposalManagement.domain.ProposalTemplate;
+import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -12,6 +16,8 @@ public class ConfigureProposalTemplateController {
 
     private final String templatesDirectory = "docs/data/";
     private final String propertiesFilePath = "shodrone.app.backoffice.console/src/main/resources/application.properties";
+    private final ProposalTemplateRepository repo = PersistenceContext.repositories().templates();
+
 
     /**
      * Lists all available template files from the docs/data directory.
@@ -52,5 +58,10 @@ public class ConfigureProposalTemplateController {
             return false;
         }
         return true;
+    }
+
+    public void addProposalTemplate(String name, String filePath) {
+        final ProposalTemplate newTemplate = new ProposalTemplate(name, filePath);
+        this.repo.save(newTemplate);
     }
 }

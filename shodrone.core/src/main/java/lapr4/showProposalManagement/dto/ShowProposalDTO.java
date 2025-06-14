@@ -21,13 +21,14 @@ public class ShowProposalDTO {
     public int eventDuration;
     public String status;
     public String simulationStatus;
-    public double insuranceValue;  // <-- NOVO CAMPO
+    public double insuranceValue;
+    public String templateType;
 
     /**
      * Construtor alternativo para criação inicial da proposta.
      */
     public ShowProposalDTO(final int showRequestID, final int totalNumDrones, final double latitude, final double longitude,
-                           final String eventDate, final String eventHour, final int eventDuration) {
+                           final String eventDate, final String eventHour, final int eventDuration, final String templateType) {
         this.showRequestID = showRequestID;
         this.totalNumDrones = totalNumDrones;
         this.latitude = latitude;
@@ -35,17 +36,17 @@ public class ShowProposalDTO {
         this.eventDate = eventDate;
         this.eventHour = eventHour;
         this.eventDuration = eventDuration;
+        this.templateType = templateType;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "ID: %d | Customer: %s | Status: %s | Date: %s | Seguro: %.2f€",
+                "ID: %d | Customer: %s | Status: %s | Date: %s",
                 number,
                 customerVAT,
                 status,
-                eventDate,
-                insuranceValue
+                eventDate
         );
     }
 }
