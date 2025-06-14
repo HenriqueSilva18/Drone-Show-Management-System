@@ -20,17 +20,17 @@ public class ShowProposalBootstrapper implements Action {
     @Override
     public boolean execute() {
         // Template PT
-        registerProposalTemplate("PT", "docs/data/Proposta_mod_01.txt");
+        registerProposalTemplate("PT");
         // Template EN
-        registerProposalTemplate("EN", "docs/data/Proposta_mod_02.txt");
+        registerProposalTemplate("EN");
         // Template VIP
-        registerProposalTemplate("VIP", "docs/data/Proposta_mod_03.txt");
+        registerProposalTemplate("VIP");
         return true;
     }
 
-    private void registerProposalTemplate(String name, String filePath) {
+    private void registerProposalTemplate(String name) {
         try {
-            controller.addProposalTemplate(name, filePath);
+            controller.addProposalTemplate(name);
             LOGGER.info("Bootstrapped Proposal Template: {}", name);
         } catch (final IntegrityViolationException | ConcurrencyException e) {
             // ignoring bootstrap debug problems

@@ -1,67 +1,55 @@
 package lapr4.showProposalManagement.application;
 
+import eapli.framework.application.UseCaseController;
+import eapli.framework.domain.repositories.TransactionalContext;
+import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ProposalTemplate;
+import lapr4.showProposalManagement.dto.ProposalTemplateDTO;
 import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
+import lapr4.usermanagement.domain.Roles;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+import java.util.Optional;
 
+@UseCaseController
 public class ConfigureProposalTemplateController {
 
-    private final String templatesDirectory = "docs/data/";
-    private final String propertiesFilePath = "shodrone.app.backoffice.console/src/main/resources/application.properties";
+    private final AuthorizationService authz = AuthzRegistry.authorizationService();
+    private final TransactionalContext tx = PersistenceContext.repositories().newTransactionalContext();
     private final ProposalTemplateRepository repo = PersistenceContext.repositories().templates();
 
-
-    /**
-     * Lists all available template files from the docs/data directory.
-     * @return A list of template filenames.
-     */
-    public List<String> listAvailableTemplates() {
-        File folder = new File(templatesDirectory);
-        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().startsWith("proposta_mod_") && name.endsWith(".txt"));
-        List<String> templateNames = new ArrayList<>();
-        if (files != null) {
-            for (File file : files) {
-                templateNames.add(file.getName());
-            }
-        }
-        return templateNames;
+    public List<ProposalTemplateDTO> listProposalTemplates() {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.CRM_MANAGER);
+        final List<ProposalTemplateDTO> dtoList = new ArrayList<>();
+        final Iterable<ProposalTemplate> templates = this.repo.findAll();
+        templates.forEach(template -> dtoList.add(template.toDTO()));
+        return dtoList;
     }
 
-    /**
-     * Saves the selected template path to the properties file.
-     * @param templateFilename The filename of the template to be set as active.
-     * @return true if successful, false otherwise.
-     */
-    public boolean setProposalTemplate(String templateFilename) {
-        Properties props = new Properties();
-        try (FileInputStream in = new FileInputStream(propertiesFilePath)) {
-            props.load(in);
-        } catch (IOException e) {
-            System.err.println("Error reading properties file: " + e.getMessage());
-            return false;
+    public ProposalTemplateDTO updateTemplateFilePath(ProposalTemplateDTO templateDTO, String newFilePath) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.CRM_MANAGER);
+
+        tx.beginTransaction();
+        final Optional<ProposalTemplate> optTemplate = this.repo.ofIdentity(templateDTO.name);
+
+        if (optTemplate.isEmpty()) {
+            tx.rollback();
+            throw new IllegalArgumentException("Template with name '" + templateDTO.name + "' not found.");
         }
 
-        props.setProperty("shodrone.proposal.template.file", templatesDirectory + templateFilename);
+        final ProposalTemplate template = optTemplate.get();
+        template.changeFilePath(newFilePath);
+        final ProposalTemplate savedTemplate = this.repo.save(template);
+        tx.commit();
 
-        try (FileOutputStream out = new FileOutputStream(propertiesFilePath)) {
-            props.store(out, "Updated proposal template configuration");
-        } catch (IOException e) {
-            System.err.println("Error writing to properties file: " + e.getMessage());
-            return false;
-        }
-        return true;
+        return savedTemplate.toDTO();
     }
 
-    public void addProposalTemplate(String name, String filePath) {
-        final ProposalTemplate newTemplate = new ProposalTemplate(name, filePath);
+    public void addProposalTemplate(String name) {
+        final ProposalTemplate newTemplate = new ProposalTemplate(name);
         this.repo.save(newTemplate);
     }
 }

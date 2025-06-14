@@ -57,7 +57,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
 
     @XmlElement
     @JsonProperty
-    @OneToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private ProposalTemplate template;
 
     @XmlElement

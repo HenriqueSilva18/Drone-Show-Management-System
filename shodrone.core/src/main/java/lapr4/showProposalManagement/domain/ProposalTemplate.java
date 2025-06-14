@@ -10,6 +10,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import eapli.framework.validations.Preconditions;
 import eapli.framework.domain.model.DomainEntities;
+import lapr4.showProposalManagement.dto.ProposalTemplateDTO;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -27,7 +28,6 @@ public class ProposalTemplate implements Serializable, AggregateRoot<String> {
     @JsonProperty
     private String name;
 
-    @Id
     @Column
     @XmlElement
     @JsonProperty
@@ -37,12 +37,16 @@ public class ProposalTemplate implements Serializable, AggregateRoot<String> {
         // for ORM
     }
 
-    public ProposalTemplate(final String name, final String filePath) {
+    public ProposalTemplate(final String name) {
         Preconditions.nonEmpty(name, "Template name cannot be empty.");
-        Preconditions.nonEmpty(filePath, "Template file cannot be empty.");
         this.name = name;
-        this.filePath = filePath;
     }
+
+    public ProposalTemplateDTO toDTO() {
+        return new ProposalTemplateDTO(this.name, this.filePath);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -77,5 +81,9 @@ public class ProposalTemplate implements Serializable, AggregateRoot<String> {
     @Override
     public String identity() {
         return this.name;
+    }
+
+    public void changeFilePath(String newFilePath) {
+        this.filePath = newFilePath;
     }
 }
