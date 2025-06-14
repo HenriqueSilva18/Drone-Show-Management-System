@@ -83,4 +83,14 @@ public final class ReadValidations {
             }
         }
     }
+
+    public static String readValidString(String s) {
+        while (true) {
+            String input = Console.readLine(s);
+            if (input != null && !input.trim().isEmpty()) {
+                return input.trim();
+            }
+            System.out.println("Error: Input cannot be empty. Please enter a valid string.");
+        }
+    }
 }
