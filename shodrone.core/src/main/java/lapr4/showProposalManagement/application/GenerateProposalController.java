@@ -6,6 +6,7 @@ import eapli.framework.infrastructure.authz.application.UserSession;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
+import lapr4.showProposalManagement.domain.SimulationStatus;
 import lapr4.showProposalManagement.dto.ProposalTemplateDTO;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
@@ -80,7 +81,7 @@ public class GenerateProposalController {
                 .append(proposal.simulationVideoLink()).append(" encontra-se um vídeo com a simulação do show proposto.\n\n");
 
         sb.append("Com a aplicação do AI-Test©, um exclusivo da Shodrone, temos a confiança de oferecer um seguro de responsabilidade civil no valor de ")
-                .append(proposal.insuranceValue()).append(" para o show. Os dados detalhados do show são apresentados em anexo.\n\n");
+                .append(proposal.insuranceValue()).append(" euros para o show. Os dados detalhados do show são apresentados em anexo.\n\n");
 
         sb.append("Estando certos que seremos alvo da V/ preferência.\n\n");
         sb.append("Subscrevemo-nos ao dispor.\n\n");
@@ -227,7 +228,7 @@ public class GenerateProposalController {
         sb.append("In the link ").append(proposal.simulationVideoLink()).append(" there is a video with a simulation of the proposed show.\n\n");
 
         sb.append("With the application of AI-Test©, a Shodrone exclusive, we are confident in offering liability insurance in the amount of ")
-                .append(proposal.insuranceValue()).append(" for the show. Detailed show data is presented in the attachment.\n\n");
+                .append(proposal.insuranceValue()).append(" euros for the show. Detailed show data is presented in the attachment.\n\n");
 
         sb.append("Looking forward to hearing from you soon.\n\n");
         sb.append("Best regards,\n\n");
@@ -281,7 +282,6 @@ public class GenerateProposalController {
 
         proposal.changeSentBy(userSession.authenticatedUser().name());
         proposal.changeSentDate(date);
-
         repo.save(proposal);
 
         System.out.println("Proposal updated successfully.");

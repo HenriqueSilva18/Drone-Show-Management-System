@@ -78,7 +78,7 @@ public class CollaboratorMenu extends MainMenu {
 
 		menu.addItem(CREATE_SHOW_PROPOSAL, "Create Show Proposal", new CreateShowProposalUI()::show);
 		menu.addItem(ADD_VIDEO_PROPOSAL, "Add Video of Simulation", new AddVideoProposalUI()::show);
-		//menu.addItem(SEND_SHOW_PROPOSAL, "Send Show Proposal", new SendShowProposalUI()::show);
+		menu.addItem(SEND_SHOW_PROPOSAL, "Send Show Proposal", new SendShowProposalUI()::show);
 		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
 		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);

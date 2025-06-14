@@ -2,6 +2,8 @@ package lapr4.persistence.impl.inmemory;
 
 import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.domain.SimulationStatus;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -78,6 +80,24 @@ public class InMemoryShowProposalRepository
         return showProposals.stream()
                 .filter(proposal -> proposal.CustomerVAT().equals(customerVAT))
                 .toList();
+    }
+
+    @Override
+    public List<ShowProposal> findAllProposalsToSend() {
+        return showProposals.stream()
+                .filter(proposal -> proposal.status().equals(ShowProposalStatus.CREATED) &&
+                        proposal.simulationStatus().equals(SimulationStatus.PASSED))
+                .toList();
+    }
+
+    @Override
+    public List<ShowProposalDTO> findAllProposalsToSendDTO() {
+        List<ShowProposal> proposals = findAllProposalsToSend();
+        List<ShowProposalDTO> dtos = new ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
     }
 
 } 

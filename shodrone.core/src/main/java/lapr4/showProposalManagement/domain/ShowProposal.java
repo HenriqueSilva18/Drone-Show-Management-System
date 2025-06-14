@@ -110,6 +110,10 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(name = "quantity", nullable = false)
     private Map<DroneModel, Integer> modelCountMap = new HashMap<>();
 
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true, columnDefinition="CLOB")
+    private String proposalText;
 
     @XmlElement
     @JsonProperty
@@ -306,6 +310,22 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
 
     public void changeSentBy(Name sentBy) {
         this.sentBy = sentBy;
+    }
+
+    public SimulationStatus simulationStatus() {
+        return this.simulationStatus;
+    }
+
+    public void changeSimulationStatus(SimulationStatus simulationStatus) {
+        if (simulationStatus == null) {
+            throw new IllegalArgumentException("Simulation status cannot be null");
+        }
+        this.simulationStatus = simulationStatus;
+    }
+
+    public void changeProposalText(String proposalText) {
+        Preconditions.nonEmpty(proposalText, "Proposal text cannot be empty.");
+        this.proposalText = proposalText;
     }
 
 }

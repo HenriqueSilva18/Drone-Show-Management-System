@@ -84,7 +84,6 @@ public class GenerateProposalUI extends AbstractUI {
                 directory.mkdirs();
             }
             String filePath = "docs/ShowProposals/proposal_" + proposalNumber + ".txt";
-            //input date by date input manually, NOT .NOW
             LocalDate date = null;
             while (date == null) {
                 try {
@@ -106,7 +105,9 @@ public class GenerateProposalUI extends AbstractUI {
             throw new RuntimeException(e);
         }
     }
-        public String headline() {
+
+    @Override
+    public String headline() {
         return "Generate Show Proposal";
     }
 }
