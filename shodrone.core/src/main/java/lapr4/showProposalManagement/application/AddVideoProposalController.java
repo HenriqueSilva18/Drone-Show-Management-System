@@ -2,13 +2,15 @@ package lapr4.showProposalManagement.application;
 
 import eapli.framework.application.UseCaseController;
 import eapli.framework.infrastructure.authz.application.AuthorizationService;
+import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import eapli.framework.validations.Preconditions;
+import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
+import lapr4.showProposalManagement.dto.AddVideoProposalDTO;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.usermanagement.domain.Roles;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -16,16 +18,11 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @UseCaseController
-@Component
 public class AddVideoProposalController {
 
-    private final ShowProposalRepository proposalRepository;
-    private final AuthorizationService authorizationService;
+    private final AuthorizationService authorizationService = AuthzRegistry.authorizationService();
+    private final ShowProposalRepository proposalRepository = PersistenceContext.repositories().showProposals();
 
-    public AddVideoProposalController(ShowProposalRepository showProposalRepository, AuthorizationService authorizationService) {
-        this.proposalRepository = showProposalRepository;
-        this.authorizationService = authorizationService;
-    }
 
     public Iterable<ShowProposalDTO> listProposalsForVideoAddition() {
         authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
@@ -39,20 +36,20 @@ public class AddVideoProposalController {
     }
 
     @Transactional
-    public ShowProposalDTO addProposalVideo(final Integer proposalId, final String newVideoLink) {
-        this.authorizationService.ensureAuthenticatedUserHasAnyOf(
-                Roles.POWER_USER, Roles.CRM_COLLABORATOR);
-        Preconditions.nonNull(proposalId, "Proposal ID cannot be null.");
-        Preconditions.nonEmpty(newVideoLink, "New video link cannot be empty. Please provide a valid link.");
+    public ShowProposalDTO addProposalVideo(final AddVideoProposalDTO proposalDTO) {
+        this.authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        Preconditions.nonNull(proposalDTO, "Proposal DTO cannot be null.");
+        Preconditions.nonNull(proposalDTO.proposalNumber, "Proposal ID cannot be null.");
+        Preconditions.nonEmpty(proposalDTO.videoLink, "New video link cannot be empty.");
 
-        Optional<ShowProposal> optionalProposal = this.proposalRepository.findByProposalNumber(proposalId);
+        Optional<ShowProposal> optionalProposal = this.proposalRepository.findByProposalNumber(proposalDTO.proposalNumber);
         if (optionalProposal.isEmpty()) {
-            throw new IllegalArgumentException("Proposal with ID " + proposalId + " not found.");
+            throw new IllegalArgumentException("Proposal with ID " + proposalDTO.proposalNumber + " not found.");
         }
 
         ShowProposal proposal = optionalProposal.get();
 
-        proposal.changeVideoTo(newVideoLink);
+        proposal.changeVideoTo(proposalDTO.videoLink);
         ShowProposal savedProposal = this.proposalRepository.save(proposal);
 
         return savedProposal.toDTO();
