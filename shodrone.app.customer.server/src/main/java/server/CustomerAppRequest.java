@@ -30,49 +30,170 @@ public class CustomerAppRequest extends Thread {
         try {
             outS = new DataOutputStream(sock.getOutputStream());
             inS = new DataInputStream(sock.getInputStream());
-
             HTTPmessage request = new HTTPmessage(inS);
             HTTPmessage response = new HTTPmessage();
-
             System.out.println("A processar pedido " + request.getMethod() + " para o URI: " + request.getURI());
 
-            // Extrai o caminho (path) do URI, ignorando os parâmetros da query
             String uri = request.getURI();
             String path = uri.split("\\?")[0];
 
-            // --- Roteamento dos Pedidos ---
-            if (request.getMethod().equals("POST") && path.equals("/login")) {
-                handleLogin(request, response);
+            // --- Lógica de Roteamento ---
+            if (request.getMethod().equals("POST")) {
+                if (path.equals("/login")) {
+                    handleLogin(request, response);
+                } else if (path.equals("/proposal/decision")) {
+                    handleProposalDecision(request, response);
+                } else {
+                    // POST para um recurso desconhecido
+                    response.setResponseStatus("404 Not Found");
+                }
             } else if (request.getMethod().equals("GET")) {
                 if (path.equals("/proposals")) {
                     handleProposals(request, response);
+                } else if (path.equals("/shows/scheduled")) { // NOVO ENDPOINT
+                    handleScheduledShows(request, response);
                 } else {
+                    // Todos os outros GETs tentam servir ficheiros estáticos
                     handleStaticFile(request, response);
                 }
             } else {
+                // Lida com outros métodos (PUT, DELETE, etc.) que não são permitidos
                 response.setResponseStatus("405 Method Not Allowed");
-                response.setContentFromString("<h1>405 Method Not Allowed</h1>", "text/html");
             }
+
             response.send(outS);
         } catch (IOException ex) {
             System.err.println("Erro na thread: " + ex.getMessage());
         } finally {
-            try {
-                sock.close();
-            } catch (IOException ex) {
-                System.err.println("Exceção ao fechar o socket: " + ex.getMessage());
-            }
+            try { sock.close(); } catch (IOException ex) { System.err.println("Erro ao fechar o socket."); }
         }
+    }
+
+    private void handleScheduledShows(HTTPmessage request, HTTPmessage response) {
+        String uri = request.getURI();
+        String query = null;
+        int queryStartIndex = uri.indexOf('?');
+        if (queryStartIndex != -1) {
+            query = uri.substring(queryStartIndex + 1);
+        }
+
+        if (query == null || !query.startsWith("user=")) {
+            response.setResponseStatus("400 Bad Request");
+            response.setContentFromString("{\"error\":\"Parâmetro 'user' ausente ou inválido.\"}", "application/json");
+            return;
+        }
+
+        String username = query.split("=")[1];
+        System.out.println("A procurar espetáculos agendados para o utilizador: " + username);
+
+        List<String> showsList = getScheduledShowsForUser(username);
+        String showsJsonString = "[" + String.join(",", showsList) + "]";
+        response.setContentFromString(showsJsonString, "application/json");
+        response.setResponseStatus("200 Ok");
+    }
+
+    private List<String> getScheduledShowsForUser(String username) {
+        // Query para obter os detalhes do evento de propostas com estado 'ACCEPTED'
+        final String sql = "SELECT SP.NUMBER, SP.EVENTDATETIME, SP.LATITUDE, SP.LONGITUDE " +
+                "FROM SHOW_PROPOSAL SP " +
+                "JOIN REPRESENTATIVE R ON SP.CUSTOMER_NUMBER = R.CUSTOMER_VAT " +
+                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'ACCEPTED'";
+
+        List<String> shows = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                // Envia a data no formato ISO, que é universalmente reconhecido pelo JavaScript
+                String showJson = "{" +
+                        "\"id\":" + rs.getInt("NUMBER") + "," +
+                        "\"dateTime\":\"" + rs.getTimestamp("EVENTDATETIME").toInstant().toString() + "\"," +
+                        "\"latitude\":" + rs.getDouble("LATITUDE") + "," +
+                        "\"longitude\":" + rs.getDouble("LONGITUDE") +
+                        "}";
+                shows.add(showJson);
+            }
+            System.out.println("Encontrados " + shows.size() + " espetáculos agendados para o utilizador " + username);
+        } catch (SQLException e) {
+            System.err.println("Erro de SQL a procurar espetáculos agendados: " + e.getMessage());
+        }
+        return shows;
+    }
+
+    private void handleProposalDecision(HTTPmessage request, HTTPmessage response) {
+        String body = request.getContentAsString();
+        try {
+            String idStr = body.split("\"id\":")[1].split(",")[0].replaceAll("[^0-9]", "").trim();
+            String status = body.split("\"status\":\"")[1].split("\"")[0].trim();
+            int id = Integer.parseInt(idStr);
+
+            boolean success = updateProposalStatus(id, status);
+
+            if (success) {
+                response.setResponseStatus("200 OK");
+                response.setContentFromString("Decision processed.", "text/plain");
+                System.out.println("Decisão processada para a proposta #" + id + ": " + status);
+            } else {
+                response.setResponseStatus("500 Internal Server Error");
+                response.setContentFromString("Failed to update proposal status in the database.", "text/plain");
+            }
+        } catch (Exception e) {
+            response.setResponseStatus("400 Bad Request");
+            response.setContentFromString("Invalid request body format.", "text/plain");
+            System.err.println("Erro ao fazer parse do corpo do pedido de decisão: " + e.getMessage());
+        }
+    }
+
+    private boolean updateProposalStatus(int proposalId, String status) {
+        if (!status.equals("ACCEPTED") && !status.equals("REJECTED")) {
+            System.err.println("Tentativa de atualizar para estado inválido: " + status);
+            return false;
+        }
+        final String sql = "UPDATE SHOW_PROPOSAL SET STATUS = ? WHERE NUMBER = ?";
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, status);
+            stmt.setInt(2, proposalId);
+            int affectedRows = stmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            System.err.println("Erro de SQL ao atualizar a proposta #" + proposalId + ": " + e.getMessage());
+            return false;
+        }
+    }
+
+    private List<String> getPendingProposalsForUser(String username) {
+        final String sql = "SELECT SP.NUMBER, SP.PROPOSALTEXT FROM SHOW_PROPOSAL SP " +
+                "JOIN REPRESENTATIVE R ON SP.CUSTOMER_NUMBER = R.CUSTOMER_VAT " +
+                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'CREATED'";
+        List<String> proposals = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int proposalId = rs.getInt("NUMBER");
+                String proposalText = rs.getString("PROPOSALTEXT");
+                String proposalJson = "{\"id\":" + proposalId + ",\"name\":\"" + escapeJson("Proposal " + proposalId) + "\",\"text\":\"" + escapeJson(proposalText) + "\"}";
+                proposals.add(proposalJson);
+            }
+            System.out.println("Encontradas " + proposals.size() + " propostas criadas para o utilizador " + username);
+        } catch (SQLException e) {
+            System.err.println("Erro de SQL a procurar propostas para " + username + ": " + e.getMessage());
+        }
+        return proposals;
     }
 
     private void handleStaticFile(HTTPmessage request, HTTPmessage response) {
         String uri = request.getURI();
         String resourcePath = "www" + (uri.equals("/") ? "/index.html" : uri);
-
         try (InputStream is = this.getClass().getClassLoader().getResourceAsStream(resourcePath)) {
             if (is == null) {
                 response.setResponseStatus("404 Not Found");
-                response.setContentFromString("<html><body><h1>404 File not found</h1></body></html>", "text/html");
+                response.setContentFromString("<html><body><h1>404 Not Found</h1></body></html>", "text/html");
                 System.err.println("Recurso não encontrado: " + resourcePath);
             } else {
                 String contentType = "text/html";
@@ -92,66 +213,21 @@ public class CustomerAppRequest extends Thread {
     private void handleProposals(HTTPmessage request, HTTPmessage response) {
         String uri = request.getURI();
         String query = null;
-
-        // Extrai a query string do URI
         int queryStartIndex = uri.indexOf('?');
         if (queryStartIndex != -1) {
             query = uri.substring(queryStartIndex + 1);
         }
-
         if (query == null || !query.startsWith("user=")) {
             response.setResponseStatus("400 Bad Request");
             response.setContentFromString("{\"error\":\"Parâmetro 'user' ausente ou inválido.\"}", "application/json");
             return;
         }
-
         String username = query.split("=")[1];
-        System.out.println("A procurar propostas pendentes para o utilizador: " + username);
-
+        System.out.println("A procurar propostas criadas para o utilizador: " + username);
         List<String> proposalsList = getPendingProposalsForUser(username);
-
         String proposalsJsonString = "[" + String.join(",", proposalsList) + "]";
         response.setContentFromString(proposalsJsonString, "application/json");
         response.setResponseStatus("200 Ok");
-    }
-
-    private List<String> getPendingProposalsForUser(String username) {
-        final String sql = "SELECT SP.NUMBER, SP.PROPOSALTEXT FROM SHOW_PROPOSAL SP " +
-                "JOIN REPRESENTATIVE R ON SP.CUSTOMER_NUMBER = R.CUSTOMER_VAT " +
-                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'CREATED'";
-
-        List<String> proposals = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int proposalId = rs.getInt("NUMBER");
-                String proposalText = rs.getString("PROPOSALTEXT");
-
-                String proposalJson = "{" +
-                        "\"id\":" + proposalId + "," +
-                        "\"name\":\"" + escapeJson("Proposal " + proposalId) + "\"," +
-                        "\"text\":\"" + escapeJson(proposalText) + "\"" +
-                        "}";
-                proposals.add(proposalJson);
-            }
-            System.out.println("Encontradas " + proposals.size() + " propostas criadas para o utilizador " + username);
-        } catch (SQLException e) {
-            System.err.println("Erro de SQL a procurar propostas para " + username + ": " + e.getMessage());
-        }
-        return proposals;
-    }
-
-    private String escapeJson(String text) {
-        if (text == null) return "";
-        return text.replace("\\", "\\\\")
-                .replace("\"", "\\\"")
-                .replace("\n", "\\n")
-                .replace("\r", "\\r")
-                .replace("\t", "\\t");
     }
 
     private void handleLogin(HTTPmessage request, HTTPmessage response) {
@@ -164,9 +240,7 @@ public class CustomerAppRequest extends Thread {
         }
         String username = credentials[0];
         String password = credentials[1];
-
         System.out.println("Tentativa de autenticação para o utilizador: " + username);
-
         if (checkCredentialsAndRole(username, password)) {
             System.out.println("Autenticação bem-sucedida para o utilizador '" + username + "' (Customer Representative)");
             response.setResponseStatus("200 OK");
@@ -196,5 +270,14 @@ public class CustomerAppRequest extends Thread {
             System.err.println("Erro de SQL ao verificar credenciais para o utilizador " + username + ": " + e.getMessage());
             return false;
         }
+    }
+
+    private String escapeJson(String text) {
+        if (text == null) return "";
+        return text.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 }
