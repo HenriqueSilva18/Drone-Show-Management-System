@@ -28,8 +28,8 @@ public class DroneTechMenu extends MainMenu {
         menu.addItem(3, "Edit Drone Model ", new EditDroneModelUI()::show);
         menu.addItem(4, "Edit MaintenanceType ", new EditMaintenanceTypeUI()::show);
         menu.addItem(5, "List DroneModels ", new ListDroneModelsUI()::show);
-        menu.addItem(6, "List MaintenanceTypes ", new EditMaintenanceTypeUI()::show);
-        menu.addItem(7, "Validate a Drone Program (Language 2)", () -> {
+        menu.addItem(6, "List MaintenanceTypes ", new ListMaintenanceTypesUI()::show);
+        menu.addItem(7, "Validate a Drone Program (Language 1)", () -> {
             new DroneValidator_L1_UI().display();
             return true;
         });

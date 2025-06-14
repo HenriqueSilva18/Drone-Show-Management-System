@@ -131,7 +131,6 @@ MaintenanceTypeEditor --> MaintenanceType : modifies >
 
 ## 7. Observations
 
-* Optimistic locking prevents concurrent modifications
 * Validation ensures data integrity
 * Clear error messages for business rule violations
 * Transaction boundaries properly defined
