@@ -15,7 +15,7 @@ public class CreateMaintenanceTypeController {
 
     @Transactional
     public MaintenanceType create(String name, String description) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.DRONE_TECH);
 
         if (repo.existsByNameIgnoreCase(name)) {
             throw new IllegalArgumentException("Tipo de manutenção já existe.");
