@@ -86,4 +86,7 @@ public class ProposalTemplate implements Serializable, AggregateRoot<String> {
     public void changeFilePath(String newFilePath) {
         this.filePath = newFilePath;
     }
+
+
+
 }

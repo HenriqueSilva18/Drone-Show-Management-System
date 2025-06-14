@@ -228,7 +228,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
                 this.status.name(),
                 this.simulationStatus.name(),
                 this.insuranceValue,
-                this.template.toString()
+                this.template.identity()
         );
     }
 

@@ -6,7 +6,9 @@ import eapli.framework.infrastructure.authz.application.UserSession;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
+import lapr4.showProposalManagement.dto.ProposalTemplateDTO;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
+import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import show_proposal_plugin.ShowProposalValidationService;
 
@@ -27,8 +29,8 @@ public class GenerateProposalController {
     private final ShowProposalRepository repo;
     private final AuthorizationService authz = AuthzRegistry.authorizationService();
     private final UserSession userSession = authz.session().orElseThrow(IllegalStateException::new);;
-    private final String propertiesFilePath = "shodrone.app.backoffice.console/src/main/resources/application.properties";
     ShowProposalValidationService validationService = new ShowProposalValidationService();
+    private final ProposalTemplateRepository ptRepo = PersistenceContext.repositories().templates();
 
 
     // Production constructor
@@ -55,31 +57,11 @@ public class GenerateProposalController {
                 .filter(p -> p.status() != ShowProposalStatus.ACCEPTED);
     }
 
-    public String readProposalTemplate() {
-        Properties props = new Properties();
-        try (FileInputStream in = new FileInputStream(propertiesFilePath)) {
-            props.load(in);
-        } catch (IOException e) {
-            System.err.println("Error reading properties file: " + e.getMessage());
-            return null;
-        }
-
-        String templateFilePath = props.getProperty("shodrone.proposal.template.file");
-        if (templateFilePath == null || templateFilePath.isEmpty()) {
-            System.err.println("No proposal template file configured.");
-            return null;
-        }
-
-        return templateFilePath;
-
-    }
-
 
     public String writeProposalPT(ShowProposalDTO proposalDTO) {
 
         Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.getNumber());
         ShowProposal proposal = opt.get();
-
 
         StringBuilder sb = new StringBuilder();
 
@@ -216,7 +198,19 @@ public class GenerateProposalController {
         Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.getNumber());
         ShowProposal proposal = opt.get();
 
-        sb.append("Dear ").append(proposal.customer().representatives().get(0).name()).append(",\n");
+        sb.append("Dear ");
+        for (int i = 0; i < proposal.customer().representatives().size(); i++) {
+            sb.append(proposal.customer().representatives().get(i).name());
+            if (i < proposal.customer().representatives().size() - 2) {
+                sb.append(", ");
+            } else if (i < proposal.customer().representatives().size() - 1) {
+                sb.append(" and ");
+            }
+        }
+        sb.append(",\n");
+
+
+
         sb.append(proposal.customer().name()).append("\n");
         sb.append(proposal.customer().address()).append("\n");
         sb.append(proposal.CustomerVAT().toString()).append("\n\n");
@@ -294,4 +288,9 @@ public class GenerateProposalController {
         return true;
     }
 
+    public ProposalTemplateDTO getFilePathProposalTemplate(String proposalTemplateName) {
+
+        return ptRepo.findByName(proposalTemplateName).toDTO();
+
+    }
 }

@@ -20,4 +20,9 @@ public class InMemoryProposalTemplateRepository extends InMemoryDomainRepository
         return StreamSupport.stream(super.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public ProposalTemplate findByName(String name) {
+        return super.ofIdentity(name).orElse(null);
+    }
 }

@@ -23,4 +23,11 @@ public class JpaProposalTemplateRepository extends JpaAutoTxRepository<ProposalT
         return this.createQuery("SELECT e FROM ProposalTemplate e", ProposalTemplate.class).getResultList();
     }
 
+    @Override
+    public ProposalTemplate findByName(String name) {
+        return this.createQuery("SELECT e FROM ProposalTemplate e WHERE e.name = :name", ProposalTemplate.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
 }
