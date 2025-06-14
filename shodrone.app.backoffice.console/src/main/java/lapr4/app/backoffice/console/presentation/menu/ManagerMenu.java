@@ -29,7 +29,7 @@ public class ManagerMenu extends MainMenu {
         final var menu = new Menu("Managing tools >");
 
         menu.addItem(DECOMMISSION_FIGURE, "Decommission Figure", new DecommissionFigureUI()::show);
-        menu.addItem(CONFIGURE_PROPOSAL_TEMPLATE, "Configure Proposal Template", new ConfigureProposalTemplateUI()::show);
+        menu.addItem(CONFIGURE_PROPOSAL_TEMPLATE, "Configure Proposal Template", new ConfigureProposalTemplateUI()::show); // Adicione esta linha
         menu.addItem(WRITE_PROPOSAL, "Write Show Proposal", new GenerateProposalUI()::show);
         menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 

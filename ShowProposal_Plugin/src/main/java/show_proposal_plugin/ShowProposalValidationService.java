@@ -9,10 +9,6 @@ import show_proposal_plugin.generated_code.ShowProposalBaseVisitor;
 import show_proposal_plugin.generated_code.ShowProposalLexer;
 import show_proposal_plugin.generated_code.ShowProposalParser;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,16 +40,6 @@ public class ShowProposalValidationService {
         // 3. Usar o Visitor para validações que podem necessitar de retorno ou lógica complexa
         ShowProposalValidationVisitor visitor = new ShowProposalValidationVisitor(errors);
         visitor.visit(tree);
-
-        return errors;
-    }
-
-    public List<String> validateFilePath(String filePath) throws IOException {
-
-        Path path = Paths.get(filePath);
-        String template = Files.readString(path);
-
-        List<String> errors = validate(template);
 
         return errors;
     }
@@ -104,13 +90,7 @@ public class ShowProposalValidationService {
         @Override
         public Object visitVat_number(ShowProposalParser.Vat_numberContext ctx) {
             String vat = ctx.getText().trim();
-
-
-
-            if (vat.equals("[VAT Number]")) {
-                return super.visitVat_number(ctx);
-            }
-
+            // Exemplo de regra de negócio: o VAT number deve começar com 'PT'
             if (!vat.toUpperCase().startsWith("PT")) {
                 errors.add("Erro de Validação (Visitor): O VAT number deve ser um número de contribuinte português (iniciar com 'PT').");
             }

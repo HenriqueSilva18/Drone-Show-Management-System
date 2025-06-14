@@ -5,12 +5,7 @@ import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.presentation.console.SelectWidget;
 import lapr4.showProposalManagement.application.ConfigureProposalTemplateController;
 import lapr4.showProposalManagement.dto.ProposalTemplateDTO;
-import show_proposal_plugin.ShowProposalValidationService;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class ConfigureProposalTemplateUI extends AbstractUI {
@@ -41,24 +36,14 @@ public class ConfigureProposalTemplateUI extends AbstractUI {
                 if (newFilePath.isBlank()) {
                     System.out.println("File path cannot be empty. Operation cancelled.");
                 } else {
-                    ShowProposalValidationService sp = new ShowProposalValidationService();
-                    List<String> errors = sp.validateFilePath(newFilePath);
-
-                    if (!errors.isEmpty()) {
-                        System.out.println("Please correct the following errors:");
-                        for (String error : errors) {
-                            System.out.println(" - " + error);
-                        }
-                        return false;
-                    }
-
-                    System.out.println("File path validated successfully!");
-                }
-
                     ProposalTemplateDTO updatedTemplate = theController.updateTemplateFilePath(selectedTemplate, newFilePath);
                     System.out.println("\nTemplate updated successfully!");
                     System.out.println("   " + updatedTemplate);
+                }
+            } else {
+                System.out.println("\nNo template selected. Operation cancelled.");
             }
+
         } catch (final Exception e) {
             System.err.println("An error occurred during the configuration: " + e.getMessage());
         }

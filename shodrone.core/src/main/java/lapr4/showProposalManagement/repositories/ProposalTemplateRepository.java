@@ -8,6 +8,4 @@ import java.util.List;
 public interface ProposalTemplateRepository extends DomainRepository<String, ProposalTemplate> {
 
     List<ProposalTemplate> findAll();
-
-    ProposalTemplate findByName(String name);
 }
