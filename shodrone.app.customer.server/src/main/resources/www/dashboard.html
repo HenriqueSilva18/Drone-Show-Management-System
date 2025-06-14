@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Customer App</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; text-align: center; }
+        .dashboard-container { position: relative; background: white; padding: 4rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; }
+        p { color: #34495e; }
+        .logout-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <h1>Bem-vindo!</h1>
+    <p>O seu login foi efetuado com sucesso.</p>
+    <p>A partir daqui, pode aceder às funcionalidades da aplicação.</p>
+</div>
+
+<script>
+    // Função de logout simples que redireciona para a página de login.
+    function logout() {
+        // No futuro, aqui poder-se-ia invalidar um token de sessão no servidor.
+        // Por agora, simplesmente redirecionamos para a página inicial.
+        window.location.href = '/index.html';
+    }
+</script>
+
+</body>
+</html>
