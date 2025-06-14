@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Customer APP</title>
     <style>
+        /* --- CSS existente --- */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
         body {
@@ -118,6 +119,63 @@
             font-size: 0.9rem;
             line-height: 1.5;
         }
+
+        /* CSS PARA A JANELA MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        .proposals-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        .proposals-table th, .proposals-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .proposals-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .download-btn {
+            padding: 8px 12px;
+            background: #2575fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -133,32 +191,32 @@
             <h1>Welcome, Representative!</h1>
             <p>Please select one of the options below to proceed.</p>
         </div>
-
         <div class="menu">
-            <div class="menu-card" onclick="handleMenuClick('Analyse a proposal')">
+            <!-- Cada cartão agora chama uma função específica -->
+            <div class="menu-card" onclick="showAnalyseProposalModal()">
                 <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-3 2a1 1 0 1 1 2 0v3a1 1 0 1 1-2 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-3 2a1 1 0 1 1 2 0v3a1 1 0 1 1-2 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5-.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/></svg>
                 </div>
                 <h2>Analyse a proposal</h2>
                 <p>Review and analyse the details of received show proposals.</p>
             </div>
-            <div class="menu-card" onclick="handleMenuClick('Accept/reject proposal')">
+            <div class="menu-card" onclick="showGenericModal('Accept/reject proposal')">
                 <div class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
                 </div>
                 <h2>Accept/reject proposal</h2>
                 <p>Make a final decision on the proposals under analysis.</p>
             </div>
-            <div class="menu-card" onclick="handleMenuClick('Check shows dates')">
+            <div class="menu-card" onclick="showGenericModal('Check shows dates')">
                 <div class="icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>
                 </div>
                 <h2>Check shows dates</h2>
                 <p>Consult the calendar and availability for new drone shows.</p>
             </div>
-            <div class="menu-card" onclick="handleMenuClick('Get show info')">
+            <div class="menu-card" onclick="showGenericModal('Get show info')">
                 <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.064.293.006.399.287.47l.45.082.082-.38-2.29-.287a.5.5 0 0 0-.469.288l-.738 3.468a.5.5 0 1 0 .94.198l.738-3.468c.064-.293-.006-.399-.287-.47l-.45-.082-.082.38 2.29.287a.5.5 0 0 0 .469-.288l.738-3.468a.5.5 0 0 0-.94-.198l-.738 3.468c-.064-.293.006.399.287.47l.45.082.082-.38.229-.287-.082-.38-.45-.083a.5.5 0 0 0-.288-.469l.738-3.468a.5.5 0 0 0-.94-.198zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.064.293.006.399.287.47l.45.082.082-.38-2.29-.287a.5.5 0 0 0-.469.288l-.738 3.468a.5.5 0 1 0 .94.198l.738-3.468c-.064-.293-.006-.399-.287-.47l-.45-.082-.082.38 2.29.287a.5.5 0 0 0 .469-.288l.738-3.468a.5.5 0 0 0-.94-.198l-.738 3.468c-.064-.293.006.399.287.47l.45.082.082-.38.229-.287-.082-.38-.45-.083a.5.5 0 0 0-.288-.469l.738-3.468a.5.5 0 0 0-.94-.198zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
                 </div>
                 <h2>Get show info</h2>
                 <p>Access the complete details of a specific scheduled show.</p>
@@ -167,13 +225,103 @@
     </main>
 </div>
 
+<!-- HTML da Janela Modal -->
+<div class="modal-overlay" id="proposalsModal">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal('proposalsModal')">&times;</button>
+        <h2 id="modalTitle">Pending Proposals</h2>
+        <div id="modalContent">
+            <!-- O conteúdo da modal será inserido aqui pelo JavaScript -->
+        </div>
+    </div>
+</div>
+
+
 <script>
     function logout() {
+        sessionStorage.removeItem('loggedInUser');
         window.location.href = '/index.html';
     }
 
-    function handleMenuClick(option) {
-        alert("You selected the option: " + option);
+    const modal = document.getElementById('proposalsModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    // Fecha qualquer modal
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    // Função genérica para abrir a modal com uma mensagem
+    function showGenericModal(title) {
+        modalTitle.innerText = title;
+        modalContent.innerHTML = `<p>This feature (${title}) is not yet implemented.</p>`;
+        modal.style.display = 'flex';
+    }
+
+    // Função específica para "Analyse a proposal"
+    async function showAnalyseProposalModal() {
+        const username = sessionStorage.getItem('loggedInUser');
+        if (!username) {
+            alert('Error: Not logged in. Redirecting to login page.');
+            window.location.href = '/index.html';
+            return;
+        }
+
+        modalTitle.innerText = 'Analyse a proposal';
+        modalContent.innerHTML = '<p>Loading proposals...</p>';
+        modal.style.display = 'flex';
+
+        try {
+            const response = await fetch(`/proposals?user=${username}`);
+            if (!response.ok) {
+                throw new Error('Server responded with an error!');
+            }
+            const proposals = await response.json();
+            populateProposalsTable(proposals);
+
+        } catch (error) {
+            console.error('Failed to fetch proposals:', error);
+            modalContent.innerHTML = '<p>Could not fetch proposals from the server.</p>';
+        }
+    }
+
+    function populateProposalsTable(proposals) {
+        if (proposals.length === 0) {
+            modalContent.innerHTML = '<p>No pending proposals found.</p>';
+            return;
+        }
+
+        let tableHTML = '<table class="proposals-table"><tr><th>ID</th><th>Name</th><th>Action</th></tr>';
+        proposals.forEach(p => {
+            const safeText = p.text.replace(/"/g, '&quot;');
+            tableHTML += `<tr>
+                            <td>${p.id}</td>
+                            <td>${p.name}</td>
+                            <td><button class="download-btn" data-proposal-text="${safeText}" data-proposal-id="${p.id}" onclick="downloadProposal(this)">Download</button></td>
+                         </tr>`;
+        });
+        tableHTML += '</table>';
+        modalContent.innerHTML = tableHTML;
+    }
+
+    function downloadProposal(button) {
+        const proposalText = button.getAttribute('data-proposal-text');
+        const proposalId = button.getAttribute('data-proposal-id');
+
+        const blob = new Blob([proposalText], { type: 'text/plain;charset=utf-8' });
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `proposal_${proposalId}.txt`;
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
     }
 </script>
 

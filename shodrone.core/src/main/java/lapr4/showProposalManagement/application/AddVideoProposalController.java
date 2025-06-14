@@ -7,6 +7,7 @@ import eapli.framework.validations.Preconditions;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
+import lapr4.showProposalManagement.domain.SimulationStatus;
 import lapr4.showProposalManagement.dto.AddVideoProposalDTO;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
@@ -50,6 +51,7 @@ public class AddVideoProposalController {
         ShowProposal proposal = optionalProposal.get();
 
         proposal.changeVideoTo(proposalDTO.videoLink);
+        proposal.changeSimulationStatus(SimulationStatus.PASSED);
         ShowProposal savedProposal = this.proposalRepository.save(proposal);
 
         return savedProposal.toDTO();
