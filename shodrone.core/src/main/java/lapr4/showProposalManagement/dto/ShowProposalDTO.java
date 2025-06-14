@@ -25,7 +25,7 @@ public class ShowProposalDTO {
     public String templateType;
 
     /**
-     * Construtor alternativo para criação inicial da proposta.
+     * Construtor alternativo para criação inicial da proposal.
      */
     public ShowProposalDTO(final int showRequestID, final int totalNumDrones, final double latitude, final double longitude,
                            final String eventDate, final String eventHour, final int eventDuration, final String templateType) {

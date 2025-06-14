@@ -27,13 +27,13 @@ public class ShowRequestBootstrapper implements Action {
         registerShowRequest(3, 20.0, "Show of Logo",
             101, "2024-07-01", "PT987654321");
         registerShowRequest(8, 45.0, "Show of Logo",
-            102, "2024-08-15", "PT987654321");
+            102, "2024-08-15", "PT223643289");
         registerShowRequest(5, 30.0, "Show of Logo",
                 200, "2025-06-15", "PT123456789");
         registerShowRequest(3, 20.0, "Show of Logo",
                 201, "2025-07-01", "PT987654321");
         registerShowRequest(8, 45.0, "Show of Logo",
-                202, "2025-08-15", "PT987654321");
+                202, "2025-08-15", "PT223643289");
         
         return true;
     }

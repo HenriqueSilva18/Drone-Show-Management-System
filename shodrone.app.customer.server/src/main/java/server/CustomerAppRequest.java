@@ -29,28 +29,30 @@ public class CustomerAppRequest extends Thread {
             outS = new DataOutputStream(sock.getOutputStream());
             inS = new DataInputStream(sock.getInputStream());
         } catch (IOException ex) {
-            System.out.println("Erro na thread ao criar streams de dados");
+            System.err.println("Thread error on stream creation: " + ex.getMessage());
         }
         try {
             HTTPmessage request = new HTTPmessage(inS);
+            System.out.println("A processar pedido " + request.getMethod() + " para o URI: " + request.getURI());
+
             HTTPmessage response = new HTTPmessage();
 
             if (request.getMethod().equals("POST") && request.getURI().equals("/login")) {
                 handleLogin(request, response);
             } else if (request.getMethod().equals("GET")) {
-                handleGet(request, response); // NOVA LÓGICA PARA SERVIR FICHEIROS
+                handleGet(request, response);
             } else {
                 response.setResponseStatus("405 Method Not Allowed");
                 response.setContentFromString("<h1>405 Method Not Allowed</h1>", "text/html");
             }
             response.send(outS);
         } catch (IOException ex) {
-            System.out.println("Erro na thread ao ler o pedido");
+            System.err.println("Thread error reading request: " + ex.getMessage());
         }
         try {
             sock.close();
         } catch (IOException ex) {
-            System.out.println("CLOSE IOException");
+            System.err.println("Exception while closing socket: " + ex.getMessage());
         }
     }
 
@@ -65,11 +67,11 @@ public class CustomerAppRequest extends Thread {
             if (is == null) {
                 response.setResponseStatus("404 Not Found");
                 response.setContentFromString("<html><body><h1>404 File not found</h1></body></html>", "text/html");
+                System.err.println("Recurso não encontrado: " + resourcePath);
             } else {
                 String contentType = "text/html";
                 if (uri.endsWith(".js")) contentType = "application/javascript";
                 if (uri.endsWith(".css")) contentType = "text/css";
-
                 byte[] data = is.readAllBytes();
                 response.setContent(data, contentType);
                 response.setResponseStatus("200 Ok");
@@ -77,6 +79,7 @@ public class CustomerAppRequest extends Thread {
         } catch (IOException ex) {
             response.setResponseStatus("500 Internal Server Error");
             response.setContentFromString("<html><body><h1>500 Internal Server Error</h1></body></html>", "text/html");
+            System.err.println("Erro ao ler recurso " + resourcePath + ": " + ex.getMessage());
         }
     }
 
@@ -85,20 +88,22 @@ public class CustomerAppRequest extends Thread {
         String[] credentials = body.split(":", 2);
         if (credentials.length != 2) {
             response.setResponseStatus("400 Bad Request");
-            response.setContentFromString("Formato de credenciais inválido.", "text/plain");
+            response.setContentFromString("Invalid credentials format.", "text/plain");
             return;
         }
         String username = credentials[0];
         String password = credentials[1];
 
+        System.out.println("Tentativa de autenticação para o utilizador: " + username);
+
         if (checkCredentialsAndRole(username, password)) {
-            System.out.println("Utilizador '" + username + "' (Customer Representative) autenticado com sucesso.");
+            System.out.println("Autenticação bem-sucedida para o utilizador '" + username + "' (Customer Representative)");
             response.setResponseStatus("200 OK");
-            response.setContentFromString("Autenticação bem-sucedida!", "text/plain");
+            response.setContentFromString("Authentication successful!", "text/plain");
         } else {
-            System.out.println("Falha na autenticação para o utilizador '" + username + "'.");
+            System.out.println("Autenticação falhou para o utilizador '" + username + "'. Credenciais inválidas ou sem a role necessária.");
             response.setResponseStatus("401 Unauthorized");
-            response.setContentFromString("Autenticação falhou: Credenciais inválidas ou sem permissão.", "text/plain");
+            response.setContentFromString("Authentication failed: Invalid credentials or permission denied.", "text/plain");
         }
     }
 
@@ -110,18 +115,15 @@ public class CustomerAppRequest extends Thread {
                 "JOIN T_ROLESET_T_ROLEASSIGNMENT RSR ON RS.PK = RSR.ROLESET_PK " +
                 "JOIN T_ROLEASSIGNMENT RA ON RSR.ASSIGNMENTS_PK = RA.PK " +
                 "WHERE SU.USERNAME = ? AND SU.PASSWORD = ? AND RA.ROLENAME = 'CUSTOMER_REPRESENTATIVE'";
-
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setString(1, username);
             stmt.setString(2, password);
-
             try (ResultSet rs = stmt.executeQuery()) {
                 return rs.next() && rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            System.err.println("Erro de SQL ao verificar credenciais e role: " + e.getMessage());
+            System.err.println("Erro de SQL ao verificar credenciais para o utilizador " + username + ": " + e.getMessage());
             return false;
         }
     }

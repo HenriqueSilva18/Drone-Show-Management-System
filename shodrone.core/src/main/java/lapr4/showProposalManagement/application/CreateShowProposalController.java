@@ -59,19 +59,23 @@ public class CreateShowProposalController {
                 template
         );
 
+        showRequest.markAsProposalDone();
+        showRequestRepository.save(showRequest);
+
         return showProposalRepository.save(newProposal).toDTO();
     }
 
-    public List<String> getTemplateTypeForCustomer(String customerVAT) {
+    public String getTemplateTypeForCustomer(String customerVAT) {
         authz.ensureAuthenticatedUserHasAnyOf(Roles.CRM_COLLABORATOR);
-        Customer customer = customerRepository.findByVAT(customerVAT).orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        Customer customer = customerRepository.findByVAT(customerVAT)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+
         if ("VIP".equalsIgnoreCase(customer.customerType().toString())) {
-            return List.of("VIP");
+            return "VIP";
+        } else if ("Portugal".equalsIgnoreCase(customer.address().country())) {
+            return "PT";
         } else {
-            return StreamSupport.stream(proposalTemplateRepository.findAll().spliterator(), false)
-                    .map(ProposalTemplate::identity)
-                    .filter(name -> !name.equalsIgnoreCase("VIP"))
-                    .collect(Collectors.toList());
+            return "EN";
         }
     }
 

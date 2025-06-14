@@ -72,31 +72,16 @@ public class CreateShowProposalUI extends AbstractUI {
     }
 
     private String selectProposalTemplate(ShowRequestDTO theShowRequest) {
-        String templateType;
-        List<String> templates = theController.getTemplateTypeForCustomer(theShowRequest.getCustomerVat());
+        String templateType = theController.getTemplateTypeForCustomer(theShowRequest.getCustomerVat());
 
-        if (templates.isEmpty()) {
+        if (templateType == null || templateType.isEmpty()) {
             System.out.println("No proposal templates available. Aborting.");
             return null;
         }
 
         System.out.println("\n------------------------------------");
-
-        if (templates.size() == 1) {
-            templateType = templates.get(0);
-            if (templateType.equalsIgnoreCase("VIP")) {
-                System.out.println("Customer is VIP. Template automatically set to VIP.");
-            }
-        } else {
-            SelectWidget<String> templateSelector = new SelectWidget<>("Select the proposal template type:", templates);
-            templateSelector.show();
-            templateType = templateSelector.selectedElement();
-        }
-
-        if (templateType == null) {
-            System.out.println("No template selected. Aborting.");
-            return null;
-        }
+        System.out.println("Proposal template automatically set to: " + templateType);
+        System.out.println("------------------------------------");
 
         return templateType;
     }

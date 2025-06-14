@@ -79,6 +79,10 @@ public class ShowRequest implements AggregateRoot<ShowRequestId> {
         // this.user = user;
     }
 
+    public void markAsProposalDone() {
+        this.status = "ShowProposalDone";
+    }
+
     public String getStatus() {
         return status;
     }

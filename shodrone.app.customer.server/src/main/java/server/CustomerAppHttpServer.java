@@ -44,6 +44,7 @@ public class CustomerAppHttpServer {
 
         while (true) {
             cliSock = sock.accept();
+            System.out.println("Ligação aceite de " + cliSock.getInetAddress().getHostAddress() + ":" + cliSock.getPort());
             CustomerAppRequest req = new CustomerAppRequest(cliSock, BASE_FOLDER);
             req.start();
         }
