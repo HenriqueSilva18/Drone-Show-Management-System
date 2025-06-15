@@ -8,6 +8,7 @@ import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lapr4.customermanagement.domain.Customer;
+import lapr4.customermanagement.domain.VAT;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.figureManagement.domain.Figure;
@@ -58,11 +59,9 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     private String simulationVideoLink;
 
     // TODO INSURANCE VALUE
-    @XmlElement
-    @JsonProperty
-    @Column(nullable = false)
-    private double insuranceValue;
 
+    @Column(name = "INSURANCEVALUE", nullable = false)
+    private double insuranceValue;
 
     @XmlElement
     @JsonProperty
@@ -258,5 +257,33 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         }
         calculateInsuranceValue(); // atualiza o seguro com base no novo mapa
     }
+
+    public static ShowProposal createFakeProposalWithFigures(List<FigureInShowProposal> figures) {
+        return new ShowProposal() {
+            @Override
+            public List<FigureInShowProposal> figuresList() {
+                return figures;
+            }
+        };
+    }
+
+    public static ShowProposal from(VAT customerVAT, List<FigureInShowProposal> figures) {
+        if (customerVAT == null || figures == null) {
+            throw new IllegalArgumentException("VAT e lista de figuras não podem ser nulos.");
+        }
+
+        ShowProposal fakeProposal = new ShowProposal() {
+            private final List<FigureInShowProposal> internalFigures = figures;
+
+            @Override
+            public List<FigureInShowProposal> figuresList() {
+                return internalFigures;
+            }
+        };
+
+        return fakeProposal;
+    }
+
+    
 
 }

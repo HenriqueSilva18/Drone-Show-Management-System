@@ -233,4 +233,16 @@ public class Figure implements AggregateRoot<Long> {
         }
         this.id = l;
     }
+
+    public String dslCode() {
+        return dslCode;
+    }
+
+    public String dslVersion() {
+        return dslVersion;
+    }
+
+
+
+
 }

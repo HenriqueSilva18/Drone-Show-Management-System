@@ -1,4 +1,4 @@
-# US317 – Mark show proposal as accepted
+# Mark show proposal as accepted
 
 ## Objective
 
@@ -46,10 +46,6 @@ Allow a manager to accept or reject a show proposal. A proposal can only be acce
 ---
 
 ## Test Coverage
-
-This section documents the test coverage for user story 317 implemented in Sprint 3. Each method is illustrated with an image showing the actual unit test code and assertions.
-
----
 
 ### Class: AcceptShowProposalControllerTest
 

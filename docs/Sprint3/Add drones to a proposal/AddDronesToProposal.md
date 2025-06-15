@@ -1,4 +1,4 @@
-# US311 – Add drones to a proposal
+# Add drones to a proposal
 
 ## Objective
 
@@ -55,10 +55,6 @@ Allow a manager to populate a show proposal with available drone models until th
 ---
 
 ## Test Coverage
-
-This section documents the test coverage for user story 311 implemented in Sprint 3. Each method is illustrated with an image showing the actual unit test code and assertions.
-
----
 
 ## US311 – Add drones to a proposal
 
