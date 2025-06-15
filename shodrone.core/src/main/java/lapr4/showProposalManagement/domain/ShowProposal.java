@@ -130,6 +130,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     public ShowProposal(final ShowRequest showRequest, final int totalNumDrones, final Coordinates eventLocation,
                         final LocalDateTime eventDateTime, final int eventDuration, final ProposalTemplate template) {
         Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration, template);
+        Preconditions.isPositive(totalNumDrones, "Total number of drones must be positive.");
+
 
         this.customer = showRequest.getCustomer();
         this.showRequest = showRequest;

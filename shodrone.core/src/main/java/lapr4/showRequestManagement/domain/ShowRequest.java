@@ -135,6 +135,10 @@ public class ShowRequest implements AggregateRoot<ShowRequestId> {
         return customer;
     }
 
+    public Customer customer() {
+        return customer;
+    }
+
     public VAT getClientVAT() {
         return clientVAT;
     }
