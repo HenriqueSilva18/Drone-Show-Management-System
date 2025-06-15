@@ -29,6 +29,8 @@
 		<module>Drone_Script(Languague_2)</module>
         <module>shodrone.app.customer.server</module>
         <module>show_high_level_description_plugin</module>
+		<module>ShowProposal_Plugin</module>
+
 	</modules>
 
 	<properties>

@@ -1,6 +1,7 @@
 package lapr4.showProposalManagement.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import eapli.framework.infrastructure.authz.domain.model.Name;
 import jakarta.xml.bind.annotation.XmlElement;
 import eapli.framework.domain.model.AggregateRoot;
 import eapli.framework.domain.model.DomainEntities;
@@ -16,15 +17,18 @@ import lapr4.showRequestManagement.domain.ShowRequest;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import eapli.framework.representations.dto.DTOable;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @XmlRootElement
 @Entity
+@Table(name = "SHOW_PROPOSAL")
 public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposalDTO> {
 
     private static final long serialVersionUID = 1L;
@@ -51,17 +55,21 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(nullable = false)
     private int totalNumDrones;
 
-    // TODO TEMPLATE
+    @XmlElement
+    @JsonProperty
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private ProposalTemplate template;
 
     @XmlElement
     @JsonProperty
     @Column
     private String simulationVideoLink;
 
-    // TODO INSURANCE VALUE
-
-    @Column(name = "INSURANCEVALUE", nullable = false)
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = false)
     private double insuranceValue;
+
 
     @XmlElement
     @JsonProperty
@@ -102,14 +110,26 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(name = "quantity", nullable = false)
     private Map<DroneModel, Integer> modelCountMap = new HashMap<>();
 
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true, columnDefinition="CLOB")
+    private String proposalText;
 
-    // TODO SENT DATE & SENT BY MANAGER
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true)
+    private LocalDate sentDate;
+
+    @XmlElement
+    @JsonProperty
+    @Column(nullable = true)
+    private Name sentBy;
 
     // TODO SHOW DESCRIPTION
 
     public ShowProposal(final ShowRequest showRequest, final int totalNumDrones, final Coordinates eventLocation,
-                        final LocalDateTime eventDateTime, final int eventDuration) {
-        Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration);
+                        final LocalDateTime eventDateTime, final int eventDuration, final ProposalTemplate template) {
+        Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration, template);
 
         this.customer = showRequest.getCustomer();
         this.showRequest = showRequest;
@@ -119,6 +139,7 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         this.eventDuration = eventDuration;
         this.status = ShowProposalStatus.CREATED;
         this.simulationStatus = SimulationStatus.UNTESTED;
+        this.template = template;
         this.modelList = new ArrayList<>();
     }
 
@@ -173,6 +194,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return this.number;
     }
 
+    public Customer customer() {return this.customer;}
+
     public ShowProposalStatus status() {
         return this.status;
     }
@@ -208,7 +231,8 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
                 this.eventDuration,
                 this.status.name(),
                 this.simulationStatus.name(),
-                this.insuranceValue
+                this.insuranceValue,
+                this.template.identity()
         );
     }
 
@@ -258,6 +282,52 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         calculateInsuranceValue(); // atualiza o seguro com base no novo mapa
     }
 
+    public LocalDateTime eventDateTime() {return this.eventDateTime;}
+
+    public VAT CustomerVAT(){
+        return customer.identity();
+    }
+
+    public Coordinates coordinates () {
+        return this.eventLocation;
+    }
+
+    public int eventDuration() {
+        return this.eventDuration;
+    }
+
+    public Map<String, Integer> modelCountMap() {
+        return modelCountMap.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().name(),
+                        Map.Entry::getValue
+                ));
+    }
+
+    public void changeSentDate(LocalDate sentDate) {
+        this.sentDate = sentDate;
+    }
+
+    public void changeSentBy(Name sentBy) {
+        this.sentBy = sentBy;
+    }
+
+    public SimulationStatus simulationStatus() {
+        return this.simulationStatus;
+    }
+
+    public void changeSimulationStatus(SimulationStatus simulationStatus) {
+        if (simulationStatus == null) {
+            throw new IllegalArgumentException("Simulation status cannot be null");
+        }
+        this.simulationStatus = simulationStatus;
+    }
+
+    public void changeProposalText(String proposalText) {
+        Preconditions.nonEmpty(proposalText, "Proposal text cannot be empty.");
+        this.proposalText = proposalText;
+    }
+
     public static ShowProposal createFakeProposalWithFigures(List<FigureInShowProposal> figures) {
         return new ShowProposal() {
             @Override
@@ -284,6 +354,6 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return fakeProposal;
     }
 
-    
+
 
 }
