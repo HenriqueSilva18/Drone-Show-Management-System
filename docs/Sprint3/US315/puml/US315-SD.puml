@@ -1,0 +1,71 @@
+@startuml US315-SD
+
+actor "CRM Collaborator" as actor
+participant ":AddVideoProposalUI" as ui
+participant ":AddVideoProposalController" as controller
+participant ":ShowProposalRepository" as repository
+participant "showProposal\n:ShowProposal" as proposal
+participant "addVideoProposalDTO\n::AddVideoProposalDTO" as dto
+
+
+activate actor
+actor -> ui: asks to Add Video to Proposal
+activate ui
+
+ui -> controller: listProposalsForVideoAddition()
+activate controller
+
+controller -> repository: findByStatus("CREATED")
+activate repository
+repository --> controller: listShowProposal
+deactivate repository
+controller -> controller: filterProposalsWithoutVideo(listShowProposal)
+activate controller
+controller --> controller: listShowProposal
+deactivate controller
+controller -> controller: toDTO(listShowProposal)
+activate controller
+controller --> controller: listShowProposalDTO
+deactivate controller
+
+controller --> ui: listShowProposalDTO
+deactivate controller
+
+ui -> actor: display proposal and asks to select one
+deactivate ui
+
+actor -> ui: Select proposal
+activate ui
+ui -> actor: Request video link
+deactivate ui
+actor -> ui: Enter video link
+activate ui
+
+ui -> dto**: create(proposalDTO.number, videoLink)
+ui -> controller: addProposalVideo(AddVideoProposalDTO)
+activate controller
+
+controller -> repository: findByProposalNumber(proposalNumber)
+activate repository
+repository --> controller: Optional<ShowProposal>
+deactivate repository
+
+controller -> proposal: changeVideoTo(videoLink)
+activate proposal
+deactivate proposal
+controller -> proposal: changeSimulationStatus(PASSED)
+activate proposal
+deactivate proposal
+controller -> repository: save(proposal)
+activate repository
+repository --> controller: ShowProposal
+deactivate repository
+
+controller --> ui: ShowProposalDTO
+deactivate controller
+
+ui --> actor: Display success message
+deactivate ui
+
+
+@enduml
