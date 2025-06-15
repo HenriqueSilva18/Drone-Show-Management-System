@@ -148,6 +148,7 @@ java lapr4.app.backoffice.console.presentation.dronemodel.DroneValidator_L1_UI
 
 ## Authors & Contributors
 
-- Drone Tech Team
-- Show DSL Team
-- ANTLR Grammar Authors
+- 1230596
+- 1230595
+- 1220848
+- 1240588
