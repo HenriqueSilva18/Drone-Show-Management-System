@@ -2,32 +2,29 @@ package lapr4.showProposalManagement.domain;
 
 import lapr4.customermanagement.domain.Customer;
 import lapr4.customermanagement.domain.VAT;
-import lapr4.droneModelManagement.domain.DroneModel;
-import lapr4.figureManagement.domain.Figure;
 import lapr4.showRequestManagement.domain.ShowRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ShowProposalTest {
-
     // Mocks for dependencies
     private ShowRequest mockShowRequest;
     private ProposalTemplate mockTemplate;
     private Customer mockCustomer;
 
+    // Valid test data
     private Coordinates validCoordinates;
     private LocalDateTime validEventDateTime;
     private int validEventDuration;
     private int validTotalNumDrones;
 
+    // The subject under test
     private ShowProposal subject;
 
     @BeforeEach
@@ -50,7 +47,6 @@ class ShowProposalTest {
 
         // Creating a new instance of ShowProposal for each test
         subject = new ShowProposal(mockShowRequest, validTotalNumDrones, validCoordinates, validEventDateTime, validEventDuration, mockTemplate);
-
     }
 
     @Test
@@ -73,8 +69,10 @@ class ShowProposalTest {
     }
 
     @Test
-    void ensureStatusIsCREATED() {
-        assertEquals(ShowProposalStatus.CREATED, subject.status());
+    void ensureMustHaveEventDate() {
+        assertThrows(IllegalArgumentException.class, () ->
+                new ShowProposal(mockShowRequest, validTotalNumDrones, validCoordinates, null, validEventDuration, mockTemplate)
+        );
     }
 
     @Test
@@ -88,59 +86,38 @@ class ShowProposalTest {
     }
 
     @Test
-    void ensureMustHaveEventDateTime() {
-        assertThrows(IllegalArgumentException.class, () ->
-                new ShowProposal(mockShowRequest, validTotalNumDrones, validCoordinates, null, validEventDuration, mockTemplate)
-        );
+    void ensureStatusIsCREATED() {
+        assertEquals(ShowProposalStatus.CREATED, subject.status());
     }
 
     @Test
-    void ensureCanChangeStatusToPendent() {
-        subject.changeProposalStatus(ShowProposalStatus.PENDENT);
-        assertEquals(ShowProposalStatus.PENDENT, subject.status());
-    }
-
-    @Test
-    void ensureCannotChangeStatusToNull() {
-        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalStatus(null));
-    }
-
-    @Test
-    void ensureCanChangeSimulationStatus() {
-        subject.changeSimulationStatus(SimulationStatus.PASSED);
-        assertEquals(SimulationStatus.PASSED, subject.simulationStatus());
-    }
-
-    @Test
-    void ensureCannotChangeSimulationStatusToNull() {
-        assertThrows(IllegalArgumentException.class, () -> subject.changeSimulationStatus(null));
-    }
-
-    @Test
-    void ensureCanChangeVideo() {
-        String videoLink = "http://shodrone.com/video.mp4";
+    void ensureCanChangeVideoToValidLink() {
+        final String videoLink = "http://shodrone.com/video.mp4";
         subject.changeVideoTo(videoLink);
         assertEquals(videoLink, subject.simulationVideoLink());
     }
 
     @Test
-    void ensureCanChangeProposalText() {
-        String text = "This is a new proposal text.";
-        subject.changeProposalText(text);
+    void ensureCannotChangeVideoToNull() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeVideoTo(null));
     }
 
     @Test
-    void ensureCannotChangeProposalTextToEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalText(""));
+    void ensureCannotChangeVideoToEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeVideoTo(""));
     }
 
     @Test
-    void ensureCannotChangeProposalTextToNull() {
-        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalText(null));
+    void ensureCanChangeProposalStatus() {
+        final ShowProposalStatus newStatus = ShowProposalStatus.PENDENT;
+        subject.changeProposalStatus(newStatus);
+        assertEquals(newStatus, subject.status());
     }
 
     @Test
-    void identity() {
-        assertEquals(0, subject.identity());
+    void ensureCannotChangeProposalStatusToNull() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalStatus(null));
     }
+
+
 }

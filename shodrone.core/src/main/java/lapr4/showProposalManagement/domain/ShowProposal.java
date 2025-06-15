@@ -125,13 +125,10 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
     @Column(nullable = true)
     private Name sentBy;
 
-    // TODO SHOW DESCRIPTION
-
     public ShowProposal(final ShowRequest showRequest, final int totalNumDrones, final Coordinates eventLocation,
                         final LocalDateTime eventDateTime, final int eventDuration, final ProposalTemplate template) {
         Preconditions.noneNull(showRequest, totalNumDrones, eventLocation, eventDateTime, eventDuration, template);
         Preconditions.isPositive(totalNumDrones, "Total number of drones must be positive.");
-
 
         this.customer = showRequest.getCustomer();
         this.showRequest = showRequest;
@@ -329,33 +326,5 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         Preconditions.nonEmpty(proposalText, "Proposal text cannot be empty.");
         this.proposalText = proposalText;
     }
-
-    public static ShowProposal createFakeProposalWithFigures(List<FigureInShowProposal> figures) {
-        return new ShowProposal() {
-            @Override
-            public List<FigureInShowProposal> figuresList() {
-                return figures;
-            }
-        };
-    }
-
-    public static ShowProposal from(VAT customerVAT, List<FigureInShowProposal> figures) {
-        if (customerVAT == null || figures == null) {
-            throw new IllegalArgumentException("VAT e lista de figuras não podem ser nulos.");
-        }
-
-        ShowProposal fakeProposal = new ShowProposal() {
-            private final List<FigureInShowProposal> internalFigures = figures;
-
-            @Override
-            public List<FigureInShowProposal> figuresList() {
-                return internalFigures;
-            }
-        };
-
-        return fakeProposal;
-    }
-
-
 
 }

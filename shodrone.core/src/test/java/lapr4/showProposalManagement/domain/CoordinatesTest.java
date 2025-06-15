@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoordinatesTest {
-
     private static final double TEST_LATITUDE = 41.14961;
     private static final double TEST_LONGITUDE = -8.61099;
 
@@ -54,13 +53,13 @@ class CoordinatesTest {
         Coordinates coords3 = new Coordinates(40.7128, -74.0060); // New York
         Coordinates coords4 = new Coordinates(TEST_LATITUDE, -74.0060);
 
-        assertEquals(coords1, coords1);             // Test for reflexivity
-        assertEquals(coords1, coords2);             // Test for symmetry
-        assertEquals(coords2, coords1);             // Test for symmetry
-        assertNotEquals(coords1, coords3);          // Test for non-equality
-        assertNotEquals(coords1, coords4);          // Test for non-equality
-        assertNotEquals(null, coords1);   // Test with null
-        assertNotEquals(new Object(), coords1);      // Test with different object type
+        assertEquals(coords1, coords1);           // Test for reflexivity
+        assertEquals(coords1, coords2);           // Test for symmetry
+        assertEquals(coords2, coords1);           // Test for symmetry
+        assertNotEquals(coords1, coords3);        // Test for non-equality
+        assertNotEquals(coords1, coords4);        // Test for non-equality
+        assertNotEquals(null, coords1);    // Test with null
+        assertNotEquals(new Object(), coords1);   // Test with different object type
     }
 
     @Test
