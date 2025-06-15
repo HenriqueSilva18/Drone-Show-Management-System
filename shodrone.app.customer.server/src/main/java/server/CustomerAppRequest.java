@@ -44,20 +44,19 @@ public class CustomerAppRequest extends Thread {
                 } else if (path.equals("/proposal/decision")) {
                     handleProposalDecision(request, response);
                 } else {
-                    // POST para um recurso desconhecido
                     response.setResponseStatus("404 Not Found");
                 }
             } else if (request.getMethod().equals("GET")) {
                 if (path.equals("/proposals")) {
                     handleProposals(request, response);
-                } else if (path.equals("/shows/scheduled")) { // NOVO ENDPOINT
+                } else if (path.equals("/shows/scheduled")) {
                     handleScheduledShows(request, response);
+                } else if (path.equals("/show/details")) {
+                    handleShowDetails(request, response);
                 } else {
-                    // Todos os outros GETs tentam servir ficheiros estáticos
                     handleStaticFile(request, response);
                 }
             } else {
-                // Lida com outros métodos (PUT, DELETE, etc.) que não são permitidos
                 response.setResponseStatus("405 Method Not Allowed");
             }
 
@@ -67,6 +66,111 @@ public class CustomerAppRequest extends Thread {
         } finally {
             try { sock.close(); } catch (IOException ex) { System.err.println("Erro ao fechar o socket."); }
         }
+    }
+
+    private void handleShowDetails(HTTPmessage request, HTTPmessage response) {
+        String uri = request.getURI();
+        String query = "";
+        int queryIndex = uri.indexOf('?');
+        if (queryIndex != -1) {
+            query = uri.substring(queryIndex + 1);
+        }
+
+        if (!query.startsWith("id=")) {
+            response.setResponseStatus("400 Bad Request");
+            response.setContentFromString("{\"error\":\"Parâmetro 'id' ausente ou inválido.\"}", "application/json");
+            return;
+        }
+
+        try {
+            int showId = Integer.parseInt(query.split("=")[1]);
+            System.out.println("A procurar detalhes para o espetáculo #" + showId);
+
+            String showDetailsJson = getShowDetails(showId);
+
+            if (showDetailsJson == null) {
+                response.setResponseStatus("404 Not Found");
+                response.setContentFromString("{\"error\":\"Show not found.\"}", "application/json");
+            } else {
+                response.setContentFromString(showDetailsJson, "application/json");
+                response.setResponseStatus("200 Ok");
+            }
+        } catch (NumberFormatException e) {
+            response.setResponseStatus("400 Bad Request");
+            response.setContentFromString("{\"error\":\"ID inválido.\"}", "application/json");
+        }
+    }
+
+    private String getShowDetails(int showId) {
+        String proposalSQL = "SELECT NUMBER, EVENTDATETIME, EVENTDURATION, LATITUDE, LONGITUDE, INSURANCEVALUE, FIRSTNAME, LASTNAME, SIMULATIONVIDEOLINK, PROPOSALTEXT FROM SHOW_PROPOSAL WHERE NUMBER = ?";
+        String dronesSQL = "SELECT DM.NAME, SPMC.QUANTITY FROM DRONE_MODEL DM " +
+                "JOIN SHOW_PROPOSAL_MODEL_COUNTS SPMC ON DM.ID = SPMC.DRONE_MODEL_ID " +
+                "WHERE SPMC.SHOW_PROPOSAL_ID = ?";
+        String figuresSQL = "SELECT DESCRIPTION FROM FIGURE " +
+                "JOIN FIGUREINSHOWPROPOSAL ON FIGURE.ID = FIGUREINSHOWPROPOSAL.FIGURE_ID " +
+                "JOIN SHOW_PROPOSAL_FIGUREINSHOWPROPOSAL ON FIGUREINSHOWPROPOSAL.ID = SHOW_PROPOSAL_FIGUREINSHOWPROPOSAL.FIGURESLIST_ID " +
+                "WHERE SHOW_PROPOSAL_FIGUREINSHOWPROPOSAL.SHOWPROPOSAL_NUMBER = ?";
+        StringBuilder json = new StringBuilder();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+            // 1. Get Proposal Details
+            try (PreparedStatement stmt = conn.prepareStatement(proposalSQL)) {
+                stmt.setInt(1, showId);
+                ResultSet rs = stmt.executeQuery();
+                if (!rs.next()) return null;
+
+                json.append("{");
+                json.append("\"id\":").append(rs.getInt("NUMBER")).append(",");
+                json.append("\"dateTime\":\"").append(rs.getTimestamp("EVENTDATETIME").toInstant().toString()).append("\",");
+                json.append("\"duration\":").append(rs.getInt("EVENTDURATION")).append(",");
+                json.append("\"latitude\":").append(rs.getDouble("LATITUDE")).append(",");
+                json.append("\"longitude\":").append(rs.getDouble("LONGITUDE")).append(",");
+                json.append("\"insuranceValue\":").append(rs.getDouble("INSURANCEVALUE")).append(",");
+                json.append("\"firstName\":\"").append(escapeJson(rs.getString("FIRSTNAME"))).append("\",");
+                json.append("\"lastName\":\"").append(escapeJson(rs.getString("LASTNAME"))).append("\",");
+                json.append("\"proposalText\":\"").append(escapeJson(rs.getString("PROPOSALTEXT"))).append("\",");
+                json.append("\"simulationVideoLink\":\"").append(escapeJson(rs.getString("SIMULATIONVIDEOLINK"))).append("\",");
+            }
+
+            // 2. Adiciona um array de drones vazio
+            json.append("\"drones\":[");
+            try (PreparedStatement stmt = conn.prepareStatement(dronesSQL)) {
+                stmt.setInt(1, showId);
+                ResultSet rs = stmt.executeQuery();
+                boolean first = true;
+                while (rs.next()) {
+                    if (!first) json.append(",");
+                    json.append("{\"name\":\"").append(escapeJson(rs.getString("NAME"))).append("\",");
+                    json.append("\"quantity\":").append(rs.getInt("QUANTITY")).append("}");
+                    first = false;
+                }
+            }
+            json.append("],");
+
+            // 3. Get Figures
+            json.append("\"figures\":[");
+            try (PreparedStatement stmt = conn.prepareStatement(figuresSQL)) {
+                stmt.setInt(1, showId);
+                ResultSet rs = stmt.executeQuery();
+                boolean first = true;
+                int figureCount = 1;
+                while (rs.next()) {
+                    if (!first) json.append(",");
+                    json.append("{\"name\":\"Figure ").append(figureCount).append("\",");
+                    json.append("\"description\":\"").append(escapeJson(rs.getString("DESCRIPTION"))).append("\"}");
+                    first = false;
+                    figureCount++;
+                }
+            }
+            json.append("]");
+            json.append("}");
+
+        } catch (SQLException e) {
+            System.err.println("Erro de SQL a procurar detalhes do espetáculo #" + showId + ": " + e.getMessage());
+            return null;
+        }
+
+        return json.toString();
     }
 
     private void handleScheduledShows(HTTPmessage request, HTTPmessage response) {
@@ -97,7 +201,7 @@ public class CustomerAppRequest extends Thread {
         final String sql = "SELECT SP.NUMBER, SP.EVENTDATETIME, SP.LATITUDE, SP.LONGITUDE " +
                 "FROM SHOW_PROPOSAL SP " +
                 "JOIN REPRESENTATIVE R ON SP.CUSTOMER_NUMBER = R.CUSTOMER_VAT " +
-                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'ACCEPTED'";
+                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'SCHEDULED'";
 
         List<String> shows = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -168,7 +272,7 @@ public class CustomerAppRequest extends Thread {
     private List<String> getPendingProposalsForUser(String username) {
         final String sql = "SELECT SP.NUMBER, SP.PROPOSALTEXT FROM SHOW_PROPOSAL SP " +
                 "JOIN REPRESENTATIVE R ON SP.CUSTOMER_NUMBER = R.CUSTOMER_VAT " +
-                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'CREATED'";
+                "WHERE R.SYSTEMUSER_USERNAME = ? AND SP.STATUS = 'PENDENT'";
         List<String> proposals = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(sql)) {

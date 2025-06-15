@@ -28,6 +28,7 @@
         .proposals-table th, .proposals-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
         .proposals-table th { background-color: #f2f2f2; font-weight: bold; }
         .download-btn { padding: 8px 12px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .back-btn { padding: 8px 12px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer; }
         .decision-buttons .accept-btn, .decision-buttons .reject-btn { padding: 8px 12px; font-size: 0.9rem; margin: 0 5px; width: 90px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
         .decision-buttons .accept-btn { background-color: #28a745; color: white; }
         .decision-buttons .accept-btn:hover { background-color: #218838; }
@@ -68,7 +69,7 @@
                 <p>Consult the calendar for your accepted and scheduled shows.</p>
             </div>
 
-            <div class="menu-card" onclick="showGenericModal('Get show info')">
+            <div class="menu-card" onclick="showGetShowInfoModal()">
                 <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.064.293.006.399.287.47l.45.082.082-.38-2.29-.287a.5.5 0 0 0-.469.288l-.738 3.468a.5.5 0 1 0 .94.198l.738-3.468c-.064-.293-.006-.399-.287-.47l-.45-.082-.082.38 2.29.287a.5.5 0 0 0 .469-.288l.738-3.468a.5.5 0 0 0-.94-.198l-.738 3.468c-.064-.293.006.399.287.47l.45.082.082-.38.229-.287-.082-.38-.45-.083a.5.5 0 0 0-.288-.469l.738-3.468a.5.5 0 0 0-.94-.198zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></div>
                 <h2>Get show info</h2>
                 <p>Access the complete details of a specific scheduled show.</p>
