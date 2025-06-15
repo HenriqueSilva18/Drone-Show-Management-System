@@ -7,22 +7,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Fixed some issues regarding EAPLI">
+    <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Attempt at fixes of SCOMP">
+      <change afterPath="$PROJECT_DIR$/LPROG/SPRINT3/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SCOMP/sprint3/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/shared.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/simulator_report.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LPROG/DSL_GRAMMAR.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LPROG/SPRINT2/DSL_GRAMMAR.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LPROG/ShowDescription.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LPROG/SPRINT2/ShowDescription.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LPROG/ShowProposal.g4" beforeDir="false" afterPath="$PROJECT_DIR$/LPROG/SPRINT2/ShowProposal.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LPROG/ShowProposal.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LPROG/SPRINT2/ShowProposal.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/DroneValidator_L1_UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/dronemodel/DroneValidator_L1_UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/DroneTechMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/DroneTechMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,61 +82,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Bootstrap.executor&quot;: &quot;Run&quot;,
-    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
-    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.FigureCategoryTest.equals_shouldReturnFalseForDifferentClass.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone.app.backoffice.console [test].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.shodrone.core [test].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jose/Downloads/eapli.base/eapli.base&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Backoffice.executor": "Run",
+    "Application.Bootstrap.executor": "Run",
+    "Application.H2DatabaseManager.executor": "Run",
+    "Application.HelloWorld.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
+    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
+    "JUnit.FigureCategoryTest.equals_shouldReturnFalseForDifferentClass.executor": "Run",
+    "Maven.shodrone [clean].executor": "Run",
+    "Maven.shodrone [test].executor": "Run",
+    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
+    "Maven.shodrone.core [test].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ChangesTree.GroupingKeys&quot;: [
-      &quot;module&quot;
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+      "module"
     ],
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;h2&quot;
+    "DatabaseDriversLRU": [
+      "h2"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="lapr4.showProposalManagement.application" />
@@ -157,6 +153,8 @@
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\shodrone.app.common.console\src\main\java\lapr4\app\common\console\presentation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\LPROG\SPRINT2" />
+      <recent name="C:\Users\berna\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\SCOMP" />
       <recent name="C:\Users\Jose\IdeaProjects\sem4pi-2024-2025-sem4pi_2024_2025_g39\docs\lapr4" />
       <recent name="C:\Users\senke\IdeaProjects\sem4pi_2024_2025_g39\docs\us_110\Domain_Model" />
       <recent name="$PROJECT_DIR$/database" />
@@ -300,7 +298,8 @@
       <workItem from="1749219319019" duration="33390000" />
       <workItem from="1749824416323" duration="5976000" />
       <workItem from="1749895611490" duration="15442000" />
-      <workItem from="1749977289975" duration="2076000" />
+      <workItem from="1749977289975" duration="2166000" />
+      <workItem from="1749998797865" duration="5600000" />
     </task>
     <task id="LOCAL-00002" summary="Add base files for user stories documentation #1 #2 #3 #4 #5">
       <option name="closed" value="true" />
@@ -430,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749900860402</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Attempt at fixes of SCOMP">
+      <option name="closed" value="true" />
+      <created>1749982086416</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1749982086416</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,7 +486,8 @@
     <MESSAGE value="US246-US247-US248 tests completed #109" />
     <MESSAGE value="Drone Type Logic added" />
     <MESSAGE value="Fixed some issues regarding EAPLI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some issues regarding EAPLI" />
+    <MESSAGE value="Attempt at fixes of SCOMP" />
+    <option name="LAST_COMMIT_MESSAGE" value="Attempt at fixes of SCOMP" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

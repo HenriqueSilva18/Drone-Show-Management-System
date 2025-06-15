@@ -8,14 +8,10 @@ import lapr4.app.backoffice.console.presentation.dronemodel.*;
 import lapr4.app.backoffice.console.presentation.figure.*;
 import show_high_level_description_plugin.GenerateShowDslUI;
 
-
 public class DroneTechMenu extends MainMenu {
     private static final String RETURN_LABEL = "Return ";
-
     private static final int EXIT_OPTION = 0;
-
-    // MAIN MENU
-    private static final int OPTION = 2;
+    private static final int OPTION = 2; // posição do submenu Drone Tech no menu principal
 
     public static void buildDroneTechMenu(Menu mainMenu) {
         final Menu sdMenu = DroneTechMenu.buildDroneTechMenu();
@@ -31,12 +27,21 @@ public class DroneTechMenu extends MainMenu {
         menu.addItem(4, "Edit MaintenanceType ", new EditMaintenanceTypeUI()::show);
         menu.addItem(5, "List DroneModels ", new ListDroneModelsUI()::show);
         menu.addItem(6, "List MaintenanceTypes ", new EditMaintenanceTypeUI()::show);
+
         menu.addItem(7, "Generate the Show high-level Description", () -> {
             try {
                 new GenerateShowDslUI().show();
             } catch (Exception e) {
                 System.out.println("Erro ao gerar descrição DSL: " + e.getMessage());
             }
+            return true;
+        });
+        menu.addItem(8, "Validate Drone Program (Language 1)", () -> {
+            new DroneValidator_L1_UI().display();
+            return true;
+        });
+        menu.addItem(9, "Validate Drone Program (Language 2)", () -> {
+            new DroneValidator_L2_UI().display();
             return true;
         });
 
