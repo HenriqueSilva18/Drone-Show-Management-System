@@ -126,8 +126,6 @@ async function submitDecision(proposalId, decision) {
     }
 }
 
-
-// --- NOVAS FUNÇÕES PARA "Check shows dates" ---
 async function showShowsDatesModal() {
     const username = sessionStorage.getItem('loggedInUser');
     modalTitle.innerText = 'Scheduled Shows';
@@ -156,4 +154,101 @@ function populateShowsDatesTable(shows) {
     });
     tableHTML += '</table>';
     modalContent.innerHTML = tableHTML;
+}
+
+/**
+ * Mostra a modal para "Get show info", começando por listar os espetáculos disponíveis.
+ */
+async function showGetShowInfoModal() {
+    const username = sessionStorage.getItem('loggedInUser');
+    modalTitle.innerText = 'Select a Show to View Details';
+    modalContent.innerHTML = '<p>Loading shows...</p>';
+    modal.style.display = 'flex';
+
+    try {
+        // Reutilizamos o endpoint que busca shows aceites
+        const response = await fetch(`/shows/scheduled?user=${username}`);
+        if (!response.ok) throw new Error('Server error!');
+
+        const shows = await response.json();
+        // Usamos uma nova função para popular a tabela, que permite selecionar um show
+        populateShowSelectionTable(shows);
+
+    } catch (error) {
+        console.error('Failed to fetch shows:', error);
+        modalContent.innerHTML = '<p>Could not fetch shows from the server.</p>';
+    }
+}
+
+/**
+ * Cria a tabela de espetáculos com um botão "View Details" para cada um.
+ */
+function populateShowSelectionTable(shows) {
+    if (shows.length === 0) {
+        modalContent.innerHTML = '<p>No scheduled shows available to view.</p>';
+        return;
+    }
+
+    let tableHTML = `<table class="proposals-table">
+                       <tr><th>Proposal ID</th><th>Date & Time</th><th>Action</th></tr>`;
+    shows.forEach(s => {
+        const formattedDate = new Date(s.dateTime).toLocaleString('pt-PT');
+        tableHTML += `<tr>
+                        <td>${s.id}</td>
+                        <td>${formattedDate}</td>
+                        <td><button class="view-btn" onclick="fetchAndDisplayShowDetails(${s.id})">View Details</button></td>
+                     </tr>`;
+    });
+    tableHTML += '</table>';
+    modalContent.innerHTML = tableHTML;
+}
+
+/**
+ * Busca os detalhes completos de um espetáculo e chama a função para os mostrar.
+ */
+async function fetchAndDisplayShowDetails(showId) {
+    modalContent.innerHTML = '<p>Loading show details...</p>';
+    try {
+        const response = await fetch(`/show/details?id=${showId}`);
+        if (!response.ok) throw new Error('Show not found or server error!');
+
+        const details = await response.json();
+        displayShowDetails(details);
+    } catch (error) {
+        console.error('Failed to fetch show details:', error);
+        modalContent.innerHTML = `<p>${error.message}</p>`;
+    }
+}
+
+/**
+ * Mostra os detalhes completos de um show.
+ */
+function displayShowDetails(details) {
+    const formattedDate = new Date(details.dateTime).toLocaleString('pt-PT');
+
+    // Cria as listas de drones e figuras
+    let dronesList = details.drones.map(d => `<li>${d.quantity}x ${d.name}</li>`).join('');
+    let figuresList = details.figures.map(f => `<li><b>${f.name}:</b> ${f.description}</li>`).join('');
+
+    // Prepara o texto da proposta para download
+    const safeText = details.proposalText ? details.proposalText.replace(/"/g, '&quot;') : '';
+
+    modalTitle.innerText = `Details for Show #${details.id}`;
+    modalContent.innerHTML = `
+        <button class="back-btn" onclick="showGetShowInfoModal()">← Back to Show List</button>
+        <button class="download-btn" data-proposal-text="${safeText}" data-proposal-id="${details.id}" onclick="downloadProposal(this)">Download</button>
+        <h3>Show Information</h3>
+        <ul>
+            <li><b>Date & Time:</b> ${formattedDate}</li>
+            <li><b>Duration:</b> ${details.duration} minutes</li>
+            <li><b>Location:</b> Lat ${details.latitude.toFixed(6)}, Lon ${details.longitude.toFixed(6)}</li>
+            <li><b>Insurance Value:</b> €${details.insuranceValue.toFixed(2)}</li>
+            <li><b>Manager:</b> ${details.firstName} ${details.lastName}</li>
+            <li><b>Simulation Video:</b> <a href="${details.simulationVideoLink}" target="_blank">Watch video</a></li>
+        </ul>
+        <h3>Drones in Show</h3>
+        <ul>${dronesList || '<li>No drones specified.</li>'}</ul>
+        <h3>Figures in Show</h3>
+        <ul>${figuresList || '<li>No figures specified.</li>'}</ul>
+    `;
 }

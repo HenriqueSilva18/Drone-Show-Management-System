@@ -54,6 +54,16 @@ public class InMemoryShowProposalRepository
     }
 
     @Override
+    public List<ShowProposalDTO> findAllDTO() {
+        List<ShowProposal> proposals = findAll();
+        List<ShowProposalDTO> dtos = new ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
+
+    @Override
     public ShowProposal save(ShowProposal entity) {
         showProposals.removeIf(existing -> existing.identity().equals(entity.identity()));
         showProposals.add(entity);
@@ -85,7 +95,7 @@ public class InMemoryShowProposalRepository
     @Override
     public List<ShowProposal> findAllProposalsToSend() {
         return showProposals.stream()
-                .filter(proposal -> proposal.status().equals(ShowProposalStatus.CREATED) &&
+                .filter(proposal -> (proposal.status().equals(ShowProposalStatus.CREATED) || proposal.status().equals(ShowProposalStatus.REJECTED) || proposal.status().equals(ShowProposalStatus.ABORTED) )&&
                         proposal.simulationStatus().equals(SimulationStatus.PASSED))
                 .toList();
     }

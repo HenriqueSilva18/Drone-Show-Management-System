@@ -282,6 +282,7 @@ public class GenerateProposalController {
 
         proposal.changeSentBy(userSession.authenticatedUser().name());
         proposal.changeSentDate(date);
+
         repo.save(proposal);
 
         System.out.println("Proposal updated successfully.");

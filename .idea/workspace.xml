@@ -9,21 +9,20 @@
   <component name="ChangeListManager">
     <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Drone Type Logic added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AddFigureToProposalUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AddFigureToProposalUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/Bootstrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.bootstrappers/src/main/java/lapr4/infrastructure/bootstrapers/Bootstrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneType.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/droneModelManagement/domain/DroneType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureCategoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/application/FigureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/dto/FigureDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/dto/FigureDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/figureManagement/repositories/FigureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/infrastructure/persistence/RepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AddFigureToProposalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AddFigureToProposalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryFigureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryRepositoryFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaFigureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaRepositoryFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/shared.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/simulator_report.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,65 +86,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Backoffice.executor": "Run",
-    "Application.Bootstrap.executor": "Run",
-    "Application.H2DatabaseManager.executor": "Run",
-    "Application.HelloWorld.executor": "Run",
-    "JUnit.AddFigureToProposalControllerTest.addFigureToProposal_shouldThrowIfFigureDoesNotExist.executor": "Run",
-    "JUnit.AddFigureToProposalControllerTest.executor": "Run",
-    "JUnit.AddFigureToProposalControllerTest.testIsLastFigureSameAs_emptyList.executor": "Run",
-    "JUnit.AddFigureToProposalControllerTest.testIsLastFigureSameAs_proposalNotFound.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor": "Run",
-    "JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor": "Run",
-    "JUnit.FigureCategoryTest.equals_shouldReturnFalseForDifferentClass.executor": "Run",
-    "Maven.shodrone [clean].executor": "Run",
-    "Maven.shodrone [test].executor": "Run",
-    "Maven.shodrone.app.backoffice.console [test].executor": "Run",
-    "Maven.shodrone.core [test].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jose/Downloads/eapli.base/eapli.base",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Backoffice.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Bootstrap.executor&quot;: &quot;Run&quot;,
+    &quot;Application.H2DatabaseManager.executor&quot;: &quot;Run&quot;,
+    &quot;Application.HelloWorld.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.activateAlreadyActive_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.createCategory_unauthorizedUser_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.deactivateAlreadyInactive_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldIncludeInactiveCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldOverwriteCategoryWithSameName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_shouldReturnAllSavedCategories.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_withNoCategories_shouldReturnEmptyList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_validCategory_shouldCreateAndSave.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullDescription_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.registerCategory_withNullName_shouldThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.testActivateDoesNotChangeIfAlreadyActive.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.testDeactivateDoesNotChangeIfAlreadyInactive.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryServiceTest.updateDescription_unauthorizedUser_shouldEditAndSave.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FigureCategoryTest.equals_shouldReturnFalseForDifferentClass.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone.app.backoffice.console [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.shodrone.core [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jose/Downloads/eapli.base/eapli.base&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "module"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;module&quot;
     ],
-    "DatabaseDriversLRU": [
-      "h2"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="lapr4.showProposalManagement.application" />
@@ -174,7 +169,7 @@
       <recent name="lapr4.app.backoffice.console" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AddFigureToProposalControllerTest.addFigureToProposal_shouldThrowIfFigureDoesNotExist">
+  <component name="RunManager" selected="Application.Backoffice">
     <configuration name="Backoffice" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lapr4.app.backoffice.console.Backoffice" />
       <module name="shodrone.app.backoffice.console" />
@@ -188,64 +183,62 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddFigureToProposalControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shodrone.core" />
+    <configuration name="Bootstrap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lapr4.app.bootstrap.Bootstrap" />
+      <module name="shodrone.app.bootstrap" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lapr4.showProposalManagement.application.*" />
+          <option name="PATTERN" value="lapr4.app.bootstrap.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lapr4.showProposalManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.showProposalManagement.application.AddFigureToProposalControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddFigureToProposalControllerTest.addFigureToProposal_shouldThrowIfFigureDoesNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lapr4.showProposalManagement.application.*" />
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lapr4.showProposalManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.showProposalManagement.application.AddFigureToProposalControllerTest" />
-      <option name="METHOD_NAME" value="addFigureToProposal_shouldThrowIfFigureDoesNotExist" />
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_shouldNotDuplicateSameCategory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddFigureToProposalControllerTest.testIsLastFigureSameAs_emptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lapr4.showProposalManagement.application.*" />
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.application.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lapr4.showProposalManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.showProposalManagement.application.AddFigureToProposalControllerTest" />
-      <option name="METHOD_NAME" value="testIsLastFigureSameAs_emptyList" />
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.application" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.application.FigureCategoryServiceTest" />
+      <option name="METHOD_NAME" value="listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddFigureToProposalControllerTest.testIsLastFigureSameAs_proposalNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FigureCategoryTest.equals_shouldReturnFalseForDifferentClass" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shodrone.core" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lapr4.showProposalManagement.application.*" />
+          <option name="PATTERN" value="lapr4.figureCategoryManagement.domain.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lapr4.showProposalManagement.application" />
-      <option name="MAIN_CLASS_NAME" value="lapr4.showProposalManagement.application.AddFigureToProposalControllerTest" />
-      <option name="METHOD_NAME" value="testIsLastFigureSameAs_proposalNotFound" />
+      <option name="PACKAGE_NAME" value="lapr4.figureCategoryManagement.domain" />
+      <option name="MAIN_CLASS_NAME" value="lapr4.figureCategoryManagement.domain.FigureCategoryTest" />
+      <option name="METHOD_NAME" value="equals_shouldReturnFalseForDifferentClass" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -253,11 +246,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AddFigureToProposalControllerTest.addFigureToProposal_shouldThrowIfFigureDoesNotExist" />
-        <item itemvalue="JUnit.AddFigureToProposalControllerTest.testIsLastFigureSameAs_proposalNotFound" />
-        <item itemvalue="JUnit.AddFigureToProposalControllerTest.testIsLastFigureSameAs_emptyList" />
-        <item itemvalue="JUnit.AddFigureToProposalControllerTest" />
         <item itemvalue="Application.Backoffice" />
+        <item itemvalue="JUnit.FigureCategoryTest.equals_shouldReturnFalseForDifferentClass" />
+        <item itemvalue="Application.Bootstrap" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_shouldNotDuplicateSameCategory" />
+        <item itemvalue="JUnit.FigureCategoryServiceTest.listCategories_withSpecialCharacters_shouldBeHandledCorrectly" />
       </list>
     </recent_temporary>
   </component>
