@@ -344,3 +344,5 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         return fakeProposal;
     }
 }
+
+//from() commited?
