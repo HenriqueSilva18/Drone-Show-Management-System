@@ -13,7 +13,7 @@ This README covers the implementation of user story US310 for creating show prop
 ### US310 - Create Show Proposal
 
 As CRM Collaborator I want to start the process for creating a show proposal so that we can reply to
-the customer. The show proposal includes the total number of drones to be used in the show. Currently, all figures7
+the customer. The show proposal includes the total number of drones to be used in the show. Currently, all figures
 in a show must use all drones.The show proposal must follow a predefined template.
 
 **Acceptance Criteria:**
