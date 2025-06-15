@@ -1,9 +1,10 @@
 package lapr4.droneModelManagement.domain;
 
+import eapli.framework.domain.model.AggregateRoot;
 import jakarta.persistence.*;
 
 @Entity
-public class DroneType {
+public class DroneType implements AggregateRoot<String> {
 
 
     @Id
@@ -41,6 +42,14 @@ public class DroneType {
         if (!(o instanceof DroneType)) return false;
         DroneType droneType = (DroneType) o;
         return name != null && name.equals(droneType.name);
+    }
+
+    @Override
+    public boolean sameAs(Object other) {
+        if (this == other) return true;
+        if (!(other instanceof DroneType)) return false;
+        DroneType that = (DroneType) other;
+        return this.name.equals(that.name) && this.description.equals(that.description);
     }
 
     public String identity() {

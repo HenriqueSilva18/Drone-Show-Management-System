@@ -55,8 +55,19 @@ public class FigureController {
         return figureService.registerFigure(description, keywords, exclusive, clientVAT, category, DSLCode, DSLVersion, droneTypes);
     }
 
+    public Figure addFigure(Figure figure) {
+        return figureService.registerFigure(figure);
+    }
+
     public Figure decommissionFigure(Figure figure) {
         return figureService.decommissionFigure(figure);
     }
 
+    public Figure findByDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be null or empty");
+        }
+        return figureService.findByDescription(description)
+                .orElseThrow(() -> new IllegalArgumentException("Figure not found with description: " + description));
+    }
 }
