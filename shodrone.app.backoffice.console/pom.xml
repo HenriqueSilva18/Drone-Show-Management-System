@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>lapr4</groupId>
         <artifactId>shodrone</artifactId>
@@ -19,7 +18,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
@@ -29,6 +27,7 @@
             <groupId>org.bitbucket.pag_isep.eapliframework</groupId>
             <artifactId>eapli.framework.infrastructure.authz</artifactId>
         </dependency>
+
         <dependency>
             <groupId>lapr4</groupId>
             <artifactId>shodrone.app.common.console</artifactId>
@@ -40,12 +39,6 @@
             <version>${project.parent.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- Dependência para o plugin da descrição DSL -->
-        <dependency>
-            <groupId>lapr4</groupId>
-            <artifactId>show_high_level_description_plugin</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
     </dependencies>
+
 </project>

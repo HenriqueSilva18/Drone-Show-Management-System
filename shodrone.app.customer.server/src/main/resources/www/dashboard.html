@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Customer APP</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 2rem; color: #333; background: linear-gradient(-45deg, #6a11cb, #2575fc, #ec77ab, #7873f5); background-size: 400% 400%; animation: gradientBG 15s ease infinite; min-height: 100vh; box-sizing: border-box; }
+        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .dashboard-container { background: rgba(255, 255, 255, 0.95); border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); padding: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        .header-title { font-size: 1.8rem; font-weight: bold; background: -webkit-linear-gradient(45deg, #6a11cb, #2575fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logout-btn { padding: 10px 20px; background-color: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: bold; transition: background-color 0.3s, transform 0.2s; text-transform: uppercase; }
+        .logout-btn:hover { background-color: #c0392b; transform: translateY(-2px); }
+        .welcome-message { text-align: center; margin-bottom: 3rem; }
+        .welcome-message h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .menu-card { background: #fff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 2rem; text-align: center; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid #2575fc; }
+        .menu-card:hover { transform: translateY(-10px); box-shadow: 0 12px 25px rgba(37, 117, 252, 0.25); }
+        .menu-card .icon { margin-bottom: 1rem; color: #6a11cb; }
+        .menu-card h2 { margin-top: 0; margin-bottom: 0.5rem; color: #333; font-size: 1.25rem; }
+        .menu-card p { color: #666; font-size: 0.9rem; line-height: 1.5; }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #fff; padding: 2rem; border-radius: 10px; width: 80%; max-width: 800px; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal-close-btn { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; font-weight: bold; cursor: pointer; border: none; background: none; }
+        .proposals-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        .proposals-table th, .proposals-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        .proposals-table th { background-color: #f2f2f2; font-weight: bold; }
+        .download-btn { padding: 8px 12px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .back-btn { padding: 8px 12px; background: #2575fc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .decision-buttons .accept-btn, .decision-buttons .reject-btn { padding: 8px 12px; font-size: 0.9rem; margin: 0 5px; width: 90px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.2s; }
+        .decision-buttons .accept-btn { background-color: #28a745; color: white; }
+        .decision-buttons .accept-btn:hover { background-color: #218838; }
+        .decision-buttons .reject-btn { background-color: #dc3545; color: white; }
+        .decision-buttons .reject-btn:hover { background-color: #c82333; }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <header class="header">
+        <div class="header-title">Shodrone - Customer App</div>
+        <button class="logout-btn" onclick="logout()">LOGOUT</button>
+    </header>
+
+    <main class="main-container">
+        <div class="welcome-message">
+            <h1 id="welcome-user">Welcome, Representative!</h1>
+            <p>Please select one of the options below to proceed.</p>
+        </div>
+
+        <div class="menu">
+            <div class="menu-card" onclick="showAnalyseProposalModal()">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zm-3 2a1 1 0 1 1 2 0v3a1 1 0 1 1-2 0z"/><path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/><path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5-.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/></svg></div>
+                <h2>Analyse a proposal</h2>
+                <p>Review and analyse the details of received show proposals.</p>
+            </div>
+
+            <div class="menu-card" onclick="showAcceptRejectModal()">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg></div>
+                <h2>Accept/reject proposal</h2>
+                <p>Make a final decision on the proposals under analysis.</p>
+            </div>
+
+            <div class="menu-card" onclick="showShowsDatesModal()">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg></div>
+                <h2>Check shows dates</h2>
+                <p>Consult the calendar for your accepted and scheduled shows.</p>
+            </div>
+
+            <div class="menu-card" onclick="showGetShowInfoModal()">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.064.293.006.399.287.47l.45.082.082-.38-2.29-.287a.5.5 0 0 0-.469.288l-.738 3.468a.5.5 0 1 0 .94.198l.738-3.468c-.064-.293-.006-.399-.287-.47l-.45-.082-.082.38 2.29.287a.5.5 0 0 0 .469-.288l.738-3.468a.5.5 0 0 0-.94-.198l-.738 3.468c-.064-.293.006.399.287.47l.45.082.082-.38.229-.287-.082-.38-.45-.083a.5.5 0 0 0-.288-.469l.738-3.468a.5.5 0 0 0-.94-.198zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg></div>
+                <h2>Get show info</h2>
+                <p>Access the complete details of a specific scheduled show.</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-overlay" id="mainModal">
+    <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+        <h2 id="modalTitle"></h2>
+        <div id="modalContent"></div>
+    </div>
+</div>
+
+<script src="dashboard.js" defer></script>
+
+</body>
+</html>

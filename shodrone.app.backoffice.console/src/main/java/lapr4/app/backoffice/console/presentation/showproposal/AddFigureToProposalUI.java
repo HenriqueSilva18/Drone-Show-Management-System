@@ -37,7 +37,7 @@ public class AddFigureToProposalUI extends AbstractUI {
         int pos = Console.readInteger("Select a proposal (1-" + proposals.size() + "): ");
         ShowProposalDTO selectedProposal = proposals.get(pos - 1);
 
-        List<FigureDTO> figures = ctrl.availableFigures();
+        List<FigureDTO> figures = ctrl.availableActiveFigures();
 
         if (figures.isEmpty()) {
             System.out.println("No figure available.");
@@ -58,12 +58,6 @@ public class AddFigureToProposalUI extends AbstractUI {
         List<DroneModelDTO> models = ctrl.availableModels(selectedProposal.number);
         if (models.isEmpty()) {
             System.out.println("There are no drone models available for this proposal.");
-            return false;
-        }
-
-        // ❗ Verificação: se figura requer mais tipos do que modelos disponíveis
-        if (requiredTypes.size() > models.size()) {
-            System.out.println("❌ This figure requires more drone types than available drone models in the proposal.");
             return false;
         }
 

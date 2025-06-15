@@ -76,6 +76,13 @@ class FigureServiceTest {
         }
 
         @Override
+        public Optional<Figure> findByDescription(String description) {
+            return figures.stream()
+                    .filter(f -> f.description().equalsIgnoreCase(description))
+                    .findFirst();
+        }
+
+        @Override
         public Optional<Figure> findById(Long id) {
             return ofIdentity(id);
         }

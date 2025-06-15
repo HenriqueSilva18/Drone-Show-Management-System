@@ -2,8 +2,11 @@ package lapr4.persistence.impl.jpa;
 
 import eapli.framework.domain.repositories.TransactionalContext;
 import eapli.framework.infrastructure.repositories.impl.jpa.JpaAutoTxRepository;
+import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
+import lapr4.showProposalManagement.domain.SimulationStatus;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 
 import java.util.List;
@@ -45,4 +48,50 @@ public class JpaShowProposalRepository extends JpaAutoTxRepository<ShowProposal,
                 ShowProposal.class);
         return query.getResultList();
     }
+
+    @Override
+    public List<ShowProposalDTO> findAllDTO() {
+        List<ShowProposal> proposals = findAll();
+        List<ShowProposalDTO> dtos = new java.util.ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
+
+
+    @Override
+    public List<ShowProposal> findByCustomerVAT(VAT customerVAT){
+        final var query = entityManager().createQuery(
+                "SELECT p FROM ShowProposal p WHERE p.customer.vat = :vat", ShowProposal.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<ShowProposal> findAllProposalsToSend() {
+        final var query = entityManager().createQuery(
+                "SELECT p FROM ShowProposal p " +
+                        "WHERE p.status IN (:statuses) AND p.simulationStatus = :simulation",
+                ShowProposal.class);
+
+        query.setParameter("statuses", List.of(
+                ShowProposalStatus.CREATED,
+                ShowProposalStatus.REJECTED,
+                ShowProposalStatus.ABORTED
+        ));
+        query.setParameter("simulation", SimulationStatus.PASSED);
+
+        return query.getResultList();
+    }
+
+    public List<ShowProposalDTO> findAllProposalsToSendDTO() {
+        List<ShowProposal> proposals = findAllProposalsToSend();
+
+        List<ShowProposalDTO> dtos = new java.util.ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
+
 } 

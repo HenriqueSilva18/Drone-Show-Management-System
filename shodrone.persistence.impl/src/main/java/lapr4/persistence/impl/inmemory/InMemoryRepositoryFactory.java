@@ -3,10 +3,12 @@ package lapr4.persistence.impl.inmemory;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.droneModelManagement.repositories.DroneTypeRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.maintenanceManagement.repositories.MaintenanceTypeRepository;
+import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.usermanagement.domain.Roles;
@@ -124,6 +126,21 @@ public class InMemoryRepositoryFactory implements RepositoryFactory {
 	@Override
 	public ShowProposalRepository showProposals(TransactionalContext tx) {
 		return new InMemoryShowProposalRepository();
+	}
+
+	@Override
+	public ProposalTemplateRepository templates(TransactionalContext tx) {
+		return new InMemoryProposalTemplateRepository();
+	}
+
+	@Override
+	public DroneTypeRepository droneTypes() {
+		return new InMemoryDroneTypeRepository();
+	}
+
+	@Override
+	public ProposalTemplateRepository templates() {
+		return new InMemoryProposalTemplateRepository();
 	}
 
 }

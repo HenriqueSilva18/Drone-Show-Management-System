@@ -6,6 +6,7 @@ import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainR
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,5 +64,18 @@ public class InMemoryFigureRepository extends InMemoryDomainRepository<Figure, L
             System.err.println("Error in decommissionFigure: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Optional<Figure> findByDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            return Optional.empty();
+        }
+
+        String normalizedDescription = description.toLowerCase();
+
+        return figures.stream()
+                .filter(f -> f.description().toLowerCase().equals(normalizedDescription))
+                .findFirst();
     }
 }

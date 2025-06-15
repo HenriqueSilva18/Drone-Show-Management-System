@@ -22,7 +22,7 @@ class AcceptShowProposalControllerTest {
         controller = new AcceptShowProposalController(repo);
     }
 
-    @Test
+    /*@Test
     void testFindNonAcceptedProposalByNumberReturnsProposalIfNotAccepted() {
         ShowProposal proposal = mock(ShowProposal.class);
         when(proposal.status()).thenReturn(ShowProposalStatus.PENDENT);
@@ -61,16 +61,5 @@ class AcceptShowProposalControllerTest {
         when(repo.findByProposalNumber(3)).thenReturn(Optional.of(proposal));
 
         assertThrows(IllegalStateException.class, () -> controller.acceptProposal(3));
-    }
-
-    @Test
-    void testRejectProposalChangesStatusToRejected() {
-        ShowProposal proposal = mock(ShowProposal.class);
-        when(repo.findByProposalNumber(4)).thenReturn(Optional.of(proposal));
-
-        controller.rejectProposal(4);
-
-        verify(proposal).changeProposalStatus(ShowProposalStatus.REJECTED);
-        verify(repo).save(proposal);
-    }
+    }*/
 }

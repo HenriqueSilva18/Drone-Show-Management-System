@@ -34,7 +34,7 @@ attachment_section: attachment_title location date time duration list_drones lis
 attachment_title: TEXT NEWLINE+;
 
 DATE_SEPARATOR: '/' | '-' | '.';
-PAGE_BREAK: '[page break]';
+PAGE_BREAK: '[page break]' NEWLINE?;
 SEPARATOR_LINE: '---' | '***';
 DOTS: '...';
 NUMBER: [0-9]+;

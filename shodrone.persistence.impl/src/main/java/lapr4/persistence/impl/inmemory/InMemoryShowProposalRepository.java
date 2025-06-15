@@ -1,6 +1,9 @@
 package lapr4.persistence.impl.inmemory;
 
+import lapr4.customermanagement.domain.VAT;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.domain.SimulationStatus;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import eapli.framework.infrastructure.repositories.impl.inmemory.InMemoryDomainRepository;
@@ -51,6 +54,16 @@ public class InMemoryShowProposalRepository
     }
 
     @Override
+    public List<ShowProposalDTO> findAllDTO() {
+        List<ShowProposal> proposals = findAll();
+        List<ShowProposalDTO> dtos = new ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
+
+    @Override
     public ShowProposal save(ShowProposal entity) {
         showProposals.removeIf(existing -> existing.identity().equals(entity.identity()));
         showProposals.add(entity);
@@ -71,4 +84,30 @@ public class InMemoryShowProposalRepository
     public long count() {
         return showProposals.size();
     }
+
+    @Override
+    public List<ShowProposal> findByCustomerVAT(VAT customerVAT){
+        return showProposals.stream()
+                .filter(proposal -> proposal.CustomerVAT().equals(customerVAT))
+                .toList();
+    }
+
+    @Override
+    public List<ShowProposal> findAllProposalsToSend() {
+        return showProposals.stream()
+                .filter(proposal -> (proposal.status().equals(ShowProposalStatus.CREATED) || proposal.status().equals(ShowProposalStatus.REJECTED) || proposal.status().equals(ShowProposalStatus.ABORTED) )&&
+                        proposal.simulationStatus().equals(SimulationStatus.PASSED))
+                .toList();
+    }
+
+    @Override
+    public List<ShowProposalDTO> findAllProposalsToSendDTO() {
+        List<ShowProposal> proposals = findAllProposalsToSend();
+        List<ShowProposalDTO> dtos = new ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
+
 } 

@@ -8,6 +8,7 @@ import lapr4.figureManagement.domain.FigureCategory;
 import lapr4.figureManagement.repositories.FigureRepository;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -21,6 +22,10 @@ public class FigureCategoryController {
 
     public Iterable<FigureCategory> listAll() {
         return service.findAll();
+    }
+
+    public Optional<FigureCategory> findByName(String name) {
+        return service.findByName(name);
     }
 
     public FigureCategory editCategoryDescription(String name, String newDescription) {

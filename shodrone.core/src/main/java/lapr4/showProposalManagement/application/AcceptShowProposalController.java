@@ -3,8 +3,10 @@ package lapr4.showProposalManagement.application;
 import lapr4.infrastructure.persistence.PersistenceContext;
 import lapr4.showProposalManagement.domain.ShowProposalStatus;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class AcceptShowProposalController {
@@ -21,9 +23,10 @@ public class AcceptShowProposalController {
         this.repo = repo;
     }
 
-    public Optional<ShowProposal> findNonAcceptedProposalByNumber(int proposalNumber) {
-        return repo.findByProposalNumber(proposalNumber)
-                .filter(p -> p.status() != ShowProposalStatus.ACCEPTED);
+    public Iterable<ShowProposalDTO> findAcceptedProposalByCustomer() {
+        return repo.findAllDTO().stream()
+                .filter(proposal -> Objects.equals(proposal.status(), "ACCEPTED"))
+                .toList();
     }
 
     public void acceptProposal(int proposalNumber) {
@@ -38,11 +41,21 @@ public class AcceptShowProposalController {
         repo.save(proposal);
     }
 
-    public void rejectProposal(int proposalNumber) {
-        ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
+    public void scheduleProposal(ShowProposalDTO proposalDTO) {
+        Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.number);
+        if (opt.isEmpty()) {
+            throw new IllegalArgumentException("Proposal not found or already ACCEPTED.");
+        }
 
-        proposal.changeProposalStatus(ShowProposalStatus.REJECTED);
+        ShowProposal proposal = opt.get();
+        proposal.changeProposalStatus(ShowProposalStatus.SCHEDULED);
         repo.save(proposal);
     }
+
+    public Optional<ShowProposal> findNonAcceptedProposalByNumber(int proposalNumber) {
+        return repo.findByProposalNumber(proposalNumber)
+                .filter(proposal -> proposal.status() != ShowProposalStatus.ACCEPTED ||
+                                    proposal.status() != ShowProposalStatus.SCHEDULED);
+    }
+
 }

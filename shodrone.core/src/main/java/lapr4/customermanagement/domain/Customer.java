@@ -5,6 +5,7 @@ import eapli.framework.domain.model.DomainEntities;
 import eapli.framework.validations.Preconditions;
 import jakarta.persistence.*;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -106,6 +107,8 @@ public class Customer implements AggregateRoot<VAT> {
 		return this.vat;
 	}
 
+	public Address address() {return this.address;}
+
 	public CustomerType customerType() {
 		return this.customerType;
 	}
@@ -113,4 +116,6 @@ public class Customer implements AggregateRoot<VAT> {
 	public CustomerStatus customerStatus() {
 		return this.customerStatus;
 	}
+
+	public String name() {return this.name;}
 }

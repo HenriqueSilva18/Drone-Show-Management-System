@@ -83,4 +83,27 @@ public class JpaFigureRepository extends JpaAutoTxRepository<Figure, Long, Long>
             e.printStackTrace();
         }
     }
+
+    @Override
+    public Optional<Figure> findByDescription(String description) {
+        try {
+            if (description == null || description.trim().isEmpty()) {
+                return Optional.empty();
+            }
+
+            String normalizedDescription = description.toLowerCase();
+
+            final TypedQuery<Figure> query = entityManager().createQuery(
+                    "SELECT f FROM Figure f WHERE LOWER(f.description) = :description",
+                    Figure.class);
+
+            query.setParameter("description", normalizedDescription);
+
+            return query.getResultStream().findFirst();
+        } catch (Exception e) {
+            System.err.println("Error in findByDescription: " + e.getMessage());
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
 }

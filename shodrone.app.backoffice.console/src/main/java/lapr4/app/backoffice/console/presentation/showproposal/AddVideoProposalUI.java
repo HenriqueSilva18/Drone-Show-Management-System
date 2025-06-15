@@ -4,25 +4,17 @@ import eapli.framework.domain.repositories.ConcurrencyException;
 import eapli.framework.domain.repositories.IntegrityViolationException;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.AbstractUI;
-import eapli.framework.presentation.console.SelectWidget; // Import SelectWidget
+import eapli.framework.presentation.console.SelectWidget;
 import lapr4.showProposalManagement.application.AddVideoProposalController;
+import lapr4.showProposalManagement.dto.AddVideoProposalDTO;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
-import lapr4.infrastructure.persistence.PersistenceContext;
-import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AddVideoProposalUI extends AbstractUI {
     private static final Logger LOGGER = LogManager.getLogger(AddVideoProposalUI.class);
 
-    private final AddVideoProposalController theController;
-
-    public AddVideoProposalUI() {
-        this.theController = new AddVideoProposalController(
-                PersistenceContext.repositories().showProposals(),
-                AuthzRegistry.authorizationService()
-        );
-    }
+    private final AddVideoProposalController theController = new AddVideoProposalController();
 
     @Override
     protected boolean doShow() {
@@ -45,7 +37,8 @@ public class AddVideoProposalUI extends AbstractUI {
         try {
             final String newVideoLink = Console.readLine("\nEnter the video link for proposal #" + selectedProposal.number + ": ");
 
-            theController.addProposalVideo(selectedProposal.number, newVideoLink);
+            AddVideoProposalDTO dto = new AddVideoProposalDTO(selectedProposal.number, newVideoLink);
+            theController.addProposalVideo(dto);
 
             System.out.println("\nVideo link added successfully!");
 

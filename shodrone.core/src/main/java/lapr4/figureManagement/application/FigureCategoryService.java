@@ -7,6 +7,8 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.usermanagement.domain.Roles;
 
+import java.util.Optional;
+
 
 public class FigureCategoryService {
 
@@ -30,26 +32,26 @@ public class FigureCategoryService {
 
     @Transactional
     public FigureCategory registerCategory(FigureCategory category) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN);
         return repo.save(category);
     }
 
 
     @Transactional
     public FigureCategory registerCategory(String name, String description) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN);
         FigureCategory category = new FigureCategory(name, description);
         return repo.save(category);
     }
 
     public Iterable<FigureCategory> findAll() {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
         return repo.findAll();
     }
 
 
     public FigureCategory updateDescription(String name, String newDescription) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN);
 
         FigureCategory category = repo.findByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found: " + name));
@@ -59,7 +61,7 @@ public class FigureCategoryService {
     }
 
     public FigureCategory toggleCategory(String name) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN);
 
         FigureCategory category = repo.findByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Category not found: " + name));
@@ -95,8 +97,13 @@ public class FigureCategoryService {
     }
 
     public Iterable<FigureCategory> findAllActive() {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
         return repo.findAllActive();
+    }
+
+    public Optional<FigureCategory> findByName(String name) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER, Roles.ADMIN, Roles.CRM_COLLABORATOR);
+        return repo.findByName(name);
     }
 
 }

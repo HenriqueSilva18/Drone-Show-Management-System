@@ -4,10 +4,12 @@ import lapr4.Application;
 import lapr4.customermanagement.repositories.CustomerRepository;
 import lapr4.droneManagement.repositories.DroneRepository;
 import lapr4.droneModelManagement.repositories.DroneModelRepository;
+import lapr4.droneModelManagement.repositories.DroneTypeRepository;
 import lapr4.figureManagement.repositories.FigureCategoryRepository;
 import lapr4.figureManagement.repositories.FigureRepository;
 import lapr4.infrastructure.persistence.RepositoryFactory;
 import lapr4.maintenanceManagement.repositories.MaintenanceTypeRepository;
+import lapr4.showProposalManagement.repositories.ProposalTemplateRepository;
 import lapr4.showRequestManagement.repositories.ShowRequestRepository;
 import lapr4.utentemanagement.repositories.SignupRequestRepository;
 import lapr4.utentemanagement.repositories.UtenteRepository;
@@ -145,5 +147,22 @@ public class JpaRepositoryFactory implements RepositoryFactory {
         return new JpaFigureCategoryRepository(PERSISTENCE_UNIT_NAME);
     }
 
+    // =====================
+    // Proposal Templates
+    // =====================
+    @Override
+    public ProposalTemplateRepository templates(TransactionalContext autoTx) {
+        return new JpaProposalTemplateRepository(autoTx);
+    }
+
+    @Override
+    public DroneTypeRepository droneTypes() {
+        return new JpaDroneTypeRepository(PERSISTENCE_UNIT_NAME);
+    }
+
+    @Override
+    public ProposalTemplateRepository templates() {
+        return new JpaProposalTemplateRepository(PERSISTENCE_UNIT_NAME);
+    }
 
 }

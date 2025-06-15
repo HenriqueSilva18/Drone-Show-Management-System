@@ -38,6 +38,8 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lapr4.customermanagement.domain.CustomerType.VIP;
+
 /**
  *
  * @author Paulo Sousa
@@ -50,32 +52,39 @@ public class CustomerBootstrapper implements Action {
 
     @Override
     public boolean execute() {
+
         registerCustomer(
                 "PT123456789", "Company One",
-                new Address("Rua 123", "Lisbon", "1000-100", "Portugal"),
-                "companyone@email.com", "255123456",
+                new Address("Rua 123", "Hamburg", "1000-100", "Germany"),
+                "companyone@email.com", "255123456", CustomerType.REGULAR,
                 List.of(newRepresentative("John Smith", "543456123", "john.rep@companyone.com", "654876123", "Sales Manager", "johnrep", "Password1", "John", "Smith"))
         );
 
         registerCustomer(
                 "PT987654321", "Company Two",
                 new Address("Rua 321", "Porto", "4000-200", "Portugal"),
-                "companytwo@email.com", "251987654",
+                "companytwo@email.com", "251987654", CustomerType.REGULAR,
                 List.of(
                         newRepresentative("Maria Silva", "987456876", "maria.rep@companytwo.com", "999333444", "CEO", "mariarep", "Password1", "Maria", "Silva"),
                         newRepresentative("Carlos Santos", "234543567", "carlos.rep@companytwo.com", "444555666", "Sales Manager", "carlosrep", "Password1", "Carlos", "Santos")
                 )
         );
 
+        registerCustomer(
+                "PT223643289", "Company Nice",
+                new Address("Rua 123", "Hamburg", "1011-101", "Germany"),
+                "companyonetwo@email.com", "255128436", CustomerType.VIP,
+                List.of(newRepresentative("John Silva", "543934523", "john.repfixe@companyone.com", "654816423", "Sales Manager", "johnvip", "Password1", "John", "Silva"))
+        );
+
         return true;
     }
 
-    private void registerCustomer(String vat, String name, Address address, String email, String phone,
+    private void registerCustomer(String vat, String name, Address address, String email, String phone, CustomerType customerType,
                                   List<RegCustomerController.RepresentativeData> representatives) {
         try {
-            CustomerType type = customerController.getCustomerTypes().iterator().next();
             Customer customer = customerController.registerCustomerWithMultipleRepresentatives(
-                    vat, name, address, email, phone, type, representatives
+                    vat, name, address, email, phone, customerType, representatives
             );
             LOGGER.info("Customer {} registered", customer.identity());
         } catch (final ConcurrencyException | IntegrityViolationException e) {

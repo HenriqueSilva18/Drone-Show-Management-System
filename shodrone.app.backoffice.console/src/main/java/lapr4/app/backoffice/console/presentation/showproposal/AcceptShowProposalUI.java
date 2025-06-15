@@ -2,8 +2,10 @@ package lapr4.app.backoffice.console.presentation.showproposal;
 
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.io.util.Console;
+import eapli.framework.presentation.console.SelectWidget;
 import lapr4.showProposalManagement.application.AcceptShowProposalController;
 import lapr4.showProposalManagement.domain.ShowProposal;
+import lapr4.showProposalManagement.dto.ShowProposalDTO;
 
 import java.util.Optional;
 
@@ -13,28 +15,25 @@ public class AcceptShowProposalUI extends AbstractUI {
 
     @Override
     protected boolean doShow() {
-        int proposalNumber = Console.readInteger("Enter the Proposal Number to accept:");
 
-        Optional<ShowProposal> opt = controller.findNonAcceptedProposalByNumber(proposalNumber);
+        Iterable<ShowProposalDTO> proposalsDTO = controller.findAcceptedProposalByCustomer();
 
-        if (opt.isEmpty()) {
-            System.out.println("Proposal not found or already ACCEPTED.");
-            return false;
-        }
+        final SelectWidget<ShowProposalDTO> selector = new SelectWidget<>("Select the Proposal Template to schedule:", proposalsDTO);
+        selector.show();
 
-        ShowProposal proposal = opt.get();
-        System.out.println("\nProposal found:");
-        System.out.println(proposal);  // usa toString()
+        final ShowProposalDTO selectedTemplate = selector.selectedElement();;
 
-        String confirm = Console.readLine("Do you want to accept this proposal? (Y/N): ");
-        if (confirm.equalsIgnoreCase("Y")) {
-            controller.acceptProposal(proposalNumber);
-            System.out.println("Proposal status changed to ACCEPTED.");
+        if (selectedTemplate != null) {
+            System.out.println("Selected Proposal: " + selectedTemplate);
+            controller.scheduleProposal(selectedTemplate);
+            System.out.println("Proposal accepted successfully!");
+            return true;
         } else {
-            System.out.println("Operation cancelled.");
+            System.out.println("No proposal selected.");
         }
 
-        return true;
+
+        return false;
     }
 
     @Override

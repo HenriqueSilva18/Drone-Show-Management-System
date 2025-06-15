@@ -77,6 +77,8 @@ public class Address implements ValueObject, Comparable<Address> {
         return new Address(street, city, postalCode, country);
     }
 
+    public String country() {return this.country;}
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

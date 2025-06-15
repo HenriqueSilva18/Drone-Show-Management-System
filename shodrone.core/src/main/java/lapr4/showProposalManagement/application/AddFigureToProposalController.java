@@ -5,7 +5,6 @@ import eapli.framework.infrastructure.authz.application.AuthzRegistry;
 import lapr4.droneModelManagement.domain.DroneModel;
 import lapr4.droneModelManagement.domain.DroneType;
 import lapr4.droneModelManagement.domain.dto.DroneModelDTO;
-import lapr4.droneModelManagement.repositories.DroneModelRepository;
 import lapr4.figureManagement.domain.Figure;
 import lapr4.figureManagement.dto.FigureDTO;
 import lapr4.figureManagement.repositories.FigureRepository;
@@ -23,9 +22,24 @@ import java.util.Optional;
 
 public class AddFigureToProposalController {
 
-    private final ShowProposalRepository proposalRepository = PersistenceContext.repositories().showProposals();
-    private final AuthorizationService authorizationService = AuthzRegistry.authorizationService();
-    private final FigureRepository figureRepository = PersistenceContext.repositories().figures();
+    private final ShowProposalRepository proposalRepository ;
+    private final AuthorizationService authorizationService ;
+    private final FigureRepository figureRepository ;
+
+    public AddFigureToProposalController() {
+        this.proposalRepository = PersistenceContext.repositories().showProposals();
+        this.figureRepository = PersistenceContext.repositories().figures();
+        this.authorizationService = AuthzRegistry.authorizationService();
+    }
+
+    public AddFigureToProposalController(ShowProposalRepository proposalRepository,
+                                         FigureRepository figureRepository,
+                                         AuthorizationService authorizationService) {
+        this.proposalRepository = proposalRepository;
+        this.figureRepository = figureRepository;
+        this.authorizationService = authorizationService;
+    }
+
 
 
     public List<FigureDTO> availableFigures() {
@@ -40,6 +54,18 @@ public class AddFigureToProposalController {
 
         }
         return dtos;
+    }
+
+    public List<FigureDTO> availableActiveFigures() {
+        authorizationService.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_COLLABORATOR);
+        List<FigureDTO> allFigures = availableFigures();
+        List<FigureDTO> activeFigures = new ArrayList<>();
+        for (FigureDTO figure : allFigures) {
+            if (figure.isActive) {
+                activeFigures.add(figure);
+            }
+        }
+        return activeFigures;
     }
 
     public List<DroneModelDTO> availableModels(int proposalId) {

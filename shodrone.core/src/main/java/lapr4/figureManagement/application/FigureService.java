@@ -67,7 +67,7 @@ public class FigureService {
 
     @Transactional
     public Figure registerFigure(String description, Set<String> keywords, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
@@ -79,7 +79,7 @@ public class FigureService {
     }
 
     public Figure registerFigure(String description, boolean exclusive, VAT clientVAT, FigureCategory category, String DSLCode, String DSLVersion, List<DroneType> droneTypes) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.SHOW_DESIGNER);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.SHOW_DESIGNER);
 
         if (clientVAT == null) {
             throw new IllegalArgumentException("A figure must have a client VAT associated.");
@@ -92,7 +92,7 @@ public class FigureService {
 
     @Transactional
     public Figure decommissionFigure(Figure figure) {
-        authz.ensureAuthenticatedUserHasAnyOf(Roles.CRM_MANAGER);
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.POWER_USER, Roles.CRM_MANAGER);
         Figure fig = repo.ofIdentity(figure.identity())
                 .orElseThrow(() -> new IllegalArgumentException("Figure not found: " + figure.identity()));
 
@@ -105,4 +105,13 @@ public class FigureService {
 
         return repo.save(fig);
     }
+
+    public Optional<Figure> findByDescription(String description) {
+        authz.ensureAuthenticatedUserHasAnyOf(Roles.ADMIN, Roles.POWER_USER, Roles.CRM_COLLABORATOR, Roles.CRM_MANAGER);
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be null or empty");
+        }
+        return repo.findByDescription(description);
+    }
+
 }
