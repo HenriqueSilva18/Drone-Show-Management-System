@@ -49,4 +49,8 @@ public class ShowProposalDTO {
                 eventDate
         );
     }
+
+    public String status() {
+        return status;
+    }
 }

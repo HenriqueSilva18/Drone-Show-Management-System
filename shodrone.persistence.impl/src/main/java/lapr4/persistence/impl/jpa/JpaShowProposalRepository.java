@@ -49,6 +49,15 @@ public class JpaShowProposalRepository extends JpaAutoTxRepository<ShowProposal,
         return query.getResultList();
     }
 
+    @Override
+    public List<ShowProposalDTO> findAllDTO() {
+        List<ShowProposal> proposals = findAll();
+        List<ShowProposalDTO> dtos = new java.util.ArrayList<>();
+        for (ShowProposal proposal : proposals) {
+            dtos.add(proposal.toDTO());
+        }
+        return dtos;
+    }
 
 
     @Override
@@ -61,10 +70,17 @@ public class JpaShowProposalRepository extends JpaAutoTxRepository<ShowProposal,
     @Override
     public List<ShowProposal> findAllProposalsToSend() {
         final var query = entityManager().createQuery(
-                "SELECT p FROM ShowProposal p WHERE p.status = :status AND p.simulationStatus = :simulation",
+                "SELECT p FROM ShowProposal p " +
+                        "WHERE p.status IN (:statuses) AND p.simulationStatus = :simulation",
                 ShowProposal.class);
-        query.setParameter("status", ShowProposalStatus.CREATED);
+
+        query.setParameter("statuses", List.of(
+                ShowProposalStatus.CREATED,
+                ShowProposalStatus.REJECTED,
+                ShowProposalStatus.ABORTED
+        ));
         query.setParameter("simulation", SimulationStatus.PASSED);
+
         return query.getResultList();
     }
 

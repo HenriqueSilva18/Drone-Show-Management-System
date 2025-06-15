@@ -21,11 +21,11 @@ public class AcceptRejectProposalUI extends AbstractUI {
     @Override
     protected boolean doShow() {
         System.out.println("=== Accept/Reject a Proposal ===");
-        final int proposalNumber = Console.readInteger("Enter the Proposal Number:");
+        /*final int proposalNumber = Console.readInteger("Enter the Proposal Number:");
 
         // For simplicity, we'll fetch the proposal details from the backoffice controller.
         // In a real-world scenario, this would likely be a call to the server.
-        Optional<ShowProposal> opt = controller.findNonAcceptedProposalByNumber(proposalNumber);
+        Optional<ShowProposal> opt = null;
 
         if (opt.isEmpty()) {
             System.out.println("Proposal not found or has already been accepted/rejected.");
@@ -58,7 +58,7 @@ public class AcceptRejectProposalUI extends AbstractUI {
             // Similarly, a call to reject the proposal
             controller.rejectProposal(proposalNumber);
             System.out.println("Proposal rejected successfully!");
-        }
+        }*/
 
         return false;
     }

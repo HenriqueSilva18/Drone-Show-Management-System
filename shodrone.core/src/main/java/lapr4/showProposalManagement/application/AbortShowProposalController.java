@@ -9,17 +9,17 @@ import lapr4.showProposalManagement.repositories.ShowProposalRepository;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AcceptShowProposalController {
+public class AbortShowProposalController {
 
     private final ShowProposalRepository repo;
 
     // Production constructor
-    public AcceptShowProposalController() {
+    public AbortShowProposalController() {
         this(PersistenceContext.repositories().showProposals());
     }
 
     // Test constructor (mock-friendly)
-    public AcceptShowProposalController(ShowProposalRepository repo) {
+    public AbortShowProposalController(ShowProposalRepository repo) {
         this.repo = repo;
     }
 
@@ -29,33 +29,22 @@ public class AcceptShowProposalController {
                 .toList();
     }
 
-    public void acceptProposal(int proposalNumber) {
-        ShowProposal proposal = repo.findByProposalNumber(proposalNumber)
+    public void abortProposal(ShowProposalDTO proposalDTO) {
+        ShowProposal proposal = repo.findByProposalNumber(proposalDTO.number)
                 .orElseThrow(() -> new IllegalArgumentException("Proposal not found"));
 
-        if (proposal.status() == ShowProposalStatus.ACCEPTED) {
-            throw new IllegalStateException("Proposal is already accepted.");
+        if (proposal.status() == ShowProposalStatus.ABORTED) {
+            throw new IllegalStateException("Proposal is already aborted.");
         }
 
-        proposal.changeProposalStatus(ShowProposalStatus.ACCEPTED);
-        repo.save(proposal);
-    }
-
-    public void scheduleProposal(ShowProposalDTO proposalDTO) {
-        Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.number);
-        if (opt.isEmpty()) {
-            throw new IllegalArgumentException("Proposal not found or already ACCEPTED.");
-        }
-
-        ShowProposal proposal = opt.get();
-        proposal.changeProposalStatus(ShowProposalStatus.SCHEDULED);
+        proposal.changeProposalStatus(ShowProposalStatus.ABORTED);
         repo.save(proposal);
     }
 
     public Optional<ShowProposal> findNonAcceptedProposalByNumber(int proposalNumber) {
         return repo.findByProposalNumber(proposalNumber)
                 .filter(proposal -> proposal.status() != ShowProposalStatus.ACCEPTED ||
-                                    proposal.status() != ShowProposalStatus.SCHEDULED);
+                        proposal.status() != ShowProposalStatus.SCHEDULED);
     }
 
 }

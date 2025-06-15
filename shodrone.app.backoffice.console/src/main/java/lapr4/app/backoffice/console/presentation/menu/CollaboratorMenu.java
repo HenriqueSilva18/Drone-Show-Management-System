@@ -39,6 +39,7 @@ public class CollaboratorMenu extends MainMenu {
 	private static final int SEND_SHOW_PROPOSAL = 3;
 	private static final int POPULATE_MODEL_LIST = 4;
 	private static final int ACCEPT_SHOW_PROPOSAL = 5;
+	private static final int REJECT_SHOW_PROPOSAL = 6;
 
 	// MAIN MENU
 	private static final int CUSTOMERS_OPTION = 2;
@@ -80,7 +81,8 @@ public class CollaboratorMenu extends MainMenu {
 		menu.addItem(ADD_VIDEO_PROPOSAL, "Add Video of Simulation", new AddVideoProposalUI()::show);
 		menu.addItem(SEND_SHOW_PROPOSAL, "Send Show Proposal", new SendShowProposalUI()::show);
 		menu.addItem(POPULATE_MODEL_LIST, "Add Drone Models to a Show Proposal", new PopulateModelListUI()::show);
-		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as ACCEPTED", new AcceptShowProposalUI()::show);
+		menu.addItem(ACCEPT_SHOW_PROPOSAL, "Mark Show Proposal as SCHEDULED by Collaborator", new AcceptShowProposalUI()::show);
+		menu.addItem(REJECT_SHOW_PROPOSAL, "Mark Show Proposal as ABORTED by Collaborator", new AbortShowProposalUI()::show);
 		menu.addItem(EXIT_OPTION, RETURN_LABEL, Actions.SUCCESS);
 
 		return menu;

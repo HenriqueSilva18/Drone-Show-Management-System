@@ -3,30 +3,31 @@ package lapr4.app.backoffice.console.presentation.showproposal;
 import eapli.framework.presentation.console.AbstractUI;
 import eapli.framework.io.util.Console;
 import eapli.framework.presentation.console.SelectWidget;
+import lapr4.showProposalManagement.application.AbortShowProposalController;
 import lapr4.showProposalManagement.application.AcceptShowProposalController;
 import lapr4.showProposalManagement.domain.ShowProposal;
 import lapr4.showProposalManagement.dto.ShowProposalDTO;
 
 import java.util.Optional;
 
-public class AcceptShowProposalUI extends AbstractUI {
+public class AbortShowProposalUI extends AbstractUI {
 
-    private final AcceptShowProposalController controller = new AcceptShowProposalController();
+    private final AbortShowProposalController controller = new AbortShowProposalController();
 
     @Override
     protected boolean doShow() {
 
         Iterable<ShowProposalDTO> proposalsDTO = controller.findAcceptedProposalByCustomer();
 
-        final SelectWidget<ShowProposalDTO> selector = new SelectWidget<>("Select the Proposal Template to schedule:", proposalsDTO);
+        final SelectWidget<ShowProposalDTO> selector = new SelectWidget<>("Select the Proposal Template to abort:", proposalsDTO);
         selector.show();
 
         final ShowProposalDTO selectedTemplate = selector.selectedElement();;
 
         if (selectedTemplate != null) {
             System.out.println("Selected Proposal: " + selectedTemplate);
-            controller.scheduleProposal(selectedTemplate);
-            System.out.println("Proposal accepted successfully!");
+            controller.abortProposal(selectedTemplate);
+            System.out.println("Proposal aborted successfully!");
             return true;
         } else {
             System.out.println("No proposal selected.");
@@ -38,6 +39,6 @@ public class AcceptShowProposalUI extends AbstractUI {
 
     @Override
     public String headline() {
-        return "Accept Show Proposal";
+        return "Abort Show Proposal";
     }
 }

@@ -8,21 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15ec2e4b-bcdb-4e69-be0a-008a6998eb69" name="Changes" comment="Drone Type Logic added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/drone.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/main.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/report.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script0.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/script4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/shared.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SCOMP/sprint3/simulator_report.txt" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AbortShowProposalUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AbortShowProposalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/menu/CollaboratorMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AcceptShowProposalUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.backoffice.console/src/main/java/lapr4/app/backoffice/console/presentation/showproposal/AcceptShowProposalUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.app.customer.console/src/main/java/lapr4/app/customer/console/presentation/proposal/AcceptRejectProposalUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.app.customer.console/src/main/java/lapr4/app/customer/console/presentation/proposal/AcceptRejectProposalUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AcceptShowProposalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/AcceptShowProposalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/GenerateProposalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/application/GenerateProposalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/domain/ShowProposalStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/domain/ShowProposalStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/dto/ShowProposalDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/dto/ShowProposalDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/repositories/ShowProposalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/main/java/lapr4/showProposalManagement/repositories/ShowProposalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/showProposalManagement/application/AcceptShowProposalControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.core/src/test/java/lapr4/showProposalManagement/application/AcceptShowProposalControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowProposalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/inmemory/InMemoryShowProposalRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaShowProposalRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/shodrone.persistence.impl/src/main/java/lapr4/persistence/impl/jpa/JpaShowProposalRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,6 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2udFP3eqRgVp6dgMd8LjbfHe7RW" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

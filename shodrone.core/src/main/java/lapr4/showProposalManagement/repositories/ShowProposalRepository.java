@@ -17,6 +17,8 @@ public interface ShowProposalRepository extends DomainRepository<Integer, ShowPr
     
     List<ShowProposal> findAll();
 
+    List<ShowProposalDTO> findAllDTO();
+
     List<ShowProposal> findByCustomerVAT(VAT customerVAT);
 
     List<ShowProposal> findAllProposalsToSend();
