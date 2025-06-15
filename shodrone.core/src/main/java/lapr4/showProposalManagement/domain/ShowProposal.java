@@ -327,4 +327,20 @@ public class ShowProposal implements AggregateRoot<Integer>, DTOable<ShowProposa
         this.proposalText = proposalText;
     }
 
+    public static ShowProposal from(VAT customerVAT, List<FigureInShowProposal> figures) {
+        if (customerVAT == null || figures == null) {
+            throw new IllegalArgumentException("VAT e lista de figuras não podem ser nulos.");
+        }
+
+        ShowProposal fakeProposal = new ShowProposal() {
+            private final List<FigureInShowProposal> internalFigures = figures;
+
+            @Override
+            public List<FigureInShowProposal> figuresList() {
+                return internalFigures;
+            }
+        };
+
+        return fakeProposal;
+    }
 }
