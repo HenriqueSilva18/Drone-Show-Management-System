@@ -1,0 +1,224 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+class CreateShowProposalUI {
+    - theController : CreateShowProposalController
+    + doShow() : boolean
+    - selectProposalTemplate(showRequestDTO : ShowRequestDTO) : String
+    + headline() : String
+}
+
+class CreateShowProposalController {
+    - authz : AuthorizationService
+    - showProposalRepository : ShowProposalRepository
+    - showRequestRepository : ShowRequestRepository
+    - customerRepository : CustomerRepository
+    - proposalTemplateRepository : ProposalTemplateRepository
+    + createShowProposal(dto : ShowProposalDTO) : ShowProposalDTO
+    + getTemplateTypeForCustomer(customerVAT : String) : String
+    + listShowRequests() : Iterable<ShowRequestDTO>
+}
+
+class Customer <<AggregateRoot>> {
+    - vat : VAT
+    - name : String
+    - address : Address
+    - email : Email
+    - phone : Phone
+    - customerType : CustomerType
+    - customerStatus : CustomerStatus
+    - representatives : List<Representative>
+    + Customer(vat : VAT, name : String, address : Address, email : Email, \n    phone : Phone, customerType : CustomerType, customerStatus : CustomerStatus, \n    representatives : List<Representative>)
+    + address() : Address
+    + customerType() : CustomerType
+    + customerStatus() : CustomerStatus
+    + name() : String
+    + identity() : VAT
+}
+
+class ShowRequest <<AggregateRoot>> {
+    - showRequestId : ShowRequestId
+    - numDrones : int
+    - duration : double
+    - showDescription : String
+    - dateValue : String
+    - status : String
+    - customer : Customer
+    - clientVAT : VAT
+    + ShowRequest(numDrones : int, duration : double, showDescription : String, \n    showRequestId : ShowRequestId, dateValue : String, customer : Customer, \n    clientVAT : VAT, drones : List<Drone>, figures : List<Figure>, status : String)
+    + markAsProposalDone() : void
+    + getStatus() : String
+    + getNumDrones() : int
+    + getDuration() : double
+    + getShowDescription() : String
+    + getDateValue() : String
+    + customer() : Customer
+    + getClientVAT() : VAT
+    + identity() : ShowRequestId
+    + toDTO() : ShowRequestDTO
+}
+
+class ShowProposal <<AggregateRoot>> {
+    - number : int
+    - customer : Customer
+    - showRequest : ShowRequest
+    - totalNumDrones : int
+    - template : ProposalTemplate
+    - eventLocation : Coordinates
+    - eventDateTime : LocalDateTime
+    - eventDuration : int
+    - status : ShowProposalStatus
+    - simulationStatus : SimulationStatus
+    - simulationVideoLink : String
+    - insuranceValue : double
+    - proposalText : String
+    - sentDate : LocalDate
+    - sentBy : Name
+    + ShowProposal(showRequest : ShowRequest, totalNumDrones : int, \n    eventLocation : Coordinates, eventDateTime : LocalDateTime, \n    eventDuration : int, template : ProposalTemplate)
+    + toDTO() : ShowProposalDTO
+    + changeVideoTo(newVideoLink : String) : void
+    + changeProposalStatus(status : ShowProposalStatus) : void
+    + changeSimulationStatus(status : SimulationStatus) : void
+    + changeSentDate(sentDate : LocalDate) : void
+    + changeSentBy(sentBy : Name) : void
+    + changeProposalText(proposalText : String) : void
+}
+
+class Coordinates <<(V, #ADD8E6) valueObject>> {
+    - latitude : double
+    - longitude : double
+    + Coordinates(latitude : double, longitude : double)
+    + latitude() : double
+    + longitude() : double
+}
+
+class ProposalTemplate <<AggregateRoot>> {
+    - name : String
+    - filePath : String
+    + ProposalTemplate(name : String)
+    + toDTO() : ProposalTemplateDTO
+    + changeFilePath(newFilePath : String) : void
+}
+
+class ShowProposalDTO {
+    + number : int
+    + customerVAT : String
+    + showRequestID : int
+    + totalNumDrones : int
+    + simulationVideoLink : String
+    + latitude : double
+    + longitude : double
+    + eventDate : String
+    + eventHour : String
+    + eventDuration : int
+    + status : String
+    + simulationStatus : String
+    + insuranceValue : double
+    + templateType : String
+    + ShowProposalDTO(showRequestID : int, totalNumDrones : int, \n    latitude : double, longitude : double, eventDate : String, \n    eventHour : String, eventDuration : int, templateType : String)
+    + toString() : String
+    + status() : String
+}
+
+class ShowRequestDTO {
+    + id : int
+    + customerVAT : String
+    + showDescription : String
+    + numDrones : int
+    + duration : double
+    + dateValue : String
+    + status : String
+    + ShowRequestDTO(id : int, customerVAT : String, showDescription : String, \n    numDrones : int, duration : double, dateValue : String, status : String)
+}
+
+class ProposalTemplateDTO {
+    + name : String
+    + filePath : String
+    + ProposalTemplateDTO(name : String, filePath : String)
+}
+
+enum ShowProposalStatus {
+    CREATED
+    PENDENT
+    REJECTED
+    ACCEPTED
+    SCHEDULED
+    ABORTED
+}
+
+enum SimulationStatus {
+    UNTESTED
+    FAILED
+    PASSED
+}
+
+enum CustomerType {
+    VIP
+    REGULAR
+}
+
+interface ShowProposalRepository {
+    + save(showProposal : ShowProposal) : ShowProposal
+    + findByProposalNumber(proposalNumber : int) : Optional<ShowProposal>
+    + findByStatus(status : String) : Iterable<ShowProposal>
+    + findAll() : List<ShowProposal>
+    + findAllDTO() : List<ShowProposalDTO>
+    + findByCustomerVAT(customerVAT : VAT) : List<ShowProposal>
+    + findAllProposalsToSend() : List<ShowProposal>
+    + findAllProposalsToSendDTO() : List<ShowProposalDTO>
+}
+
+interface ShowRequestRepository {
+    + findById(showRequestId : int) : Optional<ShowRequest>
+    + findAll() : Iterable<ShowRequest>
+}
+
+interface CustomerRepository {
+    + findByVAT(vatNumber : String) : Optional<Customer>
+}
+
+interface ProposalTemplateRepository {
+    + ofIdentity(templateType : String) : Optional<ProposalTemplate>
+    + findAll() : List<ProposalTemplate>
+    + findByName(name : String) : ProposalTemplate
+}
+
+CreateShowProposalUI ..> CreateShowProposalController
+CreateShowProposalUI ..> ShowProposalDTO
+CreateShowProposalUI ..> ShowRequestDTO
+
+CreateShowProposalController --> ShowProposalRepository
+CreateShowProposalController --> ShowRequestRepository
+CreateShowProposalController --> CustomerRepository
+CreateShowProposalController --> ProposalTemplateRepository
+CreateShowProposalController ..> ShowProposal
+CreateShowProposalController ..> ShowProposalDTO
+CreateShowProposalController ..> ShowRequestDTO
+
+ShowProposal --> "1" Customer
+ShowProposal --> "1" ShowRequest
+ShowProposal --> "1" ProposalTemplate
+ShowProposal --> "1" Coordinates
+ShowProposal --> "1" ShowProposalStatus
+ShowProposal --> "1" SimulationStatus
+ShowProposal ..> ShowProposalDTO
+
+ShowRequest --> "1" Customer
+ShowRequest ..> ShowRequestDTO
+
+Customer --> "1" CustomerType
+
+ProposalTemplate ..> ProposalTemplateDTO
+
+ShowProposalRepository ..> ShowProposal
+ShowRequestRepository ..> ShowRequest
+CustomerRepository ..> Customer
+ProposalTemplateRepository ..> ProposalTemplate
+
+@enduml 
