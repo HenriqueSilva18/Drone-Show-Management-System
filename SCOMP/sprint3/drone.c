@@ -11,7 +11,7 @@
 #include "shared.h"
 
 SharedMemoryLayout* shm = NULL;
-sem_t *sem_mutex, *sem_drone_sync, *sem_main_sync;
+sem_t *sem_mutex, *sem_drone_sync, *sem_main_sync, *sem_ready;
 volatile sig_atomic_t terminate = 0;
 
 void handle_sigterm(int signum) {
@@ -36,8 +36,10 @@ void init_communication_resources(int drone_id) {
 	sem_mutex = sem_open(SEM_MUTEX_NAME, 0);
 	sem_drone_sync = sem_open(SEM_DRONE_SYNC_NAME, 0);
 	sem_main_sync = sem_open(SEM_MAIN_SYNC_NAME, 0);
+	sem_ready = sem_open(SEM_READY_NAME, 0);
 
-	if (sem_mutex == SEM_FAILED || sem_drone_sync == SEM_FAILED || sem_main_sync == SEM_FAILED) {
+	if (sem_mutex == SEM_FAILED || sem_drone_sync == SEM_FAILED ||
+		 sem_main_sync == SEM_FAILED || sem_ready == SEM_FAILED) {
 		perror("sem_open in drone");
 		exit(EXIT_FAILURE);
 	}
@@ -50,6 +52,7 @@ void cleanup_resources(int drone_id) {
 	sem_close(sem_mutex);
 	sem_close(sem_drone_sync);
 	sem_close(sem_main_sync);
+	sem_close(sem_ready);
 	printf("[DRONE %d] Terminado e recursos libertados.\n", drone_id);
 }
 
@@ -75,24 +78,18 @@ int main(int argc, char* argv[]) {
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGTERM, &sa, NULL);
-	signal(SIGINT, SIG_IGN);
+	sigaction(SIGINT, &sa, NULL);
 
 	int x = 0, y = 0, z = 0;
 	int script_completed = 0;
 
+	sem_post(sem_ready);	 // Drone sinaliza que está pronto
+
+	// Lê a primeira posição antes de entrar no loop
 	if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
-		printf("[DRONE %d] Script vazio ou mal formatado.\n", drone_id);
+		printf("[DRONE %d] ERRO: Script vazio ou inválido.\n", drone_id);
 		script_completed = 1;
 	}
-
-	// ✅ Correção: escreve a posição inicial imediatamente
-	sem_wait(sem_mutex);
-	shm->drone_data[drone_id].x = x;
-	shm->drone_data[drone_id].y = y;
-	shm->drone_data[drone_id].z = z;
-	shm->drone_data[drone_id].drone_id = drone_id;
-	shm->drone_data[drone_id].script_completed = script_completed;
-	sem_post(sem_mutex);
 
 	while (!terminate) {
 		sem_wait(sem_drone_sync);
@@ -108,14 +105,15 @@ int main(int argc, char* argv[]) {
 		shm->drone_data[drone_id].script_completed = script_completed;
 		sem_post(sem_mutex);
 
-		sem_post(sem_main_sync);
-
+		// Lê a próxima posição apenas depois de escrever a atual
 		if (!script_completed) {
 			if (fscanf(script, "%d %d %d", &x, &y, &z) != 3) {
-				printf("[DRONE %d] Script terminado. Última posição mantida.\n", drone_id);
 				script_completed = 1;
+				printf("[DRONE %d] Script terminado. Última posição mantida.\n", drone_id);
 			}
 		}
+
+		sem_post(sem_main_sync);
 	}
 
 	fclose(script);

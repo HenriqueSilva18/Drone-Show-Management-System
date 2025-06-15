@@ -14,7 +14,7 @@
 #include "shared.h"
 
 SharedMemoryLayout* shm = NULL;
-sem_t *sem_mutex, *sem_drone_sync, *sem_main_sync;
+sem_t *sem_mutex, *sem_drone_sync, *sem_main_sync, *sem_ready;
 pid_t drone_pids[MAX_DRONES];
 Position trajectory[MAX_STEPS][MAX_DRONES];
 int num_drones = 3;
@@ -23,9 +23,11 @@ void cleanup_resources() {
 	sem_close(sem_mutex);
 	sem_close(sem_drone_sync);
 	sem_close(sem_main_sync);
+	sem_close(sem_ready);
 	sem_unlink(SEM_MUTEX_NAME);
 	sem_unlink(SEM_DRONE_SYNC_NAME);
 	sem_unlink(SEM_MAIN_SYNC_NAME);
+	sem_unlink(SEM_READY_NAME);
 	if (shm) {
 		munmap(shm, sizeof(SharedMemoryLayout));
 		shm_unlink(SHM_NAME);
@@ -55,15 +57,15 @@ void* collision_thread_func(void* arg) {
 					for (int k = 0; k < shm->collision_log_count; k++) {
 						CollisionEvent prev = shm->collision_log[k];
 						if (prev.step == step &&
-							((prev.drone1_id == i && prev.drone2_id == j) ||
-							 (prev.drone1_id == j && prev.drone2_id == i))) {
+							 ((prev.drone1_id == i && prev.drone2_id == j) ||
+							  (prev.drone1_id == j && prev.drone2_id == i))) {
 							duplicado = 1;
 							break;
 						}
 					}
 					if (!duplicado && shm->collision_log_count < MAX_COLLISION_LOG) {
 						printf("[COLLISION] Drones %d e %d colidiram em (%d,%d,%d) no passo %d\n",
-							i, j, di.x, di.y, di.z, step);
+								 i, j, di.x, di.y, di.z, step);
 
 						CollisionEvent ev = {step, i, j, di.x, di.y, di.z};
 						shm->collision_log[shm->collision_log_count++] = ev;
@@ -96,7 +98,7 @@ void* report_thread_func(void* arg) {
 		while (shm->next_collision_to_report < shm->collision_log_count) {
 			CollisionEvent ev = shm->collision_log[shm->next_collision_to_report++];
 			printf("[REPORT] Colisão registada: Drones %d & %d @ (%d,%d,%d), passo %d\n",
-				ev.drone1_id, ev.drone2_id, ev.x, ev.y, ev.z, ev.step);
+					 ev.drone1_id, ev.drone2_id, ev.x, ev.y, ev.z, ev.step);
 		}
 		if (shm->simulation_finished_flag) {
 			pthread_mutex_unlock(&shm->thread_sync_mutex);
@@ -153,6 +155,7 @@ int main(int argc, char* argv[]) {
 	sem_mutex = sem_open(SEM_MUTEX_NAME, O_CREAT, 0666, 1);
 	sem_drone_sync = sem_open(SEM_DRONE_SYNC_NAME, O_CREAT, 0666, 0);
 	sem_main_sync = sem_open(SEM_MAIN_SYNC_NAME, O_CREAT, 0666, 0);
+	sem_ready = sem_open(SEM_READY_NAME, O_CREAT, 0666, 0);
 
 	for (int i = 0; i < num_drones; i++) {
 		pid_t pid = fork();
@@ -165,7 +168,9 @@ int main(int argc, char* argv[]) {
 		drone_pids[i] = pid;
 	}
 
-	sleep(1); // garantir que todos os drones estão prontos
+	// Esperar que todos os drones sinalizem que estão prontos
+	for (int i = 0; i < num_drones; i++)
+		sem_wait(sem_ready);
 
 	pthread_t t1, t2;
 	pthread_create(&t1, NULL, collision_thread_func, NULL);
@@ -180,12 +185,11 @@ int main(int argc, char* argv[]) {
 	sem_wait(sem_mutex);
 	for (int d = 0; d < shm->num_drones; d++) {
 		trajectory[0][d] = (Position){
-			.x = shm->drone_data[d].x,
-			.y = shm->drone_data[d].y,
-			.z = shm->drone_data[d].z,
-			.drone_id = d,
-			.step = 0
-		};
+			 .x = shm->drone_data[d].x,
+			 .y = shm->drone_data[d].y,
+			 .z = shm->drone_data[d].z,
+			 .drone_id = d,
+			 .step = 0};
 	}
 	sem_post(sem_mutex);
 	shm->current_step = 1;
@@ -202,12 +206,11 @@ int main(int argc, char* argv[]) {
 		sem_wait(sem_mutex);
 		for (int d = 0; d < shm->num_drones; d++) {
 			trajectory[step][d] = (Position){
-				.x = shm->drone_data[d].x,
-				.y = shm->drone_data[d].y,
-				.z = shm->drone_data[d].z,
-				.drone_id = d,
-				.step = step
-			};
+				 .x = shm->drone_data[d].x,
+				 .y = shm->drone_data[d].y,
+				 .z = shm->drone_data[d].z,
+				 .drone_id = d,
+				 .step = step};
 		}
 		sem_post(sem_mutex);
 

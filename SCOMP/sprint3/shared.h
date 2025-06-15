@@ -5,13 +5,14 @@
 #include <semaphore.h>
 
 #define MAX_DRONES 10
-#define MAX_STEPS  100              
+#define MAX_STEPS  100
 #define MAX_COLLISION_LOG 15
 
 #define SHM_NAME "/shm_sim"
 #define SEM_MUTEX_NAME "/sem_mutex"
 #define SEM_DRONE_SYNC_NAME "/sem_dsync"
 #define SEM_MAIN_SYNC_NAME  "/sem_msync"
+#define SEM_READY_NAME "/sem_ready"
 
 typedef struct {
 	int x, y, z;
