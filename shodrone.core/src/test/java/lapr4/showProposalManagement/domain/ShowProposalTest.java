@@ -91,8 +91,8 @@ class ShowProposalTest {
     }
 
     @Test
-    void ensureCanChangeVideoToValidLink() {
-        final String videoLink = "http://shodrone.com/video.mp4";
+    void ensureCanChangeVideo() {
+        String videoLink = "http://shodrone.com/video.mp4";
         subject.changeVideoTo(videoLink);
         assertEquals(videoLink, subject.simulationVideoLink());
     }
@@ -119,5 +119,35 @@ class ShowProposalTest {
         assertThrows(IllegalArgumentException.class, () -> subject.changeProposalStatus(null));
     }
 
+    @Test
+    void ensureCanChangeSimulationStatus() {
+        subject.changeSimulationStatus(SimulationStatus.PASSED);
+        assertEquals(SimulationStatus.PASSED, subject.simulationStatus());
+    }
 
+    @Test
+    void ensureCannotChangeSimulationStatusToNull() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeSimulationStatus(null));
+    }
+
+    @Test
+    void ensureCanChangeProposalText() {
+        String text = "This is a new proposal text.";
+        subject.changeProposalText(text);
+    }
+
+    @Test
+    void ensureCannotChangeProposalTextToEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalText(""));
+    }
+
+    @Test
+    void ensureCannotChangeProposalTextToNull() {
+        assertThrows(IllegalArgumentException.class, () -> subject.changeProposalText(null));
+    }
+
+    @Test
+    void identity() {
+        assertEquals(0, subject.identity());
+    }
 }

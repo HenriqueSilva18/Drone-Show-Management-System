@@ -1,0 +1,115 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "CRM Collaborator" as COLLAB
+participant ":CreateShowProposalUI" as UI
+participant ":CreateShowProposalController" as CTRL
+participant ":ShowProposalRepository" as PROPOSAL_REPO
+participant ":ShowRequestRepository" as REQUEST_REPO
+participant ":CustomerRepository" as CUST_REPO
+participant ":ProposalTemplateRepository" as TEMPLATE_REPO
+participant "showRequest\n:ShowRequest" as REQUEST
+participant "showRequestDTO\n:ShowRequestDTO" as REQUEST_DTO
+participant "showRequestDTOList\n:List<ShowRequestDTO>" as REQUEST_DTO_LIST
+participant "proposalTemplate\n:ProposalTemplate" as TEMPLATE
+participant "showProposal\n:ShowProposal" as PROPOSAL
+participant "showProposalDTO\n:ShowProposalDTO" as dto
+
+activate COLLAB
+
+    COLLAB -> UI : asks to create a new show proposal
+    activate UI
+        UI -> CTRL : listShowRequests()
+        activate CTRL
+            CTRL -> REQUEST_REPO : findAll()
+            activate REQUEST_REPO
+                REQUEST_REPO --> CTRL : showRequests
+            deactivate REQUEST_REPO
+            
+            create REQUEST_DTO_LIST
+            CTRL -> REQUEST_DTO_LIST : new ArrayList<>()
+            
+            loop for each showRequest
+                CTRL -> REQUEST : toDTO()
+                activate REQUEST
+                    REQUEST --> REQUEST_DTO** : create
+                    REQUEST --> CTRL : showRequestDTO
+                deactivate REQUEST
+                
+                CTRL -> REQUEST_DTO_LIST : add(showRequestDTO)
+            end
+            
+            CTRL --> UI : showRequestDTOList
+        deactivate CTRL
+        UI --> COLLAB : displays available show requests and asks to select one
+    deactivate UI
+
+    COLLAB -> UI : selects a show request
+    activate UI
+        UI -> CTRL : getTemplateTypeForCustomer(customerVAT)
+        activate CTRL
+            CTRL -> CUST_REPO : findByVAT(customerVAT)
+            activate CUST_REPO
+                CUST_REPO --> CTRL : customer
+            deactivate CUST_REPO
+            CTRL -> CTRL: checkTemplateForCustomer(customer)
+            activate CTRL
+            CTRL --> CTRL: templateType
+            deactivate CTRL
+            CTRL --> UI : templateType
+        deactivate CTRL
+        UI --> COLLAB : displays selected template type and request data
+    deactivate UI
+
+    COLLAB -> UI : inputs proposal details (totalNumDrones, \nlatitude, longitude, eventDate, \neventHour, eventDuration)
+    activate UI
+        UI -> dto**: create(showRequestDTO.ID, totalNumDrones, \nlatitude, longitude, eventDate, \neventHour, eventDuration)
+        UI -> CTRL : createShowProposal(showProposalDTO)
+        activate CTRL
+            CTRL -> REQUEST_REPO : findById(showRequestID)
+            activate REQUEST_REPO
+                REQUEST_REPO --> CTRL : showRequest
+            deactivate REQUEST_REPO
+
+            CTRL -> TEMPLATE_REPO : ofIdentity(templateType)
+            activate TEMPLATE_REPO
+                TEMPLATE_REPO --> CTRL : template
+            deactivate TEMPLATE_REPO
+
+            create PROPOSAL
+            CTRL -> PROPOSAL : create(showRequest, totalNumDrones, \neventLocation, eventDateTime, \neventDuration, template)
+            activate PROPOSAL
+                PROPOSAL --> CTRL : showProposal
+            deactivate PROPOSAL
+
+            CTRL -> REQUEST : markRequestAsProposalDone()
+            activate REQUEST
+            deactivate REQUEST
+            CTRL -> REQUEST_REPO : save(showRequest)
+            activate REQUEST_REPO
+                REQUEST_REPO --> CTRL : savedShowRequest
+            deactivate REQUEST_REPO
+
+            CTRL -> PROPOSAL_REPO : save(showProposal)
+            activate PROPOSAL_REPO
+                PROPOSAL_REPO --> CTRL : savedProposal
+            deactivate PROPOSAL_REPO
+
+            CTRL -> PROPOSAL : toDTO()
+            activate PROPOSAL
+                PROPOSAL --> CTRL : showProposalDTO
+            deactivate PROPOSAL
+
+            CTRL --> UI : showProposalDTO
+        deactivate CTRL
+
+        UI --> COLLAB : displays operation success
+    deactivate UI
+
+deactivate COLLAB
+
+@enduml 

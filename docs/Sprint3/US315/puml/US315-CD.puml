@@ -1,0 +1,106 @@
+@startuml
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+skinparam classAttributeIconSize 0
+
+class AddVideoProposalUI {
+    - theController : AddVideoProposalController
+    + doShow() : boolean
+    + headline() : String
+}
+
+class AddVideoProposalController {
+    - authz : AuthorizationService
+    - proposalRepository : ShowProposalRepository
+    + listProposalsForVideoAddition() : Iterable<ShowProposalDTO>
+    + addProposalVideo(dto : AddVideoProposalDTO) : ShowProposalDTO
+}
+
+class ShowProposal <<AggregateRoot>> {
+    - number : int
+    - customer : Customer
+    - showRequest : ShowRequest
+    - totalNumDrones : int
+    - template : ProposalTemplate
+    - eventLocation : Coordinates
+    - eventDateTime : LocalDateTime
+    - eventDuration : int
+    - status : ShowProposalStatus
+    - simulationStatus : SimulationStatus
+    - simulationVideoLink : String
+    - insuranceValue : double
+    - proposalText : String
+    - sentDate : LocalDate
+    - sentBy : Name
+    + changeVideoTo(newVideoLink : String) : void
+    + changeSimulationStatus(status : SimulationStatus) : void
+    + simulationVideoLink() : String
+    + toDTO() : ShowProposalDTO
+}
+
+class ShowProposalDTO {
+    + number : int
+    + customerVAT : String
+    + showRequestID : int
+    + totalNumDrones : int
+    + simulationVideoLink : String
+    + latitude : double
+    + longitude : double
+    + eventDate : String
+    + eventHour : String
+    + eventDuration : int
+    + status : String
+    + simulationStatus : String
+    + insuranceValue : double
+    + templateType : String
+}
+
+class AddVideoProposalDTO {
+    + proposalNumber : int
+    + videoLink : String
+    + AddVideoProposalDTO(proposalNumber : int, videoLink : String)
+}
+
+enum ShowProposalStatus {
+    CREATED
+    PENDENT
+    REJECTED
+    ACCEPTED
+    SCHEDULED
+    ABORTED
+}
+
+enum SimulationStatus {
+    UNTESTED
+    FAILED
+    PASSED
+}
+
+interface ShowProposalRepository {
+    + save(showProposal : ShowProposal) : ShowProposal
+    + findByProposalNumber(proposalNumber : int) : Optional<ShowProposal>
+    + findByStatus(status : String) : Iterable<ShowProposal>
+    + findAll() : List<ShowProposal>
+    + findAllDTO() : List<ShowProposalDTO>
+    + findByCustomerVAT(customerVAT : VAT) : List<ShowProposal>
+    + findAllProposalsToSend() : List<ShowProposal>
+    + findAllProposalsToSendDTO() : List<ShowProposalDTO>
+}
+
+AddVideoProposalUI ..> AddVideoProposalController
+AddVideoProposalUI ..> ShowProposalDTO
+AddVideoProposalUI ..> AddVideoProposalDTO
+
+AddVideoProposalController --> ShowProposalRepository
+AddVideoProposalController ..> ShowProposal
+AddVideoProposalController ..> ShowProposalDTO
+AddVideoProposalController ..> AddVideoProposalDTO
+
+ShowProposal --> "1" ShowProposalStatus
+ShowProposal --> "1" SimulationStatus
+ShowProposal ..> ShowProposalDTO
+
+ShowProposalRepository ..> ShowProposal
+
+@enduml 
