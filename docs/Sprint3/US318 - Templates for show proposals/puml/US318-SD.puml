@@ -1,0 +1,75 @@
+@startuml
+title US318: Configure Proposal Templates - Sequence Diagram
+
+actor "CRM Manager" as Manager
+participant ":ConfigureProposalTemplateUI" as UI
+participant ":ConfigureProposalTemplateController" as Controller
+participant "authz\n:AuthorizationService" as AUTHZ
+participant "List<ProposalTemplateDTO>" as ProposalTemplateDTOList
+participant "template:ProposalTemplate" as Template
+participant ":ShowProposalValidationService" as Validator
+participant ":ProposalTemplateRepository" as Repo
+participant "template:ProposalTemplate" as Template
+
+activate Manager
+
+activate UI
+    Manager -> UI : asks to configure proposal template
+    UI -> Controller : listProposalTemplates()
+    activate Controller
+    Controller -> AUTHZ : ensureAuthenticatedUserHasAnyOf(Roles.CRM_MANAGER)
+
+    Controller -> ProposalTemplateDTOList** : create()
+    Controller -> Repo : findAll()
+    activate Repo
+    Repo --> Controller : templates
+    deactivate Repo
+    loop for each template
+        Controller -> Template : toDTO()
+        activate Template
+            Template --> Controller : ProposalTemplateDTO
+        deactivate Template
+
+        Controller -> ProposalTemplateDTOList : add(ProposalTemplateDTO)
+    end
+
+    Controller --> UI : List<ProposalTemplateDTO>
+    deactivate Controller
+
+    UI --> Manager : show list of templates
+    deactivate UI
+    Manager -> UI : select template & provide new path
+    activate UI
+
+    UI -> Validator : validateFilePath(newPath)
+    activate Validator
+    Validator --> UI : validationStatus
+    deactivate Validator
+
+    alt Validation OK
+        UI -> Controller : updateTemplateFilePath(dto, newPath)
+        activate Controller
+        Controller -> Repo : ofIdentity(dto.name)
+        activate Repo
+        Repo --> Controller : template
+        deactivate Repo
+
+        Controller -> Template : changeFilePath(newPath)
+        activate Template
+        deactivate Template
+
+        Controller -> Repo : save(template)
+        activate Repo
+        Repo --> Controller : savedTemplate
+        deactivate Repo
+
+        Controller -> UI : updatedDTO
+        deactivate Controller
+        UI --> Manager : show success message
+    else Validation FAILED
+        UI --> Manager : show error message
+    end
+
+    deactivate UI
+deactivate Manager
+@enduml

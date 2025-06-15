@@ -72,17 +72,4 @@ public class SendShowProposalController {
 
     }
 
-    public void setProposalText(ShowProposalDTO proposalDTO, String proposalText) {
-        Optional<ShowProposal> opt = repo.findByProposalNumber(proposalDTO.getNumber());
-        if (opt.isEmpty()) {
-            System.out.println("Proposal not found.");
-            return;
-        }
-
-        ShowProposal proposal = opt.get();
-        proposal.changeProposalText(proposalText);
-
-        repo.save(proposal);
-    }
-
 }

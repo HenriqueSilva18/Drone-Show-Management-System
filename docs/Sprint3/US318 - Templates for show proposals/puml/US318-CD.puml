@@ -1,0 +1,109 @@
+@startuml
+title US318: Configure Proposal Templates - Class Diagram
+
+skinparam classAttributeIconSize 0
+
+' UI Layer
+class ConfigureProposalTemplateUI {
+    - controller: ConfigureProposalTemplateController
+    - validator: ShowProposalValidationService
+    + showProposalTemplates()
+    + selectTemplate()
+    + requestNewFilePath()
+    + showSuccessMessage()
+    + showErrorMessage()
+}
+
+' Controller Layer
+class ConfigureProposalTemplateController {
+    - authz: AuthorizationService
+    - repository: ProposalTemplateRepository
+    + listProposalTemplates(): List<ProposalTemplateDTO>
+    + updateTemplateFilePath(dto: ProposalTemplateDTO, newPath: String): ProposalTemplateDTO
+    - ensureUserPermissions()
+}
+
+' Service Layer
+class ShowProposalValidationService {
+    + validateFilePath(filePath: String): boolean
+    + isValidFileExtension(filePath: String): boolean
+    + fileExists(filePath: String): boolean
+}
+
+class AuthorizationService {
+    + ensureAuthenticatedUserHasAnyOf(roles: SystemRole[]): void
+    + getCurrentUser(): SystemUser
+}
+
+' Repository Layer
+interface ProposalTemplateRepository {
+    + findAll(): Iterable<ProposalTemplate>
+    + ofIdentity(name: String): Optional<ProposalTemplate>
+    + save(template: ProposalTemplate): ProposalTemplate
+    + delete(template: ProposalTemplate): void
+}
+
+' DTO Layer
+class ProposalTemplateDTO {
+    + name: String
+    + filePath: String
+    + ProposalTemplateDTO(name: String, filePath: String)
+    + name(): String
+    + filePath(): String
+}
+
+' ProposalTemplate Aggregate
+class ProposalTemplate <<AggregateRoot>> {
+    + String name
+    + String filePath
+    + ProposalTemplate(name: String)
+    + changeFilePath(newFilePath: String): void
+    + toDTO(): ProposalTemplateDTO
+    + identity(): String
+    + equals(other: Object): boolean
+    + hashCode(): int
+    + sameAs(other: Object): boolean
+}
+
+' SystemUser Aggregate
+class SystemUser <<AggregateRoot>> {
+    + String name
+    + hasRole(role: SystemRole): boolean
+}
+
+class Username <<(V, #ADD8E6) valueObject>> {
+    + String value
+}
+
+class Password <<(V, #ADD8E6) valueObject>> {
+    + String value
+}
+
+enum SystemRole <<Enum>> {
+    + ADMIN
+    + CRM_MANAGER
+    + CRM_COLLABORATOR
+    + SHOW_DESIGNER
+    + CUSTOMER_REPRESENTATIVE
+}
+
+' Relationships
+ConfigureProposalTemplateUI --> ConfigureProposalTemplateController : uses
+ConfigureProposalTemplateUI --> ShowProposalValidationService : uses
+
+ConfigureProposalTemplateController --> AuthorizationService : uses
+ConfigureProposalTemplateController --> ProposalTemplateRepository : uses
+ConfigureProposalTemplateController --> ProposalTemplateDTO : creates
+ConfigureProposalTemplateController --> ProposalTemplate : updates
+
+AuthorizationService --> SystemUser : authenticates
+
+ProposalTemplate --> ProposalTemplateDTO : creates
+
+SystemUser "1" --> "1" Username : Username
+SystemUser "1" --> "1" Password : Password
+SystemUser "*" --> "1" SystemRole : UserRole
+
+ProposalTemplateRepository --> ProposalTemplate : manages
+
+@enduml

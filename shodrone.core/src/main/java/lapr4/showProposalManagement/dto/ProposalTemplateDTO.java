@@ -1,5 +1,6 @@
 package lapr4.showProposalManagement.dto;
 
+
 @SuppressWarnings("squid:S1068")
 public class ProposalTemplateDTO {
 
@@ -14,5 +15,14 @@ public class ProposalTemplateDTO {
     @Override
     public String toString() {
         return name;
+    }
+
+
+    public String name() {
+        return name;
+    }
+
+    public String filePath() {
+        return filePath;
     }
 }

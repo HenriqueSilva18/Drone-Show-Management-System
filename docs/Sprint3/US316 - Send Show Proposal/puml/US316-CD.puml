@@ -1,0 +1,105 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+class SendShowProposalUI {
+    - controller : SendShowProposalController
+    + doShow() : boolean
+    + headline() : String
+}
+
+class SendShowProposalController {
+    - repo : ShowProposalRepository
+    - authz : AuthorizationService
+    + getAllProposalsToSend() : Iterable<ShowProposalDTO>
+    + sendProposal(proposalDTO : ShowProposalDTO) : void
+}
+
+class ShowProposal <<AggregateRoot>> {
+    - number : int
+    - customer : Customer
+    - showRequest : ShowRequest
+    - totalNumDrones : int
+    - template : ProposalTemplate
+    - eventLocation : Coordinates
+    - eventDateTime : LocalDateTime
+    - eventDuration : int
+    - status : ShowProposalStatus
+    - simulationStatus : SimulationStatus
+    - simulationVideoLink : String
+    - insuranceValue : double
+    - proposalText : String
+    - sentDate : LocalDate
+    - sentBy : Name
+    + ShowProposal(showRequest : ShowRequest, totalNumDrones : int, \n    eventLocation : Coordinates, eventDateTime : LocalDateTime, \n    eventDuration : int, template : ProposalTemplate)
+    + toDTO() : ShowProposalDTO
+    + changeVideoTo(newVideoLink : String) : void
+    + changeProposalStatus(status : ShowProposalStatus) : void
+    + changeSimulationStatus(status : SimulationStatus) : void
+    + changeSentDate(sentDate : LocalDate) : void
+    + changeSentBy(sentBy : Name) : void
+    + changeProposalText(proposalText : String) : void
+}
+
+class ShowProposalDTO {
+    + number : int
+    + customerVAT : String
+    + showRequestID : int
+    + totalNumDrones : int
+    + simulationVideoLink : String
+    + latitude : double
+    + longitude : double
+    + eventDate : String
+    + eventHour : String
+    + eventDuration : int
+    + status : String
+    + simulationStatus : String
+    + insuranceValue : double
+    + templateType : String
+    + ShowProposalDTO(...)
+    + toString() : String
+    + getNumber() : int
+}
+
+enum ShowProposalStatus {
+    CREATED
+    PENDENT
+    REJECTED
+    ACCEPTED
+    SCHEDULED
+    ABORTED
+}
+
+interface ShowProposalRepository {
+    + save(showProposal : ShowProposal) : ShowProposal
+    + findByProposalNumber(proposalNumber : int) : Optional<ShowProposal>
+    + findAllProposalsToSendDTO() : List<ShowProposalDTO>
+    + findAllProposalsToSend() : List<ShowProposal>
+}
+
+enum SimulationStatus {
+    UNTESTED
+    FAILED
+    PASSED
+}
+
+SendShowProposalUI ..> SendShowProposalController
+SendShowProposalUI ..> ShowProposalDTO
+
+SendShowProposalController --> ShowProposalRepository
+SendShowProposalController ..> ShowProposal
+SendShowProposalController ..> ShowProposalDTO
+
+ShowProposal --> "1" ShowProposalStatus
+ShowProposal ..> ShowProposalDTO
+ShowProposal --> "1" SimulationStatus
+
+ShowProposalRepository ..> ShowProposal
+
+@enduml
+```

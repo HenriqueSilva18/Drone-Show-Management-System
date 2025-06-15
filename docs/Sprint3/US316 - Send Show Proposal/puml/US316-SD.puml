@@ -1,0 +1,79 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "CRM Collaborator" as COLLAB
+participant ":SendShowProposalUI" as UI
+participant ":SendShowProposalController" as CTRL
+participant "authz\n:AuthorizationService" as AUTHZ
+participant ":ShowProposalRepository" as PROPOSAL_REPO
+participant "proposal\n:ShowProposal" as PROPOSAL
+participant "ShowProposalDTO" as PROPOSAL_DTO
+participant "showProposalDTOList\n:List<ShowProposalDTO>" as PROPOSAL_DTO_LIST
+
+participant "Files" as FILES
+
+activate COLLAB
+    COLLAB -> UI : asks to send a show proposal
+    activate UI
+        UI -> CTRL** : create()
+        UI -> CTRL : getAllProposalsToSend()
+        activate CTRL
+            CTRL -> AUTHZ : ensureAuthenticatedUserHasAnyOf(Roles.CRM_COLLABORATOR)
+            activate AUTHZ
+            deactivate AUTHZ
+            CTRL -> PROPOSAL_REPO : findAllProposalsToSendDTO()
+            activate PROPOSAL_REPO
+            PROPOSAL_REPO -> PROPOSAL_REPO : findAllProposalsToSend()
+            activate PROPOSAL_REPO
+            PROPOSAL_REPO --> PROPOSAL_REPO : proposals
+            deactivate PROPOSAL_REPO
+            PROPOSAL_REPO -> PROPOSAL_DTO_LIST** : create()
+            loop for each proposal with CREATED, REJECTED or ABORTED status
+                PROPOSAL_REPO -> PROPOSAL : toDTO()
+                activate PROPOSAL
+                PROPOSAL -> PROPOSAL_DTO** : create()
+                PROPOSAL --> PROPOSAL_REPO : proposalDTO
+                deactivate PROPOSAL
+                PROPOSAL_REPO -> PROPOSAL_DTO_LIST : add(proposalDTO)
+            end
+
+            PROPOSAL_REPO --> CTRL : proposalsDTOList
+
+            deactivate PROPOSAL_REPO
+            CTRL --> UI : proposalsDTOList
+        deactivate CTRL
+
+        UI --> COLLAB : displays proposals ready to be sent and asks to select one
+    deactivate UI
+
+    COLLAB -> UI : selects a proposal to send
+    activate UI
+        UI -> CTRL : sendProposal(selectedProposalDTO)
+        activate CTRL
+
+            CTRL -> PROPOSAL_REPO : findByProposalNumber(selectedProposalDTO.getNumber())
+            activate PROPOSAL_REPO
+                PROPOSAL_REPO --> CTRL : proposal
+            deactivate PROPOSAL_REPO
+
+            CTRL -> PROPOSAL : changeProposalText(proposalText)
+            activate PROPOSAL
+            deactivate PROPOSAL
+
+            CTRL -> PROPOSAL : changeProposalStatus(ShowProposalStatus.PENDENT)
+            activate PROPOSAL
+            deactivate PROPOSAL
+
+            CTRL -> PROPOSAL_REPO : save(proposal)
+
+            CTRL --> UI : success message
+        deactivate CTRL
+        UI --> COLLAB : displays operation success message
+    deactivate UI
+deactivate COLLAB
+
+@enduml
