@@ -168,7 +168,7 @@ public class GenerateProposalController {
         proposal.modelCountMap().forEach((model, quantity) -> {
             sb.append(model).append(" – ").append(quantity).append(" units.\n");
         });
-        sb.append("XYZ - 5").append("\n");
+        sb.append("Test - TestNumber").append("\n");
         sb.append("...\n\n");
 
         sb.append("#List of figures\n");
@@ -247,7 +247,7 @@ public class GenerateProposalController {
         proposal.modelCountMap().forEach((model, quantity) -> {
             sb.append(model).append(" – ").append(quantity).append(" units.\n");
         });
-        sb.append("XYZ - 5").append("\n");
+        sb.append("Test - TestNumber").append("\n");
         sb.append("...\n\n");
 
         sb.append("#List of figures\n");

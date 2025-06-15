@@ -1,0 +1,55 @@
+@startuml
+title US341: Validate Figure Description - Sequence Diagram
+
+actor "Show Designer" as Designer
+participant ":ValidateFigureDescriptionUI" as UI
+participant ":ValidateFigureDescriptionController" as Controller
+participant ":FigureDescriptionValidationService" as Service
+participant "result:ValidationResult" as Result
+
+activate Designer
+
+note right of Designer
+    This code snippet represents the sequence of interactions while adding a figure.
+end note
+
+Designer -> UI : asks to validate a figure description
+activate UI
+
+UI --> Designer : requests file path
+deactivate UI
+Designer -> UI : provides file path
+activate UI
+' UI reads the file content internally and gets the dslCode
+
+UI -> Controller : validateFigureDescription(dslCode)
+activate Controller
+
+Controller -> Service : validateFigureDescription(dslCode)
+activate Service
+
+' The Service uses ANTLR components (Lexer, Parser, Listener, Visitor)
+' to perform the validation. This complex internal process is encapsulated.
+Service -> Result** : create()
+
+Service -> Service : performValidation(dslCode)
+activate Service
+Service --> Service : result: ValidationResult
+deactivate Service
+' The service populates the result object based on the validation outcome.
+Service --> Controller : result:ValidationResult
+deactivate Service
+
+Controller --> UI : result:ValidationResult
+deactivate Controller
+
+alt validation was successful
+    UI --> Designer : display success message with parsed DSL version
+else validation failed
+    UI --> Designer : display list of validation errors
+end
+
+deactivate UI
+deactivate Designer
+
+@enduml

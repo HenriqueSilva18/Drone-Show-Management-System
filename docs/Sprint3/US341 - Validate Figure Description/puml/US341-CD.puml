@@ -1,0 +1,80 @@
+@startuml
+title US341: Validate Figure Description - Class Diagram
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+
+
+    class ValidateFigureDescriptionUI <<UI>> {
+        - controller: ValidateFigureDescriptionController
+        - dslCodeFromFile: String
+        - parsedDslVersion: String
+        - wasLastValidationSuccessful: boolean
+        ---
+        + requestAndPerformDslValidation(): boolean
+        # doShow(): boolean
+        + headline(): String
+    }
+
+
+' Pacote de Aplicação
+    class ValidateFigureDescriptionController <<Controller>> {
+        - validationService: FigureDescriptionValidationService
+        - lastValidDslCode: String
+        - lastValidDslVersion: String
+        ---
+        + validateFigureDescription(dslCode: String): ValidationResult
+    }
+
+
+' Pacote do Plugin DSL e Domínio
+    class FigureDescriptionValidationService <<Service>> {
+        + validateFigureDescription(dslCode: String): ValidationResult
+        - performAdditionalValidations(...): List<String>
+    }
+
+    class ValidationResult <<DTO>> {
+        - isValid: boolean
+        - errors: List<String>
+        - dslVersion: String
+        ---
+        + isValid(): boolean
+        + getErrors(): List<String>
+        + getDslVersion(): String
+        + {static} valid(version: String): ValidationResult
+        + {static} invalid(errors: List<String>): ValidationResult
+    }
+
+    class DSL_GRAMMARBaseListener <<(A, #F2D2BD) ANTLR Generated>> {}
+    class DSL_GRAMMARBaseVisitor<T> <<(A, #F2D2BD) ANTLR Generated>> {}
+
+    class DSLValidationListener {
+        - figureDeclarationCount: int
+        - actionCount: int
+    }
+
+    class DSLValidationVisitor {
+        + visitProgram(ctx): String
+        + visitDslVersion(ctx): String
+    }
+
+' Relacionamentos entre as classes
+ValidateFigureDescriptionUI --> "1" ValidateFigureDescriptionController
+
+ValidateFigureDescriptionController --> "1" FigureDescriptionValidationService
+ValidateFigureDescriptionController ..> ValidationResult : uses
+
+FigureDescriptionValidationService ..> ValidationResult : creates & returns
+FigureDescriptionValidationService ..> DSLValidationListener : uses
+FigureDescriptionValidationService ..> DSLValidationVisitor : uses
+
+DSLValidationListener -|> DSL_GRAMMARBaseListener
+DSLValidationVisitor -|> DSL_GRAMMARBaseVisitor
+
+note right of FigureDescriptionValidationService
+  Utiliza o ANTLR (Lexer, Parser, Walker)
+  para percorrer a árvore sintática
+  e aplicar o Listener e o Visitor.
+end note
+
+@enduml
