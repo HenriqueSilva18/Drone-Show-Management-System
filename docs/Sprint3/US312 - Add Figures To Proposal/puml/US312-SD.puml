@@ -1,0 +1,236 @@
+@startuml
+title Sequence Diagram - Add Figure to Proposal
+
+actor User as "CRM_COLLABORATOR"
+participant ":AddFigureToProposalUI" as UI
+participant ":AddFigureToProposalController" as Controller
+participant ":AuthorizationService" as AuthService
+participant ":ShowProposalRepository" as ProposalRepo
+participant ":FigureRepository" as FigureRepo
+participant ":ShowProposal" as Proposal
+participant ":Figure" as Figure
+participant ":DroneModel" as DroneModel
+
+
+activate User
+
+User -> UI : doShow()
+activate UI
+
+UI -> Controller : listAllProposals()
+activate Controller
+Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+activate AuthService
+AuthService --> Controller
+deactivate AuthService
+
+Controller -> ProposalRepo : findAll()
+activate ProposalRepo
+ProposalRepo --> Controller : List<ShowProposal>
+deactivate ProposalRepo
+
+create listProposalDTO as "listProposalDTO : List<ShowProposalDTO>"
+Controller -> listProposalDTO : new ArrayList<ShowProposalDTO>()
+
+loop for each ShowProposal
+    Controller -> Proposal : toDTO()
+    activate Proposal
+    Proposal --> Controller : ShowProposalDTO
+    deactivate Proposal
+    Controller -> listProposalDTO : add(dto)
+end
+
+Controller --> UI : List<ShowProposalDTO>
+deactivate Controller
+
+UI --> User : show Available Proposals
+
+User -> UI : selectProposal(position)
+UI -> Controller : availableActiveFigures()
+activate Controller
+
+Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+activate AuthService
+AuthService --> Controller
+deactivate AuthService
+
+Controller -> Controller : availableFigures()
+Controller -> FigureRepo : findAll()
+activate FigureRepo
+FigureRepo --> Controller : Iterable<Figure>
+deactivate FigureRepo
+
+create figuresList as "figuresList : List<Figure>"
+Controller -> figuresList : new ArrayList<Figure>()
+Controller -> figuresList : addAll()
+
+create listFigureDTO as "listFigureDTO : List<FigureDTO>"
+Controller -> listFigureDTO : new ArrayList<FigureDTO>()
+
+loop for each Figure
+    Controller -> Figure : identity()
+    activate Figure
+    Figure --> Controller : Long
+    deactivate Figure
+    Controller -> Figure : description()
+    activate Figure
+    Figure --> Controller : String
+    deactivate Figure
+    create dto as  "dto : FigureDTO"
+    Controller -> dto : new FigureDTO(id, description)
+    Controller -> listFigureDTO : add(dto)
+end
+
+Controller --> UI : List<FigureDTO>
+deactivate Controller
+
+UI --> User : show Active Figures
+
+User -> UI : selectFigure(figureId)
+UI -> Controller : droneTypesOfFigure(figureId)
+activate Controller
+
+Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+activate AuthService
+AuthService --> Controller
+deactivate AuthService
+
+Controller -> FigureRepo : findById(figureId)
+activate FigureRepo
+FigureRepo --> Controller : Optional<Figure>
+deactivate FigureRepo
+
+Controller -> Figure : droneTypes()
+activate Figure
+Figure --> Controller : List<DroneType>
+deactivate Figure
+
+Controller --> UI : List<DroneType>
+deactivate Controller
+
+UI -> Controller : availableModels(proposalNumber)
+activate Controller
+
+Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+activate AuthService
+AuthService --> Controller
+deactivate AuthService
+
+Controller -> ProposalRepo : findByProposalNumber(proposalId)
+activate ProposalRepo
+ProposalRepo --> Controller : Optional<ShowProposal>
+deactivate ProposalRepo
+
+Controller -> Proposal : modelList()
+activate Proposal
+Proposal --> Controller : List<DroneModel>
+deactivate Proposal
+
+create listDroneModelDTO as "listDroneModelDTO : List<DroneModelDTO>"
+Controller -> listDroneModelDTO : new ArrayList<DroneModelDTO>()
+
+loop for each DroneModel
+    Controller -> DroneModel : identity()
+    activate DroneModel
+    DroneModel --> Controller : Long
+    deactivate DroneModel
+    Controller -> DroneModel : name()
+    activate DroneModel
+    DroneModel --> Controller : String
+    deactivate DroneModel
+    create dmDto as "dto : DroneModelDTO"
+    Controller -> dmDto : new DroneModelDTO(id, name)
+    Controller -> listDroneModelDTO : add(dto)
+end
+
+Controller --> UI : List<DroneModelDTO>
+deactivate Controller
+
+UI -> Controller : isLastFigureSameAs(figureId, proposalId)
+activate Controller
+
+Controller -> ProposalRepo : findByProposalNumber(proposalId)
+activate ProposalRepo
+ProposalRepo --> Controller : Optional<ShowProposal>
+deactivate ProposalRepo
+
+Controller -> Proposal : figuresList()
+activate Proposal
+Proposal --> Controller : List<FigureInShowProposal>
+deactivate Proposal
+
+Controller --> UI : boolean
+deactivate Controller
+
+alt if not consecutive duplicate
+create droneMapping as "droneMapping : Map<DroneType, DroneModel>"
+UI -> droneMapping : new HashMap<DroneType, DroneModel>()
+
+    loop for each DroneType
+        UI --> User : requestDroneModelSelection()
+        User -> UI : selectDroneModel(modelId)
+
+        UI -> Controller : getDroneModelByID(proposalNumber, modelId)
+        activate Controller
+
+        Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+        activate AuthService
+        AuthService --> Controller
+        deactivate AuthService
+
+        Controller -> ProposalRepo : findByProposalNumber(proposalNumber)
+        activate ProposalRepo
+        ProposalRepo --> Controller : Optional<ShowProposal>
+        deactivate ProposalRepo
+
+        Controller -> Proposal : modelList()
+        activate Proposal
+        Proposal --> Controller : List<DroneModel>
+        deactivate Proposal
+
+        Controller -> droneMapping : put(droneType, droneModel)
+        deactivate Controller
+    end
+
+    droneMapping --> UI : Map<DroneType, DroneModel>
+
+    User -> UI : confirmAddFigure()
+    UI -> Controller : addFigureToProposal(proposalNumber, figureId, droneMapping)
+    activate Controller
+
+    Controller -> AuthService : ensureAuthenticatedUserHasAnyOf(POWER_USER, CRM_COLLABORATOR)
+    activate AuthService
+    AuthService --> Controller
+    deactivate AuthService
+
+    Controller -> ProposalRepo : findByProposalNumber(proposalNumber)
+    activate ProposalRepo
+    ProposalRepo --> Controller : Optional<ShowProposal>
+    deactivate ProposalRepo
+
+    Controller -> FigureRepo : findById(figureId)
+    activate FigureRepo
+    FigureRepo --> Controller : Optional<Figure>
+    deactivate FigureRepo
+
+    Controller -> Proposal : addFigure(figure, droneMapping)
+    activate Proposal
+    Proposal --> Controller
+    deactivate Proposal
+
+    Controller -> ProposalRepo : save(proposal)
+    activate ProposalRepo
+    ProposalRepo --> Controller
+    deactivate ProposalRepo
+
+    Controller --> UI
+    deactivate Controller
+
+    UI --> User : success
+else consecutive duplicate detected
+    UI --> User : error("Consecutive duplicate figure ")
+end
+
+deactivate UI
+
+@enduml

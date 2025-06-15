@@ -1,0 +1,141 @@
+@startuml
+title Class Diagram - Add Figure to Proposal
+
+class AddFigureToProposalUI {
+    - ctrl : AddFigureToProposalController
+    + doShow() : boolean
+    + headline() : String
+}
+
+class AddFigureToProposalController {
+    - proposalRepository : ShowProposalRepository
+    - authorizationService : AuthorizationService
+    - figureRepository : FigureRepository
+    + AddFigureToProposalController()
+    + AddFigureToProposalController(ShowProposalRepository, FigureRepository, AuthorizationService)
+    + availableFigures() : List<FigureDTO>
+    + availableActiveFigures() : List<FigureDTO>
+    + availableModels(int) : List<DroneModelDTO>
+    + listAllProposals() : List<ShowProposalDTO>
+    + droneTypesOfFigure(Long) : List<DroneType>
+    + getDroneModelByID(int, Long) : DroneModel
+    + addFigureToProposal(int, Long, Map<DroneType, DroneModel>) : void
+    + isLastFigureSameAs(Long, int) : boolean
+}
+
+interface ShowProposalRepository {
+    + findByProposalNumber(int) : Optional<ShowProposal>
+    + findByStatus(String) : Iterable<ShowProposal>
+    + findAll() : List<ShowProposal>
+    + findAllDTO() : List<ShowProposalDTO>
+    + findByCustomerVAT(VAT) : List<ShowProposal>
+    + findAllProposalsToSend() : List<ShowProposal>
+    + findAllProposalsToSendDTO() : List<ShowProposalDTO>
+    + save(ShowProposal) : ShowProposal
+}
+
+interface FigureRepository {
+    + save(Figure) : Figure
+    + findById(Long) : Optional<Figure>
+    + findAll() : Iterable<Figure>
+    + findActivePublic() : Iterable<Figure>
+    + searchByCategoryOrKeyword(String) : Iterable<Figure>
+    + decommissionFigure(Figure) : void
+    + findByDescription(String) : Optional<Figure>
+}
+
+interface AuthorizationService {
+    + ensureAuthenticatedUserHasAnyOf(Role...) : void
+}
+
+class ShowProposal {
+    - proposalNumber : int
+    - customerVAT : VAT
+    - eventDate : Date
+    - figures : List<FigureInShowProposal>
+    - models : List<DroneModel>
+    + toDTO() : ShowProposalDTO
+    + modelList() : List<DroneModel>
+    + figuresList() : List<FigureInShowProposal>
+    + addFigure(Figure, Map<DroneType, DroneModel>) : void
+}
+
+class Figure {
+    - id : Long
+    - description : String
+    - isActive : boolean
+    - isPublic : boolean
+    - droneTypes : List<DroneType>
+    + identity() : Long
+    + description() : String
+    + droneTypes() : List<DroneType>
+    + isActive() : boolean
+}
+
+class DroneModel {
+    - id : Long
+    - name : String
+    - type : DroneType
+    + identity() : Long
+    + name() : String
+    + getType() : DroneType
+}
+
+enum DroneType {
+    + name() : String
+    + description() : String
+}
+
+class FigureInShowProposal {
+    - figure : Figure
+    - droneMapping : Map<DroneType, DroneModel>
+    + figure() : Figure
+    + getDroneMapping() : Map<DroneType, DroneModel>
+}
+
+class ShowProposalDTO {
+    + number : int
+    + customerVAT : String
+    + eventDate : String
+}
+
+class FigureDTO {
+    + id : Long
+    + description : String
+    + isActive : boolean
+    + FigureDTO(Long, String)
+}
+
+class DroneModelDTO {
+    + id : Long
+    + name : String
+    + DroneModelDTO(Long, String)
+}
+
+' Relationships
+AddFigureToProposalUI --> AddFigureToProposalController : uses
+AddFigureToProposalController --> ShowProposalRepository : uses
+AddFigureToProposalController --> FigureRepository : uses
+AddFigureToProposalController --> AuthorizationService : uses
+
+ShowProposalRepository --> ShowProposal : manages
+FigureRepository --> Figure : manages
+
+ShowProposal *-- FigureInShowProposal : contains
+ShowProposal --> DroneModel : references
+FigureInShowProposal --> Figure : references
+FigureInShowProposal --> DroneModel : maps to
+Figure --> DroneType : requires
+DroneModel --> DroneType : is of type
+
+ShowProposal ..> ShowProposalDTO : creates
+Figure ..> FigureDTO : creates
+DroneModel ..> DroneModelDTO : creates
+
+AddFigureToProposalController ..> ShowProposalDTO : uses
+AddFigureToProposalController ..> FigureDTO : uses
+AddFigureToProposalController ..> DroneModelDTO : uses
+
+
+
+@enduml
