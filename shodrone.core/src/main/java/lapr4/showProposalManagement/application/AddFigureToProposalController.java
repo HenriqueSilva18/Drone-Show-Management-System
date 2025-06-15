@@ -135,4 +135,6 @@ public class AddFigureToProposalController {
         return last.identity().equals(figureId);
     }
 
+
+
 }
