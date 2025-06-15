@@ -2,20 +2,22 @@
 hide methods
 
 ' Aggregates
-class Language
-class "Drone Model" as DroneModel
-class Client
-class "Show Request" as ShowRequest
-class "Show Proposal" as ShowProposal
+class Customer
+class ShowRequest
+class ShowProposal
 class Drone
 class User
 class Figure
+class SignupRequest
+class Utente
+class DroneModel
+class DroneType
 
 ' Value Objects
 class Name
 class VAT
 class Address
-class Id
+class NIF
 class SerialNumber
 class Date
 class Status
@@ -24,41 +26,47 @@ class Username
 class Password
 class Email
 class Phone
+class MecanographicNumber
+class ShowRequestId
+class Language
 
 ' Entities
 class Representative
 class Maintenance
+class FigureCategory
 
 ' Relationships with names
-Language --> Name : has >
-DroneModel --> Language : has >
-DroneModel --> Name : has >
-Client --> Name : has >
-Client --> VAT : has >
-Client --> Address : has >
-Client --> Representative : has many >
+Customer --> Name : has >
+Customer --> VAT : has >
+Customer --> Address : has >
+Customer --> Representative : has many >
 Representative --> Name : has >
-Representative --> Id : has >
-ShowRequest --> Client : requested by >
-ShowRequest --> Id : has >
+Representative --> NIF : has >
+ShowRequest --> Customer : requested by >
+ShowRequest --> ShowRequestId : has >
 ShowRequest --> Drone : uses >
 ShowRequest --> Date : scheduled for >
 ShowRequest --> Figure : includes >
 Drone --> DroneModel : is of >
 Drone --> SerialNumber : identified by >
 Drone --> Maintenance : undergoes >
-Drone --> Id : has >
-Maintenance --> Date : performed on >
+DroneModel --> Language : has >
+DroneModel --> Name : has >
+DroneModel --> Maintenance : has >
+DroneType --> Name : has >
+Figure --> DroneType : requires >
 ShowProposal --> Drone : uses >
 ShowProposal --> Date : scheduled for >
 ShowProposal --> Status : has >
 ShowProposal --> Report : includes >
-ShowProposal --> Id : has >
 User --> Username : identified by >
 User --> Password : authenticated with >
 User --> Email : contacted via >
 User --> Phone : contacted via >
-User --> Id : has >
-Figure --> Id : has >
+Figure --> FigureCategory : belongs to >
+SignupRequest --> Username : has >
+SignupRequest --> Email : has >
+Utente --> MecanographicNumber : has >
+Utente --> Name : has >
 
 @enduml
